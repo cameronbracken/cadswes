@@ -1,0 +1,1500 @@
+# RplAnalysis View Export
+#
+# Created 10:48 August 20, 2009 using RiverWare 5.1.3
+# Filename: C:/Documents and Settings/cameron/Desktop/crss-powell-rules.txt
+#
+# RplSet File: CRSS.rls
+# Model File: CRSS.mdl
+#
+# View Type: Descending View (Selected Rows)
+
+Return Type	Name	Argument List	Description	
+
+	Compute 602a Storage		This rule fires once a year and sets the 602a storage. Although this solves for each year in the run duration, the value is only used while the Guidelines are in effect, through 2026.	
+> 	ASSIGN TO $ "EqualizationData.value602a" [@"24:00:00 December 31, Current Year"]			
+> > NUMERIC	602aStorage			
+> > > NUMERIC	AnnualMinObjectiveRelease			
+> > > NUMERIC	ShortedUBDepletion			
+> > > > NUMERIC	CriticalPeriodUBDepletion		Replaced Tcl function: CriticalPeriodUBDepletion (3/1/04)<BR>From the current year to as many years into the future as the critical period, the<BR>UB Depletions are summed. 	
+	Compute 70R Assurance Level Surplus Volume		This rule fires at the beginning of the year and sets the 70R surplus volume. This is the estimated end-of-year volume of water in excess of the system space requirement assuming a 70th percentile runoff, a 7.5 maf Lower Basin delivery, the Upper Basin scheduled use and the current Powell and Mead volumes. If this volume is greater than 0, a 70R or Quantified Surplus is declared in the Surplus Rules: 70R Assurance Level Surplus and 7 State Plan Level 1. 	
+> 	ASSIGN TO $ "Surplus.SurplusRelease" []			
+> > NUMERIC	ComputeInflowAtProbability		Replaced Tcl function: ComputeInflowAtProbability (3/1/04)<BR>-Returns the inflow at a specified assurance probability	
+> > > NUMERIC	GetDenominator			
+> > > > NUMERIC	GetT			
+> > > NUMERIC	GetNumerator			
+> > > > NUMERIC	GetT			
+> > > NUMERIC	GetT			
+> > NUMERIC	SumLBDemands			
+> > > NUMERIC	AnnualEvaporation	OBJECT reservoir, LIST dates		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > NUMERIC	SumDemandsDownstreamOfPowell		The original CRSS did not include CAP and MWD in this calculation, SumDepletionsBelowVolume with Mead includes every diversion below Mead with the exception of SNWP, CAP, MWD, <BR>and Mexico. therefore the annual volume of SNWP and Mexico depletion schedules are added to match CRSS results.  This seems to be a very bad calculation and I would recommend that<BR>it be examined closely in conjuction with all of the functions that sum demands into the future such as SumDemandsDownstreamOfMead, and SumDemandsBelowMead and <BR>SumCurrentDemandsBelowMead, to see if a common function could replace all of these.  It is not possible now in order to match CRSS results.<BR><BR>The above comments was due to Brad Vickers, Wave Eng.  On Feb 26, 2000, Terry Fulp changed this function to include MWD, CAP, and Coachella and IID, as they are now<BR>beiing surplused.	
+> > > > NUMERIC	AnnualVolume	SLOT slot		
+> > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	TotalOtherPriority4ScheduledUse	DATETIME startDate, DATETIME endDate		
+> > > > > STRING	MakeSlotNameAggDiv	OBJECT diversion		
+> > > > > STRING	MakeSlotNameWaterUser	OBJECT diversion		
+> > > > > > STRING	GetSlotNameForScheduleWaterUser	STRING diversion		
+> > > > > LIST	OtherArizonaPriority4UsersAggDivSite			
+> > > > > LIST	OtherArizonaPriority4UsersWaterUser			
+> > > > NUMERIC	TotalPriority2and3ScheduledUse	DATETIME startDate, DATETIME endDate		
+> > > > > LIST	ArizonaPriority2and3UsersWaterUser			
+> > > > > STRING	MakeSlotNameWaterUserPriority2and3	OBJECT diversion		
+> > > > > > STRING	GetSlotNameForScheduleWaterUser	STRING diversion		
+> > NUMERIC	SumPreviousYearICSCredits		This function returns the beginning of the year ICS balance for Arizona, California, Nevada and Unassigned. There is no participation assumed by Unassgined for the current Guidelines ruleset.  If the current timestep is after 2036, when the ICS program expires, this function returns 0. 	
+> > > NUMERIC	PreviousYearBankBalance	STRING player		
+> > NUMERIC	SumUBDemands			
+> > NUMERIC	SurplusMaxStorage			
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+	Powell Forecast Error		Brad Vickers, Wave Engineering Inc.<BR>January, 1999<BR><BR>This rule checks to see if the PowellForecastError slot on the MeadFloodControlData object has been set, if it has not and the month is not June (because June has some special limits) then<BR>the forecast error for Powell is computed with the ComputeForecastError function.  The first part of the IF statement in the rule limits June's computed forecast error to one half of <BR>May's forecast error. This check was performed in the originall CRSS.  Ideally I believe there should be limits on every month to ensure that the forecast error is within the range of historical <BR>forecast error.  This becomes a problem with the random component of how the forecast error is derived.  See the comments on the ComputeForecastError function for further information on<BR>how the forecast error is computed. <BR><BR>NOTE the print statement in this rule.  this calls the resetRanDev function which rewinds the file of random numbers to the hydrology start date that is input<BR>by the user on the MeadFloodControlData.HydrologyStartYear table slot.  This function is only called at the first of the model run.  It is used with a print statement because it has to be in a rule <BR>rather than a function and there are no slots set with it.<BR>	
+> 	ASSIGN TO $ "MeadFloodControlData.PowellForecastError" []			
+> > NUMERIC	ComputePowellForecastError		Replaced Tcl function: ComputePowellForecastError (3/1/04)<BR>-this function is called directly from the rule: Powell Forecast Error and limits <BR>June's error to half of May's error.  Otherwise, the value of ComputeInitialPowellForecastError() <BR>is returned. 	
+> > > NUMERIC	ComputeInitialPowellForecastError		Computes the forecast error based on the previous forecast error, regression<BR>coefficients, Powell's runoff and the random deviation.  The forecast error is 0<BR>Aug-December and is a quarter of the June's error during July.  The value of this<BR>function is returned to ComputePowellForecastError() which, during June, limits<BR>the error to half of May's error. 	
+> > > > NUMERIC	GetPreviousForecastError		Called by ComputeInitialPowellForecastError() and returns the previous month's<BR>forecast error unless the current month is January.  In that case, 0 is returned.	
+> > > > NUMERIC	RegressionCoefficient	OBJECT reservoir, STRING col		
+> > > > NUMERIC	SetRandomDeviation		This function calls the random number generator and returns the random <BR>number if it is Jan - June.  Otherwise, there is no random deviation. The value<BR>returned by this function is stored in PowellForecastData.random. The 0.000 <BR>passed to RandomNormal() only specifies the units of the returned number, in this case,<BR>NONE.  To get a different set of random numbers, change the seed in<BR>PowellForecastData.Random Seed.<BR><BR>The min and max constraints on this function are from the old generator, which had these limits. We have a slightly different result here, because the old generator would create a new number if the value exceeded these limits, we just return a number at the limit instead. Things will probably break if we get a random number even close to this large.<BR>Since the generator has less than a 1 in 1e-21 chance of generating something outside these bands, it probably isn't useful to have those constraints anyway. :)<BR>	
+> > > > > NUMERIC	GetRandSeed		Returns a seed for use by the RandomNormal function. <BR>The seed is incremented by the trace number, as stored in the first timestep of the<BR>Hydrology Increment slot. The trace number could be available as a RPL function, but would not be enough to fulfill our requirements.<BR><BR>In the current setup, all MRM runs will have the same set of random numbers at the same trace, but all traces will have different sets, as controlled by the Hydrology Increment slot, which is rotated with the MRM runs.<BR>This also allows single trace runs to have identical random numbers generated as well, which is not possible with a RPL function.<BR><BR>Probably should rename the Hydrology Increment slot to Trace Number.<BR><BR>With Random Seed = 1, is equivalent to just using the Trace Number as the seed for each trace.	
+> 	ASSIGN TO $ "PowellForecastData.forecastError" []			
+> > NUMERIC	ComputePowellForecastError		Replaced Tcl function: ComputePowellForecastError (3/1/04)<BR>-this function is called directly from the rule: Powell Forecast Error and limits <BR>June's error to half of May's error.  Otherwise, the value of ComputeInitialPowellForecastError() <BR>is returned. 	
+> > > NUMERIC	ComputeInitialPowellForecastError		Computes the forecast error based on the previous forecast error, regression<BR>coefficients, Powell's runoff and the random deviation.  The forecast error is 0<BR>Aug-December and is a quarter of the June's error during July.  The value of this<BR>function is returned to ComputePowellForecastError() which, during June, limits<BR>the error to half of May's error. 	
+> > > > NUMERIC	GetPreviousForecastError		Called by ComputeInitialPowellForecastError() and returns the previous month's<BR>forecast error unless the current month is January.  In that case, 0 is returned.	
+> > > > NUMERIC	RegressionCoefficient	OBJECT reservoir, STRING col		
+> > > > NUMERIC	SetRandomDeviation		This function calls the random number generator and returns the random <BR>number if it is Jan - June.  Otherwise, there is no random deviation. The value<BR>returned by this function is stored in PowellForecastData.random. The 0.000 <BR>passed to RandomNormal() only specifies the units of the returned number, in this case,<BR>NONE.  To get a different set of random numbers, change the seed in<BR>PowellForecastData.Random Seed.<BR><BR>The min and max constraints on this function are from the old generator, which had these limits. We have a slightly different result here, because the old generator would create a new number if the value exceeded these limits, we just return a number at the limit instead. Things will probably break if we get a random number even close to this large.<BR>Since the generator has less than a 1 in 1e-21 chance of generating something outside these bands, it probably isn't useful to have those constraints anyway. :)<BR>	
+> > > > > NUMERIC	GetRandSeed		Returns a seed for use by the RandomNormal function. <BR>The seed is incremented by the trace number, as stored in the first timestep of the<BR>Hydrology Increment slot. The trace number could be available as a RPL function, but would not be enough to fulfill our requirements.<BR><BR>In the current setup, all MRM runs will have the same set of random numbers at the same trace, but all traces will have different sets, as controlled by the Hydrology Increment slot, which is rotated with the MRM runs.<BR>This also allows single trace runs to have identical random numbers generated as well, which is not possible with a RPL function.<BR><BR>Probably should rename the Hydrology Increment slot to Trace Number.<BR><BR>With Random Seed = 1, is equivalent to just using the Trace Number as the seed for each trace.	
+> 	ASSIGN TO $ "PowellForecastData.random" []			
+> > NUMERIC	SetRandomDeviation		This function calls the random number generator and returns the random <BR>number if it is Jan - June.  Otherwise, there is no random deviation. The value<BR>returned by this function is stored in PowellForecastData.random. The 0.000 <BR>passed to RandomNormal() only specifies the units of the returned number, in this case,<BR>NONE.  To get a different set of random numbers, change the seed in<BR>PowellForecastData.Random Seed.<BR><BR>The min and max constraints on this function are from the old generator, which had these limits. We have a slightly different result here, because the old generator would create a new number if the value exceeded these limits, we just return a number at the limit instead. Things will probably break if we get a random number even close to this large.<BR>Since the generator has less than a 1 in 1e-21 chance of generating something outside these bands, it probably isn't useful to have those constraints anyway. :)<BR>	
+> > > NUMERIC	GetRandSeed		Returns a seed for use by the RandomNormal function. <BR>The seed is incremented by the trace number, as stored in the first timestep of the<BR>Hydrology Increment slot. The trace number could be available as a RPL function, but would not be enough to fulfill our requirements.<BR><BR>In the current setup, all MRM runs will have the same set of random numbers at the same trace, but all traces will have different sets, as controlled by the Hydrology Increment slot, which is rotated with the MRM runs.<BR>This also allows single trace runs to have identical random numbers generated as well, which is not possible with a RPL function.<BR><BR>Probably should rename the Hydrology Increment slot to Trace Number.<BR><BR>With Random Seed = 1, is equivalent to just using the Trace Number as the seed for each trace.	
+	Powell Runoff Forecast		This rule was added to compute and store the forecasts for inflows into Lake Powell.  These computations<BR>are done for Mead's inflow forecast, so we should clean that up eventually.<BR><BR>It assumes that the forecast error has been computed previously by the Powell Forecast Error rule <BR>and stored on the data/slot  MeadFloodControlData.PowellForecastError	
+> 	ASSIGN TO $ "PowellForecastData.Natural Inflow with Error" []			
+> 	ASSIGN TO $ "PowellForecastData.Reg Inflow with Error" []			
+> > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > NUMERIC	UBEffectiveStorage			
+> > > NUMERIC	AvailableSpace	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> 	ASSIGN TO $ "PowellForecastData.Unreg Inflow with Error" []			
+> > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+	EOWYStorageForecasts			
+> 	ASSIGN TO $ "EqualizationData.ForecastEOWYSMead" []			
+> > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > NUMERIC	ForecastPowellInflow			
+> > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	ForecastMeadRelease			
+> > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > NUMERIC	SumInflowBelowMead			
+> > NUMERIC	ForecastPowellRelease			
+> > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > NUMERIC	ReleaseMade			
+> > > > > > > NUMERIC	PowellFallRelease			
+> > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > NUMERIC	ReleaseMade			
+> > > > > > > NUMERIC	PowellFallRelease			
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> 	ASSIGN TO $ "EqualizationData.ForecastEOWYSPowell" []			
+> > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > NUMERIC	ForecastPowellInflow			
+> > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	ForecastMeadRelease			
+> > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > NUMERIC	SumInflowBelowMead			
+> > NUMERIC	ForecastPowellRelease			
+> > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > NUMERIC	ReleaseMade			
+> > > > > > > NUMERIC	PowellFallRelease			
+> > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > NUMERIC	ReleaseMade			
+> > > > > > > NUMERIC	PowellFallRelease			
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+	Estimate Upper Basin Storage			
+> 	ASSIGN TO $ "EqualizationData.AvailableWater" []			
+> > NUMERIC	SumUpperBasinStorage			
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Sum Powell Inflow Spring			
+> 	FOREACH date IN @"24:00:00 January 31, Current Year" TO @"24:00:00 July 31, Current Year"			
+> > 	ASSIGN TO $ "PowellForecastData.Powell Inflow Volume" [date]			
+	Sum Powell Inflow Fall			
+> 	FOREACH date IN @"24:00:00 August 31, Current Year" TO @"24:00:00 December 31, Current Year"			
+> > 	ASSIGN TO $ "PowellForecastData.Powell Inflow Volume" [date]			
+	Powell Spike Flow Rule			
+> 	ASSIGN TO $ "Powell Spike Flow Data.Spike Flow Flag" []			
+> > BOOLEAN	CheckSpikeFlowCriteria			
+> > > NUMERIC	PowellSpringOutflowAverage			
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> 	ASSIGN TO $ "Powell.Bypass" []			
+> > BOOLEAN	CheckSpikeFlowCriteria			
+> > > NUMERIC	PowellSpringOutflowAverage			
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > BOOLEAN	CheckSpikeFlowCriteria			
+> > > NUMERIC	PowellSpringOutflowAverage			
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	PowellMinSpikeFlowOutflow			
+> BOOLEAN	SpikeAlreadyMade			
+	Equalization Post Guidelines			
+> 	ASSIGN TO "Powell.Storage" []			
+> > NUMERIC	602aStorageValue			
+> > NUMERIC	CheckEqualizationRelease602a	NUMERIC equalizationRelease	After the function ComputeEqualizationReleaseList has completed its while loop, which varies Powell's release until a balance between Powell's and Mead EOWY storages are within equalization tolerance.  Equalization tolerance is a user input variable and is currently set at 2,000 acre-feet. This value is input on the equalizationTolerance slot in the EqualizationData data object. This function does a final check on the release from Lake Powell to insure that making this release will not violate the upper basin 602a storage.  This check is computed by subtracting the value of Powell equalization release (which is represented by the function GetListElement(0,equalizationReleaseList) and the value of ForecastPowellRelease from the amount of storage in the Upper Basin which is computed by the function SumUpperBasinStorage. which is set with a rule and written out to a dataobject slot.  this value is then compared to the value of 602a storage that has already been set with another rule.  Also note that the results of this check are also constrained by a minimum value of zero. 	
+> > > NUMERIC	602aStorageValue			
+> > LIST	ComputeEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead	This function returns a five element list, the order of the list is Equalization Release, Powell Release, EOWY storage for Powell, EOWY storage for Mead, <BR>and a count. The list <result> is initialized with the function InitializedEqualizationReleaseList. Which of course is a five element list in the same <BR>order as above.  PER TJF: FEB, 2000:  I think this is a 4 element list ... the equalization release is not a part of it.	
+> > > NUMERIC	ComputeNewPowellRelease	LIST results		
+> > > > NUMERIC	CheckEqualizationRelease	LIST results		
+> > > > > NUMERIC	CheckERMeadExclusiveFCS	NUMERIC EOWYSMead, NUMERIC equalizationRelease	This function is used in conjuction with ComputeEqualizationRelease.  It is called to check if the computed equalization release will cause Mead to<BR>violate its exclusive flood control space.  If the release will cause this violation, a new equalization release is computed as the live capacity of mead<BR>minus the minimum flood control space minus the estimated end of water year storage for Mead.  Otherwise no changes to the equalization release <BR>are made.  Also note that this function is contrained to have a minumum value of zero.	
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > > NUMERIC	ForecastPowellInflow			
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	ForecastMeadRelease			
+> > > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumInflowBelowMead			
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > LIST	InitialEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	ForecastPowellRelease			
+> > > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ComputePowellRelease	NUMERIC equalizationRelease		
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	NumberMonthsRemaining			
+> > NUMERIC	ConvertPowellRelease	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	WaterAvailableInUpperBasin			
+> 	ASSIGN TO $ "EqualizationData.EqualFlag" []			
+> > NUMERIC	602aStorageValue			
+> > NUMERIC	WaterAvailableInUpperBasin			
+	Equalization Tier		This rule fires monthly January through September and computes the Equalization (EQ) release from Powell, given that the conditions for EQ are met. Note that Powell's previous EOCY storage is compared to the EQ Line. This has the effect of not allowing Powell to bounce in and out of EQ. The new EQ conditions in the Guidelines (release to keep Mead above 1105 so as Powell doesn't go more than 20' below the EQ Line) are performed in the function CheckEqualizationRelease_Mead1105. 	
+> 	ASSIGN TO "Powell.Storage" []			
+> > NUMERIC	CheckEqualizationRelease_Mead1105	NUMERIC equalizationRelease	This function checks the EQ release to ensure that it doesn't cause Powell to go below the EQ Line, unless Mead is less than 1105. If Mead is less than 1105, Powell releases more until the first of the following 3 occurs: 1) the reservoirs are equal 2) Mead is at 1105 3) Powell is 20' below the EQ Line. Then a final check is made that the release is at least what would bring Powell to the EQ Line. If Mead is above 1105, then Powell is constrainted to the EQ Line.	
+> > LIST	ComputeEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead	This function returns a five element list, the order of the list is Equalization Release, Powell Release, EOWY storage for Powell, EOWY storage for Mead, <BR>and a count. The list <result> is initialized with the function InitializedEqualizationReleaseList. Which of course is a five element list in the same <BR>order as above.  PER TJF: FEB, 2000:  I think this is a 4 element list ... the equalization release is not a part of it.	
+> > > NUMERIC	ComputeNewPowellRelease	LIST results		
+> > > > NUMERIC	CheckEqualizationRelease	LIST results		
+> > > > > NUMERIC	CheckERMeadExclusiveFCS	NUMERIC EOWYSMead, NUMERIC equalizationRelease	This function is used in conjuction with ComputeEqualizationRelease.  It is called to check if the computed equalization release will cause Mead to<BR>violate its exclusive flood control space.  If the release will cause this violation, a new equalization release is computed as the live capacity of mead<BR>minus the minimum flood control space minus the estimated end of water year storage for Mead.  Otherwise no changes to the equalization release <BR>are made.  Also note that this function is contrained to have a minumum value of zero.	
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > > NUMERIC	ForecastPowellInflow			
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	ForecastMeadRelease			
+> > > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumInflowBelowMead			
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > LIST	InitialEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	ForecastPowellRelease			
+> > > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ComputePowellRelease	NUMERIC equalizationRelease		
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	NumberMonthsRemaining			
+> > NUMERIC	ConvertPowellRelease	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> 	ASSIGN TO $ "EqualizationData.EqualBasinStatesFlag" []			
+	Upper Elevation Balancing Tier Jan thru March		This rule fires in January through March and determines if Powell is in the Upper Elevation Balancing Tier (based on previous EOCY storage). If Powell is in this tier and Mead (again, previous EOCY storage) is below the minimum balancing elevation of 1075, Powell makes balancing releases within the min and max of 700 and 900 kaf. If Mead is above 1075, Powell releases 823 maf set in the rule Meet Powell Min Objective Release, which is lower priority and required to fire before this rule.	
+> 	ASSIGN TO $ "Coordinated Operation.UpperLevelBalancingFlag" []			
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > LIST	ComputeEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead	This function returns a five element list, the order of the list is Equalization Release, Powell Release, EOWY storage for Powell, EOWY storage for Mead, <BR>and a count. The list <result> is initialized with the function InitializedEqualizationReleaseList. Which of course is a five element list in the same <BR>order as above.  PER TJF: FEB, 2000:  I think this is a 4 element list ... the equalization release is not a part of it.	
+> > > NUMERIC	ComputeNewPowellRelease	LIST results		
+> > > > NUMERIC	CheckEqualizationRelease	LIST results		
+> > > > > NUMERIC	CheckERMeadExclusiveFCS	NUMERIC EOWYSMead, NUMERIC equalizationRelease	This function is used in conjuction with ComputeEqualizationRelease.  It is called to check if the computed equalization release will cause Mead to<BR>violate its exclusive flood control space.  If the release will cause this violation, a new equalization release is computed as the live capacity of mead<BR>minus the minimum flood control space minus the estimated end of water year storage for Mead.  Otherwise no changes to the equalization release <BR>are made.  Also note that this function is contrained to have a minumum value of zero.	
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > > NUMERIC	ForecastPowellInflow			
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	ForecastMeadRelease			
+> > > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumInflowBelowMead			
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > LIST	InitialEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	ForecastPowellRelease			
+> > > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ComputePowellReleaseUpperBalancing	NUMERIC equalizationRelease, STRING minRelease, STRING maxRelease	Computes the monthly balancing release from Powell if in either the Upper or Lower Elevation Balancing Tiers. NOTE: the release is constrained by the specified min and max release for that tier. This specified release is the STRING argument minRelease and maxRelease.	
+> > > NUMERIC	NumberMonthsRemaining			
+> > > NUMERIC	PowellReducedRelforCurrentMonth	STRING releaseIndex		
+> > > > NUMERIC	ComputeReducedReleaseRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellReducedRelVolRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > > NUMERIC	ReleaseMade			
+> > > > > > NUMERIC	PowellFallRelease			
+> > NUMERIC	ConvertPowellReleaseBalancing	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Upper Elevation Balancing Tier April thru Sept		This rule fires in April through September and makes any required adjustments to Powell's release if Powell began the year in the Upper Elevation Balancing Tier. The decision to switch to the EQ Tier or to increase the release for balancing is based on the April EOWY forecasts. Meaning, the decision made in April stays for the rest of the water year.	
+> 	ASSIGN TO $ "Coordinated Operation.EQTrumpUpperLevelBalancing1105GovFlag" []			
+> > BOOLEAN	EqualizationConditionsMet			
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Coordinated Operation.EQTrumpUpperLevelBalancingFlag" []			
+> > BOOLEAN	EqualizationConditionsMet			
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Coordinated Operation.UpperLevelBalancingFlag" []			
+> > BOOLEAN	EqualizationConditionsMet			
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > NUMERIC	CheckEqualizationRelease_Mead1105	NUMERIC equalizationRelease	This function checks the EQ release to ensure that it doesn't cause Powell to go below the EQ Line, unless Mead is less than 1105. If Mead is less than 1105, Powell releases more until the first of the following 3 occurs: 1) the reservoirs are equal 2) Mead is at 1105 3) Powell is 20' below the EQ Line. Then a final check is made that the release is at least what would bring Powell to the EQ Line. If Mead is above 1105, then Powell is constrainted to the EQ Line.	
+> > LIST	ComputeEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead	This function returns a five element list, the order of the list is Equalization Release, Powell Release, EOWY storage for Powell, EOWY storage for Mead, <BR>and a count. The list <result> is initialized with the function InitializedEqualizationReleaseList. Which of course is a five element list in the same <BR>order as above.  PER TJF: FEB, 2000:  I think this is a 4 element list ... the equalization release is not a part of it.	
+> > > NUMERIC	ComputeNewPowellRelease	LIST results		
+> > > > NUMERIC	CheckEqualizationRelease	LIST results		
+> > > > > NUMERIC	CheckERMeadExclusiveFCS	NUMERIC EOWYSMead, NUMERIC equalizationRelease	This function is used in conjuction with ComputeEqualizationRelease.  It is called to check if the computed equalization release will cause Mead to<BR>violate its exclusive flood control space.  If the release will cause this violation, a new equalization release is computed as the live capacity of mead<BR>minus the minimum flood control space minus the estimated end of water year storage for Mead.  Otherwise no changes to the equalization release <BR>are made.  Also note that this function is contrained to have a minumum value of zero.	
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > > NUMERIC	ForecastPowellInflow			
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	ForecastMeadRelease			
+> > > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumInflowBelowMead			
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > LIST	InitialEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	ForecastPowellRelease			
+> > > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ComputePowellRelease	NUMERIC equalizationRelease		
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	NumberMonthsRemaining			
+> > NUMERIC	ComputePowellReleaseUpperBalancing	NUMERIC equalizationRelease, STRING minRelease, STRING maxRelease	Computes the monthly balancing release from Powell if in either the Upper or Lower Elevation Balancing Tiers. NOTE: the release is constrained by the specified min and max release for that tier. This specified release is the STRING argument minRelease and maxRelease.	
+> > > NUMERIC	NumberMonthsRemaining			
+> > > NUMERIC	PowellReducedRelforCurrentMonth	STRING releaseIndex		
+> > > > NUMERIC	ComputeReducedReleaseRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellReducedRelVolRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > > NUMERIC	ReleaseMade			
+> > > > > > NUMERIC	PowellFallRelease			
+> > NUMERIC	ConvertPowellRelease	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ConvertPowellReleaseBalancing	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > BOOLEAN	EqualizationConditionsMet			
+> > BOOLEAN	InUpperElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Upper Elevation Balancing Tier. Returns TRUE if so.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Mid Elevation Release Tier			
+> 	ASSIGN TO $ "Coordinated Operation.ReducedReleaseFlag" []			
+> > BOOLEAN	InMidElevationReleaseTier		Determines if Powell (based on previous EOCY storage) is in the Mid Elevation ReleaseTier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > BOOLEAN	InMidElevationReleaseTier		Determines if Powell (based on previous EOCY storage) is in the Mid Elevation ReleaseTier. Returns TRUE if so.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	PowellReducedRelforCurrentMonth	STRING releaseIndex		
+> > > NUMERIC	ComputeReducedReleaseRemaining	STRING releaseIndex		
+> > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	PowellReducedRelVolRemaining	STRING releaseIndex		
+> > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > NUMERIC	ReleaseMade			
+> > > > > NUMERIC	PowellFallRelease			
+	Lower Elevation Balancing Tier			
+> 	ASSIGN TO $ "Coordinated Operation.LowerLevelBalancingFlag" []			
+> > BOOLEAN	InLowerElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Lower Elevation Balancing Tier. Returns TRUE if so.	
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > LIST	ComputeEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead	This function returns a five element list, the order of the list is Equalization Release, Powell Release, EOWY storage for Powell, EOWY storage for Mead, <BR>and a count. The list <result> is initialized with the function InitializedEqualizationReleaseList. Which of course is a five element list in the same <BR>order as above.  PER TJF: FEB, 2000:  I think this is a 4 element list ... the equalization release is not a part of it.	
+> > > NUMERIC	ComputeNewPowellRelease	LIST results		
+> > > > NUMERIC	CheckEqualizationRelease	LIST results		
+> > > > > NUMERIC	CheckERMeadExclusiveFCS	NUMERIC EOWYSMead, NUMERIC equalizationRelease	This function is used in conjuction with ComputeEqualizationRelease.  It is called to check if the computed equalization release will cause Mead to<BR>violate its exclusive flood control space.  If the release will cause this violation, a new equalization release is computed as the live capacity of mead<BR>minus the minimum flood control space minus the estimated end of water year storage for Mead.  Otherwise no changes to the equalization release <BR>are made.  Also note that this function is contrained to have a minumum value of zero.	
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > NUMERIC	EOWYStorage	OBJECT reservoir, NUMERIC powellRelease, NUMERIC meadRelease	This function estimates the End of Water Year (end of September) storage for Powell and Mead, with the given release from Powell and Mead. by subtracting<BR>the estimated evaporation and bankstorage from the given release.  This function is used in conjunction with equalization.	
+> > > > NUMERIC	EstimateBankStorage	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStorageMead	NUMERIC powellRelease, NUMERIC meadRelease		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	InitialEOWYStoragePowell	NUMERIC powellRelease		
+> > > > > NUMERIC	ForecastPowellInflow			
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > NUMERIC	ForecastMeadRelease			
+> > > > NUMERIC	ComputeEqualizationEvaporation	OBJECT reservoir, LIST dates		
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	EqualizationRuleCurveStorage	OBJECT reservoir		
+> > > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > > > > NUMERIC	RuleCurveStorage	OBJECT reservoir, DATETIME date	Returns the rule curve storage for a reservoir based on the month provided.	
+> > > > NUMERIC	SumDemandsDownstreamofMead		I changed this function 2/26/2000 to add in Coachella and IID as they are now not  included in the Below Mead sub-basin since they may be surplused.<BR>Also, CRSS did some funky thing and only used the current timesteps MWD and CAP diversion schedule, and looked in the past year for the rest of the schedule.<BR>It probably was because it didn't know whether they were surplused or not.  Since we do, I changed this function to just sum what's on the slots.	
+> > > > > NUMERIC	SumDepletionsBelowVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalOtherPriority4ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	TotalPriority2and3ActualUse	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	SumInflowBelowMead			
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > > LIST	InitialEqualizationReleaseList	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	ForecastPowellRelease			
+> > > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	TotalPowellRelease	LIST results		
+> > > > NUMERIC	EstimateEqualizationRelease	NUMERIC EOWYSPowell, NUMERIC EOWYSMead		
+> > > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > NUMERIC	ComputePowellReleaseLowerBalancing	NUMERIC equalizationRelease, STRING minRelease, STRING maxRelease		
+> > > NUMERIC	NumberMonthsRemaining			
+> > > NUMERIC	PowellReducedRelforCurrentMonth	STRING releaseIndex		
+> > > > NUMERIC	ComputeReducedReleaseRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellReducedRelVolRemaining	STRING releaseIndex		
+> > > > > NUMERIC	AnnualReducedRelease	STRING releaseIndex		
+> > > > > NUMERIC	ReleaseMade			
+> > > > > > NUMERIC	PowellFallRelease			
+> > NUMERIC	ConvertPowellReleaseBalancing	LIST equalizationReleaseList		
+> > > NUMERIC	ForecastPowellRelease			
+> > > > NUMERIC	ForecastPowellFallRangeOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	Forecasts the Powell outflow volume for a range of months in the fall drawdown period. <BR>The Min Constraint has been altered from just the 823 pattern to actually consider how much water is left<BR>in the Minimum Objective release, and also considers the minimum flow constraint.	
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	PowellMinObjRelVolumeFall	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSumReleaseWeights	DATETIME startDate, DATETIME endDate		
+> > > > NUMERIC	ForecastPowellJulyStorage		forecasts the Powell july storage at the current timestep by using the spring operation, execpt that the forecasted outflow volume<BR>is contrainied by the min release volume, min objective release volume, and the max release volume.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolConstrained			
+> > > > > NUMERIC	MaxReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > > NUMERIC	MinReleaseVolume	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > > NUMERIC	PowellMinObjRelVolumeSpring	DATETIME endDate	Estimates the volume of minimum objective release remaining from the current timestep through the endDate<BR>and scales it by the ratio of the amount remaining through EWOY to the annual value.	
+> > > > > > NUMERIC	ComputeScheduledMinObjRelRemainingThruSept			
+> > > > > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > > > > NUMERIC	ReleaseMade			
+> > > > > > > > NUMERIC	PowellFallRelease			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	GetListElement	NUMERIC index, LIST list		
+> > BOOLEAN	InLowerElevationBalancingTier		Determines if Powell (based on previous EOCY storage) is in the Lower Elevation Balancing Tier. Returns TRUE if so.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Check Bypass Capacity		If the reservoir is below the power pool, check if the set outflow is greater than the capacity of the bypass tubes.<BR>If it is, reset it to the bypass capacity.<BR><BR>If the reservoir is above the power pool, then the power plant capacity is in play. This is roughly 25,000 cfs, or the maximum ROD release anyway, and the limitations of the bypass tubes do not matter.	
+> 	ASSIGN TO $ "EqualizationData.BypassCapFlag" []			
+> > NUMERIC	BypassCapacity	NUMERIC elevation	The Bypass Tube Capacity table is per tube, and there are 4 tubes at Powell. This assumes all tubes are always available.	
+> > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > NUMERIC	BypassCapacity	NUMERIC elevation	The Bypass Tube Capacity table is per tube, and there are 4 tubes at Powell. This assumes all tubes are always available.	
+> > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > NUMERIC	IterateBypassCapacity	NUMERIC elevation		
+> > > NUMERIC	BypassCapacity	NUMERIC elevation	The Bypass Tube Capacity table is per tube, and there are 4 tubes at Powell. This assumes all tubes are always available.	
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Powell Limit Outflow Rule			
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Powell Smooth July Operation Rule			
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+	Meet Powell Min Objective Release			
+> 	ASSIGN TO "Powell.Storage" []			
+> > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	PowellMinObjRelforCurrentMonth			
+> > > NUMERIC	ComputeMinObjReleaseRemaining			
+> > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > NUMERIC	ReleaseMade			
+> > > > > NUMERIC	PowellFallRelease			
+> 	ASSIGN TO $ "EqualizationData.MinObjRelFlag" []			
+> > NUMERIC	PowellMinObjRelforCurrentMonth			
+> > > NUMERIC	ComputeMinObjReleaseRemaining			
+> > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > NUMERIC	PowellMinObjRelVolRemaining			
+> > > > NUMERIC	AnnualMinObjectiveRelease			
+> > > > NUMERIC	ReleaseMade			
+> > > > > NUMERIC	PowellFallRelease			
+	Powell Operations Rule			
+> 	ASSIGN TO $ "Powell.Storage" []			
+> > NUMERIC	PowellFallSeasonStorage		This function takes the computed fall season release and computes the resulting storage given<BR>the inflow for the current month. The ComputeStorage function also checks to be sure that the<BR>resulting storage is between live and inactive capacity.	
+> > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PowellComputeFallSeasonRelease		This function computes the release for the month, from the fall outflow volume and the <BR>release weights. It is constrained by the miniumu and maximum releases.	
+> > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellFallOutflowVolume	NUMERIC initialStorage, DATETIME startDate, DATETIME endDate	This function computes the outflow volume from Powell from the current month through December necessary to meet the December target.<BR>It assums a perfect forecast.	
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	PowellRegulatedInflowVolume	DATETIME startDate, DATETIME endDate	This function computes the regulated inflow into Powell, from the startDate through the endDate.<BR>No forecast error is used.	
+> > > > > > NUMERIC	PowellNaturalInflowVolume	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBDepletionsRange	DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	UBRegulation	DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	UBDrawDown	OBJECT reservoir, DATETIME startDate, DATETIME endDate		
+> > > > > > > > NUMERIC	UBInitialStorage	OBJECT reservoir, DATETIME date		
+> > > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellReleaseFraction	DATETIME startDate, DATETIME endDate	This function computes the release fraction for the current month. Since the tables are indexed from zero,<BR>we have to subtract 1 from the numeric month.	
+> > > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
+> > NUMERIC	PowellRunoffSeasonStorage		This function takes the computed runoff season release and computes the resulting storage given the inflow<BR>at the current timestep. The ComputeStorage function also checks it to be sure that the resulting storage is between<BR>inactive and live capacity.	
+> > > NUMERIC	InactiveCapacity	OBJECT reservoir		
+> > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > NUMERIC	PowellComputeRunoffSeasonRelease		This function computes the release for the month, from the spring outflow volume and the release<BR>weights. It is constrained by the minimum and maximum release.<BR>On March 4, 2000, TJF added the check to see if the outflow volume average (equally distributed over the remaining<BR>months) exceeds a check (currently 1 maf).  If so, we want to just equally weight the outflow for the remaining months.<BR>This was added for high forecast years, where we really would want to start dumping the water quicker than what the<BR>current weights would have us do.	
+> > > > NUMERIC	MaxRelease	OBJECT reservoir		
+> > > > NUMERIC	MinRelease	OBJECT reservoir		
+> > > > NUMERIC	PowellReleaseFraction	DATETIME startDate, DATETIME endDate	This function computes the release fraction for the current month. Since the tables are indexed from zero,<BR>we have to subtract 1 from the numeric month.	
+> > > > NUMERIC	PowellSpringOutflowAverage			
+> > > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > > NUMERIC	PowellSpringOutflowVolume			
+> > > > > NUMERIC	Estimate Bank Storage without Evap	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage	Function to estimate the change in bank storage, given a starting and ending storage.<BR>This is different from the function Estimate Bank Storage. In that function, the evaporation<BR>is also estimated and subtracted from the ending storage.  why I don't know.	
+> > > > > NUMERIC	EstimateEvaporation	OBJECT reservoir, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate		
+> > > > > > NUMERIC	SumEvapCoeff	OBJECT reservoir, NUMERIC startRow, NUMERIC endRow		
+> > > > > NUMERIC	UBTargetStorage	OBJECT reservoir, DATETIME date	This function computes the target storage from the live capacity and target space<BR>for the Upper Basin reservoirs.	
+> > > NUMERIC	PowellComputeStorageAtGivenOutflow	NUMERIC outflow	Returns Powell's storage for a given outflow. First checks that there is enough storage in Powell for the given outflow. If there isn't enough, set Powell's storage to 0. This check is required for hydrologic sequences that take Powell this low. RiverWare's SolveStorage function will return a NaN if a negative storage is computed. NOTE: the final storage is constrained by Powell's minimum content, 0 and live capacity.	
+> > > > NUMERIC	LiveCapacity	OBJECT reservoir		
+> > > > NUMERIC	PreviousStorage	OBJECT reservoir		
