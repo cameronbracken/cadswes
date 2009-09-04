@@ -15,12 +15,12 @@ get.cbrfc.unregulated.data.url <- function(site.names, start = "1900-01-01", end
 }
 
 download.and.read.cbrfc.unregulated.data <- function(site.names, 
-	download.dir = 'downloads', from.cache = TRUE, missing.val = -9999)
+	download.dir = 'downloads', from.cache = TRUE, missing.val = -9999, ...)
 {
 	# This function takes a a character vector of tiver forcast center site names,
 	# and downloads the unregulated flow data for that site
 	
-	urls <- get.cbrfc.unregulated.data.url( site.names[!is.na(site.names)] )
+	urls <- get.cbrfc.unregulated.data.url( site.names[!is.na(site.names)], ...)
 	
 	#Create dir of downloaded data
 	if(!file.exists(download.dir)) dir.create( download.dir )
@@ -54,6 +54,39 @@ download.and.read.cbrfc.unregulated.data <- function(site.names,
 		data.cbrfc[[i]] <- data.cbrfc[[i]] * 1000 # convert to ac-ft/mon
 	}
 	return(data.cbrfc)
+	
+}
+
+cumsum.ts <- function(x){
+	
+	x[is.na(x)] = 0
+	ts(cumsum(as.vector(x)),start=start(x),frequency=frequency(x))
+	
+}
+
+diff.ts <- function(x, y, cumsum = FALSE, percent = FALSE){
+	
+	#takes either two lists of ts or two single ts
+	if( is.list(x) ){
+		z <- list()
+		for(i in 1:length(x)){
+			if( cumsum )
+				z[[i]] <- cumsum.ts(x[[i]]-y[[i]])
+			else if( percent ) 
+				z[[i]] <- 200*abs(x[[i]] - y[[i]])/(x[[i]] + y[[i]])
+			else
+				z[[i]] <- x[[i]]-y[[i]]
+		}
+		
+	}else{
+		if( cumsum )
+			z <- cumsum.ts(x-y)
+		else if( percent ) 
+			z <- 200*abs(x - y)/(x + y)
+		else 
+			z <- x - y
+	}
+	return(z)
 	
 }
 
@@ -97,44 +130,63 @@ site <- list(
 	)
 )
 
-data.cbrfc <- download.and.read.cbrfc.unregulated.data( site$codes )
+# get the cbrfc data
+data.cbrfc <- download.and.read.cbrfc.unregulated.data( site$codes)
+# enforce the time limits
+for(i in 1:length(site$names))
+	data.cbrfc[[i]] <- window(data.cbrfc[[i]], c(1971,1), c(2000,12))
+
 names(data.cbrfc) <- site$names[!is.na(site$names)]
 
-#read and transform the usbr data to a list of timeseries
+#read and transform the usbr data to a list of timeseries starting at 1971, ending at 2000
 data.usbr <- read.csv( 'USBRLocations-acft-mon.csv' )
 temp <- list()
 s <- as.integer( strsplit( as.character( data.usbr[1,1] ), '-' )[[1]] )
-for(i in 1:length(site$names))
+for(i in 1:length(site$names)){
 	temp[[site$names[i]]] <- 
 		ts(data.usbr[[site$names[i]]], start=c(s[3], s[1]), frequency=12)
+	temp[[site$names[i]]] <- window(temp[[site$names[i]]],c(1971,1), c(2000,12))
+}
 
 data.usbr <- temp	
 names(data.usbr) <- site$names[!is.na(site$names)]	
 
 # Plot the comparisons
 
-pdf('usbr-cbrfc-natcomp.pdf',width=10,height=5)
+pdf('usbr-cbrfc-natcomp.pdf',width=12,height=4)
 for( i in 1:length(site$names) ){
 	if( !is.na(site$codes[i]) && !is.na(site$names[i]) ){
 		
-		plot(data.cbrfc[[site$names[i]]], col='darkgrey', lwd=2, 
+		plot(data.cbrfc[[site$names[i]]], col='black', 
 			xlab='', ylab='Flow (ac-ft/month)', 
 			main = paste(site$names[i],'vs.',site$codes[i]) )
 		lines(data.usbr[[site$names[i]]], col='steelblue', lty = 'solid')
-		legend("topright", c("CBRFC","USBR"), col=c('darkgrey','steelblue'), 
-			lty=c('solid','solid'), lwd=c(2,1))
+		lines(data.usbr[[site$names[i]]] - data.cbrfc[[site$names[i]]], col='green')
+		legend("topright", c("CBRFC","USBR", "Difference"), 
+			col=c(1,'steelblue','green'), lty=c('solid'))
+			
 	}
 }
+
+	# plot the cumulative difference
+col <- rainbow(length(site$names), alpha=.9)
+z <- diff.ts( data.usbr, data.cbrfc, cumsum = TRUE )
+
+plot(z[[1]], xlab = '', ylab = 'Cumulative difference', col = col[1], 
+	xlim=c(time(z[[1]])[1],2000),
+	ylim = c(min(sapply(z, min)), max(sapply(z, max))))
+for(i in 2:length(site$names))
+	lines(z[[i]], col = col[i])
+legend('topleft',site$names,col=col,lty='solid')
+
 	#plot the percent differences
-col <- rainbow(length(site$names),alpha=.5)
-x <- data.usbr[[site$names[1]]]
-y <- data.cbrfc[[site$names[1]]]
-plot((x - y)/(x + y), xlab = '', ylab = 'Percent difference', col = col[1], 
-	ylim = c(-1,1),xlim=c(1909,2012))
-for(i in 2:length(site$names)){
-	x <- data.usbr[[site$names[i]]]
-	y <- data.cbrfc[[site$names[i]]]
-	lines((x - y)/ (x + y), col = col[i])
-}
+col <- rainbow(length(site$names), alpha=.9)
+p <- diff.ts( data.usbr, data.cbrfc, percent = TRUE )
+plot(p[[i]], xlab = '', ylab = 'Percent difference', col = col[1], 
+	ylim = c(0,100),xlim=c(time(p[[1]])[1],2000))
+	
+for(i in 2:length(site$names))
+	lines(p[[i]], col = col[i])
 legend('bottomleft',site$names,col=col,lty='solid')
+
 dev.off()
