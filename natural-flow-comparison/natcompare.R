@@ -46,13 +46,15 @@ site <- c(site,names = list(attributes(data.usbr)$dimnames[[2]]))
 ###################################
 pdf('usbr-cbrfc-natcomp.pdf',width=11,height=4)
 for( i in 1:length(site$names) ){
-		
 	
 	# plot a thousand acre-ft/month
+	# CBRFC 
 	plot(data.cbrfc[,i], col='black', 
 		xlab='', ylab='Flow (thousand ac-ft/month)', 
 		main = paste(site$names[i],'vs.',site$codes[i]) )
+	# USBR
 	lines(data.usbr[,i], col='steelblue', lty = 'solid')
+	# Difference
 	lines(data.usbr[,i]-data.cbrfc[,i], col='green')
 	legend("topright", c("CBRFC","USBR", "Difference"), 
 		col=c(1,'steelblue','green'), lty=c('solid'))	
@@ -64,25 +66,37 @@ dev.off()
 # Plot the cumulative difference
 ###################################
 pdf('usbr-cbrfc-natcomp-cum-diff.pdf',width=7,height=10)
-cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE),start=1971,frequency=1)
-ag <- ts(read.table("USBR-ag-loss-ac-ft.tab",sep='\t',header=TRUE),start=1971,frequency=1)
+
+#Read in Consumtive use data and convert to MAF
+cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE),start=1971+1,frequency=1)/1e6
+ag <- ts(read.table("USBR-ag-loss-ac-ft.tab",sep='\t',header=TRUE),start=1971+1,frequency=1)/1e6
 col <- rainbow(length(site$names))
 
-	# z is a list of time series
-diff <- data.usbr - data.cbrfc
-
-
-for(i in 1:length(site$names)) z[[i]] <- z[[i]]/1e6 #change units to MAF
+	# compute difference in MAF from thousand ac-ft
+diff <- (data.usbr - data.cbrfc)/1e3
+attr(diff,"dimnames") <- attributes(data.usbr)$dimnames
+diff <- cumsum.ts((data.usbr - data.cbrfc)/1e3)
+		
+	#add intervening uses
+diff[,"FlamingGorge"] <- diff[,"FlamingGorge"] + diff[,"Fontenelle"]
+diff[,"Crystal"] <- diff[,"Crystal"] + diff[,"BlueMesa"]
 
 layout(matrix(1:length(site$names),ncol=1))
 for(i in 1:length(site$names)){
-	this.z <- cumsum.ts()
+	
+	z <- diff[,i]
+		
+	x <- as.vector(time(ag)-1/12)
+		#Margins
 	par(mar=c(2,4,1,1))
-	plot(z[[i]], xlab = '', ylab = 'Cum diff (MAF)', col = col[i], 
-		xlim=c(time(z[[i]])[1],eComp),
-		ylim = c(min(z[[i]]), max(z[[i]])))
-	lines(cumsum.ts(cul[,i])/1e6)
-	lines(cumsum.ts(ag[,i])/1e6,lty="dashed")
+		#Cumulative difference
+	plot(z, xlab = '', ylab = 'Cum diff (MAF)', col = col[i], 
+			xlim=c(time(z)[1],eComp),
+			ylim = c(min(z), max(z)))
+		# Total CUL
+	lines(x,cumsum.ts(cul[,i]))
+		#Ag CUL
+	lines(x,cumsum.ts(ag[,i]),lty="dashed")
 	legend('topleft',c(site$names[i],"Total CUL","Ag CUL"),
 			col=c(col[i],1,1),lty=c('solid','solid','dashed'))
 }
@@ -92,24 +106,30 @@ dev.off()
 # Plot the average cumulative difference for one year
 #########################################################
 pdf('usbr-cbrfc-natcomp-ave-cum-diff.pdf')
-s <- sapply(diff.ts( data.usbr, data.cbrfc ), seasonal.stat, mean, simplify=F)
 
+	# compute difference in MAF from thousand ac-ft
+diff <- (data.usbr - data.cbrfc)/1e3
+	
+	#get the mean difference for each season
+	#s is a data.frame
+s <- seasonal.stat(diff, mean)
+
+	#Get the cumulative sums of each mean 
 for(i in 1:length(s))
-	s[[i]] <- cumsum.ts(s[[i]])
+	s[,i] <- cumsum.ts(s[,i])
 
-for(i in 1:length(site$names)) 
-	s[[i]] <- s[[i]]/1e3 #change units to MAF
-
+	#names of months
 mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")	
 
+	#plot differences
 par(xaxt="n")
-plot(s[[1]], xlab = '', ylab = 'Ave Cum diff (MAF)', col = col[1],
-	ylim = c(min(sapply(s,min)), max(sapply(s,max))))
+plot(s[,1], xlab = '', ylab = 'Ave Cum Diff (MAF)', col = col[1],
+	ylim = c(min(s), max(s)))
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 	
 for(i in 2:length(site$names))
-	lines(s[[i]],col=col[i])
+	lines(s[,i],col=col[i])
 	
 legend('topleft',site$names,col=col,lty='solid')
 
@@ -125,8 +145,8 @@ p <- diff.ts( data.usbr, data.cbrfc, percent = TRUE )
 layout(matrix(1:length(site$names),ncol=1))
 for(i in 1:length(site$names)){
 	par(mar=c(2,4,1,1))
-	plot(p[[i]], xlab = '', ylab = '% difference', col = col[i], 
-		ylim = c(0,100),xlim=c(time(p[[i]])[i],eComp))
+	plot(p[,i], xlab = '', ylab = '% difference', col = col[i], 
+		ylim = c(0,100),xlim=c(time(p)[i],eComp))
 	legend('topleft',site$names[i],col=col[i],lty='solid')
 }
 dev.off()
