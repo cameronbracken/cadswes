@@ -74,18 +74,20 @@ col <- rainbow(length(site$names))
 
 	# compute difference in MAF from thousand ac-ft
 diff <- (data.usbr - data.cbrfc)/1e3
+	#dimnames get changed when ts's are subtracted
 attr(diff,"dimnames") <- attributes(data.usbr)$dimnames
-diff <- cumsum.ts((data.usbr - data.cbrfc)/1e3)
+diff <- cumsum.ts(diff)
 		
 	#add intervening uses
-diff[,"FlamingGorge"] <- diff[,"FlamingGorge"] + diff[,"Fontenelle"]
-diff[,"Crystal"] <- diff[,"Crystal"] + diff[,"BlueMesa"]
+#diff[,"FlamingGorge"] <- diff[,"FlamingGorge"] + diff[,"Fontenelle"]
+#diff[,"Crystal"] <- diff[,"Crystal"] + diff[,"BlueMesa"]
 
 layout(matrix(1:length(site$names),ncol=1))
 for(i in 1:length(site$names)){
 	
 	z <- diff[,i]
 		
+		#plot the annual series on the last month of the year
 	x <- as.vector(time(ag)-1/12)
 		#Margins
 	par(mar=c(2,4,1,1))
@@ -108,15 +110,13 @@ dev.off()
 pdf('usbr-cbrfc-natcomp-ave-cum-diff.pdf')
 
 	# compute difference in MAF from thousand ac-ft
-diff <- (data.usbr - data.cbrfc)/1e3
 	
 	#get the mean difference for each season
 	#s is a data.frame
-s <- seasonal.stat(diff, mean)
+s <- seasonal.stat((data.usbr - data.cbrfc)/1e3, mean)
 
 	#Get the cumulative sums of each mean 
-for(i in 1:length(s))
-	s[,i] <- cumsum.ts(s[,i])
+s <- cumsum.ts(s)
 
 	#names of months
 mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")	
