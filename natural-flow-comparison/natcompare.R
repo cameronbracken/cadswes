@@ -65,11 +65,10 @@ dev.off()
 ###################################
 # Plot the cumulative difference
 ###################################
-pdf('usbr-cbrfc-natcomp-cum-diff.pdf',width=7,height=10)
 
 #Read in Consumtive use data and convert to MAF
-cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE),start=1971+1,frequency=1)/1e6
-ag <- ts(read.table("USBR-ag-loss-ac-ft.tab",sep='\t',header=TRUE),start=1971+1,frequency=1)/1e6
+cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE), start=1971+1,frequency=1)/1e6
+ag <- ts(read.table("USBR-ag-loss-ac-ft.tab",sep='\t', header=TRUE), start=1971+1,frequency=1)/1e6
 col <- rainbow(length(site$names))
 
 	# compute difference in MAF from thousand ac-ft
@@ -79,16 +78,30 @@ attr(diff,"dimnames") <- attributes(data.usbr)$dimnames
 diff <- cumsum.ts(diff)
 		
 	#add intervening uses
-#diff[,"FlamingGorge"] <- diff[,"FlamingGorge"] + diff[,"Fontenelle"]
-#diff[,"Crystal"] <- diff[,"Crystal"] + diff[,"BlueMesa"]
+ag[,"FlamingGorge"] <- ag[,"FlamingGorge"] + ag[,"Fontenelle"]
+ag[,"Crystal"] <- ag[,"Crystal"] + ag[,"BlueMesa"]
+cul[,"FlamingGorge"] <- cul[,"FlamingGorge"] + cul[,"Fontenelle"]
+cul[,"Crystal"] <- cul[,"Crystal"] + cul[,"BlueMesa"]
 
+pdf('usbr-cbrfc-natcomp-cum-diff.pdf',width=7,height=10)
 layout(matrix(1:length(site$names),ncol=1))
+
 for(i in 1:length(site$names)){
 	
-	z <- diff[,i]
+		#crystal set is shorter so truncate series if we are on that site
+	if(site$names[i] == "Crystal"){
+		#cat('Special case for Crystal')
+		z <- window(diff[,i],1978,2001)
+		this.cul <- cumsum.ts(window(cul[,i],1978,2001))
+		this.ag <- cumsum.ts(window(ag[,i],1978,2001))
+	} else {
+		z <- diff[,i]
+		this.cul <- cumsum.ts(cul[,i])
+		this.ag <- cumsum.ts(ag[,i])
+	}
 		
 		#plot the annual series on the last month of the year
-	x <- as.vector(time(ag)-1/12)
+	x <- as.vector(time(this.ag)-1/12)
 		#Margins
 	par(mar=c(2,4,1,1))
 		#Cumulative difference
@@ -96,9 +109,9 @@ for(i in 1:length(site$names)){
 			xlim=c(time(z)[1],eComp),
 			ylim = c(min(z), max(z)))
 		# Total CUL
-	lines(x,cumsum.ts(cul[,i]))
+	lines(x,this.cul)
 		#Ag CUL
-	lines(x,cumsum.ts(ag[,i]),lty="dashed")
+	lines(x,this.ag,lty="dashed")
 	legend('topleft',c(site$names[i],"Total CUL","Ag CUL"),
 			col=c(col[i],1,1),lty=c('solid','solid','dashed'))
 }
@@ -124,7 +137,7 @@ mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")
 	#plot differences
 par(xaxt="n")
 plot(s[,1], xlab = '', ylab = 'Ave Cum Diff (MAF)', col = col[1],
-	ylim = c(min(s), max(s)))
+	ylim = c(min(s), max(s)), type = 'l')
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 	
