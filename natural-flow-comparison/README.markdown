@@ -1,1 +1,1 @@
-Files for comparison of USBR natural flows to CBRFC unregulated flows at the nine 24 month study input locations. 
+Files for comparison of USBR natural flows to CBRFC unregulated flows at the  24 month study input locations. 
