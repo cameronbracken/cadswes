@@ -3,7 +3,7 @@
 # Functions (put these in a package)
 #
 ##########################
-get.cbrfc.unregulated.data.url <- function(site.names, start = "1900-01-01", end = Sys.Date())
+getCbrfcUnregulatedDataUrl <- function(site.names, start = "1900-01-01", end = Sys.Date())
 {
 		
 	url <- paste("http://www.nwrfc.noaa.gov/westernwater/inc/getcsv.php?id=", site.names,
@@ -12,14 +12,14 @@ get.cbrfc.unregulated.data.url <- function(site.names, start = "1900-01-01", end
 		
 }
 
-download.and.read.cbrfc.unregulated.data <- function(site.names, 
+downloadAndReadCbrfcUnregulatedData <- function(site.names, 
 	download.dir = 'downloads', from.cache = TRUE, missing.val = -9999, ...)
 {
 	# This function takes a a character vector of river forcast center site names,
 	# and downloads the unregulated flow data for that site from the RFC. The data 
 	# is read in and returned in a list
 	
-	urls <- get.cbrfc.unregulated.data.url( site.names[!is.na(site.names)], ...)
+	urls <- getCbrfcUnregulatedDataUrl( site.names[!is.na(site.names)], ...)
 	
 	#Create dir of downloaded data
 	if(!file.exists(download.dir)) dir.create( download.dir )
@@ -35,7 +35,8 @@ download.and.read.cbrfc.unregulated.data <- function(site.names,
 	data.cbrfc <- list()
 	for(i in 1:length(urls)) {
 		if( !from.cache || !file.exists(files[i]) )
-			download.file( urls[i], destfile=files[i], method = "wget", quiet = T)
+			download.file( urls[i], destfile=files[i], 
+				method = "wget", quiet = T)
 		data.cbrfc[[i]] <- unique( read.csv( files[i] ) )
 	}
 	
@@ -48,9 +49,9 @@ download.and.read.cbrfc.unregulated.data <- function(site.names,
 		s <- strsplit(as.character(data.cbrfc[[i]]$obsdate[n]),'-')[[1]]
 		s <- as.integer(s)
 			#must reverse the data for the same reason
-		data.cbrfc[[i]] <- ts(rev(data.cbrfc[[i]]$val), start=c(s[1], s[2]), frequency=12)
+		data.cbrfc[[i]] <- ts(rev(data.cbrfc[[i]]$val), 
+								start=c(s[1], s[2]), frequency=12)
 		data.cbrfc[[i]][ data.cbrfc[[i]] == missing.val ] = NA
-		data.cbrfc[[i]][ data.cbrfc[[i]] < 0 ] = 0
 	}
 	
 	# coerce time series list into multi dimensional time series
@@ -119,23 +120,29 @@ diff.ts <- function(x, y, cumsum = FALSE, percent = FALSE){
 
 	# calculate a statistic for each period in a time series
 	# default period id frequency but any window will work
-seasonal.stat <- function(x, fun, win = frequency(x), na.rm = T){
+seasonal.stat <- function(x, fun, win = frequency(x), ...){
 	
 	#figure out if ts is single or multi dimensional
 	if(is.null(dim(x))){
 			#Single ts
-		return(seasonal.stat.work(x,fun=fun,win=win,na.rm=na.rm))
+		return(seasonal.stat.work(x,fun=fun,win=win,giveStack=F,...))
 	}else{
 		
 			# Multidimensional ts
 			# get the seasonal stat for each ts and bind the result together 
 			# into a matrix
 		mts <- cbind(
-				seasonal.stat.work(x[,1],fun=fun,win=win,na.rm=na.rm),
-				seasonal.stat.work(x[,2],fun=fun,win=win,na.rm=na.rm)
+				seasonal.stat.work(x[,1],
+					fun=fun, win=win, giveStack=F,...),
+				seasonal.stat.work(x[,2], 
+					fun=fun, win=win, giveStack=F,...)
 				)
 		for(i in 2:(dim(x)[2]-1)){
-			mts <- cbind(mts, seasonal.stat.work(x[,i+1],fun=fun,win=win,na.rm=na.rm))
+
+			mts <- cbind(mts, 
+				seasonal.stat.work(x[,i+1],
+					fun=fun, win=win, giveStack=F,...))
+				
 		}
 		mts <- as.data.frame(mts)
 		names(mts) <- attributes(x)$dimnames[[2]]
@@ -144,12 +151,12 @@ seasonal.stat <- function(x, fun, win = frequency(x), na.rm = T){
 	
 }
 
-seasonal.stat.work <- function(x,fun,win=frequency(x),na.rm=T){
+seasonal.stat.work <- function(x,fun,win=frequency(x),giveStack=F,...){
 	
 	#calcualte a statistic for each period in a time series
 	
 	nyears <- length(unique(floor(time(x))))
-    syear <- start(x)[1]
+	syear <- start(x)[1]
 
 	times <- seq(syear,by=1/win,length.out=length(x))
 	years <- floor(times)
@@ -160,60 +167,62 @@ seasonal.stat.work <- function(x,fun,win=frequency(x),na.rm=T){
 	thisYear <- syear
 	for(i in 1:nyears){
 
-	    thisRow <- x[years==thisYear]
-	    stacked[thisYear - syear + 1, 1:length(thisRow)] <- thisRow
-	    thisYear = thisYear + 1
-
+		thisRow <- x[years==thisYear]
+		stacked[thisYear - syear + 1, 1:length(thisRow)] <- thisRow
+		thisYear = thisYear + 1
 	}
 
-	return(as.vector(apply(stacked,2,fun,na.rm=na.rm)))
+	if(giveStack)
+		return(stacked)
+	else
+		return(as.vector(apply(stacked,2,fun,...)))
 	
 }
 
 ts.annual.mean <- function(x){
 
-    options(warn=-1)
-    nyears <- length(unique(floor(time(x))))
-    syear <- start(x)[1]
-    nst = vector('numeric',nyears)
+	options(warn=-1)
+	nyears <- length(unique(floor(time(x))))
+	syear <- start(x)[1]
+	nst = vector('numeric',nyears)
 
-    for(i in 1:nyears)  nst[i] <- mean(window(x,syear - 1 + i,
-                                        c(syear - 1 + i, frequency(x))))
+	for(i in 1:nyears)	nst[i] <- mean(window(x,syear - 1 + i,
+										c(syear - 1 + i, frequency(x))))
    
-    nst <- ts(nst, start = c(syear,1), frequency = 1) 
-    return(nst)
+	nst <- ts(nst, start = c(syear,1), frequency = 1) 
+	return(nst)
 
 }
 
 wapply <- function(x, fun, win.len = length(x), ...){
-    
-    r <- (length(x) %% win.len)
-    if(r > 0) x <- x[1:(length(x)-r)]
-    stack <- matrix(x,nrow = win.len)
-    return(apply(stack,2,fun,...))
-    
+	
+	r <- (length(x) %% win.len)
+	if(r > 0) x <- x[1:(length(x)-r)]
+	stack <- matrix(x,nrow = win.len)
+	return(apply(stack,2,fun,...))
+	
 }
 
 
 ts.next.time <- function(x){
-    en <- end(x)
-    en <- if(en[2] == frequency(x))
-            c(en[1] + 1, 1)
-        else
-            c(en[1], en[2] + 1)
-    return(en)
+	en <- end(x)
+	en <- if(en[2] == frequency(x))
+			c(en[1] + 1, 1)
+		else
+			c(en[1], en[2] + 1)
+	return(en)
 }
 
 ts.order.start <- function(x,start.per){
 
-        f = frequency(x)
-        ord <- if(start.per == 1) 
-                start.per:f
-           else if(start.per == f) 
-                c(f, 1:(f - 1))
-           else
-                c(start.per:f, 1:(start.per - 1))
-        return(ord)
+		f = frequency(x)
+		ord <- if(start.per == 1) 
+				start.per:f
+		   else if(start.per == f) 
+				c(f, 1:(f - 1))
+		   else
+				c(start.per:f, 1:(start.per - 1))
+		return(ord)
 }
 
 ##########################

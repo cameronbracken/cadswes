@@ -7,6 +7,9 @@
 ##########################
 source('libnatcompare.R')
 
+figPrefix = 'figs'
+if(!file.exists(figPrefix)) dir.create(figPrefix)
+
 sComp <- 1971
 eComp <- 2000
 
@@ -27,37 +30,47 @@ site <- list(
 ##############################
 # Get the cbrfc data
 ##############################
-data.cbrfc <- download.and.read.cbrfc.unregulated.data( site$codes )
+data.cbrfc <- downloadAndReadCbrfcUnregulatedData( site$codes )
 # enforce the time limits
 data.cbrfc <- window(data.cbrfc, c(sComp,1), c(eComp,12))
+#remove negatives
+data.cbrfc[ data.cbrfc < 0 ] = 0
 
 ##############################
 # Get the usbr data
 ##############################
 #read and transform the usbr data to a timeseries starting at 1971, ending at 2000
-data.usbr <- ts(read.table("USBR-monthly.tab",sep='\t',header=TRUE),start=c(1905,10),frequency=12)
+data.usbr <- ts(read.table("USBR-monthly.tab",sep='\t',header=TRUE),
+		start=c(1905,10),frequency=12)
 # enforce time window and convert to thousand acre-ft/mon
 data.usbr <- window(data.usbr, c(sComp,1), c(eComp,12))/1e3
+data.usbr[data.usbr < 0] = NA
 
 site <- c(site,names = list(attributes(data.usbr)$dimnames[[2]]))
 
 ###################################
 # Plot the comparisons at each site
 ###################################
-pdf('usbr-cbrfc-natcomp.pdf',width=11,height=4)
+pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-data.pdf'),width=6.5,height=8.5)
+layout(matrix(1:length(site$names),ncol=1))
+
 for( i in 1:length(site$names) ){
-	
 	# plot a thousand acre-ft/month
 	# CBRFC 
+	par(mar=c(2,4,1.5,1))
 	plot(data.cbrfc[,i], col='black', 
-		xlab='', ylab='Flow (thousand ac-ft/month)', 
+		xlab='', ylab='Flow (KAF/mon)', 
 		main = paste(site$names[i],'vs.',site$codes[i]) )
+		
 	# USBR
 	lines(data.usbr[,i], col='steelblue', lty = 'solid')
+	
 	# Difference
-	lines(data.usbr[,i]-data.cbrfc[,i], col='green')
-	legend("topright", c("CBRFC","USBR", "Difference"), 
-		col=c(1,'steelblue','green'), lty=c('solid'))	
+	# lines(data.usbr[,i]-data.cbrfc[,i], col='green')
+	#legend("topright", c("CBRFC","USBR", "Difference"), 
+	#	col=c(1,'steelblue','green'), lty=c('solid'))	
+	legend("topright", c("CBRFC","USBR"), 
+		col=c(1,'steelblue'), lty=c('solid'))	
 }
 dev.off()
 
@@ -65,6 +78,9 @@ dev.off()
 ###################################
 # Plot the cumulative difference
 ###################################
+
+pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-cum-diff.pdf'),width=6.5,height=8.5)
+layout(matrix(1:length(site$names),ncol=1))
 
 #Read in Consumtive use data and convert to MAF
 cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE), start=1971+1,frequency=1)/1e6
@@ -82,9 +98,6 @@ ag[,"FlamingGorge"] <- ag[,"FlamingGorge"] + ag[,"Fontenelle"]
 ag[,"Crystal"] <- ag[,"Crystal"] + ag[,"BlueMesa"]
 cul[,"FlamingGorge"] <- cul[,"FlamingGorge"] + cul[,"Fontenelle"]
 cul[,"Crystal"] <- cul[,"Crystal"] + cul[,"BlueMesa"]
-
-pdf('usbr-cbrfc-natcomp-cum-diff.pdf',width=7,height=10)
-layout(matrix(1:length(site$names),ncol=1))
 
 for(i in 1:length(site$names)){
 	
@@ -106,8 +119,8 @@ for(i in 1:length(site$names)){
 	par(mar=c(2,4,1,1))
 		#Cumulative difference
 	plot(z, xlab = '', ylab = 'Cum diff (MAF)', col = col[i], 
-			xlim=c(time(z)[1],eComp),
-			ylim = c(min(z), max(z)))
+			xlim=c(time(diff)[1],eComp),
+			ylim = c(min(c(z,this.cul)), max(c(z,this.cul))))
 		# Total CUL
 	lines(x,this.cul)
 		#Ag CUL
@@ -118,40 +131,79 @@ for(i in 1:length(site$names)){
 dev.off()
 
 #########################################################
-# Plot the average cumulative difference for one year
+# Calculate the average cumulative difference for one year
 #########################################################
-pdf('usbr-cbrfc-natcomp-ave-cum-diff.pdf')
 
 	# compute difference in MAF from thousand ac-ft
 	
 	#get the mean difference for each season
 	#s is a data.frame
-s <- seasonal.stat((data.usbr - data.cbrfc)/1e3, mean)
-
-	#Get the cumulative sums of each mean 
-s <- cumsum.ts(s)
+diff <- as.matrix((data.usbr - data.cbrfc)/1e3)
+	
+f <- function(x) quantile(x,0.5,na.rm=T)
+s <- as.matrix(seasonal.stat(diff, f))
+f <- function(x) quantile(x,0.05,na.rm=T)
+smin <- as.matrix(seasonal.stat(diff, f))
+f <- function(x) quantile(x,0.95,na.rm=T)
+smax <- as.matrix(seasonal.stat(diff, f))
 
 	#names of months
-mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")	
+mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")
+
+#########################################################
+# Plot the average cumulative difference for one, 
+# each site in separate frame
+#########################################################	
+
+pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-ave-cum-diff-err.pdf'))
+
+layout(matrix(1:length(site$names),ncol=2))
+	
+for(i in 1:length(site$names)){
+	par(xaxt="n",mar=c(3,4,1,1))
+	boxdata <- seasonal.stat.work(diff[,i],mean,giveStack=T)
+	plot(s[,i], xlab = '', ylab = 'Difference (MAF)',
+		ylim = c(min(c(smin[,-6],s[,-6],boxdata),na.rm=T), 
+				max(c(smax[,-6],s[,-6],boxdata),na.rm=T)), 
+		type = 'n')
+	boxplot(as.data.frame(boxdata),add=T)
+	lines(s[,i], col = col[i])
+	par(xaxt="s")
+	axis(1,seq(1:12),labels=mon)
+	legend('topleft',site$names[i],col=col[i],lty='solid')
+}
+
+dev.off()
+
+#########################################################
+# Plot the median cumulative difference for one
+#########################################################
+pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-ave-cum-diff.pdf'))
+
+	#Get the cumulative sums of each mean
+s <- cumsum.ts(s)
 
 	#plot differences
 par(xaxt="n")
-plot(s[,1], xlab = '', ylab = 'Ave Cum Diff (MAF)', col = col[1],
+plot(s[,1], xlab = '', ylab = 'Median Cumulative Diff (MAF)', col = col[1],
 	ylim = c(min(s), max(s)), type = 'l')
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 	
-for(i in 2:length(site$names))
+for(i in 2:length(site$names)){
 	lines(s[,i],col=col[i])
-	
+}
 legend('topleft',site$names,col=col,lty='solid')
 
 dev.off()
 
+
 ###################################
 # Plot the percent differences
 ###################################
-pdf('usbr-cbrfc-natcomp-percent-diff.pdf',width=7,height=10)
+pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-percent-diff.pdf'),
+	width=6.5,height=8.5)
+	
 col <- rainbow(length(site$names), alpha=.8)
 p <- diff.ts( data.usbr, data.cbrfc, percent = TRUE )
 
@@ -159,7 +211,7 @@ layout(matrix(1:length(site$names),ncol=1))
 for(i in 1:length(site$names)){
 	par(mar=c(2,4,1,1))
 	plot(p[,i], xlab = '', ylab = '% difference', col = col[i], 
-		ylim = c(0,100),xlim=c(time(p)[i],eComp))
+		ylim = c(0,120),xlim=c(time(p)[i],eComp))
 	legend('topleft',site$names[i],col=col[i],lty='solid')
 }
 dev.off()
