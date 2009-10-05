@@ -51,7 +51,7 @@ site <- c(site,names = list(attributes(data.usbr)$dimnames[[2]]))
 ###################################
 # Plot the comparisons at each site
 ###################################
-pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-data.pdf'),width=6.5,height=8.5)
+pdf(file.path(figPrefix,'data.pdf'),width=6.5,height=8.5)
 layout(matrix(1:length(site$names),ncol=1))
 
 for( i in 1:length(site$names) ){
@@ -79,7 +79,7 @@ dev.off()
 # Plot the cumulative difference
 ###################################
 
-pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-cum-diff.pdf'),width=6.5,height=8.5)
+pdf(file.path(figPrefix,'cum-diff.pdf'),width=6.5,height=8.5)
 layout(matrix(1:length(site$names),ncol=1))
 
 #Read in Consumtive use data and convert to MAF
@@ -151,22 +151,22 @@ smax <- as.matrix(seasonal.stat(diff, f))
 mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")
 
 #########################################################
-# Plot the average cumulative difference for one, 
+# Plot the median cumulative difference, 
 # each site in separate frame
 #########################################################	
 
-pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-ave-cum-diff-err.pdf'))
+pdf(file.path(figPrefix,'median-cum-diff-err.pdf'))
 
 layout(matrix(1:length(site$names),ncol=2))
 	
 for(i in 1:length(site$names)){
 	par(xaxt="n",mar=c(3,4,1,1))
-	boxdata <- seasonal.stat.work(diff[,i],mean,giveStack=T)
+	boxdata <- seasonal.stat.work(diff[,i],median,giveStack=T)
 	plot(s[,i], xlab = '', ylab = 'Difference (MAF)',
 		ylim = c(min(c(smin[,-6],s[,-6],boxdata),na.rm=T), 
 				max(c(smax[,-6],s[,-6],boxdata),na.rm=T)), 
 		type = 'n')
-	boxplot(as.data.frame(boxdata),add=T)
+	myboxplot(as.data.frame(boxdata),add=T)
 	lines(s[,i], col = col[i])
 	par(xaxt="s")
 	axis(1,seq(1:12),labels=mon)
@@ -176,9 +176,9 @@ for(i in 1:length(site$names)){
 dev.off()
 
 #########################################################
-# Plot the median cumulative difference for one
+# Plot the median cumulative difference, all sites
 #########################################################
-pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-ave-cum-diff.pdf'))
+pdf(file.path(figPrefix,'med-cum-diff.pdf'))
 
 	#Get the cumulative sums of each mean
 s <- cumsum.ts(s)
@@ -197,11 +197,36 @@ legend('topleft',site$names,col=col,lty='solid')
 
 dev.off()
 
+#########################################################
+# Plot the median cumulative difference, Lees Ferry with box
+#########################################################
+pdf(file.path(figPrefix,'med-cum-diff-err-lees.pdf'))
+
+n <- which(site$names == 'LeesFerry')
+
+#plot differences
+par(xaxt="n",mar=c(3,4,1,1))
+boxdata <- seasonal.stat.work(diff[,n],mean,giveStack=T)
+boxdata <- t(apply(boxdata,1,cumsum))
+s <- apply(boxdata,2,median,na.rm=T)
+
+plot(s, xlab = '', ylab = 'Difference (MAF)',
+	ylim = c(min(boxdata,na.rm=T), 
+			max(boxdata,na.rm=T)), 
+	type = 'n')
+myboxplot(as.data.frame(boxdata),add=T)
+lines(s, col = col[n])
+par(xaxt="s")
+axis(1,seq(1:12),labels=mon)
+legend('topleft','LeesFerry',col=col[n],lty='solid')
+
+dev.off()
+
 
 ###################################
 # Plot the percent differences
 ###################################
-pdf(file.path(figPrefix,'usbr-cbrfc-natcomp-percent-diff.pdf'),
+pdf(file.path(figPrefix,'percent-diff.pdf'),
 	width=6.5,height=8.5)
 	
 col <- rainbow(length(site$names), alpha=.8)
