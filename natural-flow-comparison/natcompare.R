@@ -40,7 +40,7 @@ data.cbrfc[ data.cbrfc < 0 ] = 0
 # Get the usbr data
 ##############################
 #read and transform the usbr data to a timeseries starting at 1971, ending at 2000
-data.usbr <- ts(read.table("USBR-monthly.tab",sep='\t',header=TRUE),
+data.usbr <- ts(read.table("data/USBR-monthly.tab",sep='\t',header=TRUE),
 		start=c(1905,10),frequency=12)
 # enforce time window and convert to thousand acre-ft/mon
 data.usbr <- window(data.usbr, c(sComp,1), c(eComp,12))/1e3
@@ -83,8 +83,8 @@ pdf(file.path(figPrefix,'cum-diff.pdf'),width=6.5,height=8.5)
 layout(matrix(1:length(site$names),ncol=1))
 
 #Read in Consumtive use data and convert to MAF
-cul <- ts(read.table("USBR-CUL-ac-ft.tab",sep='\t',header=TRUE), start=1971+1,frequency=1)/1e6
-ag <- ts(read.table("USBR-ag-loss-ac-ft.tab",sep='\t', header=TRUE), start=1971+1,frequency=1)/1e6
+cul <- ts(read.table("data/USBR-CUL-ac-ft.tab",sep='\t',header=TRUE), start=1971+1,frequency=1)/1e6
+ag <- ts(read.table("data/USBR-ag-loss-ac-ft.tab",sep='\t', header=TRUE), start=1971+1,frequency=1)/1e6
 col <- rainbow(length(site$names))
 
 	# compute difference in MAF from thousand ac-ft
@@ -198,14 +198,14 @@ legend('topleft',site$names,col=col,lty='solid')
 dev.off()
 
 #########################################################
-# Plot the median cumulative difference, Lees Ferry with box
+# Plot the median cumulative difference, Lees Ferry with box plot
 #########################################################
 pdf(file.path(figPrefix,'med-cum-diff-err-lees.pdf'))
 
 n <- which(site$names == 'LeesFerry')
 
 #plot differences
-par(xaxt="n",mar=c(3,4,1,1))
+par(xaxt="n",mar=c(3,4,4,1))
 boxdata <- seasonal.stat.work(diff[,n],mean,giveStack=T)
 boxdata <- t(apply(boxdata,1,cumsum))
 s <- apply(boxdata,2,median,na.rm=T)
@@ -214,8 +214,10 @@ plot(s, xlab = '', ylab = 'Difference (MAF)',
 	ylim = c(min(boxdata,na.rm=T), 
 			max(boxdata,na.rm=T)), 
 	type = 'n')
-myboxplot(as.data.frame(boxdata),add=T)
+#myboxplot(as.data.frame(boxdata),add=T)
 lines(s, col = col[n])
+for(i in 1:nrow(boxdata))
+	lines(boxdata[i,])
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 legend('topleft','LeesFerry',col=col[n],lty='solid')
