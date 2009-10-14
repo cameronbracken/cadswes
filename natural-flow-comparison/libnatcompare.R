@@ -3,21 +3,50 @@
 # Functions (put these in a package)
 #
 ##########################
-getCbrfcUnregulatedDataUrl <- function(site.names, start = "1900-01-01", end = Sys.Date())
+getCbrfcUnregulatedDataUrl <- function(site.names, start = "1900-01-01", end = as.character(Sys.Date()))
 {
 		
 	url <- paste("http://www.nwrfc.noaa.gov/westernwater/inc/getcsv.php?id=", site.names,
 		"&tablelist=obs&dataobs=", start, "&dataobsend=", end, "&datacharcs=&datacharcsend=&datafcst=&datafcstend=&dataens_memb=&dataens_membend=&dataobs_mean=&dataobs_meanend=&datacli_index=&datacli_indexend=&dataobsind=&ver=table&page=data", 
 		sep='')
+	return(url)
 		
 }
+
+getCbrfcForecastDataUrl <- function(site.names, start = "1900-01-01", end = as.character(Sys.Date()))
+{
+
+n <- length(site.names)
+script <- "http://www.nwrfc.noaa.gov/westernwater/inc/getcsv.php"
+
+keys <- c('id', 'tablelist', 'dataobs', 'dataobsend', 'datacharcs',
+'datacharcsend', 'datafcst', 'datafcstend', 'dataens_memb', 'dataens_membend', 
+'dataobs_mean', 'dataobs_meanend', 'datacli_index',
+'datacli_indexend', 'dataobsind', 'ver', 'page')
+
+vals <- c('fcst', start, end, '1971', '', '1979-04-01', '2009-07-01', 
+'2007-02-20', '2009-07-28', 'January', 'December', '1871-01-01', '2008-12-01', 
+'MEI', '', 'data')
+
+x <- character()
+for(site in site.names){
+	args <- paste(keys,c(site,vals),sep='=',collapse='&')
+	x <- c(x,paste(script,args,sep='?'))
+}
+
+return(x)
+#id=GBRW4&tablelist=GBRW4&dataobs=GBRW4&dataobsend=GBRW4&datacharcs=GBRW4&datacharcsend=GBRW4&datafcst=fcst&datafcstend=1900-01-01&dataens_memb=2009-10-07&dataens_membend=1971&dataobs_mean=&dataobs_meanend=1979-04-01&datacli_index=2009-07-01&datacli_indexend=2007-02-20&dataobsind=2009-07-28&ver=January&page=December&id=1871-01-01&tablelist=2008-12-01&dataobs=MEI&dataobsend=&datacharcs=data
+#id=GBRW4&tablelist=fcst&dataobs=1957-01-01&dataobsend=2009-12-01&datacharcs=1971&datacharcsend=&datafcst=1979-04-01&datafcstend=2009-07-01&dataens_memb=2007-02-20&dataens_membend=2009-07-28&dataobs_mean=January&dataobs_meanend=December&datacli_index=1871-01-01&datacli_indexend=2008-12-01&dataobsind=MEI&ver=&page=data
+}
+
+
 
 downloadAndReadCbrfcUnregulatedData <- function(site.names, 
 	download.dir = 'downloads', from.cache = TRUE, missing.val = -9999, ...)
 {
-	# This function takes a a character vector of river forcast center site names,
-	# and downloads the unregulated flow data for that site from the RFC. The data 
-	# is read in and returned in a list
+	# This function takes a a character vector of river forcast center site 
+	# names,and downloads the unregulated flow data for that site from the 
+	# RFC. The data is read in and returned in a list
 	
 	urls <- getCbrfcUnregulatedDataUrl( site.names[!is.na(site.names)], ...)
 	
