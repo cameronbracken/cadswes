@@ -178,7 +178,7 @@ dev.off()
 #########################################################
 # Plot the median cumulative difference, all sites
 #########################################################
-pdf(file.path(figPrefix,'med-cum-diff.pdf'))
+pdf(file.path(figPrefix,'med-cum-diff.pdf'), width=6,height=6)
 
 	#Get the cumulative sums of each mean
 s <- cumsum.ts(s)
@@ -200,7 +200,7 @@ dev.off()
 #########################################################
 # Plot the median cumulative difference, Lees Ferry with box plot
 #########################################################
-pdf(file.path(figPrefix,'med-cum-diff-err-lees.pdf'))
+pdf(file.path(figPrefix,'med-cum-diff-err-lees.pdf'), width=6,height=6)
 
 n <- which(site$names == 'LeesFerry')
 
@@ -214,10 +214,11 @@ plot(s, xlab = '', ylab = 'Difference (MAF)',
 	ylim = c(min(boxdata,na.rm=T), 
 			max(boxdata,na.rm=T)), 
 	type = 'n')
-#myboxplot(as.data.frame(boxdata),add=T)
+myboxplot(as.data.frame(boxdata),add=T)
 lines(s, col = col[n])
-for(i in 1:nrow(boxdata))
-	lines(boxdata[i,])
+#for spaghetti plot
+#for(i in 1:nrow(boxdata))
+#	lines(boxdata[i,])
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 legend('topleft','LeesFerry',col=col[n],lty='solid')
