@@ -1,5 +1,5 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 12:36 October 19, 2009
+# Created 17:23 October 28, 2009
 # 
 RULESET
 AGENDA_ORDER DESCENDING;
@@ -237,16 +237,56 @@ BEGIN
   ACTIVE         TRUE;
   BEGIN
 
-    RULE                 "FallSteadyFlow";
+    RULE                 "MinFlow";
     DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      IF_STATEMENT ("IsSteadyFlowSeason"( @"t" )) THEN
-            $ "Fontenelle.Outflow" [] := $ "FontenelleData.SteadyRelease" [];
+      IF_STATEMENT ($ "Fontenelle.Outflow" [] < $ "FontenelleData.MinFlow" []) THEN
+            $ "Fontenelle.Outflow" [] := $ "FontenelleData.MinFlow" [];
 
       END_IF_STATEMENT;
+
+    END;
+
+    RULE                 "Max Elevation";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      IF_STATEMENT ($ "Fontenelle.Pool Elevation" [] > $ "FontenelleData.MaxElevation" []) THEN
+          DESCRIPTION          "If the Pool elevation goes higher than the max elevation then release whatever necessary to not overtop";
+      $ "Fontenelle.Outflow" [] := "GetMaxOutflowGivenHW"( % "Fontenelle", $ "FontenelleData.MaxElevation" [], @"t" );
+
+      END_IF_STATEMENT;
+
+    END;
+
+    RULE                 "SafeChannelCapacity";
+    DESCRIPTION          "Prevents outflow from exceeding safe channel capacity unless there is a chance of overtopping, in which case, the &quot;Max Elevation&quot; rule will take precedence. ";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      IF_STATEMENT ($ "Fontenelle.Outflow" [] > $ "FontenelleData.SafeChannelCapacity" []) THEN
+            $ "Fontenelle.Outflow" [] := $ "FontenelleData.SafeChannelCapacity" [];
+
+      END_IF_STATEMENT;
+
+    END;
+
+    RULE                 "Set September-November Baseflow";
+    DESCRIPTION          "This rule is the first of two that set the steady baseflow at Fontenelle.  This rule looks ahead at the forecasted volumes and determines what the max steady flow for the months of September-March can be. ";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "September" };
+    BEGIN
+
+      $ "FontenelleData.SepToMarSteadyRelease" COMMENTED_BY "Change in storage plus forcasted volume divided by 7 months. " [] COMMENTED_BY "Compute the steady flow over September to March necsessary to meet Apr 1 target. " := ( "ElevationToStorage"( % "Fontenelle", $ "Fontenelle.Pool Elevation" [] ) - "ElevationToStorage"( % "Fontenelle", $ "FontenelleData.April1Target" [] ) + "SumFlowsToVolume"( $ "Fontenelle.Inflow", @"t", @"t + 6" ) ) / 7.00000000 "month";
+
+    DESCRIPTION          "Set the steady flow for September, the next two months will look back at this value";
+      $ "Fontenelle.Outflow" [@"t"] := $ "FontenelleData.SepToMarSteadyRelease" [];
 
     END;
 
@@ -2272,7 +2312,7 @@ BEGIN
   ACTIVE        TRUE;
   BEGIN
 
-    FUNCTION       "IsSteadyFlowSeason" ( DATETIME timestep )
+    FUNCTION       "IsMonth" ( DATETIME timestep, LIST monthList )
     RETURN_TYPE    BOOLEAN;
     SCALE_UNITS    "";
     DESCRIPTION    "";
@@ -2281,7 +2321,7 @@ BEGIN
     POST_EXEC_DIAG FALSE;
     BEGIN
 
-      "GetMonthAsString"( timestep ) IN "SteadyMonthList"(  );
+      "GetMonthAsString"( timestep ) IN monthList;
 
     END;
 

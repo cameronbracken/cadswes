@@ -1,9 +1,9 @@
 # RiverWare_Model 5.1.3 Patch
-# Created 12:36 October 19, 2009
+# Created 16:58 October 28, 2009
 # CADSWES, University of Colorado at Boulder, http://cadswes.colorado.edu/
 # 
 DST 0
-$ws.Model.FileInfo saveInfo 1 {bracken} {10-19-2009 12:36:50} {RiverWare 5.1.3} 
+$ws.Model.FileInfo saveInfo 1 {bracken} {10-28-2009 16:58:51} {RiverWare 5.1.3} 
 $ws.Model.FileInfo comment {}
 SaveOutputs 1
 SaveExtPrecision 0
@@ -40817,7 +40817,7 @@ set s "$o.Hydrologic Inflow Salt Conc"
 "$s" setCSeries {08-01-2009 00:00:00} 1 1 MONTH -1 NaN 2
 set obj {Fontenelle}
 set o "$ws.Fontenelle"
-$ws SimObj $obj {LevelPowerReservoir} 443 2069 {} 40 6390
+$ws SimObj $obj {LevelPowerReservoir} 466 2087 {} 40 6390
 "$o" sDM {Alternate Hydrologies} {No Method}
 "$o" sDM {Stochastic Optimization Storage Type} {No Method}
 "$o" sDM {hydrologicInflowCalculationCategory} {inputHydrologicInflow}
@@ -40924,7 +40924,7 @@ $ws SimObj $obj {LevelPowerReservoir} 443 2069 {} 40 6390
 "$o" {SimObjMultiSlot} {Inflow}
 set s "$o.Inflow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 0
+"$s" order 500 18
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -40933,7 +40933,7 @@ set s "$o.Inflow"
 "$o" {AggSeriesSlot} {Outflow}
 set s "$o.Outflow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 1
+"$s" order 500 25
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -40942,7 +40942,7 @@ set s "$o.Outflow"
 "$o" {AggSeriesSlot} {Storage}
 set s "$o.Storage"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 2
+"$s" order 500 38
 "$s" cvg 2 1e-008
 "$s" unit 12 {%f} 0
 "$s" minMax NaN NaN
@@ -40960,7 +40960,7 @@ set s "$o.Previous Storage"
 "$o" {AggSeriesSlot} {Pool Elevation}
 set s "$o.Pool Elevation"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 3
+"$s" order 500 29
 "$s" cvg 2 1e-008
 "$s" unit 3 {%f} 2
 "$s" minMax NaN NaN
@@ -40969,7 +40969,7 @@ set s "$o.Pool Elevation"
 "$o" {AggSeriesSlot} {Flow FROM Pumped Storage}
 set s "$o.Flow FROM Pumped Storage"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 4
+"$s" order 500 12
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -40977,7 +40977,7 @@ set s "$o.Flow FROM Pumped Storage"
 "$o" {AggSeriesSlot} {Flow TO Pumped Storage}
 set s "$o.Flow TO Pumped Storage"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 5
+"$s" order 500 13
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -40985,7 +40985,7 @@ set s "$o.Flow TO Pumped Storage"
 "$o" {AggSeriesSlot} {Canal Flow}
 set s "$o.Canal Flow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 6
+"$s" order 500 3
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -40993,7 +40993,7 @@ set s "$o.Canal Flow"
 "$o" {SeriesSlot} {Total Inflows}
 set s "$o.Total Inflows"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 7
+"$s" order 500 43
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 0
 "$s" minMax NaN NaN
@@ -41002,7 +41002,7 @@ set s "$o.Total Inflows"
 "$o" {AggSeriesSlot} {Diversion}
 set s "$o.Diversion"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 8
+"$s" order 500 5
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -41011,13 +41011,13 @@ set s "$o.Diversion"
 "$o" {ScalarSlot} {Diversion Capacity}
 set s "$o.Diversion Capacity"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 11
+"$s" order 500 6
 "$s" units 19 {%f} 2
 "$s" value NaN {cms}
 "$o" {SimObjMultiSlot} {Return Flow}
 set s "$o.Return Flow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 9
+"$s" order 500 36
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 0
 "$s" minMax NaN NaN
@@ -41026,7 +41026,7 @@ set s "$o.Return Flow"
 "$o" {AggSeriesSlot} {Spill}
 set s "$o.Spill"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 10
+"$s" order 500 37
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 0
 "$s" minMax NaN NaN
@@ -41035,16 +41035,16 @@ set s "$o.Spill"
 "$o" {AggSeriesSlot} {Turbine Release}
 set s "$o.Turbine Release"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 12
+"$s" order 500 44
 "$s" cvg 2 0.0001
-"$s" unit 20 {%f} 0
+"$s" unit 17 {%f} 0
 "$s" minMax NaN NaN
 "$s" setFSeries {cms} {11-01-1997 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 1 @ 12 2 @ 101 1 @ 29 2 @ 26 
 "$s" setDSeries {cms} {11-01-1997 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 41.8441581696 28.1002581116 39.2311145815 38.9460469077 38.8812931902 36.9187966655 39.7540917226 43.3127862983 45.7606533559 41.6378410163 42.49857039 32.7734026868 NaN @ 101 25.6530838913 24.3549264611 22.7647655389 22.8236143174 22.8365852738 22.9033049463 12.7639759297 17.0859818035 19.2986388736 19.999800524 19.8987124398 19.7093389409 20.0011706912 19.9425325023 29.5221775253 47.644864194 47.9264150968 42.0660838432 29.8645589018 29.7984951408 22.7849539667 11.9118392853 27.8924364363 27.0660173162 26.9744986584 26.9250342527 28.7112271906 43.2013610303 40.4591789204 43.3956815831 34.8297213082 6.12003593693 0 34.8297213082 @ 4 41.0594275584 45.9033984113 49.2766298004 46.3651421505 45.8547778989 18.7318308221 25.0171605702 32.5643735808 @ 5 39.6435852288 45.6140149881 49.0510280825 46.3486654609 45.7996611507 17.2944187107 
 "$o" {TableSlot} {Max Iterations}
 set s "$o.Max Iterations"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 13
+"$s" order 500 19
 "$s" resize 1 1
 "$s" setRowLabels {0} 
 "$s" setColumnLabels {No. of Iterations} 
@@ -41057,7 +41057,7 @@ set s "$o.Max Iterations"
 "$o" {TableSlot} {Convergence Percentage}
 set s "$o.Convergence Percentage"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 14
+"$s" order 500 4
 "$s" resize 1 1
 "$s" setRowLabels {0} 
 "$s" setColumnLabels {Convergence Value} 
@@ -41070,7 +41070,7 @@ set s "$o.Convergence Percentage"
 "$o" {TableSlot} {Elevation Volume Table}
 set s "$o.Elevation Volume Table"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 15
+"$s" order 500 8
 "$s" resize 217 2
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {100} {101} {102} {103} {104} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
 "$s" setColumnLabels {Pool Elevation} {Storage} 
@@ -41299,7 +41299,7 @@ set s "$o.Elevation Volume Table"
 "$o" {AggSeriesSlot} {Energy}
 set s "$o.Energy"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 16
+"$s" order 500 9
 "$s" cvg 2 0.0001
 "$s" unit 33 {%f} 0
 "$s" minMax NaN NaN
@@ -41308,7 +41308,7 @@ set s "$o.Energy"
 "$o" {AggSeriesSlot} {Power}
 set s "$o.Power"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 17
+"$s" order 500 30
 "$s" cvg 2 0.0001
 "$s" unit 28 {%f} 2
 "$s" minMax NaN NaN
@@ -41317,7 +41317,7 @@ set s "$o.Power"
 "$o" {AggSeriesSlot} {Operating Head}
 set s "$o.Operating Head"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 18
+"$s" order 500 24
 "$s" cvg 1 1e-005
 "$s" unit 3 {%f} 2
 "$s" minMax NaN NaN
@@ -41326,7 +41326,7 @@ set s "$o.Operating Head"
 "$o" {AggSeriesSlot} {Tailwater Elevation}
 set s "$o.Tailwater Elevation"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 19
+"$s" order 500 41
 "$s" cvg 1 1e-005
 "$s" unit 3 {%f} 2
 "$s" minMax NaN NaN
@@ -41335,7 +41335,7 @@ set s "$o.Tailwater Elevation"
 "$o" {SeriesSlot} {Hydrologic Inflow}
 set s "$o.Hydrologic Inflow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 37
+"$s" order 500 15
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -41344,7 +41344,7 @@ set s "$o.Hydrologic Inflow"
 "$o" {SeriesSlot} {Hydrologic Inflow Adjust}
 set s "$o.Hydrologic Inflow Adjust"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 38
+"$s" order 500 16
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 2
 "$s" minMax NaN NaN
@@ -41353,7 +41353,7 @@ set s "$o.Hydrologic Inflow Adjust"
 "$o" {SeriesSlot} {Hydrologic Inflow Net}
 set s "$o.Hydrologic Inflow Net"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 39
+"$s" order 500 17
 "$s" cvg 2 0.0001
 "$s" unit 20 {%f} 0
 "$s" minMax NaN NaN
@@ -41362,7 +41362,7 @@ set s "$o.Hydrologic Inflow Net"
 "$o" {SeriesSlot} {Unregulated Spill}
 set s "$o.Unregulated Spill"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 33
+"$s" order 500 45
 "$s" cvg 2 0.0001
 "$s" unit 19 {%f} 0
 "$s" minMax NaN NaN
@@ -41371,7 +41371,7 @@ set s "$o.Unregulated Spill"
 "$o" {SeriesSlot} {Regulated Spill}
 set s "$o.Regulated Spill"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 34
+"$s" order 500 35
 "$s" cvg 2 0.0001
 "$s" unit 19 {%f} 0
 "$s" minMax NaN NaN
@@ -41380,7 +41380,7 @@ set s "$o.Regulated Spill"
 "$o" {SeriesSlot} {Bypass}
 set s "$o.Bypass"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 35
+"$s" order 500 2
 "$s" cvg 2 0.0001
 "$s" unit 21 {%f} 2
 "$s" minMax NaN NaN
@@ -41389,7 +41389,7 @@ set s "$o.Bypass"
 "$o" {TableSlot} {Maximum Controlled Release}
 set s "$o.Maximum Controlled Release"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 36
+"$s" order 500 20
 "$s" resize 1 1
 "$s" setRowLabels {} 
 "$s" setColumnLabels {} 
@@ -41402,7 +41402,7 @@ set s "$o.Maximum Controlled Release"
 "$o" {AggSeriesSlot} {Evaporation}
 set s "$o.Evaporation"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 40
+"$s" order 500 10
 "$s" cvg 2 1e-008
 "$s" unit 12 {%f} 3
 "$s" minMax NaN NaN
@@ -41411,7 +41411,7 @@ set s "$o.Evaporation"
 "$o" {TableSlot} {Evaporation Coefficients}
 set s "$o.Evaporation Coefficients"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 41
+"$s" order 500 11
 "$s" resize 12 1
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} 
 "$s" setColumnLabels {0} 
@@ -41435,7 +41435,7 @@ set s "$o.Evaporation Coefficients"
 "$o" {SeriesSlot} {Precipitation Rate}
 set s "$o.Precipitation Rate"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 42
+"$s" order 500 33
 "$s" cvg 2 0.0001
 "$s" unit 53 {%f} 2
 "$s" minMax NaN NaN
@@ -41444,7 +41444,7 @@ set s "$o.Precipitation Rate"
 "$o" {AggSeriesSlot} {Precipitation Volume}
 set s "$o.Precipitation Volume"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 43
+"$s" order 500 34
 "$s" cvg 2 0.0001
 "$s" unit 13 {%f} 2
 "$s" minMax NaN NaN
@@ -41453,7 +41453,7 @@ set s "$o.Precipitation Volume"
 "$o" {AggSeriesSlot} {Surface Area}
 set s "$o.Surface Area"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 44
+"$s" order 500 39
 "$s" cvg 2 1e-008
 "$s" unit 6 {%f} 2
 "$s" minMax NaN NaN
@@ -41462,7 +41462,7 @@ set s "$o.Surface Area"
 "$o" {TableSlot} {Elevation Area Table}
 set s "$o.Elevation Area Table"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 45
+"$s" order 500 7
 "$s" resize 217 2
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {100} {101} {102} {103} {104} {105} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
 "$s" setColumnLabels {Elev} {Area} 
@@ -41691,7 +41691,7 @@ set s "$o.Elevation Area Table"
 "$o" {TableSlot} {Number of Units}
 set s "$o.Number of Units"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 20
+"$s" order 500 23
 "$s" resize 1 1
 "$s" setRowLabels {0} 
 "$s" setColumnLabels {0} 
@@ -41717,16 +41717,16 @@ set s "$o.Maximum Turbine Power"
 "$o" {SeriesSlot} {Peak Flow}
 set s "$o.Peak Flow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 22
+"$s" order 500 26
 "$s" cvg 2 0.0001
-"$s" unit 15 {%f} 2
+"$s" unit 17 {%f} 2
 "$s" minMax NaN NaN
 "$s" setFSeries {cms} {08-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 27 
 "$s" setDSeries {cms} {08-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 45.4754638977 46.1927281615 6.12003593693 0 42.6520127439 47.5806756113 45.9728262878 44.4115063766 43.8513310567 45.9033984113 49.2766298004 46.3651421505 45.8547778989 18.7318308221 25.0171605702 49.8226747078 48.6586697153 47.2340945641 45.5946961377 44.1812693336 43.792939217 45.6140149881 49.0510280825 46.3486654609 45.7996611507 17.2944187107 
 "$o" {TableSlot} {Generator Efficiency}
 set s "$o.Generator Efficiency"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 23
+"$s" order 500 14
 "$s" resize 1 1
 "$s" setRowLabels {0} 
 "$s" setColumnLabels {Generator Efficiency} 
@@ -41739,7 +41739,7 @@ set s "$o.Generator Efficiency"
 "$o" {TableSlot} {Best Generator Flow}
 set s "$o.Best Generator Flow"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 24
+"$s" order 500 0
 "$s" resize 111 15
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {} {} {} {} {} {} {} {} {} {} {} 
 "$s" setColumnLabels {Head} {Flow} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
@@ -41862,7 +41862,7 @@ set s "$o.Best Generator Flow"
 "$o" {TableSlot} {Best Generator Power}
 set s "$o.Best Generator Power"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 25
+"$s" order 500 1
 "$s" resize 71 15
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
 "$s" setColumnLabels {Head} {Power} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
@@ -41945,7 +41945,7 @@ set s "$o.Best Generator Power"
 "$o" {SeriesSlot} {Peak Hours}
 set s "$o.Peak Hours"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 26
+"$s" order 500 27
 "$s" cvg 2 0.0001
 "$s" unit 34 {%f} 2
 "$s" minMax NaN NaN
@@ -41954,7 +41954,7 @@ set s "$o.Peak Hours"
 "$o" {SeriesSlot} {Plant Efficiency}
 set s "$o.Plant Efficiency"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 27
+"$s" order 500 28
 "$s" cvg 2 0.0001
 "$s" unit 0 {%f} 2
 "$s" minMax NaN NaN
@@ -41963,7 +41963,7 @@ set s "$o.Plant Efficiency"
 "$o" {TableSlot} {Min and Max Operating Head}
 set s "$o.Min and Max Operating Head"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 28
+"$s" order 500 22
 "$s" resize 1 2
 "$s" setRowLabels {} 
 "$s" setColumnLabels {Minimum Head} {Maximum Head} 
@@ -41976,7 +41976,7 @@ set s "$o.Min and Max Operating Head"
 "$o" {SeriesSlot} {Power Plant Cap Fraction}
 set s "$o.Power Plant Cap Fraction"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 29
+"$s" order 500 32
 "$s" cvg 2 0.0001
 "$s" unit 0 {%f} 2
 "$s" minMax NaN NaN
@@ -41985,7 +41985,7 @@ set s "$o.Power Plant Cap Fraction"
 "$o" {AggSeriesSlot} {Power Capacity}
 set s "$o.Power Capacity"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 30
+"$s" order 500 31
 "$s" cvg 2 0.0001
 "$s" unit 28 {%f} 2
 "$s" minMax NaN NaN
@@ -41994,7 +41994,7 @@ set s "$o.Power Capacity"
 "$o" {AggSeriesSlot} {Tailwater Base Value}
 set s "$o.Tailwater Base Value"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 31
+"$s" order 500 40
 "$s" cvg 2 0.0001
 "$s" unit 3 {%f} 2
 "$s" minMax NaN NaN
@@ -42002,7 +42002,7 @@ set s "$o.Tailwater Base Value"
 "$o" {TableSlot} {Tailwater Table}
 set s "$o.Tailwater Table"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 32
+"$s" order 500 42
 "$s" resize 375 2
 "$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
 "$s" setColumnLabels {Outflow} {TW Elevation} 
@@ -43152,6 +43152,132 @@ set s "$o.Hydrologic Inflow Salt Conc"
 "$s" order 500 500
 "$s" cvg 2 0.0001
 "$s" unit 45 {%f} 2
+"$s" minMax NaN NaN
+"$s" setCSeries {08-01-2009 00:00:00} 1 1 MONTH -1 NaN 2
+"$o" {TableSlot} {Plant Efficiency Value}
+set s "$o.Plant Efficiency Value"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnits 0 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Head Loss}
+set s "$o.Head Loss"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnits 2 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Net Head vs Peak Release}
+set s "$o.Net Head vs Peak Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 72 2
+"$s" setRowLabels {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Net Head} {Peak Release} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnits 3 17 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 12.192 91.0213141567 
+"$s" row 1 12.4968 97.9263747468 
+"$s" row 2 12.8016 104.828299588 
+"$s" row 3 13.1064 111.727088679 
+"$s" row 4 13.4112 118.622742022 
+"$s" row 5 13.716 125.515259614 
+"$s" row 6 14.0208 132.404641458 
+"$s" row 7 14.3256 139.290887553 
+"$s" row 8 14.6304 146.173997898 
+"$s" row 9 14.9352 153.053972494 
+"$s" row 10 15.24 159.930811341 
+"$s" row 11 15.5448 166.804514438 
+"$s" row 12 15.8496 173.675081787 
+"$s" row 13 16.1544 180.542513386 
+"$s" row 14 16.4592 187.406809235 
+"$s" row 15 16.764 194.267969336 
+"$s" row 16 17.0688 201.125993687 
+"$s" row 17 17.3736 207.980882289 
+"$s" row 18 17.6784 214.832635142 
+"$s" row 19 17.9832 221.681252245 
+"$s" row 20 18.288 228.526733599 
+"$s" row 21 18.5928 235.369079204 
+"$s" row 22 18.8976 242.20828906 
+"$s" row 23 19.2024 249.044363166 
+"$s" row 24 19.5072 255.877301523 
+"$s" row 25 19.812 262.707104131 
+"$s" row 26 20.1168 269.533770989 
+"$s" row 27 20.4216 276.357302099 
+"$s" row 28 20.7264 283.177697459 
+"$s" row 29 21.0312 289.99495707 
+"$s" row 30 21.336 296.809080931 
+"$s" row 31 21.6408 303.620069044 
+"$s" row 32 21.9456 310.427921407 
+"$s" row 33 22.2504 317.23263802 
+"$s" row 34 22.5552 324.034218885 
+"$s" row 35 22.86 330.832664 
+"$s" row 36 23.1648 337.627973366 
+"$s" row 37 23.4696 344.420146983 
+"$s" row 38 23.7744 351.20918485 
+"$s" row 39 24.0792 357.995086969 
+"$s" row 40 24.384 364.777853338 
+"$s" row 41 24.6888 371.557483957 
+"$s" row 42 24.9936 378.333978828 
+"$s" row 43 25.2984 385.107337949 
+"$s" row 44 25.6032 391.87756132 
+"$s" row 45 25.908 398.644648945 
+"$s" row 46 26.2128 405.408600816 
+"$s" row 47 26.5176 412.16941694 
+"$s" row 48 26.8224 418.927097317 
+"$s" row 49 27.1272 425.68164194 
+"$s" row 50 27.432 432.433050817 
+"$s" row 51 27.7368 439.181323947 
+"$s" row 52 28.0416 445.926461323 
+"$s" row 53 28.3464 452.668462953 
+"$s" row 54 28.6512 459.407328832 
+"$s" row 55 28.956 466.14305896 
+"$s" row 56 29.2608 472.875653342 
+"$s" row 57 29.5656 479.605111974 
+"$s" row 58 29.8704 486.331434855 
+"$s" row 59 30.1752 493.05462199 
+"$s" row 60 30.48 499.774673375 
+"$s" row 61 30.7848 506.491589009 
+"$s" row 62 31.0896 513.205368892 
+"$s" row 63 31.3944 519.916013029 
+"$s" row 64 31.6992 526.623521416 
+"$s" row 65 32.004 533.327894053 
+"$s" row 66 32.3088 540.029130942 
+"$s" row 67 32.6136 546.727232082 
+"$s" row 68 32.9184 553.422197471 
+"$s" row 69 33.2232 560.11402711 
+"$s" row 70 33.528 566.802721002 
+"$s" row 71 12.192 91.0213141567 
+"$o" {SeriesSlot} {Peak Release}
+set s "$o.Peak Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit 15 {%f} 2
+"$s" minMax NaN NaN
+"$s" setCSeries {08-01-2009 00:00:00} 1 1 MONTH -1 NaN 2
+"$o" {SeriesSlot} {Peak Time}
+set s "$o.Peak Time"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit 34 {%f} 2
 "$s" minMax NaN NaN
 "$s" setCSeries {08-01-2009 00:00:00} 1 1 MONTH -1 NaN 2
 set obj {PowellInflow}
@@ -49211,44 +49337,49 @@ set s "$o.AzPumpersDvsToPkr"
 "$s" setDSeries {m3} {07-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 0 @ 18 2268373.09925 @ 9 
 set obj {FontenelleData}
 set o "$ws.FontenelleData"
-$ws SimObj $obj {DataObj} 265 2074 {} 264 2073
-"$o" {ScalarSlot} {MinElevation}
-set s "$o.MinElevation"
+$ws SimObj $obj {DataObj} 263 2077 {} 264 2073
+"$o" {ScalarSlot} {SafeChannelCapacity}
+set s "$o.SafeChannelCapacity"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 0
-"$s" units 3 {%f} 2
-"$s" value 1971.4464 {m}
+"$s" order 0 0
+"$s" units 17 {%f} 2
+"$s" value 325.643735808 {cms}
 "$o" {ScalarSlot} {MaxElevation}
 set s "$o.MaxElevation"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 1
+"$s" order 1 1
+"$s" units 3 {%f} 2
+"$s" value 1983.0288 {m}
+"$o" {ScalarSlot} {August1Target}
+set s "$o.August1Target"
+"$s" flags 0 0 0 0 1 0
+"$s" order 6 5
 "$s" units 3 {%f} 2
 "$s" value 1982.8764 {m}
-"$o" {ScalarSlot} {April1Release}
-set s "$o.April1Release"
+"$o" {ScalarSlot} {April1Target}
+set s "$o.April1Target"
 "$s" flags 0 0 0 0 1 0
-"$s" order 500 2
-"$s" units 17 {%f} 2
-"$s" value 48.1386392064 {cms}
-"$o" {TableSlot} {SteadyRelease}
-set s "$o.SteadyRelease"
-"$s" flags 0 0 0 0 1 0
-"$s" order 500 3
-"$s" resize 6 1
-"$s" setRowLabels {September} {November} {December} {January} {February} {March} 
-"$s" setColumnLabels {} 
-"$s" setMaximums NaN 
-"$s" setMinimums NaN 
-"$s" setUnits 17 
-"$s" setUsrFormat {%f} 
-"$s" setUsrPrecision {2} 
-"$s" row -1 28.316846592 
-"$o" {ScalarSlot} {April1SoftTarget}
-set s "$o.April1SoftTarget"
-"$s" flags 0 0 0 0 1 0
-"$s" order 500 4
+"$s" order 4 3
 "$s" units 3 {%f} 2
 "$s" value 1971.4464 {m}
+"$o" {ScalarSlot} {MinFlow}
+set s "$o.MinFlow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 3 2
+"$s" units 17 {%f} 2
+"$s" value 8.4950539776 {cms}
+"$o" {ScalarSlot} {July1Target}
+set s "$o.July1Target"
+"$s" flags 0 0 0 0 1 0
+"$s" order 5 4
+"$s" units 0 {%f} 2
+"$s" value 6500 {NONE}
+"$o" {ScalarSlot} {SepToMarSteadyRelease}
+set s "$o.SepToMarSteadyRelease"
+"$s" flags 0 0 0 0 1 0
+"$s" order 7 6
+"$s" units 15 {%f} 2
+"$s" value 0 {cms}
 # Section: Objects/Snapshots
 # Section: Object Relationships
 set obj {PumpingFromLakeMead}
