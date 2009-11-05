@@ -1,5 +1,5 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 18:00 November 4, 2009
+# Created 19:56 November 4, 2009
 # 
 RULESET
 AGENDA_ORDER DESCENDING;
@@ -303,13 +303,16 @@ BEGIN
 
     END;
 
-    RULE                 "Set April and May Outflow";
-    DESCRIPTION          "Sets the April release to the maximum possible";
+    RULE                 "Set April or August Outflow";
+    DESCRIPTION          "Sets the April and August release to the maximum possible, this also sets May since may gets set to the same as April.";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "April" };
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "April" , "August" };
     BEGIN
 
-    DESCRIPTION          "April Outflow";
+    DESCRIPTION          "April or August Outflow";
+      $ "Fontenelle.Outflow" [] := $ "Fontenelle.Inflow" [];
+
+    DESCRIPTION          "April or August Outflow";
       $ "Fontenelle.Outflow" [] := "GetMaxReleaseGivenInflow"( % "Fontenelle", $ "Fontenelle.Inflow" [], @"t" );
 
     END;
@@ -325,12 +328,22 @@ BEGIN
     END;
 
     RULE                 "Set June Outflow";
-    DESCRIPTION          "This rule set the June outflow such that the july 1 target elevation is met";
+    DESCRIPTION          "This rule sets the June outflow such that the july 1 target elevation is met.";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "June" };
     BEGIN
 
       $ "Fontenelle.Outflow" [] := "GetMaxOutflowGivenHW"( % "Fontenelle", $ "FontenelleData.July1Target" [], @"t" );
+
+    END;
+
+    RULE                 "Set July Outflow";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "July" };
+    BEGIN
+
+      $ "Fontenelle.Outflow" [] := "GetMaxOutflowGivenHW"( % "Fontenelle", $ "FontenelleData.August1Target" [], @"t" );
 
     END;
 
