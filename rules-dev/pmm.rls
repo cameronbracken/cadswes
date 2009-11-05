@@ -1,5 +1,5 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 17:23 October 28, 2009
+# Created 18:00 November 4, 2009
 # 
 RULESET
 AGENDA_ORDER DESCENDING;
@@ -278,15 +278,59 @@ BEGIN
     END;
 
     RULE                 "Set September-November Baseflow";
-    DESCRIPTION          "This rule is the first of two that set the steady baseflow at Fontenelle.  This rule looks ahead at the forecasted volumes and determines what the max steady flow for the months of September-March can be. ";
+    DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "September" };
     BEGIN
 
-      $ "FontenelleData.SepToMarSteadyRelease" COMMENTED_BY "Change in storage plus forcasted volume divided by 7 months. " [] COMMENTED_BY "Compute the steady flow over September to March necsessary to meet Apr 1 target. " := ( "ElevationToStorage"( % "Fontenelle", $ "Fontenelle.Pool Elevation" [] ) - "ElevationToStorage"( % "Fontenelle", $ "FontenelleData.April1Target" [] ) + "SumFlowsToVolume"( $ "Fontenelle.Inflow", @"t", @"t + 6" ) ) / 7.00000000 "month";
+      $ "FontenelleData.SepToMarSteadyRelease" COMMENTED_BY "Compute the steady flow over September to March necsessary to meet Apr 1 target. <br>Change in storage plus forecasted volume divided by 3 months." [] := ( "ElevationToStorage"( % "Fontenelle", $ "Fontenelle.Pool Elevation" [] ) - "ElevationToStorage"( % "Fontenelle", $ "FontenelleData.April1Target" [] ) + "SumFlowsToVolume"( $ "Fontenelle.Inflow", @"t", @"t + 3" ) ) / 7.00000000 "month";
 
-    DESCRIPTION          "Set the steady flow for September, the next two months will look back at this value";
-      $ "Fontenelle.Outflow" [@"t"] := $ "FontenelleData.SepToMarSteadyRelease" [];
+    DESCRIPTION          "Set the steady flow for December, the next two months will look back at this value";
+      $ "Fontenelle.Outflow" [@"t"] := $ "FontenelleData.DecToMarSteadyRelease" [];
+
+    END;
+
+    RULE                 "Set December-March Baseflow";
+    DESCRIPTION          "This rule is the second of two that set the steady baseflow at Fontenelle.  This rule looks ahead at the forecasted volumes and determines what the max steady flow for the months of September-March can be. ";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "December" };
+    BEGIN
+
+      $ "FontenelleData.DecToMarSteadyRelease" COMMENTED_BY "Compute the steady flow over December to March necsessary to meet Apr 1 target. <br>Change in storage plus forecasted volume divided by 4 months." [] := ( "ElevationToStorage"( % "Fontenelle", $ "Fontenelle.Pool Elevation" [] ) - "ElevationToStorage"( % "Fontenelle", $ "FontenelleData.April1Target" [] ) + "SumFlowsToVolume"( $ "Fontenelle.Inflow", @"t", @"t + 6" ) ) / 7.00000000 "month";
+
+    DESCRIPTION          "Set the steady flow for September, the next 3 months will look back at this value";
+      $ "Fontenelle.Outflow" [] := $ "FontenelleData.DecToMarSteadyRelease" [];
+
+    END;
+
+    RULE                 "Set April and May Outflow";
+    DESCRIPTION          "Sets the April release to the maximum possible";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "April" };
+    BEGIN
+
+    DESCRIPTION          "April Outflow";
+      $ "Fontenelle.Outflow" [] := "GetMaxReleaseGivenInflow"( % "Fontenelle", $ "Fontenelle.Inflow" [], @"t" );
+
+    END;
+
+    RULE                 "Set Baseflow in off month";
+    DESCRIPTION          "Handles the case when the model is started in October, November, January, February, March, or May. In these months the baseflow needs to be set to whatever the previous month's value was. ";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "October" , "November" , "January" , "February" , "March" , "May" };
+    BEGIN
+
+      $ "Fontenelle.Outflow" [] := $ "Fontenelle.Outflow" [@"t - 1"];
+
+    END;
+
+    RULE                 "Set June Outflow";
+    DESCRIPTION          "This rule set the June outflow such that the july 1 target elevation is met";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "June" };
+    BEGIN
+
+      $ "Fontenelle.Outflow" [] := "GetMaxOutflowGivenHW"( % "Fontenelle", $ "FontenelleData.July1Target" [], @"t" );
 
     END;
 
@@ -2311,32 +2355,6 @@ BEGIN
   DESCRIPTION   "";
   ACTIVE        TRUE;
   BEGIN
-
-    FUNCTION       "IsMonth" ( DATETIME timestep, LIST monthList )
-    RETURN_TYPE    BOOLEAN;
-    SCALE_UNITS    "";
-    DESCRIPTION    "";
-    ACTIVE         TRUE;
-    PRE_EXEC_DIAG  FALSE;
-    POST_EXEC_DIAG FALSE;
-    BEGIN
-
-      "GetMonthAsString"( timestep ) IN monthList;
-
-    END;
-
-    FUNCTION       "SteadyMonthList" (  )
-    RETURN_TYPE    LIST;
-    SCALE_UNITS    "";
-    DESCRIPTION    "";
-    ACTIVE         TRUE;
-    PRE_EXEC_DIAG  FALSE;
-    POST_EXEC_DIAG FALSE;
-    BEGIN
-
-      { "September" , "October" , "November" , "December" , "January" , "February" , "March" };
-
-    END;
 
   END;
 
