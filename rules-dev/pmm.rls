@@ -1,5 +1,5 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 19:56 November 4, 2009
+# Created 12:10 November 9, 2009
 # 
 RULESET
 AGENDA_ORDER DESCENDING;
@@ -369,7 +369,7 @@ BEGIN
       THEN
          2.00000000
       ELSE
-         IF ( $ "Mead.Pool Elevation" [@"t - 1"] < $ "Shortage.Mead Shortage Elevations" [0.00000000, 0.00000000] )
+         IF ( $ "Mead.Pool Elevation" [@"t - 1"] <= $ "Shortage.Mead Shortage Elevations" [0.00000000, 0.00000000] )
          THEN
             1.00000000
          ELSE
@@ -428,6 +428,8 @@ BEGIN
             $ "AzPkrToImp:AzPumpersAbvImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersAbvImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
             $ "OthersBlwImp:AzPumpersBlwImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersBlwImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+
+            $ "AzDvsToPkr:AzPumpersDvsToPkr.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersDvsToPkr", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
             $ "CAPDiversion.Total Diversion Requested" [date] := "CAP Shortage Depletion"( $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
@@ -986,14 +988,14 @@ BEGIN
    THEN
       0.00000000 "acre-ft"
    ELSE
-      ( $ "AZ_Diversion_Overrun.AzPumpersAbvImp" [] + $ "AZ_Diversion_Overrun.AzPumpersBlwImp" [] + $ "AZ_Diversion_Overrun.BrookeWater" [] + $ "AZ_Diversion_Overrun.BullheadCity" [] + $ "AZ_Diversion_Overrun.CRIRAz" [] + $ "AZ_Diversion_Overrun.CibolaNWR" [] + $ "AZ_Diversion_Overrun.CibolaValleyIID" [] + $ "AZ_Diversion_Overrun.City of Parker" [] + $ "AZ_Diversion_Overrun.City of Yuma" [] + $ "AZ_Diversion_Overrun.Cocopah Indian Res" [] + $ "AZ_Diversion_Overrun.DavisDamProject" [] + $ "AZ_Diversion_Overrun.DesertLawnMemorial" [] + $ "AZ_Diversion_Overrun.Ehrenberg" [] + $ "AZ_Diversion_Overrun.FtMohaveAz" [] + $ "AZ_Diversion_Overrun.Gila Monster Farms" [] + $ "AZ_Diversion_Overrun.GoldenShores" [] + $ "AZ_Diversion_Overrun.HavasuNWR" [] + $ "AZ_Diversion_Overrun.ImperialNWR" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mead" [] + $ "AZ_Diversion_Overrun.LakeHavasuCity" [] + $ "AZ_Diversion_Overrun.MCAirStation" [] + $ "AZ_Diversion_Overrun.MohaveValleyIID" [] + $ "AZ_Diversion_Overrun.MohaveWaterConsDist" [] + $ "AZ_Diversion_Overrun.NGVIDD" [] + $ "AZ_Diversion_Overrun.SouthernPacific" [] + $ "AZ_Diversion_Overrun.UnitB" [] + $ "AZ_Diversion_Overrun.UofA" [] + $ "AZ_Diversion_Overrun.YAO" [] + $ "AZ_Diversion_Overrun.YCWUA" [] + $ "AZ_Diversion_Overrun.YID" [] + $ "AZ_Diversion_Overrun.YMIDD" [] + $ "AZ_Diversion_Overrun.YumaProvingGround" [] + $ "AZ_Diversion_Overrun.YumaUnionHighScl" [] ) + $ "AZ_Diversion_Overrun.LMNRA Az Mohave" [] + $ "AZ_Diversion_Overrun.AzPumpersDvsToPkr" []
+      ( $ "AZ_Diversion_Overrun.AzPumpersAbvImp" [] + $ "AZ_Diversion_Overrun.AzPumpersBlwImp" [] + $ "AZ_Diversion_Overrun.BrookeWater" [] + $ "AZ_Diversion_Overrun.BullheadCity" [] + $ "AZ_Diversion_Overrun.CRIRAz" [] + $ "AZ_Diversion_Overrun.CibolaNWR" [] + $ "AZ_Diversion_Overrun.CibolaValleyIID" [] + $ "AZ_Diversion_Overrun.City of Parker" [] + $ "AZ_Diversion_Overrun.City of Yuma" [] + $ "AZ_Diversion_Overrun.Cocopah Indian Res" [] + $ "AZ_Diversion_Overrun.DavisDamProject" [] + $ "AZ_Diversion_Overrun.DesertLawnMemorial" [] + $ "AZ_Diversion_Overrun.Ehrenberg" [] + $ "AZ_Diversion_Overrun.FtMohaveAz" [] + $ "AZ_Diversion_Overrun.Gila Monster Farms" [] + $ "AZ_Diversion_Overrun.GoldenShores" [] + $ "AZ_Diversion_Overrun.HavasuNWR" [] + $ "AZ_Diversion_Overrun.ImperialNWR" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mead" [] + $ "AZ_Diversion_Overrun.LakeHavasuCity" [] + $ "AZ_Diversion_Overrun.MCAirStation" [] + $ "AZ_Diversion_Overrun.MohaveValleyIID" [] + $ "AZ_Diversion_Overrun.MohaveWaterConsDist" [] + $ "AZ_Diversion_Overrun.NGVIDD" [] + $ "AZ_Diversion_Overrun.SouthernPacific" [] + $ "AZ_Diversion_Overrun.UnitB" [] + $ "AZ_Diversion_Overrun.UofA" [] + $ "AZ_Diversion_Overrun.YAO" [] + $ "AZ_Diversion_Overrun.YCWUA" [] + $ "AZ_Diversion_Overrun.YID" [] + $ "AZ_Diversion_Overrun.YMIDD" [] + $ "AZ_Diversion_Overrun.YumaProvingGround" [] + $ "AZ_Diversion_Overrun.YumaUnionHighScl" [] ) + $ "AZ_Diversion_Overrun.LMNRA Az Mohave" [] + $ "AZ_Diversion_Overrun.AzPumpersDvsToPkr" [] + $ "AZ_Diversion_Overrun.Ft Yuma" []
    ENDIF;
 
       $ "AZ_Diversion_Overrun.AZ_CU_Annual_Overrun" [] := IF ( "GetMonth"( @"Start Timestep" ) == 1.00000000 OR "GetYear"( @"t" ) > "GetYear"( "RunStartDate"(  ) ) )
    THEN
       0.00000000 "acre-ft"
    ELSE
-      ( $ "AZ_Diversion_Overrun.AzPumpersAbvImp" [] + $ "AZ_Diversion_Overrun.AzPumpersDvsToPkr" [] + $ "AZ_Diversion_Overrun.AzPumpersBlwImp" [] + $ "AZ_Diversion_Overrun.BrookeWater" [] + $ "AZ_Diversion_Overrun.BullheadCity" [] + $ "AZ_Diversion_Overrun.CRIRAz" [] + $ "AZ_Diversion_Overrun.CibolaNWR" [] + $ "AZ_Diversion_Overrun.CibolaValleyIID" [] + $ "AZ_Diversion_Overrun.City of Parker" [] + $ "AZ_Diversion_Overrun.City of Yuma" [] + $ "AZ_Diversion_Overrun.Cocopah Indian Res" [] + $ "AZ_Diversion_Overrun.DavisDamProject" [] + $ "AZ_Diversion_Overrun.DesertLawnMemorial" [] + $ "AZ_Diversion_Overrun.Ehrenberg" [] + $ "AZ_Diversion_Overrun.FtMohaveAz" [] + $ "AZ_Diversion_Overrun.Gila Monster Farms" [] + $ "AZ_Diversion_Overrun.GoldenShores" [] + $ "AZ_Diversion_Overrun.HavasuNWR" [] + $ "AZ_Diversion_Overrun.ImperialNWR" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mead" [] + $ "AZ_Diversion_Overrun.LakeHavasuCity" [] + $ "AZ_Diversion_Overrun.MCAirStation" [] + $ "AZ_Diversion_Overrun.MohaveValleyIID" [] + $ "AZ_Diversion_Overrun.MohaveWaterConsDist" [] + $ "AZ_Diversion_Overrun.NGVIDD" [] + $ "AZ_Diversion_Overrun.SouthernPacific" [] + $ "AZ_Diversion_Overrun.UnitB" [] + $ "AZ_Diversion_Overrun.UofA" [] + $ "AZ_Diversion_Overrun.YAO" [] + $ "AZ_Diversion_Overrun.YCWUA" [] + $ "AZ_Diversion_Overrun.YID" [] + $ "AZ_Diversion_Overrun.YMIDD" [] + $ "AZ_Diversion_Overrun.YumaProvingGround" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mohave" [] + $ "AZ_Diversion_Overrun.YumaUnionHighScl" [] ) * ( 1.00000000 - $ "AZ_Diversion_Overrun.Avg_CU_Coef" [] ) + $ "AZ_Diversion_Overrun.WMIDD" []
+      ( ( $ "AZ_Diversion_Overrun.AzPumpersAbvImp" [] + $ "AZ_Diversion_Overrun.AzPumpersDvsToPkr" [] + $ "AZ_Diversion_Overrun.AzPumpersBlwImp" [] + $ "AZ_Diversion_Overrun.BrookeWater" [] + $ "AZ_Diversion_Overrun.BullheadCity" [] + $ "AZ_Diversion_Overrun.CRIRAz" [] + $ "AZ_Diversion_Overrun.CibolaNWR" [] + $ "AZ_Diversion_Overrun.CibolaValleyIID" [] + $ "AZ_Diversion_Overrun.City of Parker" [] + $ "AZ_Diversion_Overrun.City of Yuma" [] + $ "AZ_Diversion_Overrun.Cocopah Indian Res" [] + $ "AZ_Diversion_Overrun.DavisDamProject" [] + $ "AZ_Diversion_Overrun.DesertLawnMemorial" [] + $ "AZ_Diversion_Overrun.Ehrenberg" [] + $ "AZ_Diversion_Overrun.FtMohaveAz" [] + $ "AZ_Diversion_Overrun.Gila Monster Farms" [] + $ "AZ_Diversion_Overrun.GoldenShores" [] + $ "AZ_Diversion_Overrun.HavasuNWR" [] + $ "AZ_Diversion_Overrun.ImperialNWR" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mead" [] + $ "AZ_Diversion_Overrun.LakeHavasuCity" [] + $ "AZ_Diversion_Overrun.MCAirStation" [] + $ "AZ_Diversion_Overrun.MohaveValleyIID" [] + $ "AZ_Diversion_Overrun.MohaveWaterConsDist" [] + $ "AZ_Diversion_Overrun.NGVIDD" [] + $ "AZ_Diversion_Overrun.SouthernPacific" [] + $ "AZ_Diversion_Overrun.UnitB" [] + $ "AZ_Diversion_Overrun.UofA" [] + $ "AZ_Diversion_Overrun.YAO" [] + $ "AZ_Diversion_Overrun.YCWUA" [] + $ "AZ_Diversion_Overrun.YID" [] + $ "AZ_Diversion_Overrun.YMIDD" [] + $ "AZ_Diversion_Overrun.YumaProvingGround" [] + $ "AZ_Diversion_Overrun.LMNRA Az Mohave" [] + $ "AZ_Diversion_Overrun.YumaUnionHighScl" [] ) + $ "AZ_Diversion_Overrun.AzPumpersDvsToPkr" [] + $ "AZ_Diversion_Overrun.Ft Yuma" [] ) * ( 1.00000000 - $ "AZ_Diversion_Overrun.Avg_CU_Coef" [] ) + $ "AZ_Diversion_Overrun.WMIDD" []
    ENDIF;
 
     END;
@@ -2364,13 +2366,6 @@ BEGIN
 
   END;
 
-  UTILITY_GROUP "Fontenelle Functions";
-  DESCRIPTION   "";
-  ACTIVE        TRUE;
-  BEGIN
-
-  END;
-
   UTILITY_GROUP "Shortage Functions";
   DESCRIPTION   "";
   ACTIVE        TRUE;
@@ -2441,6 +2436,13 @@ BEGIN
    ENDWITH;
 
     END;
+
+  END;
+
+  UTILITY_GROUP "Fontenelle Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
 
   END;
 
