@@ -1,4 +1,6 @@
-# Fontenelle Operational Rules Outline for Probabilistic Midterm Model (Revision 3)
+# Fontenelle Operational Rules Outline for Probabilistic Midterm Model
+
+_Last Edited: 10 November 2009 Cameron Bracken_
 
 ## Data	
 ### Data Object
@@ -41,6 +43,7 @@ _Description_: Prevents outflow from exceeding "Safe Chanel Capacity" unless the
 
 - If Release is above "Safe Channel Capacity"
 	- Set Release to "Safe Channel Capacity"
+
 
 ---
 __Rules for Normal Operations__: These are mutually exclusive so order does not matter except for the last rule which must be the lowest priority.
@@ -107,6 +110,3 @@ _Description_: Set July release to meet "August 1 Target Elevation"
 
 ### Set Unset Outflow
 _Description_: Set Fontenelle outflow to the inflow.  This is the lowest priority rule.  Sets the outflow to a dummy value for the spill and power methods.  Dependencies are then registered for higher priority rules. 
-	
-	
-_Last Edited: 9-9-09 Cameron Bracken_
