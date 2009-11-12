@@ -1,232 +1,446 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 17:39 November 9, 2009
+# Created 20:21 November 11, 2009
 # 
 RULESET
-AGENDA_ORDER DESCENDING;
+AGENDA_ORDER ASCENDING;
 DESCRIPTION "";
 PRECISION   8;
 BEGIN
 
-  POLICY_GROUP   "Data Setup";
+  POLICY_GROUP   "Reset SNWP Forecast Use";
   DESCRIPTION    "";
   ACTIVE         TRUE;
   BEGIN
 
-    RULE                 "Set Average Longterm Hydrology";
+    RULE                 "Reset Annual SNWP Forecast Use - Force to NV Apportionment";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [];
+
+    END;
+
+    RULE                 "Reset Annual SNWP Forecast Use - Allow Overrun";
     DESCRIPTION          "";
     ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
     BEGIN
 
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "PowellToMead:PariaRiver.Local Inflow" [index] := IF ( IsNaN $ "PowellToMead:PariaRiver.Local Inflow" [index] )
-   THEN
-      $ "StatisticalData.averageUnregInflows" ["PariaRiver", "GetMonthAsString"( index )]
-   ENDIF;
-
-      ENDFOREACH;
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "BlueMesaInflow.Unregulated" [index] := IF ( IsNaN $ "BlueMesaInflow.Unregulated" [index] )
-   THEN
-      $ "StatisticalData.averageUnregInflows" ["BlueMesa", "GetMonthAsString"( index )]
-   ENDIF;
-
-      ENDFOREACH;
+      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - "Min"( $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [], 0.00000000 "acre-ft" );
 
     END;
 
-    RULE                 "DebuggingRule";
+    RULE                 "Reset Annual SNWP Forecast Use - Allow Underrun";
+    DESCRIPTION          "";
+    ACTIVE               FALSE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - "Max"( $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [], 0.00000000 "acre-ft" );
+
+    END;
+
+  END;
+
+  POLICY_GROUP   "Reset MWD Forecast Use";
+  DESCRIPTION    "";
+  ACTIVE         TRUE;
+  BEGIN
+
+    RULE                 "Reset MWD Annual Forecast Use - 1st Year Only";
+    DESCRIPTION          "";
+    ACTIVE               FALSE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND IsNaN $ "ForecastUse.MWDResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.MWDResetAnnualFC" [] := $ "California_CU_Forecast1.MWD" [] - $ "AnnualWaterUse.P123bOverrun" [] - "Min"( 0.00000000 "acre-ft", $ "AnnualWaterUse.CaOverrun noPVYPIID" [] ) - "Min"( 0.00000000 "acre-ft", $ "California_CU_Overrun.IID" [] );
+
+    END;
+
+    RULE                 "Reset MWD Annual Forecast Use - Force to CA Apportionment";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.MWDResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.MWDResetAnnualFC" [] := $ "California_CU_Forecast1.MWD" [] - $ "California_CU_Overrun.California_Overrun_State_Ap" [];
+
+    END;
+
+  END;
+
+  POLICY_GROUP   "Reset CAP Forecast Use";
+  DESCRIPTION    "";
+  ACTIVE         TRUE;
+  BEGIN
+
+    RULE                 "Reset Annual CAP Forecast Use - Pump to Forecast";
+    DESCRIPTION          "";
+    ACTIVE               FALSE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.CAPResetAnnualFC" [] := $ "AnnualWaterUse.Arizona_Apportionment" [] - $ "AnnualWaterUse.AzNoCAPTotalAnnual" [] + $ "AZ_Diversion_Overrun.AZ_CU_Annual_Overrun" [];
+
+    END;
+
+    RULE                 "Reset Annual CAP Forecast Use - Keep Hardcode Value";
+    DESCRIPTION          "";
+    ACTIVE               FALSE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.CAPResetAnnualFC" [] := "AnnualVolumeSlot"( $ "Arizona_CU_Schedules.CAP" );
+
+    END;
+
+    RULE                 "Reset Annual CAP Forecast Use - Force to AZ Apportionment";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
+    BEGIN
+
+      $ "ForecastUse.CAPResetAnnualFC" [] := $ "Arizona_CU_Forecast1.CAP" [] - $ "Arizona_CU_Overrun.Arizona_Overrun_State_Ap" [];
+
+    END;
+
+  END;
+
+  POLICY_GROUP   "Calculate Final State Use and Overruns";
+  DESCRIPTION    "";
+  ACTIVE         TRUE;
+  BEGIN
+
+    RULE                 "Final NV Overrun - Div Req";
     DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      PRINT "AcreFeetPerMonthPrint"( $ "BlueMesaInflow.Unregulated" [] - $ "TaylorPark.Inflow" [] );
+      $ "AnnualWaterUse.NVOverrun" [] := $ "AnnualWaterUse.NvTotalAnnual" [] - $ "AnnualWaterUse.Nevada_Apportionment" [];
 
     END;
 
-    RULE                 "INPUT MISSING NOTIFICATION";
+    RULE                 "Final AZ Annual Use - Div Req";
     DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "BlueMesaInflow.Unregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: BlueMesaInflow.Unregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "TaylorPark.Inflow" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: TaylorPark.Inflow Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "MorrowPointInflow.Unregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: MorrowPointInflow.Unregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "CrystalInflow.Unregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: CrystalInflow.Unregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "FlamingGorgeInflow.Unregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: FlamingGorgeInflow.Unregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Fontenelle.Inflow" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: Fontenelle.Inflow Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "NavajoInflow.ModUnregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: NavajoInflow.ModUnregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Vallecito.Inflow" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: Vallecito.Inflow Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "PowellInflow.Unregulated" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: PowellInflow.Unregulated Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "NavajoIndianIrrigationProjectNIIP.Diversion Requested" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: NavajoIndianIrrigationProjectNIIP.Diversion Requested Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Azotea Tunnel.Diversion Requested" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: AzoteaTunnel.Diversion Requested Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "TunnelDiversionBelowCrystalForAg.Diversion Requested" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: TunnelDiversionBelowCrystalForAg.Diversion Requested Missing"
-   ENDIF;
-
-      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "SanJuanBelowNavajo:AnimasRiver.Local Inflow" [] )
-   THEN
-      STOP_RUN "Run Stopped, Gain Calculation Failed: SanJuanBelowNavajo:AnimasRiver.Local Inflow Missing"
-   ENDIF;
+      $ "AnnualWaterUse.AzTotalAnnual" [] := $ "ForecastUse.CAPAnnualFC" [] + $ "AnnualWaterUse.AzNoCAPTotalAnnual" [];
 
     END;
 
-    RULE                 "ComputeGainsInterveningAboveGC";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "ColoradoAbovePowell:InterveningAbovePowell.Local Inflow" [index] := $ "PowellInflow.Unregulated" [index] + ( $ "NavajoIndianIrrigationProjectNIIP.Diversion Requested" [index] + $ "Azotea Tunnel.Diversion Requested" [index] + $ "TunnelDiversionBelowCrystalForAg.Diversion Requested" [index] ) - ( $ "CrystalInflow.Unregulated" [index] + $ "FlamingGorgeInflow.Unregulated" [index] + $ "NavajoInflow.ModUnregulated" [index] + 0.00000000 "cms" + $ "SanJuanBelowNavajo:AnimasRiver.Local Inflow" [index] );
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsLocalAboveNV";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "UpperSanJuan.Inflow" [index] := $ "NavajoInflow.ModUnregulated" [index] - $ "Vallecito.Inflow" [index];
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsLocalBelowFG";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "GreenBelowFlamingGorge:YampaRiver.Local Inflow" [index] := 0.00000000 "cms";
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsInterveningAboveFG";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "GreenAboveFlamingGorge:InterveningAboveFlamingGorge.Local Inflow" [index] := $ "FlamingGorgeInflow.Unregulated" [index] - $ "Fontenelle.Inflow" [index];
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsInterveningAboveCR";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "GunnisonAboveCrystal:InterveningAboveCrystal.Local Inflow" [index] := $ "CrystalInflow.Unregulated" [index] - $ "MorrowPointInflow.Unregulated" [index];
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsInterveningAboveMP";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "GunnisonAboveMorrowPoint:InterveningAboveMorrowPoint.Local Inflow" [index] := $ "MorrowPointInflow.Unregulated" [index] - $ "BlueMesaInflow.Unregulated" [index];
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "ComputeGainsInterveningAboveBM";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
-    BEGIN
-
-      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
-            $ "GunnisonAboveBlueMesa:InterveningAboveBlueMesa.Local Inflow" [index] := $ "BlueMesaInflow.Unregulated" [index] - $ "TaylorPark.Inflow" [index];
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "Compute Lower Basin Energy";
+    RULE                 "Final AZ Overrun - Div Req";
     DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      $ "Lower Basin Energy.Computed Davis Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] ) * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" );
+      $ "AnnualWaterUse.AzOverrun" [] := $ "AnnualWaterUse.AzTotalAnnual" [] - $ "AnnualWaterUse.Arizona_Apportionment" [];
 
-      $ "Lower Basin Energy.Computed Davis Head using Turbine Release" [] := "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] );
+    END;
 
-      $ "Lower Basin Energy.Davis KWH per AF" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] ) * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) / "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * 1.00000000 "ft" * 1.00000000 "ft";
+    RULE                 "Final CA Annual Use - Div Req";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
 
-      $ "Lower Basin Energy.Computed Parker Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Parker Efficiency" [] * "FlowToVolume"( $ "Havasu.Turbine Release" [], @"t" ) * $ "Havasu.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" );
+      $ "AnnualWaterUse.CaTotalAnnual" [] := $ "California_CU_Forecast1.IID" [] + $ "AnnualWaterUse.P123bTotalAnnual" [] + $ "AnnualWaterUse.CaNoPVYPIIDTotalAnnual" [];
 
-      $ "Lower Basin Energy.Computed PD Project Energy Using Peak Base Power Calc" [] := $ "Mohave.Energy" [] + $ "Havasu.Energy" [] / 2.00000000;
+    END;
 
-      $ "Lower Basin Energy.Computed PD Project Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * $ "Mohave.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) + $ "Lower Basin Energy.Input Parker Efficiency" [] * "FlowToVolume"( $ "Havasu.Turbine Release" [], @"t" ) * $ "Havasu.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) / 2.00000000;
+    RULE                 "Final CA Overrun - Div Req";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "AnnualWaterUse.CaOverrun" [] := $ "AnnualWaterUse.CaTotalAnnual" [] - $ "AnnualWaterUse.California_Apportionment" [];
+
+    END;
+
+    RULE                 "Final MWD Diversion";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "ForecastUse.MWDDiversionAnnualFC" [] := "Annual Volume"( $ "MWDDiversion:MWD.Diversion Requested" );
+
+      $ "ForecastUse.MWDAnnualFC" [] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) AND "GetMonth"( @"Start Timestep" ) > 1.00000000 )
+   THEN
+      "SumSlot"( $ "California_CU_Actual.MWD", @"24:00:00 January Max DayOfMonth, Current Year", @"Start Timestep - 1" ) + ( "SumFlowsToVolume"( $ "MWDDiversion:MWD.Diversion Requested", @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) - "SumSlot"( $ "California_CU_Schedules.MWDReturns", @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) )
+   ELSE
+      "Annual Volume"( $ "MWDDiversion:MWD.Diversion Requested" ) - "AnnualVolumeSlot"( $ "California_CU_Schedules.MWDReturns" )
+   ENDIF;
+
+    END;
+
+    RULE                 "Final CAP Diversion";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "ForecastUse.CAPAnnualFC" [] := "Annual Volume"( $ "CAPDiversion.Total Diversion Requested" );
+
+    END;
+
+    RULE                 "Final SNWP Diversion";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "ForecastUse.SNWPAnnualFC" [] := "Annual Volume"( $ "PumpingFromLakeMead:SNWP.Diversion Requested" );
+
+    END;
+
+  END;
+
+  POLICY_GROUP   "24 Month";
+  DESCRIPTION    "";
+  ACTIVE         TRUE;
+  BEGIN
+
+    RULE                 "Set Below Imp Outflow";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "FloodControlOutput.Flood Control Flag" [];
+    BEGIN
+
+      $ "BelowImperialDam.Outflow" [] := 0.00000000 "acre-ft/month";
+
+    END;
+
+    RULE                 "Set Havasu Outflow Exp";
+    DESCRIPTION          "This rule sets Havasu's outflow to the the scheduled release from the <br>data object, HavasuOutflow.Outflow we only do this if the outflow is currently not set.  this allows<br>for setting Hoover's outflow manually";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "Havasu.Outflow" [] AND @"t" <= @"Start Timestep + 1";
+    BEGIN
+
+      $ "Havasu.Outflow" [] := $ "HavasuOutflow.BHOPSParkerOutflow" [];
+
+    END;
+
+    RULE                 "Set Parker Final Requirement";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "HavasuOutflow.ParkerRequirement" [];
+    BEGIN
+
+      $ "HavasuOutflow.ParkerRequirement" [] := "SumAllDiversionsBelowVolume"( % "Havasu", @"t", @"t" ) - "SumAllGainsBelowVolume"( % "Havasu", @"t", @"t" );
+
+    END;
+
+    RULE                 "Set DownStream Requirement exp";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.DownstreamReq" [];
+    BEGIN
+
+      $ "Lower Basin Output.DownstreamReq" [] := $ "HavasuOutflow.ParkerRequirement" [] + "SumAllDiversionsBelowVolume"( % "Mead", @"t", @"t" ) - "SumGainsBelowVolume"( % "Mead", @"t", @"t" ) + "ComputeDeltaTargetStorage"( % "Mohave" ) + "ComputeDeltaTargetStorage"( % "Havasu" ) + $ "Mohave.Evaporation" [] + $ "Havasu.Evaporation" [];
+
+    END;
+
+    RULE                 "Set Mexico Excess";
+    DESCRIPTION          " this rule determines the excess flow to Mexico which is just the<br> actual Mead release minus the release determined to meet downstream requirements <br>";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.MexicoExcessFlow" [];
+    BEGIN
+
+      $ "Lower Basin Output.MexicoExcessFlow" [] := $ "Mead.Outflow" [] - "VolumeToFlow"( $ "Lower Basin Output.DownstreamReq" [], @"t" );
+
+    END;
+
+    RULE                 "Set Flow To Mexico (flow at NIB) exp";
+    DESCRIPTION          "This rule just computes the flow to Mexico and stores it on the<br>MexicoExcess data object in the slot NIBFlow for subsequent write to hdb<br>";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.NIBFlow" [];
+    BEGIN
+
+      $ "Lower Basin Output.NIBFlow" [] := $ "Lower Basin Output.MexicoExcessFlow" [] + $ "MexicanTreatyDelivery:MexicoSched.Diversion Requested" [];
+
+    END;
+
+    RULE                 "Compute Hoover Capacity";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "Mead.Power" [] := $ "EnergyInfo.EffectiveHooverCapacity" [] * $ "Mead.Power Plant Cap Fraction" [];
+
+    END;
+
+  END;
+
+  POLICY_GROUP   "Set Future Uses - SNWP, CAP, MWD";
+  DESCRIPTION    "";
+  ACTIVE         TRUE;
+  BEGIN
+
+    RULE                 "Reset Monthly Forecast Use CAP - Nov and Dec, Cur Year";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND NOT IsNaN $ "ForecastUse.CAPResetAnnualFC" [] AND "GetMonth"( @"t" ) < 11.00000000;
+    BEGIN
+
+      FOREACH (DATETIME date IN @"24:00:00 November Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "CAPDiversion.Total Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.CAPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Arizona_CU_Forecast1.CAP" [@"t"], date ) ) / 2.00000000 + "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date );
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Reset Monthly Forecast Use CAP - All Months Outyears";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.CAPResetAnnualFC" [] AND ( @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" );
+    BEGIN
+
+      FOREACH (DATETIME date IN "GetFirstDate"( @"t" ) TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "CAPDiversion.Total Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.CAPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Arizona_CU_Forecast1.CAP" [@"t"], date ) ) / "GetDaysBasedOnFirstDate"( @"t" ) + "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date );
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Reset Monthly Forecast Use SNWP All Years";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [] AND ( @"t" == @"Start Timestep" OR @"t" == @"24:00:00 January Max DayOfMonth, Current Year" );
+    BEGIN
+
+      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) )
+   THEN
+      $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] + ( "VolumeToFlow"( $ "ForecastUse.SNWPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Nevada_CU_Forecast1.SNWP" [@"t"], date ) ) / ( 12.00000000 - "GetMonth"( @"Start Timestep" ) + 1.00000000 )
+   ELSE
+      $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] + ( "VolumeToFlow"( $ "ForecastUse.SNWPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Nevada_CU_Forecast1.SNWP" [@"t"], date ) ) / 12.00000000
+   ENDIF;
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Reset Monthly Forecast Use MWD - Nov and Dec, Cur Year";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND NOT IsNaN $ "ForecastUse.MWDResetAnnualFC" [] AND "GetMonth"( @"t" ) < 11.00000000;
+    BEGIN
+
+      FOREACH (DATETIME date IN @"24:00:00 November Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "MWDDiversion:MWD.Diversion Requested" [date] := "Max"( 0.00000000 "acre-ft/month", ( "VolumeToFlow"( $ "ForecastUse.MWDResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "California_CU_Forecast1.MWD" [@"t"], date ) ) / 2.00000000 + "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date ) );
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Reset Monthly Forecast Use MWD - All Months Outyears";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.MWDResetAnnualFC" [] AND ( @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" );
+    BEGIN
+
+      FOREACH (DATETIME date IN "GetFirstDate"( @"t" ) TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "MWDDiversion:MWD.Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.MWDResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "California_CU_Forecast1.MWD" [@"t"], date ) ) / "GetDaysBasedOnFirstDate"( @"t" ) + "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date );
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Set Normal Schedules MWD & SNWP";
+    DESCRIPTION          "Need to separate CAP & CVWD from MWD & SNWP for full surplus";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
+    BEGIN
+
+      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO "GetLastDate"( @"t" )) DO
+            $ "MWDDiversion:MWD.Diversion Requested" [date] := IF ( date < @"Start Timestep" )
+   THEN
+      "VolumeToFlow"( $ "California_CU_Actual.MWDDiversion" [date], date )
+   ELSE
+      "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date )
+   ENDIF;
+
+            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := IF ( date < @"Start Timestep" )
+   THEN
+      "VolumeToFlow"( $ "Nevada_CU_Actual.SNWP" [date], date )
+   ELSE
+      "VolumeToFlow"( $ "Nevada_CU_Schedules.SNWP" [date], date )
+   ENDIF;
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Set Normal Schedules CAP";
+    DESCRIPTION          "May need 2nd condition (@t = Jan, current year) for full surplus<br>Need to separate CAP from MWD & SNWP for full surplus";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
+    BEGIN
+
+      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO "GetLastDate"( @"t" )) DO
+            $ "CAPDiversion.Total Diversion Requested" [date] := IF ( date < @"Start Timestep" )
+   THEN
+      "VolumeToFlow"( $ "Arizona_CU_Actual.CAP" [date], date )
+   ELSE
+      "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date )
+   ENDIF;
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "SumStateMonthlyOrders - DivReq-noP123b or IID";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" OR @"t" == @"24:00:00 January 31, Current Year";
+    BEGIN
+
+      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
+            $ "AnnualWaterUse.CaNoPVYPIIDTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AAC:Coachella.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AAC:SaltonSea.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AAC:Ranch5.Diversion Requested" [date], date ) + "FlowToVolume"( $ "CaPkrToImp.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "CRIR:CRIRCa.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:CaPumpersBlwImp.Diversion Requested" [date], date ) + "FlowToVolume"( $ "CaDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:CA.Diversion Requested" [date], date ) + ( "FlowToVolume"( $ "MWDDiversion:MWD.Diversion Requested" [date], date ) - $ "California_CU_Schedules.MWDReturns" [date] );
+
+            $ "AnnualWaterUse.P123bTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AAC:YumaProject.Diversion Requested" [date], date ) + "FlowToVolume"( $ "PaloVerde.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:YumaIsland.Diversion Requested" [date], date );
+
+            $ "AnnualWaterUse.AzNoCAPTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AzPkrToImp.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "GilaGravityMainCanal.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "GilaAndYumaUsers.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "CRIR:CRIRAz.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:AzPumpersBlwImp.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:SouthernPacific.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:YAO.Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:AZ.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AzDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "PumpingFromLakeMead:LMNRA Az Mead.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:LMNRA Az Mohave.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:Ft Yuma.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:DavisDamProject.Diversion Requested" [date], date );
+
+            $ "AnnualWaterUse.NvTotalMonthlyOrder" [date] := "FlowToVolume"( $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date], date ) + "FlowToVolume"( $ "NvDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:NV.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:LMNRA Nv Mohave.Diversion Requested" [date], date );
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "SumAnnualStateUse - Div Req";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      FOREACH (STRING state IN { "CaNoPVYPIID" , "AzNoCAP" , "Nv" , "P123b" }) DO
+            "AnnualWaterUse." CONCAT state CONCAT "TotalAnnual" [] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) AND "GetMonth"( @"Start Timestep" ) > 1.00000000 )
+   THEN
+      "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyOrder" ), @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) + "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyActual" ), @"24:00:00 January Max DayOfMonth, Current Year", @"Start Timestep - 1" )
+   ELSE
+      "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyOrder" ), @"24:00:00 January Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" )
+   ENDIF;
+
+      ENDFOREACH;
+
+    END;
+
+    RULE                 "Non P123b-IID Ca Overrun";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "AnnualWaterUse.CaOverrun noPVYPIID" [];
+    BEGIN
+
+      $ "AnnualWaterUse.CaOverrun noPVYPIID" [] := $ "AnnualWaterUse.CaNoPVYPIIDTotalAnnual" [] - $ "AnnualWaterUse.CaMinusPVYPIID" [];
 
     END;
 
@@ -335,7 +549,7 @@ BEGIN
     END;
 
     RULE                 "Set July Outflow";
-    DESCRIPTION          "";
+    DESCRIPTION          "Solve for the outflow which will cause the pool elevation to reach the end of timestep target. ";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "July" };
     BEGIN
@@ -356,91 +570,176 @@ BEGIN
 
   END;
 
-  POLICY_GROUP   "Shortage";
+  POLICY_GROUP   "FloodControl";
   DESCRIPTION    "";
   ACTIVE         TRUE;
   BEGIN
 
-    RULE                 "Set Shortage Flag";
-    DESCRIPTION          "";
+    RULE                 "Set Schedule Release";
+    DESCRIPTION          "<br> This rule copies the initial Mead release needed to meet downstream demands<br> to the FloodControlOutput data object in slot schdrel. <br> The value should only be reported the first time Mead calculates its outflow <br> based on downstream demands. It should never be overwritten by another rule. <br>";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep";
+    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.MeadSchedRel" [] AND NOT IsNaN $ "Mead.Outflow" [];
     BEGIN
 
-      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
-            $ "Shortage.Shortage Flag" [date] := IF ( $ "Mead.Pool Elevation" [@"t - 1"] < $ "Shortage.Mead Shortage Elevations" [2.00000000, 0.00000000] )
-   THEN
-      3.00000000
-   ELSE
-      IF ( $ "Mead.Pool Elevation" [@"t - 1"] < $ "Shortage.Mead Shortage Elevations" [1.00000000, 0.00000000] )
-      THEN
-         2.00000000
-      ELSE
-         IF ( $ "Mead.Pool Elevation" [@"t - 1"] <= $ "Shortage.Mead Shortage Elevations" [0.00000000, 0.00000000] )
-         THEN
-            1.00000000
-         ELSE
-            0.00000000
-         ENDIF
-      ENDIF
-   ENDIF;
-
-      ENDFOREACH;
+      $ "Lower Basin Output.MeadSchedRel" [] := $ "Mead.Outflow" [];
 
     END;
 
-    RULE                 "Set CAP Annual Shortage Volume";
+    RULE                 "Set Forecast Data";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep";
+    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Withoutrel" [];
     BEGIN
 
-      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
-            $ "Shortage.CAP Annual Shortage Volume" [date] := IF ( $ "Shortage.Shortage Flag" [] > 0.00000000 )
-   THEN
-      "GetAnnualCAPShortage"( $ "Shortage.Shortage Flag" [date] - 1.00000000 )
-   ELSE
-      0.00000000 "acre-feet"
-   ENDIF;
+      $ "FloodControlOutput.FGuse" [] := "SumSlotVolume"( $ "FlamingGorgeInflow.Unregulated", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "FlamingGorge.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
 
-      ENDFOREACH;
+      $ "FloodControlOutput.FGactual" [] := "GetLiveCapacity"( % "FlamingGorge" ) - $ "FlamingGorge.Storage" [@"t - 1"] + ( "GetLiveCapacity"( % "Fontenelle" ) - $ "Fontenelle.Storage" [@"t - 1"] );
+
+      $ "FloodControlOutput.BMuse" [] := "SumSlotVolume"( $ "BlueMesaInflow.Unregulated", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "BlueMesa.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
+
+      $ "FloodControlOutput.BMactual" [] := "GetLiveCapacity"( % "BlueMesa" ) - $ "BlueMesa.Storage" [@"t - 1"];
+
+      $ "FloodControlOutput.NAVuse" [] := "SumSlotVolume"( $ "Navajo.Inflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "Navajo.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
+
+      $ "FloodControlOutput.NAVactual" [] := "GetLiveCapacity"( % "Navajo" ) - $ "Navajo.Storage" [@"t - 1"];
+
+      $ "FloodControlOutput.Spcmd" [] := "AvailableSpace"( % "Mead" );
+
+      $ "FloodControlOutput.Spcpow" [] := "AvailableSpace"( % "Powell" );
+
+      $ "FloodControlOutput.Deltabs" [] := "DeltaBankStorage"(  );
+
+      $ "FloodControlOutput.Evapmd" [] := "FloodControlEvap"( % "Mead" );
+
+      $ "FloodControlOutput.Evapow" [] := "FloodControlEvap"( % "Powell" );
+
+      $ "FloodControlOutput.Consnev" [] := "SouthernNevConsumed"( "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
 
     END;
 
-    RULE                 "Set Outyear Shortage Schedules";
+    RULE                 "Set Effective Space";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" AND $ "Shortage.Shortage Flag" [] > 0.00000000;
+    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Effective" [];
     BEGIN
 
-      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
-            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := "VolumeToFlow"( $ "Nevada_CU_Schedules.SNWP" [date] - $ "Shortage.State Shortage Volumes" [$ "Shortage.Shortage Flag" [date] - 1.00000000, "Nevada"] * $ "Shortage.MonthlyPercents" ["GetMonthAsString"( date ), 0.00000000], date );
+      $ "FloodControlOutput.Effective" [] := "Min"( $ "FloodControlOutput.FGuse" [], $ "FloodControlOutput.FGactual" [] ) + "Min"( $ "FloodControlOutput.BMuse" [], $ "FloodControlOutput.BMactual" [] ) + "Min"( $ "FloodControlOutput.NAVuse" [], $ "FloodControlOutput.NAVactual" [] );
 
-            $ "AzDvsToPkr:LakeHavasuCity.Diversion Requested" [date] := "Arizona Shortage Depletion"( "LakeHavasuCity", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    END;
 
-            $ "AzDvsToPkr:MohaveValleyIID.Diversion Requested" [date] := "Arizona Shortage Depletion"( "MohaveValleyIID", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    RULE                 "Set Without Release";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Withoutrel" [];
+    BEGIN
 
-            $ "AzDvsToPkr:BullheadCity.Diversion Requested" [date] := "Arizona Shortage Depletion"( "BullheadCity", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+      $ "FloodControlOutput.Forecas" [] := "ForecastMeadInflow"(  );
 
-            $ "AzPkrToImp:CibolaValleyIID.Diversion Requested" [date] := "Arizona Shortage Depletion"( "CibolaValleyIID", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+      $ "FloodControlOutput.Withoutrel" [] := "ForecastMeadInflow"(  ) - "AvailableSpace"( % "Mead" ) - "AvailableSpace"( % "Powell" ) + $ "MeadFloodControlData.MinSpace" [0.00000000, 0.00000000] - "DeltaBankStorage"(  ) - "FloodControlEvap"( % "Mead" ) - "FloodControlEvap"( % "Powell" ) - $ "FloodControlOutput.Consnev" [];
 
-            $ "AzPkrToImp:Parker.Diversion Requested" [date] := "Arizona Shortage Depletion"( "City of Parker", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    END;
 
-            $ "AzPkrToImp:Ehrenberg.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Ehrenberg", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    RULE                 "Set Flood Control Release";
+    DESCRIPTION          "<br> This rule computes the Mead release required by runoff based flood control<br> and stores the value on the FloodControlOutput data object as FCrelease. <br> The rule applies during year round.<br>";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT IsNaN $ "FloodControlOutput.FCrelease" [];
+    BEGIN
 
-            $ "GilaAndYumaUsers:GilaMonsterFarms.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Gila Monster Farms", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+      $ "FloodControlOutput.FCrelease" [] := IF ( @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" )
+   THEN
+      GET NUMERIC @INDEX 0.00000000 FROM "ForecastRunoffSeason "(  )
+   ELSE
+      "ComputeTargetStorageRelease"(  )
+   ENDIF;
 
-            $ "GilaAndYumaUsers:CocopahIndRes.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Cocopah Indian Res", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+      PRINT IF ( @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" )
+   THEN
+      "entering Runoff Forecast Season routine for" CONCAT "GetMonthAsString"( @"t" )
+   ELSE
+      "Mead Flood Control Release is not computed in" CONCAT "GetMonthAsString"( @"t" )
+   ENDIF;
 
-            $ "AzPkrToImp:AzPumpersAbvImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersAbvImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    END;
 
-            $ "OthersBlwImp:AzPumpersBlwImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersBlwImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    RULE                 "Mohave Rule Curve";
+    DESCRIPTION          "This rule could just as easily use a target elevation rather than a storage.<br>It would probably be safer to do so.";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
 
-            $ "AzDvsToPkr:AzPumpersDvsToPkr.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersDvsToPkr", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+      $ "Mohave.Storage" [] := "GetTargetStorage"( % "Mohave" );
 
-            $ "CAPDiversion.Total Diversion Requested" [date] := "CAP Shortage Depletion"( $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
+    END;
 
-      ENDFOREACH;
+    RULE                 "Havasu Rule Curve";
+    DESCRIPTION          "This rule could just as easily use a target elevation rather than a storage.<br>It would probably be safer to do so.";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT TRUE;
+    BEGIN
+
+      $ "Havasu.Storage" [] := "GetTargetStorage"( % "Havasu" );
+
+    END;
+
+    RULE                 "Mead Exclusive Flood Control Space";
+    DESCRIPTION          "<br>  This rule ensures that Mead can not violate the 1.5 maf space requirement at any time of the year<br>  Although this is the highest priority rule, we don't want it to fire until the other flood control procedures<br>  have had their shot<br>";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT NOT IsNaN $ "FloodControlOutput.Flood Control Flag" [] AND NOT IsNaN $ "Mead.Storage" [];
+    BEGIN
+
+      $ "Mead.Outflow" [] := IF ( $ "Mead.Storage" [] >= "ComputeMinimumSpace"( % "Mead" ) )
+   THEN
+      "ComputeOutflowAtGivenStorage"( % "Mead", "ComputeMinimumSpace"( % "Mead" ) )
+   ENDIF;
+
+      $ "FloodControlOutput.Exclusive Space Flag" [] := IF ( $ "Mead.Storage" [] >= "ComputeMinimumSpace"( % "Mead" ) )
+   THEN
+      1.00000000
+   ELSE
+      0.00000000
+   ENDIF;
+
+      PRINT "Flood Control due to violating Exclusive Flood Control Space: Mead Storage reset";
+
+    END;
+
+    RULE                 "Mead Flood Control Release";
+    DESCRIPTION          "This rule checks that the release from Mead computed for downstream demands is large<br>enough to satisfy flood control during the runoff season. If not, Mead Outflow is reset to the <br>required flood control release which was previously calculated in the <Set Flood Control Release> <br>rule and stored as FloodControlOutput.FCrelease. The flood control flag is also set to 1 : <br>this will cause the system to solve downstream and eventually force more water out of Havasu<br>";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND NOT IsNaN $ "Mead.Outflow" [];
+    BEGIN
+
+      $ "Mead.Outflow" [] := IF ( $ "Mead.Outflow" [] < $ "FloodControlOutput.FCrelease" [] )
+   THEN
+      $ "FloodControlOutput.FCrelease" []
+   ENDIF;
+
+      $ "FloodControlOutput.Flood Control Flag" [] := IF ( $ "Mead.Outflow" [] < $ "FloodControlOutput.FCrelease" [] )
+   THEN
+      1.00000000
+   ELSE
+      0.00000000
+   ENDIF;
+
+    END;
+
+    RULE                 "Mead Space Building";
+    DESCRIPTION          "";
+    ACTIVE               TRUE;
+    RULE_EXEC_CONSTRAINT @"t" > @"24:00:00 July Max DayOfMonth, Current Year" AND NOT IsNaN $ "Mead.Storage" [];
+    BEGIN
+
+      $ "Mead.Outflow" [] := IF ( $ "Mead.Storage" [] > "ComputeTargetStorage"(  ) )
+   THEN
+      "ComputeOutflowAtGivenStorage"( % "Mead", "ComputeTargetStorage"(  ) )
+   ENDIF;
+
+      $ "FloodControlOutput.Flood Control Flag" [] := IF ( $ "Mead.Storage" [] > "ComputeTargetStorage"(  ) )
+   THEN
+      1.00000000
+   ELSE
+      0.00000000
+   ENDIF;
 
     END;
 
@@ -1040,615 +1339,316 @@ BEGIN
 
   END;
 
-  POLICY_GROUP   "FloodControl";
+  POLICY_GROUP   "Shortage";
   DESCRIPTION    "";
   ACTIVE         TRUE;
   BEGIN
 
-    RULE                 "Set Schedule Release";
-    DESCRIPTION          "<br> This rule copies the initial Mead release needed to meet downstream demands<br> to the FloodControlOutput data object in slot schdrel. <br> The value should only be reported the first time Mead calculates its outflow <br> based on downstream demands. It should never be overwritten by another rule. <br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.MeadSchedRel" [] AND NOT IsNaN $ "Mead.Outflow" [];
-    BEGIN
-
-      $ "Lower Basin Output.MeadSchedRel" [] := $ "Mead.Outflow" [];
-
-    END;
-
-    RULE                 "Set Forecast Data";
+    RULE                 "Set Shortage Flag";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Withoutrel" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep";
     BEGIN
 
-      $ "FloodControlOutput.FGuse" [] := "SumSlotVolume"( $ "FlamingGorgeInflow.Unregulated", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "FlamingGorge.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
+      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
+            $ "Shortage.Shortage Flag" [date] := IF ( $ "Mead.Pool Elevation" [@"t - 1"] < $ "Shortage.Mead Shortage Elevations" [2.00000000, 0.00000000] )
+   THEN
+      3.00000000
+   ELSE
+      IF ( $ "Mead.Pool Elevation" [@"t - 1"] < $ "Shortage.Mead Shortage Elevations" [1.00000000, 0.00000000] )
+      THEN
+         2.00000000
+      ELSE
+         IF ( $ "Mead.Pool Elevation" [@"t - 1"] <= $ "Shortage.Mead Shortage Elevations" [0.00000000, 0.00000000] )
+         THEN
+            1.00000000
+         ELSE
+            0.00000000
+         ENDIF
+      ENDIF
+   ENDIF;
 
-      $ "FloodControlOutput.FGactual" [] := "GetLiveCapacity"( % "FlamingGorge" ) - $ "FlamingGorge.Storage" [@"t - 1"] + ( "GetLiveCapacity"( % "Fontenelle" ) - $ "Fontenelle.Storage" [@"t - 1"] );
-
-      $ "FloodControlOutput.BMuse" [] := "SumSlotVolume"( $ "BlueMesaInflow.Unregulated", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "BlueMesa.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
-
-      $ "FloodControlOutput.BMactual" [] := "GetLiveCapacity"( % "BlueMesa" ) - $ "BlueMesa.Storage" [@"t - 1"];
-
-      $ "FloodControlOutput.NAVuse" [] := "SumSlotVolume"( $ "Navajo.Inflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) - "SumSlotVolume"( $ "Navajo.Outflow", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
-
-      $ "FloodControlOutput.NAVactual" [] := "GetLiveCapacity"( % "Navajo" ) - $ "Navajo.Storage" [@"t - 1"];
-
-      $ "FloodControlOutput.Spcmd" [] := "AvailableSpace"( % "Mead" );
-
-      $ "FloodControlOutput.Spcpow" [] := "AvailableSpace"( % "Powell" );
-
-      $ "FloodControlOutput.Deltabs" [] := "DeltaBankStorage"(  );
-
-      $ "FloodControlOutput.Evapmd" [] := "FloodControlEvap"( % "Mead" );
-
-      $ "FloodControlOutput.Evapow" [] := "FloodControlEvap"( % "Powell" );
-
-      $ "FloodControlOutput.Consnev" [] := "SouthernNevConsumed"( "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) );
+      ENDFOREACH;
 
     END;
 
-    RULE                 "Set Effective Space";
+    RULE                 "Set CAP Annual Shortage Volume";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Effective" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep";
     BEGIN
 
-      $ "FloodControlOutput.Effective" [] := "Min"( $ "FloodControlOutput.FGuse" [], $ "FloodControlOutput.FGactual" [] ) + "Min"( $ "FloodControlOutput.BMuse" [], $ "FloodControlOutput.BMactual" [] ) + "Min"( $ "FloodControlOutput.NAVuse" [], $ "FloodControlOutput.NAVactual" [] );
+      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
+            $ "Shortage.CAP Annual Shortage Volume" [date] := IF ( $ "Shortage.Shortage Flag" [] > 0.00000000 )
+   THEN
+      "GetAnnualCAPShortage"( $ "Shortage.Shortage Flag" [date] - 1.00000000 )
+   ELSE
+      0.00000000 "acre-feet"
+   ENDIF;
+
+      ENDFOREACH;
 
     END;
 
-    RULE                 "Set Without Release";
+    RULE                 "Set Outyear Shortage Schedules";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND IsNaN $ "FloodControlOutput.Withoutrel" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" AND $ "Shortage.Shortage Flag" [] > 0.00000000;
     BEGIN
 
-      $ "FloodControlOutput.Forecas" [] := "ForecastMeadInflow"(  );
+      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December 31, Current Year") DO
+            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := "VolumeToFlow"( $ "Nevada_CU_Schedules.SNWP" [date] - $ "Shortage.State Shortage Volumes" [$ "Shortage.Shortage Flag" [date] - 1.00000000, "Nevada"] * $ "Shortage.MonthlyPercents" ["GetMonthAsString"( date ), 0.00000000], date );
 
-      $ "FloodControlOutput.Withoutrel" [] := "ForecastMeadInflow"(  ) - "AvailableSpace"( % "Mead" ) - "AvailableSpace"( % "Powell" ) + $ "MeadFloodControlData.MinSpace" [0.00000000, 0.00000000] - "DeltaBankStorage"(  ) - "FloodControlEvap"( % "Mead" ) - "FloodControlEvap"( % "Powell" ) - $ "FloodControlOutput.Consnev" [];
+            $ "AzDvsToPkr:LakeHavasuCity.Diversion Requested" [date] := "Arizona Shortage Depletion"( "LakeHavasuCity", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    END;
+            $ "AzDvsToPkr:MohaveValleyIID.Diversion Requested" [date] := "Arizona Shortage Depletion"( "MohaveValleyIID", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    RULE                 "Set Flood Control Release";
-    DESCRIPTION          "<br> This rule computes the Mead release required by runoff based flood control<br> and stores the value on the FloodControlOutput data object as FCrelease. <br> The rule applies during year round.<br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "FloodControlOutput.FCrelease" [];
-    BEGIN
+            $ "AzDvsToPkr:BullheadCity.Diversion Requested" [date] := "Arizona Shortage Depletion"( "BullheadCity", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-      $ "FloodControlOutput.FCrelease" [] := IF ( @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" )
-   THEN
-      GET NUMERIC @INDEX 0.00000000 FROM "ForecastRunoffSeason "(  )
-   ELSE
-      "ComputeTargetStorageRelease"(  )
-   ENDIF;
+            $ "AzPkrToImp:CibolaValleyIID.Diversion Requested" [date] := "Arizona Shortage Depletion"( "CibolaValleyIID", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-      PRINT IF ( @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" )
-   THEN
-      "entering Runoff Forecast Season routine for" CONCAT "GetMonthAsString"( @"t" )
-   ELSE
-      "Mead Flood Control Release is not computed in" CONCAT "GetMonthAsString"( @"t" )
-   ENDIF;
+            $ "AzPkrToImp:Parker.Diversion Requested" [date] := "Arizona Shortage Depletion"( "City of Parker", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    END;
+            $ "AzPkrToImp:Ehrenberg.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Ehrenberg", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    RULE                 "Mohave Rule Curve";
-    DESCRIPTION          "This rule could just as easily use a target elevation rather than a storage.<br>It would probably be safer to do so.";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
+            $ "GilaAndYumaUsers:GilaMonsterFarms.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Gila Monster Farms", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-      $ "Mohave.Storage" [] := "GetTargetStorage"( % "Mohave" );
+            $ "GilaAndYumaUsers:CocopahIndRes.Diversion Requested" [date] := "Arizona Shortage Depletion"( "Cocopah Indian Res", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    END;
+            $ "AzPkrToImp:AzPumpersAbvImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersAbvImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    RULE                 "Havasu Rule Curve";
-    DESCRIPTION          "This rule could just as easily use a target elevation rather than a storage.<br>It would probably be safer to do so.";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
+            $ "OthersBlwImp:AzPumpersBlwImp.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersBlwImp", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-      $ "Havasu.Storage" [] := "GetTargetStorage"( % "Havasu" );
+            $ "AzDvsToPkr:AzPumpersDvsToPkr.Diversion Requested" [date] := "Arizona Shortage Depletion"( "AzPumpersDvsToPkr", $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    END;
+            $ "CAPDiversion.Total Diversion Requested" [date] := "CAP Shortage Depletion"( $ "Shortage.Shortage Flag" [date] - 1.00000000, date );
 
-    RULE                 "Mead Exclusive Flood Control Space";
-    DESCRIPTION          "<br>  This rule ensures that Mead can not violate the 1.5 maf space requirement at any time of the year<br>  Although this is the highest priority rule, we don't want it to fire until the other flood control procedures<br>  have had their shot<br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT NOT IsNaN $ "FloodControlOutput.Flood Control Flag" [] AND NOT IsNaN $ "Mead.Storage" [];
-    BEGIN
-
-      $ "Mead.Outflow" [] := IF ( $ "Mead.Storage" [] >= "ComputeMinimumSpace"( % "Mead" ) )
-   THEN
-      "ComputeOutflowAtGivenStorage"( % "Mead", "ComputeMinimumSpace"( % "Mead" ) )
-   ENDIF;
-
-      $ "FloodControlOutput.Exclusive Space Flag" [] := IF ( $ "Mead.Storage" [] >= "ComputeMinimumSpace"( % "Mead" ) )
-   THEN
-      1.00000000
-   ELSE
-      0.00000000
-   ENDIF;
-
-      PRINT "Flood Control due to violating Exclusive Flood Control Space: Mead Storage reset";
-
-    END;
-
-    RULE                 "Mead Flood Control Release";
-    DESCRIPTION          "This rule checks that the release from Mead computed for downstream demands is large<br>enough to satisfy flood control during the runoff season. If not, Mead Outflow is reset to the <br>required flood control release which was previously calculated in the <Set Flood Control Release> <br>rule and stored as FloodControlOutput.FCrelease. The flood control flag is also set to 1 : <br>this will cause the system to solve downstream and eventually force more water out of Havasu<br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" <= @"24:00:00 July Max DayOfMonth, Current Year" AND NOT IsNaN $ "Mead.Outflow" [];
-    BEGIN
-
-      $ "Mead.Outflow" [] := IF ( $ "Mead.Outflow" [] < $ "FloodControlOutput.FCrelease" [] )
-   THEN
-      $ "FloodControlOutput.FCrelease" []
-   ENDIF;
-
-      $ "FloodControlOutput.Flood Control Flag" [] := IF ( $ "Mead.Outflow" [] < $ "FloodControlOutput.FCrelease" [] )
-   THEN
-      1.00000000
-   ELSE
-      0.00000000
-   ENDIF;
-
-    END;
-
-    RULE                 "Mead Space Building";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" > @"24:00:00 July Max DayOfMonth, Current Year" AND NOT IsNaN $ "Mead.Storage" [];
-    BEGIN
-
-      $ "Mead.Outflow" [] := IF ( $ "Mead.Storage" [] > "ComputeTargetStorage"(  ) )
-   THEN
-      "ComputeOutflowAtGivenStorage"( % "Mead", "ComputeTargetStorage"(  ) )
-   ENDIF;
-
-      $ "FloodControlOutput.Flood Control Flag" [] := IF ( $ "Mead.Storage" [] > "ComputeTargetStorage"(  ) )
-   THEN
-      1.00000000
-   ELSE
-      0.00000000
-   ENDIF;
+      ENDFOREACH;
 
     END;
 
   END;
 
-  POLICY_GROUP   "Set Future Uses - SNWP, CAP, MWD";
+  POLICY_GROUP   "Data Setup";
   DESCRIPTION    "";
   ACTIVE         TRUE;
   BEGIN
 
-    RULE                 "Reset Monthly Forecast Use CAP - Nov and Dec, Cur Year";
+    RULE                 "Set Average Longterm Hydrology";
     DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND NOT IsNaN $ "ForecastUse.CAPResetAnnualFC" [] AND "GetMonth"( @"t" ) < 11.00000000;
+    ACTIVE               FALSE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      FOREACH (DATETIME date IN @"24:00:00 November Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "CAPDiversion.Total Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.CAPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Arizona_CU_Forecast1.CAP" [@"t"], date ) ) / 2.00000000 + "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date );
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "Reset Monthly Forecast Use CAP - All Months Outyears";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.CAPResetAnnualFC" [] AND ( @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" );
-    BEGIN
-
-      FOREACH (DATETIME date IN "GetFirstDate"( @"t" ) TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "CAPDiversion.Total Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.CAPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Arizona_CU_Forecast1.CAP" [@"t"], date ) ) / "GetDaysBasedOnFirstDate"( @"t" ) + "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date );
-
-      ENDFOREACH;
-
-    END;
-
-    RULE                 "Reset Monthly Forecast Use SNWP All Years";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [] AND ( @"t" == @"Start Timestep" OR @"t" == @"24:00:00 January Max DayOfMonth, Current Year" );
-    BEGIN
-
-      FOREACH (DATETIME date IN @"t" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) )
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "PowellToMead:PariaRiver.Local Inflow" [index] := IF ( IsNaN $ "PowellToMead:PariaRiver.Local Inflow" [index] )
    THEN
-      $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] + ( "VolumeToFlow"( $ "ForecastUse.SNWPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Nevada_CU_Forecast1.SNWP" [@"t"], date ) ) / ( 12.00000000 - "GetMonth"( @"Start Timestep" ) + 1.00000000 )
-   ELSE
-      $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] + ( "VolumeToFlow"( $ "ForecastUse.SNWPResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "Nevada_CU_Forecast1.SNWP" [@"t"], date ) ) / 12.00000000
+      $ "StatisticalData.averageUnregInflows" ["PariaRiver", "GetMonthAsString"( index )]
+   ENDIF;
+
+      ENDFOREACH;
+
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "BlueMesaInflow.Unregulated" [index] := IF ( IsNaN $ "BlueMesaInflow.Unregulated" [index] )
+   THEN
+      $ "StatisticalData.averageUnregInflows" ["BlueMesa", "GetMonthAsString"( index )]
    ENDIF;
 
       ENDFOREACH;
 
     END;
 
-    RULE                 "Reset Monthly Forecast Use MWD - Nov and Dec, Cur Year";
+    RULE                 "DebuggingRule";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND NOT IsNaN $ "ForecastUse.MWDResetAnnualFC" [] AND "GetMonth"( @"t" ) < 11.00000000;
+    RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      FOREACH (DATETIME date IN @"24:00:00 November Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "MWDDiversion:MWD.Diversion Requested" [date] := "Max"( 0.00000000 "acre-ft/month", ( "VolumeToFlow"( $ "ForecastUse.MWDResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "California_CU_Forecast1.MWD" [@"t"], date ) ) / 2.00000000 + "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date ) );
-
-      ENDFOREACH;
+      PRINT "AcreFeetPerMonthPrint"( $ "BlueMesaInflow.Unregulated" [] - $ "TaylorPark.Inflow" [] );
 
     END;
 
-    RULE                 "Reset Monthly Forecast Use MWD - All Months Outyears";
+    RULE                 "INPUT MISSING NOTIFICATION";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT NOT IsNaN $ "ForecastUse.MWDResetAnnualFC" [] AND ( @"t" == @"24:00:00 January Max DayOfMonth, Current Year" AND @"t" != @"Start Timestep" );
+    RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      FOREACH (DATETIME date IN "GetFirstDate"( @"t" ) TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "MWDDiversion:MWD.Diversion Requested" [date] := ( "VolumeToFlow"( $ "ForecastUse.MWDResetAnnualFC" [@"t"], date ) - "VolumeToFlow"( $ "California_CU_Forecast1.MWD" [@"t"], date ) ) / "GetDaysBasedOnFirstDate"( @"t" ) + "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date );
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "BlueMesaInflow.Unregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: BlueMesaInflow.Unregulated Missing"
+   ENDIF;
 
-      ENDFOREACH;
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "TaylorPark.Inflow" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: TaylorPark.Inflow Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "MorrowPointInflow.Unregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: MorrowPointInflow.Unregulated Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "CrystalInflow.Unregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: CrystalInflow.Unregulated Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "FlamingGorgeInflow.Unregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: FlamingGorgeInflow.Unregulated Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Fontenelle.Inflow" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: Fontenelle.Inflow Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "NavajoInflow.ModUnregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: NavajoInflow.ModUnregulated Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Vallecito.Inflow" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: Vallecito.Inflow Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "PowellInflow.Unregulated" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: PowellInflow.Unregulated Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "NavajoIndianIrrigationProjectNIIP.Diversion Requested" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: NavajoIndianIrrigationProjectNIIP.Diversion Requested Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "Azotea Tunnel.Diversion Requested" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: AzoteaTunnel.Diversion Requested Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "TunnelDiversionBelowCrystalForAg.Diversion Requested" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: TunnelDiversionBelowCrystalForAg.Diversion Requested Missing"
+   ENDIF;
+
+      $ "DummyDataObject.DummyDataSlot" [] := IF ( IsNaN $ "SanJuanBelowNavajo:AnimasRiver.Local Inflow" [] )
+   THEN
+      STOP_RUN "Run Stopped, Gain Calculation Failed: SanJuanBelowNavajo:AnimasRiver.Local Inflow Missing"
+   ENDIF;
 
     END;
 
-    RULE                 "Set Normal Schedules MWD & SNWP";
-    DESCRIPTION          "Need to separate CAP & CVWD from MWD & SNWP for full surplus";
+    RULE                 "ComputeGainsInterveningAboveGC";
+    DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO "GetLastDate"( @"t" )) DO
-            $ "MWDDiversion:MWD.Diversion Requested" [date] := IF ( date < @"Start Timestep" )
-   THEN
-      "VolumeToFlow"( $ "California_CU_Actual.MWDDiversion" [date], date )
-   ELSE
-      "VolumeToFlow"( $ "California_CU_Schedules.MWDDiversion" [date], date )
-   ENDIF;
-
-            $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date] := IF ( date < @"Start Timestep" )
-   THEN
-      "VolumeToFlow"( $ "Nevada_CU_Actual.SNWP" [date], date )
-   ELSE
-      "VolumeToFlow"( $ "Nevada_CU_Schedules.SNWP" [date], date )
-   ENDIF;
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "ColoradoAbovePowell:InterveningAbovePowell.Local Inflow" [index] := $ "PowellInflow.Unregulated" [index] + ( $ "NavajoIndianIrrigationProjectNIIP.Diversion Requested" [index] + $ "Azotea Tunnel.Diversion Requested" [index] + $ "TunnelDiversionBelowCrystalForAg.Diversion Requested" [index] ) - ( $ "CrystalInflow.Unregulated" [index] + $ "FlamingGorgeInflow.Unregulated" [index] + $ "NavajoInflow.ModUnregulated" [index] + 0.00000000 "cms" + $ "SanJuanBelowNavajo:AnimasRiver.Local Inflow" [index] );
 
       ENDFOREACH;
 
     END;
 
-    RULE                 "Set Normal Schedules CAP";
-    DESCRIPTION          "May need 2nd condition (@t = Jan, current year) for full surplus<br>Need to separate CAP from MWD & SNWP for full surplus";
+    RULE                 "ComputeGainsLocalAboveNV";
+    DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO "GetLastDate"( @"t" )) DO
-            $ "CAPDiversion.Total Diversion Requested" [date] := IF ( date < @"Start Timestep" )
-   THEN
-      "VolumeToFlow"( $ "Arizona_CU_Actual.CAP" [date], date )
-   ELSE
-      "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date], date )
-   ENDIF;
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "UpperSanJuan.Inflow" [index] := $ "NavajoInflow.ModUnregulated" [index] - $ "Vallecito.Inflow" [index];
 
       ENDFOREACH;
 
     END;
 
-    RULE                 "SumStateMonthlyOrders - DivReq-noP123b or IID";
+    RULE                 "ComputeGainsLocalBelowFG";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" OR @"t" == @"24:00:00 January 31, Current Year";
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      FOREACH (DATETIME date IN @"24:00:00 January Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year") DO
-            $ "AnnualWaterUse.CaNoPVYPIIDTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AAC:Coachella.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AAC:SaltonSea.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AAC:Ranch5.Diversion Requested" [date], date ) + "FlowToVolume"( $ "CaPkrToImp.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "CRIR:CRIRCa.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:CaPumpersBlwImp.Diversion Requested" [date], date ) + "FlowToVolume"( $ "CaDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:CA.Diversion Requested" [date], date ) + ( "FlowToVolume"( $ "MWDDiversion:MWD.Diversion Requested" [date], date ) - $ "California_CU_Schedules.MWDReturns" [date] );
-
-            $ "AnnualWaterUse.P123bTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AAC:YumaProject.Diversion Requested" [date], date ) + "FlowToVolume"( $ "PaloVerde.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:YumaIsland.Diversion Requested" [date], date );
-
-            $ "AnnualWaterUse.AzNoCAPTotalMonthlyOrder" [date] := "FlowToVolume"( $ "AzPkrToImp.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "GilaGravityMainCanal.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "GilaAndYumaUsers.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "CRIR:CRIRAz.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:AzPumpersBlwImp.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:SouthernPacific.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:YAO.Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:AZ.Diversion Requested" [date], date ) + "FlowToVolume"( $ "AzDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "PumpingFromLakeMead:LMNRA Az Mead.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:LMNRA Az Mohave.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersBlwImp:Ft Yuma.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:DavisDamProject.Diversion Requested" [date], date );
-
-            $ "AnnualWaterUse.NvTotalMonthlyOrder" [date] := "FlowToVolume"( $ "PumpingFromLakeMead:SNWP.Diversion Requested" [date], date ) + "FlowToVolume"( $ "NvDvsToPkr.Total Diversion Requested" [date], date ) + "FlowToVolume"( $ "FtMohaveIndRes:NV.Diversion Requested" [date], date ) + "FlowToVolume"( $ "OthersMeadToMohave:LMNRA Nv Mohave.Diversion Requested" [date], date );
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "GreenBelowFlamingGorge:YampaRiver.Local Inflow" [index] := 0.00000000 "cms";
 
       ENDFOREACH;
 
     END;
 
-    RULE                 "SumAnnualStateUse - Div Req";
+    RULE                 "ComputeGainsInterveningAboveFG";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      FOREACH (STRING state IN { "CaNoPVYPIID" , "AzNoCAP" , "Nv" , "P123b" }) DO
-            "AnnualWaterUse." CONCAT state CONCAT "TotalAnnual" [] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) AND "GetMonth"( @"Start Timestep" ) > 1.00000000 )
-   THEN
-      "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyOrder" ), @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) + "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyActual" ), @"24:00:00 January Max DayOfMonth, Current Year", @"Start Timestep - 1" )
-   ELSE
-      "SumSlot"( % "AnnualWaterUse" & ( state CONCAT "TotalMonthlyOrder" ), @"24:00:00 January Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" )
-   ENDIF;
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "GreenAboveFlamingGorge:InterveningAboveFlamingGorge.Local Inflow" [index] := $ "FlamingGorgeInflow.Unregulated" [index] - $ "Fontenelle.Inflow" [index];
 
       ENDFOREACH;
 
     END;
 
-    RULE                 "Non P123b-IID Ca Overrun";
+    RULE                 "ComputeGainsInterveningAboveCR";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "AnnualWaterUse.CaOverrun noPVYPIID" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      $ "AnnualWaterUse.CaOverrun noPVYPIID" [] := $ "AnnualWaterUse.CaNoPVYPIIDTotalAnnual" [] - $ "AnnualWaterUse.CaMinusPVYPIID" [];
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "GunnisonAboveCrystal:InterveningAboveCrystal.Local Inflow" [index] := $ "CrystalInflow.Unregulated" [index] - $ "MorrowPointInflow.Unregulated" [index];
+
+      ENDFOREACH;
 
     END;
 
-  END;
-
-  POLICY_GROUP   "Reset SNWP Forecast Use";
-  DESCRIPTION    "";
-  ACTIVE         TRUE;
-  BEGIN
-
-    RULE                 "Reset Annual SNWP Forecast Use - Force to NV Apportionment";
+    RULE                 "ComputeGainsInterveningAboveMP";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [];
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "GunnisonAboveMorrowPoint:InterveningAboveMorrowPoint.Local Inflow" [index] := $ "MorrowPointInflow.Unregulated" [index] - $ "BlueMesaInflow.Unregulated" [index];
+
+      ENDFOREACH;
 
     END;
 
-    RULE                 "Reset Annual SNWP Forecast Use - Allow Overrun";
-    DESCRIPTION          "";
-    ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - "Min"( $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [], 0.00000000 "acre-ft" );
-
-    END;
-
-    RULE                 "Reset Annual SNWP Forecast Use - Allow Underrun";
-    DESCRIPTION          "";
-    ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.SNWPResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.SNWPResetAnnualFC" [] := $ "Nevada_CU_Forecast1.SNWP" [] - "Max"( $ "Nevada_CU_Overrun.Nevada_Overrun_State_Ap" [], 0.00000000 "acre-ft" );
-
-    END;
-
-  END;
-
-  POLICY_GROUP   "Reset CAP Forecast Use";
-  DESCRIPTION    "";
-  ACTIVE         TRUE;
-  BEGIN
-
-    RULE                 "Reset Annual CAP Forecast Use - Pump to Forecast";
-    DESCRIPTION          "";
-    ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.CAPResetAnnualFC" [] := $ "AnnualWaterUse.Arizona_Apportionment" [] - $ "AnnualWaterUse.AzNoCAPTotalAnnual" [] + $ "AZ_Diversion_Overrun.AZ_CU_Annual_Overrun" [];
-
-    END;
-
-    RULE                 "Reset Annual CAP Forecast Use - Keep Hardcode Value";
-    DESCRIPTION          "";
-    ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.CAPResetAnnualFC" [] := "AnnualVolumeSlot"( $ "Arizona_CU_Schedules.CAP" );
-
-    END;
-
-    RULE                 "Reset Annual CAP Forecast Use - Force to AZ Apportionment";
+    RULE                 "ComputeGainsInterveningAboveBM";
     DESCRIPTION          "";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.CAPResetAnnualFC" [];
+    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep";
     BEGIN
 
-      $ "ForecastUse.CAPResetAnnualFC" [] := $ "Arizona_CU_Forecast1.CAP" [] - $ "Arizona_CU_Overrun.Arizona_Overrun_State_Ap" [];
+      FOREACH (DATETIME index IN @"Start Timestep" TO @"Finish Timestep") DO
+            $ "GunnisonAboveBlueMesa:InterveningAboveBlueMesa.Local Inflow" [index] := $ "BlueMesaInflow.Unregulated" [index] - $ "TaylorPark.Inflow" [index];
+
+      ENDFOREACH;
 
     END;
 
-  END;
-
-  POLICY_GROUP   "Reset MWD Forecast Use";
-  DESCRIPTION    "";
-  ACTIVE         TRUE;
-  BEGIN
-
-    RULE                 "Reset MWD Annual Forecast Use - 1st Year Only";
-    DESCRIPTION          "";
-    ACTIVE               FALSE;
-    RULE_EXEC_CONSTRAINT @"t" == @"Start Timestep" AND IsNaN $ "ForecastUse.MWDResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.MWDResetAnnualFC" [] := $ "California_CU_Forecast1.MWD" [] - $ "AnnualWaterUse.P123bOverrun" [] - "Min"( 0.00000000 "acre-ft", $ "AnnualWaterUse.CaOverrun noPVYPIID" [] ) - "Min"( 0.00000000 "acre-ft", $ "California_CU_Overrun.IID" [] );
-
-    END;
-
-    RULE                 "Reset MWD Annual Forecast Use - Force to CA Apportionment";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "ForecastUse.MWDResetAnnualFC" [];
-    BEGIN
-
-      $ "ForecastUse.MWDResetAnnualFC" [] := $ "California_CU_Forecast1.MWD" [] - $ "California_CU_Overrun.California_Overrun_State_Ap" [];
-
-    END;
-
-  END;
-
-  POLICY_GROUP   "24 Month";
-  DESCRIPTION    "";
-  ACTIVE         TRUE;
-  BEGIN
-
-    RULE                 "Set Below Imp Outflow";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "FloodControlOutput.Flood Control Flag" [];
-    BEGIN
-
-      $ "BelowImperialDam.Outflow" [] := 0.00000000 "acre-ft/month";
-
-    END;
-
-    RULE                 "Set Havasu Outflow Exp";
-    DESCRIPTION          "This rule sets Havasu's outflow to the the scheduled release from the <br>data object, HavasuOutflow.Outflow we only do this if the outflow is currently not set.  this allows<br>for setting Hoover's outflow manually";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "Havasu.Outflow" [] AND @"t" <= @"Start Timestep + 1";
-    BEGIN
-
-      $ "Havasu.Outflow" [] := $ "HavasuOutflow.BHOPSParkerOutflow" [];
-
-    END;
-
-    RULE                 "Set Parker Final Requirement";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "HavasuOutflow.ParkerRequirement" [];
-    BEGIN
-
-      $ "HavasuOutflow.ParkerRequirement" [] := "SumAllDiversionsBelowVolume"( % "Havasu", @"t", @"t" ) - "SumAllGainsBelowVolume"( % "Havasu", @"t", @"t" );
-
-    END;
-
-    RULE                 "Set DownStream Requirement exp";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.DownstreamReq" [];
-    BEGIN
-
-      $ "Lower Basin Output.DownstreamReq" [] := $ "HavasuOutflow.ParkerRequirement" [] + "SumAllDiversionsBelowVolume"( % "Mead", @"t", @"t" ) - "SumGainsBelowVolume"( % "Mead", @"t", @"t" ) + "ComputeDeltaTargetStorage"( % "Mohave" ) + "ComputeDeltaTargetStorage"( % "Havasu" ) + $ "Mohave.Evaporation" [] + $ "Havasu.Evaporation" [];
-
-    END;
-
-    RULE                 "Set Mexico Excess";
-    DESCRIPTION          " this rule determines the excess flow to Mexico which is just the<br> actual Mead release minus the release determined to meet downstream requirements <br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.MexicoExcessFlow" [];
-    BEGIN
-
-      $ "Lower Basin Output.MexicoExcessFlow" [] := $ "Mead.Outflow" [] - "VolumeToFlow"( $ "Lower Basin Output.DownstreamReq" [], @"t" );
-
-    END;
-
-    RULE                 "Set Flow To Mexico (flow at NIB) exp";
-    DESCRIPTION          "This rule just computes the flow to Mexico and stores it on the<br>MexicoExcess data object in the slot NIBFlow for subsequent write to hdb<br>";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT IsNaN $ "Lower Basin Output.NIBFlow" [];
-    BEGIN
-
-      $ "Lower Basin Output.NIBFlow" [] := $ "Lower Basin Output.MexicoExcessFlow" [] + $ "MexicanTreatyDelivery:MexicoSched.Diversion Requested" [];
-
-    END;
-
-    RULE                 "Compute Hoover Capacity";
+    RULE                 "Compute Lower Basin Energy";
     DESCRIPTION          "";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT TRUE;
     BEGIN
 
-      $ "Mead.Power" [] := $ "EnergyInfo.EffectiveHooverCapacity" [] * $ "Mead.Power Plant Cap Fraction" [];
+      $ "Lower Basin Energy.Computed Davis Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] ) * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" );
 
-    END;
+      $ "Lower Basin Energy.Computed Davis Head using Turbine Release" [] := "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] );
 
-  END;
+      $ "Lower Basin Energy.Davis KWH per AF" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * "Compute Head as a Function of Turbine Release"( $ "Mohave.Turbine Release" [] ) * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) / "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * 1.00000000 "ft" * 1.00000000 "ft";
 
-  POLICY_GROUP   "Calculate Final State Use and Overruns";
-  DESCRIPTION    "";
-  ACTIVE         TRUE;
-  BEGIN
+      $ "Lower Basin Energy.Computed Parker Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Parker Efficiency" [] * "FlowToVolume"( $ "Havasu.Turbine Release" [], @"t" ) * $ "Havasu.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" );
 
-    RULE                 "Final NV Overrun - Div Req";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
+      $ "Lower Basin Energy.Computed PD Project Energy Using Peak Base Power Calc" [] := $ "Mohave.Energy" [] + $ "Havasu.Energy" [] / 2.00000000;
 
-      $ "AnnualWaterUse.NVOverrun" [] := $ "AnnualWaterUse.NvTotalAnnual" [] - $ "AnnualWaterUse.Nevada_Apportionment" [];
-
-    END;
-
-    RULE                 "Final AZ Annual Use - Div Req";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "AnnualWaterUse.AzTotalAnnual" [] := $ "ForecastUse.CAPAnnualFC" [] + $ "AnnualWaterUse.AzNoCAPTotalAnnual" [];
-
-    END;
-
-    RULE                 "Final AZ Overrun - Div Req";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "AnnualWaterUse.AzOverrun" [] := $ "AnnualWaterUse.AzTotalAnnual" [] - $ "AnnualWaterUse.Arizona_Apportionment" [];
-
-    END;
-
-    RULE                 "Final CA Annual Use - Div Req";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "AnnualWaterUse.CaTotalAnnual" [] := $ "California_CU_Forecast1.IID" [] + $ "AnnualWaterUse.P123bTotalAnnual" [] + $ "AnnualWaterUse.CaNoPVYPIIDTotalAnnual" [];
-
-    END;
-
-    RULE                 "Final CA Overrun - Div Req";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "AnnualWaterUse.CaOverrun" [] := $ "AnnualWaterUse.CaTotalAnnual" [] - $ "AnnualWaterUse.California_Apportionment" [];
-
-    END;
-
-    RULE                 "Final MWD Diversion";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "ForecastUse.MWDDiversionAnnualFC" [] := "Annual Volume"( $ "MWDDiversion:MWD.Diversion Requested" );
-
-      $ "ForecastUse.MWDAnnualFC" [] := IF ( "GetYear"( @"t" ) == "GetYear"( @"Start Timestep" ) AND "GetMonth"( @"Start Timestep" ) > 1.00000000 )
-   THEN
-      "SumSlot"( $ "California_CU_Actual.MWD", @"24:00:00 January Max DayOfMonth, Current Year", @"Start Timestep - 1" ) + ( "SumFlowsToVolume"( $ "MWDDiversion:MWD.Diversion Requested", @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) - "SumSlot"( $ "California_CU_Schedules.MWDReturns", @"Start Timestep", @"24:00:00 December Max DayOfMonth, Current Year" ) )
-   ELSE
-      "Annual Volume"( $ "MWDDiversion:MWD.Diversion Requested" ) - "AnnualVolumeSlot"( $ "California_CU_Schedules.MWDReturns" )
-   ENDIF;
-
-    END;
-
-    RULE                 "Final CAP Diversion";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "ForecastUse.CAPAnnualFC" [] := "Annual Volume"( $ "CAPDiversion.Total Diversion Requested" );
-
-    END;
-
-    RULE                 "Final SNWP Diversion";
-    DESCRIPTION          "";
-    ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT TRUE;
-    BEGIN
-
-      $ "ForecastUse.SNWPAnnualFC" [] := "Annual Volume"( $ "PumpingFromLakeMead:SNWP.Diversion Requested" );
+      $ "Lower Basin Energy.Computed PD Project Energy Using Input Eff" [] := $ "Lower Basin Energy.Input Davis Efficiency" [] * "FlowToVolume"( $ "Mohave.Turbine Release" [], @"t" ) * $ "Mohave.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) + $ "Lower Basin Energy.Input Parker Efficiency" [] * "FlowToVolume"( $ "Havasu.Turbine Release" [], @"t" ) * $ "Havasu.Operating Head" [] * 9789.00000000 "newton" / ( ( 1.00000000 "m" * 1.00000000 "m" ) * 1.00000000 "m" ) / 2.00000000;
 
     END;
 

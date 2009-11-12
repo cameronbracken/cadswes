@@ -1,0 +1,22 @@
+# Load the model
+OpenWorkspace pmm.mdl
+
+#Diagnostics
+SetDiagFile pmm.log
+
+SetTrace 1
+
+#Load Ruleset
+LoadRules pmm.rls
+
+# run the simulation:
+StartController
+
+#save the model (in your home directory):
+SaveWorkspace pmm.mdl.bak
+
+#Output Data - Output devices are predifined in the model
+Output FontenelleData
+
+# Close the opened model and exit RiverWare:
+CloseWorkspace
