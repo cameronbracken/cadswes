@@ -1,0 +1,22 @@
+# Load the model
+OpenWorkspace pmm-uc-testing.mdl
+
+#Diagnostics
+SetDiagFile pmm-uc-testing.log
+
+SetTrace 1
+
+#Load Ruleset
+LoadRules pmm-uc-testing.rls
+
+# run the simulation:
+StartController
+
+#save the model (in your home directory):
+SaveWorkspace pmm-uc-testing.mdl.bak
+
+#Output Data - Output devices are predifined in the model
+Output FontenelleData
+
+# Close the opened model and exit RiverWare:
+CloseWorkspace
