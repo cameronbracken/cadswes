@@ -1,7 +1,7 @@
 x <- read.table('font-daily-data.txt',header=T)
 
 	#spit out monthly release
-out <- "Release"
+out <- "Elevation"
 sm <- x$Month[1]
 sy <- x$Year[1]
 ey <- x$Year[length(x$Year)]
