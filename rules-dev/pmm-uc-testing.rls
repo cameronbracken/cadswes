@@ -1,5 +1,5 @@
 # RiverWare_Ruleset 5.1.3 Patch
-# Created 20:29 November 17, 2009
+# Created 12:59 December 15, 2009
 # 
 RULESET
 AGENDA_ORDER ASCENDING;
@@ -13,9 +13,9 @@ BEGIN
   BEGIN
 
     RULE                 "MinFlow";
-    DESCRIPTION          "";
+    DESCRIPTION          "This rule ensurs that the minimum instream flow requirements are met. If a lower priority rule sets the flow lower than the min flow then this rule resets the flow. ";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT "HasAnyRuleFired"( { "Safe Channel Capacity" , "Set September-November Baseflow" , "Set December-March Baseflow" , "Set April or August Outflow" , "Set Baseflow in off month" , "Set June Outflow" , "Set July Outflow" } );
+    RULE_EXEC_CONSTRAINT "HasAnyRuleFired"( { "Safe Channel Capacity" , "Set September-November Baseflow" , "Set December-March Baseflow" , "Set April or August Outflow" , "Set Baseflow in off month" , "Set June Outflow" , "Set July Outflow" } ) COMMENTED_BY "This is necessary for 1,2,3 rule order to prevent trumping of lower priority rules. <br>Not necessary in 3,2,1 order but does not hurt anything. ";
     BEGIN
 
       IF_STATEMENT ($ "Fontenelle.Outflow" [] < $ "FontenelleData.MinFlow" []) THEN
@@ -26,9 +26,9 @@ BEGIN
     END;
 
     RULE                 "Max Elevation";
-    DESCRIPTION          "";
+    DESCRIPTION          "This rule prevents overtopping. If a previous rule sets the outflow such that the elevation would overtop the dam, this rule will set the outflow to prevent this. The ";
     ACTIVE               TRUE;
-    RULE_EXEC_CONSTRAINT "HasAnyRuleFired"( { "Safe Channel Capacity" , "Set September-November Baseflow" , "Set December-March Baseflow" , "Set April or August Outflow" , "Set Baseflow in off month" , "Set June Outflow" , "Set July Outflow" } );
+    RULE_EXEC_CONSTRAINT "HasAnyRuleFired"( { "Safe Channel Capacity" , "Set September-November Baseflow" , "Set December-March Baseflow" , "Set April or August Outflow" , "Set Baseflow in off month" , "Set June Outflow" , "Set July Outflow" } ) COMMENTED_BY "This is necessary for 1,2,3 rule order to prevent trumping of lower priority rules. <br>Not necessary in 3,2,1 order but does not hurt anything. ";
     BEGIN
 
       IF_STATEMENT ($ "Fontenelle.Pool Elevation" [] > $ "FontenelleData.MaxElevation" []) THEN
@@ -53,7 +53,7 @@ BEGIN
     END;
 
     RULE                 "Set September-November Baseflow";
-    DESCRIPTION          "";
+    DESCRIPTION          "Compute the steady flow over September to March necsessary to meet Apr 1 target. <br>Change in storage plus forecasted volume divided by 3 months.  The next two months <br>will look back at this value.";
     ACTIVE               TRUE;
     RULE_EXEC_CONSTRAINT "GetMonthAsString"( @"t" ) IN { "September" };
     BEGIN
@@ -146,7 +146,12 @@ BEGIN
     BEGIN
 
       FOR ( STRING rule IN rules ) WITH BOOLEAN fired = FALSE DO
-      "HasRuleFiredSuccessfully"( rule )
+      IF ( "HasRuleFiredSuccessfully"( rule ) AND NOT fired )
+      THEN
+         TRUE
+      ELSE
+         fired
+      ENDIF
    ENDFOR;
 
     END;

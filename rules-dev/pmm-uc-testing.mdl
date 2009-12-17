@@ -1,9 +1,9 @@
 # RiverWare_Model 5.1.3 Patch
-# Created 20:29 November 17, 2009
+# Created 11:05 December 15, 2009
 # CADSWES, University of Colorado at Boulder, http://cadswes.colorado.edu/
 # 
 DST 0
-$ws.Model.FileInfo saveInfo 1 {bracken} {11-17-2009 20:29:34} {RiverWare 5.1.3} 
+$ws.Model.FileInfo saveInfo 1 {bracken} {12-15-2009 11:05:18} {RiverWare 5.1.3} 
 $ws.Model.FileInfo comment {}
 SaveOutputs 1
 SaveExtPrecision 0
@@ -19,7 +19,7 @@ CurrCanvasType SIMULATION
 $ws.runInfo setDescription {Model Run}
 $ws.runInfo runParam {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH 
 $ws.runInfo setType 2
-$ws.runInfo setResumedRun 0 {11-01-2009 00:00:00}
+$ws.runInfo setResumedRun 0 {10-01-2009 00:00:00}
 $ws.runInfo setWQConst {None}
 $ws.runInfo setSolnApproach {None}
 $ws.runInfo setActiveCategories 1 0
@@ -2817,11 +2817,6 @@ $cfg init
 $cfg postSim 
 $cfg end
 # Section: Subbasin
-$ws.SubBasin {UBFloodControlReservoirs} Type USER_DEF 
-$ws.SubBasin {BelowMead} Type USER_DEF 
-$ws.SubBasin {BelowPowell} Type USER_DEF 
-$ws.SubBasin {BelowHavasu} Type USER_DEF 
-$ws.SubBasin {California nonMWD WaterUsers} Type USER_DEF 
 # Section: Sim Analysis Info
 $ws.DispatchInfo displayedObjects {Fontenelle} 
 $ws.DispatchInfo hiddenObjects 
