@@ -3,6 +3,7 @@
 - Change order of all utility groups 
 
 __FROM__:
+
 - _Data Setup_
 - __Shortage__
 - __LC WaterUse Data Setup__
@@ -15,6 +16,7 @@ __FROM__:
 - __Calculate Final State Use and Overruns__
 
 __TO:__
+
 - __Calculate Final State Use and Overruns__
 - __FloodControl__
 - __Set Future Uses - SNWP, CAP, MWD__
@@ -25,6 +27,8 @@ __TO:__
 - __LC WaterUse Data Setup__
 - __Shortage__
 - __Data Setup__
+
+__Steps to Reproduce__
 
 - Reverse rules in __LC WaterUse Data Setup__
 - Reverse rules in __Calculate Final State Use and Overruns__

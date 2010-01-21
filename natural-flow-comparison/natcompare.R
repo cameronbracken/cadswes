@@ -48,6 +48,15 @@ data.usbr[data.usbr < 0] = NA
 
 site <- c(site,names = list(attributes(data.usbr)$dimnames[[2]]))
 
+##############################
+# Get the usbr unregulated data
+##############################
+data.usbr.unreg <- ts(read.csv("data/USBRHistUnreg-acft.csv",comment.char="#"),
+		start=c(1971,1),frequency=12)
+	# enforce time window and convert to thousand acre-ft/mon
+data.usbr.unreg <- window(data.usbr.unreg, c(sComp,1), c(eComp,12))/1e3 #* 59.50413
+data.usbr.unreg[data.usbr.unreg < 0] = NA
+
 ###################################
 # Plot the comparisons at each site
 ###################################
@@ -74,6 +83,32 @@ for( i in 1:length(site$names) ){
 }
 dev.off()
 
+###################################
+# Plot the usbr unregulated data 
+# comparisons at each site
+###################################
+pdf(file.path(figPrefix,'data-usbr-unreg.pdf'),width=6.5,height=8.5)
+layout(matrix(1:length(site$names),ncol=1))
+
+for( i in 1:length(site$names) ){
+	# plot a thousand acre-ft/month
+	# CBRFC 
+	par(mar=c(2,4,1.5,1))
+	plot(data.cbrfc[,i], col='black', 
+		xlab='', ylab='Flow (KAF/mon)', 
+		main = paste(site$names[i],'vs.',site$codes[i]) )
+		
+	# USBR
+	lines(data.usbr.unreg[,i], col='gray', lty = 'solid')
+	
+	# Difference
+	# lines(data.usbr[,i]-data.cbrfc[,i], col='green')
+	#legend("topright", c("CBRFC","USBR", "Difference"), 
+	#	col=c(1,'steelblue','green'), lty=c('solid'))	
+	legend("topright", c("CBRFC","USBR Unregulated"), 
+		col=c(1,'gray'), lty=c('solid'))	
+}
+dev.off()
 
 ###################################
 # Plot the cumulative difference
@@ -218,7 +253,7 @@ myboxplot(as.data.frame(boxdata),add=T)
 lines(s, col = col[n])
 #for spaghetti plot
 #for(i in 1:nrow(boxdata))
-#	lines(boxdata[i,])
+#	lines(boxdata[i,],col=col[i%%length(col)])
 par(xaxt="s")
 axis(1,seq(1:12),labels=mon)
 legend('topleft','LeesFerry',col=col[n],lty='solid')
@@ -242,4 +277,22 @@ for(i in 1:length(site$names)){
 		ylim = c(0,120),xlim=c(time(p)[i],eComp))
 	legend('topleft',site$names[i],col=col[i],lty='solid')
 }
+dev.off()
+
+
+###################################
+# Plot the percent difference and 
+# flows in a year with large percent diff
+###################################
+pdf(file.path(figPrefix,'percent-diff-flow-1994.pdf'))
+
+a <- ts(window(data.usbr[,'LeesFerry'],1994,c(1994,12)),start=1994,frequency=12)
+b <- ts(window(data.cbrfc[,'GLDA3'],1994,c(1994,12)),start=1994,frequency=12)
+d <- ts(window(p[,6],1994,c(1994,12)),start=1994,frequency=12)
+
+layout(cbind(c(1,2)))
+plot(a,ylim=range(c(a,b)),col='steelblue',ylab='Flow')
+lines(b)
+
+plot(d,ylab='% Difference')
 dev.off()

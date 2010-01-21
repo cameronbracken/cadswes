@@ -7,7 +7,8 @@ getCbrfcUnregulatedDataUrl <- function(site.names, start = "1900-01-01", end = a
 {
 		
 	url <- paste("http://www.nwrfc.noaa.gov/westernwater/inc/getcsv.php?id=", site.names,
-		"&tablelist=obs&dataobs=", start, "&dataobsend=", end, "&datacharcs=&datacharcsend=&datafcst=&datafcstend=&dataens_memb=&dataens_membend=&dataobs_mean=&dataobs_meanend=&datacli_index=&datacli_indexend=&dataobsind=&ver=table&page=data", 
+		"&tablelist=obs&dataobs=", start, "&dataobsend=", end, 
+		"&datacharcs=&datacharcsend=&datafcst=&datafcstend=&dataens_memb=&dataens_membend=&dataobs_mean=&dataobs_meanend=&datacli_index=&datacli_indexend=&dataobsind=&ver=table&page=data", 
 		sep='')
 	return(url)
 		
@@ -320,6 +321,36 @@ TRUE)
     stats[3] + c(-1.58, 1.58) * diff(stats[c(2, 4)])/sqrt(n)
   list(stats = stats, n = n, conf = conf, out = x[out & nna])
 }
+
+cfs2acft <- function(x){
+	
+	sts <- start(x)[1]
+	sper <- start(x)[1]
+	ets <- end(x)[1]
+	eper <- end(x)[1]
+	
+	b <- 0 
+	for(i in start(x)[1]:end(x)[1]){
+		
+		b <- b + 1
+		r <- if(b == 1){
+			sper:frequency(x)
+		}else if(b == ets){
+			 1:eper 
+		}else{
+			1:frequency(x)
+		}
+		
+		for(j in r){
+			
+			
+			
+		}
+			
+	}
+	
+}
+
 
 ##########################
 #
