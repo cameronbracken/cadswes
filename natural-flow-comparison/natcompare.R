@@ -14,7 +14,7 @@ sComp <- 1971
 eComp <- 2000
 
 site <- list(
-	# Paired lists of ubrfc and usbr names
+	# lists of cbrfc names to download
 	codes = c(
 		#NA,      #Taylor Park (not online)
 		"BMDC2", #Blue Mesa
@@ -30,32 +30,52 @@ site <- list(
 ##############################
 # Get the cbrfc data
 ##############################
-data.cbrfc <- downloadAndReadCbrfcUnregulatedData( site$codes )
+cbrfc.web <- downloadAndReadCbrfcWebData( site$codes )
 # enforce the time limits
-data.cbrfc <- window(data.cbrfc, c(sComp,1), c(eComp,12))
+cbrfc.web <- window(cbrfc.web, c(sComp,1), c(eComp,12))
 #remove negatives
-data.cbrfc[ data.cbrfc < 0 ] = 0
+cbrfc.web[ cbrfc.web < 0 ] = 0
 
 ##############################
-# Get the usbr data
+# Get the usbr natural flow data
 ##############################
 #read and transform the usbr data to a timeseries starting at 1971, ending at 2000
-data.usbr <- ts(read.table("data/USBR-monthly.tab",sep='\t',header=TRUE),
+usbr.nat <- ts(read.table("data/USBRNatural-monthly.tab",sep='\t',header=TRUE),
 		start=c(1905,10),frequency=12)
 # enforce time window and convert to thousand acre-ft/mon
-data.usbr <- window(data.usbr, c(sComp,1), c(eComp,12))/1e3
-data.usbr[data.usbr < 0] = NA
+usbr.nat <- window(usbr.nat, c(sComp,1), c(eComp,12))/1e3
+usbr.nat[usbr.nat < 0] = NA
 
-site <- c(site,names = list(attributes(data.usbr)$dimnames[[2]]))
+site <- c(site,names = list(attributes(usbr.nat)$dimnames[[2]]))
 
 ##############################
 # Get the usbr unregulated data
 ##############################
-data.usbr.unreg <- ts(read.csv("data/USBRHistUnreg-acft.csv",comment.char="#"),
+usbr.unreg <- ts(read.csv("data/USBRHistUnreg-acft.csv",comment.char="#"),
 		start=c(1971,1),frequency=12)
 	# enforce time window and convert to thousand acre-ft/mon
-data.usbr.unreg <- window(data.usbr.unreg, c(sComp,1), c(eComp,12))/1e3 #* 59.50413
-data.usbr.unreg[data.usbr.unreg < 0] = NA
+usbr.unreg <- window(usbr.unreg, c(sComp,1), c(eComp,12))/1e3
+usbr.unreg[usbr.unreg < 0] = NA
+
+##############################
+# Get the usbr unregulated from cbrfc
+##############################
+cbrfc.usbr.unreg <- ts(scan('data/CBRFC-PB.csv',comment.char='#'),start=c(1964,10),frequency=12)
+cbrfc.usbr.unreg <- window(cbrfc.usbr.unreg, c(sComp,1), c(eComp,12))
+
+##############################
+# Get the cbrfc natural data
+##############################
+cbrfc.nat <- ts(scan('data/CBRFC-PA.csv',comment.char='#'),start=c(1964,10),frequency=12)
+cbrfc.nat <- window(cbrfc.nat, c(sComp,1), c(eComp,12))
+
+##############################
+# Add in an extra plot for PA vs. Lees
+##############################
+site$names <- c(site$names,'LeesFerry')
+site$codes <- c(site$codes,'PA')
+usbr.nat <- cbind(usbr.nat,usbr.nat[,'LeesFerry'])
+
 
 ###################################
 # Plot the comparisons at each site
@@ -67,15 +87,15 @@ for( i in 1:length(site$names) ){
 	# plot a thousand acre-ft/month
 	# CBRFC 
 	par(mar=c(2,4,1.5,1))
-	plot(data.cbrfc[,i], col='black', 
+	plot(cbrfc.web[,i], col='black', 
 		xlab='', ylab='Flow (KAF/mon)', 
 		main = paste(site$names[i],'vs.',site$codes[i]) )
 		
 	# USBR
-	lines(data.usbr[,i], col='steelblue', lty = 'solid')
+	lines(usbr.nat[,i], col='steelblue', lty = 'solid')
 	
 	# Difference
-	# lines(data.usbr[,i]-data.cbrfc[,i], col='green')
+	# lines(usbr.nat[,i]-cbrfc.web[,i], col='green')
 	#legend("topright", c("CBRFC","USBR", "Difference"), 
 	#	col=c(1,'steelblue','green'), lty=c('solid'))	
 	legend("topright", c("CBRFC","USBR"), 
@@ -87,28 +107,113 @@ dev.off()
 # Plot the usbr unregulated data 
 # comparisons at each site
 ###################################
-pdf(file.path(figPrefix,'data-usbr-unreg.pdf'),width=6.5,height=8.5)
-layout(matrix(1:length(site$names),ncol=1))
+pdf(file.path(figPrefix,'data-usbr-unreg.pdf'),width=6.5,height=7)
+layout(matrix(1:length(site$names)-1,ncol=1))
 
 for( i in 1:length(site$names) ){
-	# plot a thousand acre-ft/month
-	# CBRFC 
-	par(mar=c(2,4,1.5,1))
-	plot(data.cbrfc[,i], col='black', 
-		xlab='', ylab='Flow (KAF/mon)', 
-		main = paste(site$names[i],'vs.',site$codes[i]) )
-		
-	# USBR
-	lines(data.usbr.unreg[,i], col='gray', lty = 'solid')
 	
-	# Difference
-	# lines(data.usbr[,i]-data.cbrfc[,i], col='green')
-	#legend("topright", c("CBRFC","USBR", "Difference"), 
-	#	col=c(1,'steelblue','green'), lty=c('solid'))	
-	legend("topright", c("CBRFC","USBR Unregulated"), 
-		col=c(1,'gray'), lty=c('solid'))	
+	if(site$names[i] == 'LeesFerry'){
+		
+		# Do nothing
+		
+	}else{
+		
+		# plot a thousand acre-ft/month
+		# CBRFC 
+		par(mar=c(2,4,1.5,1))
+		plot(cbrfc.web[,i], col='black', 
+			xlab='', ylab='Flow (KAF/mon)', 
+			main = paste(site$names[i],'vs.',site$codes[i]) )
+
+		# USBR
+		lines(usbr.unreg[,i], col='gray', lty = 'solid')
+		
+		legend("topright", c("CBRFC","USBR Unregulated"), 
+			col=c(1,'gray'), lty=c('solid'),bg='#FFFFFFAA')
+		
+	}
 }
 dev.off()
+
+###################################
+# Plot the usbr unregulated data 
+# comparisons Lees Ferry
+###################################
+pdf(file.path(figPrefix,'data-lf-views.pdf'),width=7.5,height=2.5)
+
+# plot a thousand acre-ft/month
+# CBRFC 
+par(mar=c(2,4,1.5,1))
+
+plot(cbrfc.web[,'GLDA3'],col=2,lwd=2)
+lines(usbr.unreg[,'LeesFerry'],col=4)
+lines(cbrfc.usbr.unreg,col=5)	
+lines(usbr.nat[,'LeesFerry'],col=6)	
+lines(cbrfc.nat,col=3)
+
+legend("topright", c("CBRFC Web", "USBR Unreg HDB", "CBRFC - PB","CBRFC Natural", "USBR Natural"), 
+	col=2:6, lty=c('solid'),bg='#FFFFFFAA')
+
+dev.off()
+
+###################################
+# Plot the usbr unregulated data 
+# comparisons Lees Ferry
+###################################
+pdf(file.path(figPrefix,'data-lf-views.pdf'),width=7.5,height=2.5)
+
+# plot a thousand acre-ft/month
+# CBRFC 
+par(mar=c(2,4,1.5,1))
+
+plot(cbrfc.web[,'GLDA3'],col=2)
+lines(usbr.unreg[,'LeesFerry'],col=3)
+lines(cbrfc.usbr.unreg,col=4)	
+lines(usbr.nat[,'LeesFerry'],col=5)	
+lines(cbrfc.nat,col=6)
+
+legend("topright", c("CBRFC Web", "USBR Unreg HDB", "CBRFC PB","CBRFC Natural", "USBR Natural"), 
+	col=2:6, lty=c('solid'),bg='#FFFFFFAA')
+
+dev.off()
+
+###################################
+# Plot the usbr unregulated data 
+# comparisons Lees Ferry
+###################################
+pdf(file.path(figPrefix,'data-lf-views-natural.pdf'),width=7.5,height=2.5)
+
+# plot a thousand acre-ft/month
+# CBRFC 
+par(mar=c(2,4,1.5,1))
+
+plot(cbrfc.web[,'GLDA3'],col=2)
+lines(usbr.unreg[,'LeesFerry'],col=3,lty=2)
+lines(cbrfc.usbr.unreg,col=4)	
+
+legend("topright", c("CBRFC Web", "USBR Unreg HDB", "CBRFC PB"), 
+	col=2:4, lty=c(1,2,1),bg='#FFFFFFAA')
+
+dev.off()
+
+###################################
+# Plot the usbr unregulated data 
+# comparisons Lees Ferry - unregulated
+###################################
+pdf(file.path(figPrefix,'data-lf-views-unreg.pdf'),width=7.5,height=2.5)
+
+# plot a thousand acre-ft/month
+# CBRFC 
+par(mar=c(2,4,1.5,1))
+
+plot(usbr.nat[,'LeesFerry'],col=5)	
+lines(cbrfc.nat,col=6)
+
+legend("topright", c("CBRFC Natural", "USBR Natural"), 
+	col=5:6, lty=c('solid'),bg='#FFFFFFAA')
+
+dev.off()
+
 
 ###################################
 # Plot the cumulative difference
@@ -123,9 +228,9 @@ ag <- ts(read.table("data/USBR-ag-loss-ac-ft.tab",sep='\t', header=TRUE), start=
 col <- rainbow(length(site$names))
 
 	# compute difference in MAF from thousand ac-ft
-diff <- (data.usbr - data.cbrfc)/1e3
+diff <- (usbr.nat - cbrfc.web)/1e3
 	#dimnames get changed when ts's are subtracted
-attr(diff,"dimnames") <- attributes(data.usbr)$dimnames
+attr(diff,"dimnames") <- attributes(usbr.nat)$dimnames
 diff <- cumsum.ts(diff)
 		
 	#add intervening uses
@@ -173,7 +278,7 @@ dev.off()
 	
 	#get the mean difference for each season
 	#s is a data.frame
-diff <- as.matrix((data.usbr - data.cbrfc)/1e3)
+diff <- as.matrix((usbr.nat - cbrfc.web)/1e3)
 	
 f <- function(x) quantile(x,0.5,na.rm=T)
 s <- as.matrix(seasonal.stat(diff, f))
@@ -268,7 +373,7 @@ pdf(file.path(figPrefix,'percent-diff.pdf'),
 	width=6.5,height=8.5)
 	
 col <- rainbow(length(site$names), alpha=.8)
-p <- diff.ts( data.usbr, data.cbrfc, percent = TRUE )
+p <- diff.ts( usbr.nat, cbrfc.web, percent = TRUE )
 
 layout(matrix(1:length(site$names),ncol=1))
 for(i in 1:length(site$names)){
@@ -286,8 +391,8 @@ dev.off()
 ###################################
 pdf(file.path(figPrefix,'percent-diff-flow-1994.pdf'))
 
-a <- ts(window(data.usbr[,'LeesFerry'],1994,c(1994,12)),start=1994,frequency=12)
-b <- ts(window(data.cbrfc[,'GLDA3'],1994,c(1994,12)),start=1994,frequency=12)
+a <- ts(window(usbr.nat[,'LeesFerry'],1994,c(1994,12)),start=1994,frequency=12)
+b <- ts(window(cbrfc.web[,'GLDA3'],1994,c(1994,12)),start=1994,frequency=12)
 d <- ts(window(p[,6],1994,c(1994,12)),start=1994,frequency=12)
 
 layout(cbind(c(1,2)))

@@ -3,7 +3,7 @@
 # Functions (put these in a package)
 #
 ##########################
-getCbrfcUnregulatedDataUrl <- function(site.names, start = "1900-01-01", end = as.character(Sys.Date()))
+getCbrfcWebDataUrl <- function(site.names, start = "1900-01-01", end = as.character(Sys.Date()))
 {
 		
 	url <- paste("http://www.nwrfc.noaa.gov/westernwater/inc/getcsv.php?id=", site.names,
@@ -42,14 +42,14 @@ return(x)
 
 
 
-downloadAndReadCbrfcUnregulatedData <- function(site.names, 
+downloadAndReadCbrfcWebData <- function(site.names, 
 	download.dir = 'downloads', from.cache = TRUE, missing.val = -9999, ...)
 {
 	# This function takes a a character vector of river forcast center site 
 	# names,and downloads the unregulated flow data for that site from the 
 	# RFC. The data is read in and returned in a list
 	
-	urls <- getCbrfcUnregulatedDataUrl( site.names[!is.na(site.names)], ...)
+	urls <- getCbrfcWebDataUrl( site.names[!is.na(site.names)], ...)
 	
 	#Create dir of downloaded data
 	if(!file.exists(download.dir)) dir.create( download.dir )
