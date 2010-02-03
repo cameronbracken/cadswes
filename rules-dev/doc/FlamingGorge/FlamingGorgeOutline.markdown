@@ -1,13 +1,16 @@
 # Flaming Gorge Operational Rules Outline for Probabilistic Midterm Model
 
-_Last Edited: 27 January 2009 Cameron Bracken_
+___Revisions:___
+
+_27 January 2010:_ First Draft, Cameron Bracken
+
+_3 February 2010:_ Revised Draft, Cameron Bracken
 
 ## Data
 ### Data Object
 - 1963 - Present historic Data
 - Look up table for Hydrologic Classification Wet, Moderately Wet, Average, Moderately Dry, Dry
 - Look up table for Upper Limit Drawdown Elevation
-- Power Plant Capacity: 4300 cfs
 - Base flow limits for each classification
 
 ## DMI
@@ -15,10 +18,10 @@ _Last Edited: 27 January 2009 Cameron Bracken_
 
 ## Rules
 
-### Hydrologic Classification
-_Execution Constraint_: 
+### Spring Flow Hydrologic Classification
+_Execution Constraint_: Jan - July
 	
-_Description_: Use forecast to determine the hydrologic classification for Given Month
+_Description_: Use forecast of April-July Volume to determine the hydrologic classification for the given
 
 - In any particular month, classify based on following season forecasted April - July unregulated inflow. 
 
