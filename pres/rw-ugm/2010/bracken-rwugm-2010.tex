@@ -1,7 +1,7 @@
 \RequirePackage{atbegshi}
 \documentclass{beamer}
 
-\usepackage{graphicx,epstopdf,subfigure,booktabs,natbib}
+\usepackage{graphicx,epstopdf,subfigure,booktabs,natbib,fancyvrb}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,positioning,trees,mindmap,backgrounds}
 
@@ -78,8 +78,8 @@
 
 \title[\scshape Probabalistic Midterm Model]{Experiences with Policy Development and Forecasting for the Midterm Probabilistic Model}
 %\subtitle{Past, Present and Future Work}
-\author[\it Cameron Bracken]{Cameron Bracken\\M.S. Student\\CADSWES, CU Boulder}
-\date{Febrary 11th, 2010}
+\author[\it Cameron Bracken]{{\it Cameron Bracken}\small\\M.S. Student\\CADSWES, CU Boulder\\Febrary 11th, 2010}
+\date{{\it Project Collaborators}:\small\\Edie Zagona, CADSWES\\Balaji Rajagopalan, CU\\Carly Jerla, Reclamation\\Jim Prairie, Reclamation\\Katrina Grantz, Reclamation}
 
 \begin{document}
 
@@ -158,7 +158,58 @@
 \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example}
+\begin{frame}{Example}
+\framesubtitle{Operator Notes}
+\begin{itemize}
+\item Baseflows: steady release mid August to mid April (usually 1000-1200 cfs)
+	\begin{itemize}		\item Flows are steady to protect fish (spawning, etc.) and to prevent flooding due to ice jamming		\item Set flow to put reservoir at March/April 6468ft target
+	\end{itemize}
+\end{itemize}
+\end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example}
+\framesubtitle{Rule Outline}
+
+\textbf{Set December-March Baseflow}
+
+\textit{Execution Constraint}: Month is December
+
+\textit{Description}: Set December-March outflow to steady value that will meet ``April 1 Target Elevation''
+
+\begin{itemize}
+	\item Compute change in volume given ``April 1 Target Elevation'' and current elevation
+	\item Add volume gain from forecasts December-March (4 months)
+	\item Compute max steady flow over December-March (4 months)
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example}
+\framesubtitle{RPL Rule}
+
+\includegraphics[width=\textwidth]{rpl.pdf}
+
+%\begin{verbatim}
+%Fontenelle.Outflow[] = 
+%    ( ElevationToStorage( %"Fontenelle", Fontenelle.Pool Elevation[@"t"] ) - 
+%    ElevationToStorage(%"Fontenelle", FontenelleData.April1Target[] ) + 
+%    SumFlowsToVolume( Fontenelle.Inflow, @"t",@"t + 3" ) ) / 4.00000000 "month"
+%\end{verbatim}
+
+%Execution Constraint 
+
+%\begin{verbatim}
+%GetMonthAsString( @"t" ) IN { "December" }
+%\end{verbatim}
+ 
+ \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
