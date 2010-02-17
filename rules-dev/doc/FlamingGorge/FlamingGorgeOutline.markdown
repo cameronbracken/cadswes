@@ -2,8 +2,9 @@
 
 ####Revisions:
 
-- V1, _27 January 2010:_ Cameron Bracken
-- V2, _3 February 2010:_ Cameron Bracken
+- Rev. 1, _27 January 2010:_ Cameron Bracken
+- Rev. 2, _3 February 2010:_ Cameron Bracken
+- Rev. 3, _16 February 2010:_ Cameron Bracken
 
 ## Data
 
