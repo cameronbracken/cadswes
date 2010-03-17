@@ -3,7 +3,7 @@
 d.min <- 3
 d.max <- 5
 T.min <- 3
-T.max <- 15
+T.max <- 8
 nalpha <- 25
 
 	# other parameters
@@ -19,8 +19,9 @@ x <- scan('data/SAWP_decade.txt',quiet=T)
 x <- ts(x,start=ts.start,frequency=1)
 
 	#forecast from end of timeseries
-I <- length(x) + 1
-fitted.models <- paste('data/fitted-models-',I,'.Rdata')
+I <- 509#length(x) + 1
+fitted.models <- paste('data/fitted-models-',I,'.Rdata',sep='')
+plot.file <- paste('plots/blindfc-',I,'.pdf',sep='')
 
 	#fit all model combinations or load the results
 if(!file.exists(fitted.models)){
@@ -32,11 +33,13 @@ if(!file.exists(fitted.models)){
 
 	# do the blind forecast and calculate meian, 10 and 90 of ensembles
 fc <- blindFC(x,models,I,n.ahead=n.ahead)
-fc.med <- ts(apply(fc,1,median), start = end(x)[1]+1, frequency=1)
-fc.90 <- ts(apply(fc,1,quantile,.9), start = end(x)[1]+1, frequency=1)
-fc.10 <- ts(apply(fc,1,quantile,.1), start = end(x)[1]+1, frequency=1)
+fc.med <- ts(apply(fc,1,median), start = (time(x)[1]-1+I), frequency=1)
+fc.90 <- ts(apply(fc,1,quantile,.9), start = (time(x)[1]-1+I), frequency=1)
+fc.10 <- ts(apply(fc,1,quantile,.1), start = (time(x)[1]-1+I), frequency=1)
 
-plot(x,type='l',xlim=c(1900,n.ahead+end(x)[1]))
-lines(fc.med,col='red')
-lines(fc.90,col='blue',lty=2)
-lines(fc.10,col='blue',lty=2)
+pdf(plot.file)
+	plot(x,type='l',xlim=c(start(x)[1],n.ahead+end(x)[1]),ylab='SAWP')
+	lines(fc.med,col='red')
+	lines(fc.90,col='blue',lty=2)
+	lines(fc.10,col='blue',lty=2)
+dev.off()

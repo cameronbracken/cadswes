@@ -1,11 +1,11 @@
-searchCriteria <- function(x, lag.max.ami = 200, lag.max.acf = 400, d.max = 7){
+searchCriteria <- function(x, lag.max.ami = 200, lag.max.acf = 400, d.max = 7, show = T){
 	
 	require(tseriesChaos)
 
-	acf <- acf(x, lag.max = lag.max.acf)
+	acf <- acf(x, lag.max = lag.max.acf,plot=F)
 	acf <- acf$acf[,,1]
 
-	ami <- mutual(x, lag.max = lag.max.ami)
+	ami <- mutual(x, lag.max = lag.max.ami, plot=F)
 
 	T.acf.picked <- T.ami.picked <- FALSE
 	for(i in 1:max(c(lag.max.acf,lag.max.ami))){

@@ -63,7 +63,7 @@ blindFC <- function(hts, models, I, fc = TRUE, blind = TRUE, tol = 0.2,
 		#print(this.step.forecast)
 	
 		forecast[,m] <- this.forecast
-		cat('\n')
+		#cat('\n')
 	}
 	forecast
 }
