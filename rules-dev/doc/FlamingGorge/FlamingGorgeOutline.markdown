@@ -67,17 +67,17 @@ _Execution Constraint_: August - April
 
 _Description_: Depending on the model start month, set the base flow operations based on the hydrologic classification in order to meet the May 1 ULDE.  
 
-		IF month is June and HClass is Wet and NOT downramped
-			Set Release to SplitMonthRelease("June","Wet")
+		IF month is June and SpringHClass is Dry and NOT downramped
+			Set Release to SplitMonthRelease("June","Dry")
 			Set BaseFlow to GetBaseFlowMagnitude("Dry")
 			Set Downramp Flag
-		ELSE IF month is July and HClass ModeratelyDry and NOT downramped
+		ELSE IF month is July and SpringHClass ModeratelyDry and NOT downramped
 			Set Release to GetBaseFlowMagnitude("ModeratelyDry")
 			Set Downramp Flag
-		ELSE IF month is July and HClass Average and NOT downramped
+		ELSE IF month is July and SpringHClass Average and NOT downramped
 			Set Release to SplitMonthRelease("July","Average")
 			Set Downramp Flag
-		ELSE IF month is August and HClass ModeratelyWet and NOT downramped
+		ELSE IF month is August and SpringHClass ModeratelyWet and NOT downramped
 			Set Release to GetBaseFlowMagnitude("ModeratelyWet")
 			Set Downramp Flag
 		ELSE IF month is August and HClass ModeratelyWet and NOT downramped
@@ -100,7 +100,7 @@ _Description_: Use forecast of April-July Volume to determine the hydrologic cla
 
 - In any particular month, classify based on following season forecasted April - July unregulated inflow. 
 - When running from different start dates, the hydrologic classification may change from month to month but will not change during a single run
-- Sets FGData.HClass
+- Sets FGData.SpringHClass
 
 _Consider implementing as function which returns classification as string_
 
@@ -112,7 +112,7 @@ _Description_: Use observed April-July for classification.
 - Classification will not change from spring classification during a single run
 - Between runs with start dates August-December, classification will not change
 - May vary between runs with start dates Jan - July since incomplete or no observations are available
-- Sets FGData.HClass
+- Sets FGData.BaseFlowHClass
 
 _Consider implementing as function which returns classification as string_
 
@@ -133,7 +133,5 @@ _Description_: Look up magnitude based on given Hydrologic Classification
 ### `Downramp( DOUBLE Flow, STRING Class )`
 _Description_: Returns an average flow which includes downramping based on given Hydrologic Classification.  For example: if starting at 4300 cfs and  downramp rate is 500 and baseflow is 800 the function would add 3800 + 3300 + 2800 + 2300 + 1800 + 1300 + 800 * (number of days left in month) and divide by total days 
 
-_Is this even important or can we just show a sharp break?_
-	
 ### `GetDownrampRate( STRING Class )`
 _Description_: Returns the downramping rate based on given hydrologic classification
