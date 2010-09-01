@@ -1,0 +1,7 @@
+Notes on combining upper basin rule sets
+
+Navajo
+------
+
+- AnticipatedFlowAtBluff() 
+	- No diversions or tribs below navajo so only base release

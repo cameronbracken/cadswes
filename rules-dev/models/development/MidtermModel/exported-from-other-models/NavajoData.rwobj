@@ -1,0 +1,243 @@
+# RiverWare_Object 5.2.6 Patch
+# Created 13:30 August 27, 2010
+# 
+DST 0
+FlagEncoding 3
+# Section: Objects
+set obj {NavajoData}
+set o "$ws.NavajoData"
+$ws SimObj $obj {DataObj} 2432 2472 {Red} 2346 2477
+"$o" {ScalarSlot} {BaseRelease}
+set s "$o.BaseRelease"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 0
+"$s" userDescript {Minimum release from Navajo per ROD.  Exception is during extreme draughts.}
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 14.158423296 {cms}
+"$o" {ScalarSlot} {MinTargetBaseflow}
+set s "$o.MinTargetBaseflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 1
+"$s" userDescript {The minimum target base flow at downstream gages from ROD.  Target base flow is 500-1000 cfs.}
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 14.158423296 {cms}
+"$o" {SeriesSlot} {ForecastedInflow}
+set s "$o.ForecastedInflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 2
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {acre-ft/month} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {02-01-1998 00:00:00} {01-01-2010 00:00:00} 1 MONTH -1 2 @ 12 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 64 @ 10 2 @ 2 
+"$s" setDSeries {cms} {02-01-1998 00:00:00} {01-01-2010 00:00:00} 1 MONTH -1 NaN @ 12 8.35811511571 10.480134241 16.607020299 38.9887619269 94.1841028218 105.380493541 51.8033266314 109.447155684 56.6428136863 17.5686470501 NaN @ 2 5.51625751519 6.54335137327 16.315063106 49.0163648982 54.5192939261 20.9134180626 10.0836587584 14.3935273783 11.0494227518 4.32679767916 NaN @ 2 5.94385442056 9.32848172722 33.4570297042 75.0933035391 131.377619066 82.3396714597 21.1509299396 26.6668973213 14.4685420847 10.8601941545 NaN @ 2 4.95328339919 4.47352332007 6.39942387925 11.6640793147 12.2764969373 6.56800049793 2.14928591734 0.016261291698 3.09322695944 8.49405877746 NaN @ 2 4.56729532148 6.18002851457 15.470797657 23.053865961 52.8906732925 32.4287181483 7.95498613523 8.63711301252 16.4960255083 5.3493340434 NaN @ 2 5.81377790286 9.7511967378 43.29736317 56.4875767611 77.2555547395 51.8480623 18.6142329088 12.0342861258 28.8391717897 19.4168158455 NaN @ 2 24.6044902677 46.1874959252 50.1347228388 128.400181776 181.619843274 110.184410382 31.9544559564 20.6033927677 19.2242998361 35.5064314087 NaN @ 2 6.71013382779 5.6847696488 10.4295531501 37.3512148527 58.0769108631 27.7720291657 22.0528122169 30.7885429865 25.8009042506 64.9751248815 NaN @ 2 9.87421000555 15.6873324764 48.0712519624 41.4300756518 92.1832086748 73.4573649405 21.3671991323 27.1127496105 19.2974283677 26.1258167711 NaN @ 2 11.1698080432 23.8297309269 76.9062616412 105.179886184 116.753122398 103.366525119 34.1933931242 23.7191317839 23.0481839498 15.5441323523 NaN @ 2 9.18403768034 12.3148466974 30.0591289545 46.1348333073 126.845789111 57.1961340324 18.1836103256 9.26501255769 13.346982544 9.59301538369 NaN @ 2 
+"$o" {ScalarSlot} {EOWYTargetPE}
+set s "$o.EOWYTargetPE"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 3
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1848.612 {m}
+"$o" {TableSlot} {SpringPeakReleaseData}
+set s "$o.SpringPeakReleaseData"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 4
+"$s" userDescript {Days at peak operations includes ramp up, ramp down and the period at peak flow}
+"$s" resize 5 11
+"$s" setRowLabels {0-day} {1-week} {2-week} {3-week} {Max} 
+"$s" setColumnLabels {Volume Above Base Release} {Days at Peak Operations} {April Days at Peak Ops} {May Days at Peak Ops} {June Days at Peak Ops} {April Vol Above Base Release} {May Vol Above Base Release} {June Vol Above Base Release} {Apirl Days at 5000 cfs} {May Days at 5000 cfs} {June Days at 5000 cfs} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Volume} {Time} {Time} {Time} {Time} {Volume} {Volume} {Volume} {Time} {Time} {Time} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {acre-ft} {day} {day} {day} {day} {acre-ft} {acre-ft} {acre-ft} {day} {day} {day} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 1 145571826.022 504 0 168 336 0 34252557.1469 111319268.875 0 0 168 
+"$s" row 2 211628478.868 648 0 240 408 0 67280266.829 144348212.039 0 72 240 
+"$s" row 3 299705249.478 840 0 336 504 0 111319268.875 188385980.603 0 168 336 
+"$s" row 4 439160239.068 1512 96 744 672 4893222.44955 209182484.384 225084532.234 0 168 336 
+"$o" {ScalarSlot} {SpringPeakRelease}
+set s "$o.SpringPeakRelease"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 5
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 141.58423296 {cms}
+"$o" {ScalarSlot} {MaxPE}
+set s "$o.MaxPE"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 6
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1854.708 {m}
+"$o" {ScalarSlot} {PostDamProtectionPE}
+set s "$o.PostDamProtectionPE"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 7
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1853.7936 {m}
+"$o" {ScalarSlot} {SupplementalReleaseIncrement}
+set s "$o.SupplementalReleaseIncrement"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 8
+"$s" userDescript {When supplemental base release is necessary, Navajo's release will be increased in 100 cfs increments.}
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 2.8316846592 {cms}
+"$o" {ScalarSlot} {MaxDesiredPE}
+set s "$o.MaxDesiredPE"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 9
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1853.7936 {m}
+"$o" {ScalarSlot} {PostFloodControlPE}
+set s "$o.PostFloodControlPE"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 10
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1851.66 {m}
+"$o" {TableSlot} {ExtendedMaxHydrographData}
+set s "$o.ExtendedMaxHydrographData"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 11
+"$s" resize 7 8
+"$s" setRowLabels {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Extended Bench} {Volume above in Standard Max} {Ramp up Vol Below Bench} {Max Day Avail for Bench} {March Days Avail} {April Days Avail} {May Days Avail} {Days Ramping Up} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Flow} {Volume} {Volume} {Time} {Time} {Time} {Time} {Time} 
+"$s" setScales 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {cfs} {acre-ft} {acre-ft} {day} {day} {day} {day} {day} 
+"$s" setUsrFormat {%f} {%f} {%f} {%d} {%d} {%d} {%d} {%d} 
+"$s" setUsrPrecision {2} {2} {2} {0} {0} {0} {0} {0} 
+"$s" row 0 56.633693184 179823149.687 1223613.98285 1680 720 720 240 24 
+"$s" row 1 70.79211648 179823149.687 4893222.44955 1656 696 720 240 48 
+"$s" row 2 84.950539776 137007761.624 4893222.44955 1824 696 720 408 48 
+"$s" row 3 99.108963072 137007761.624 11010058.8819 1800 672 720 408 72 
+"$s" row 4 113.267386368 77066711.7281 11010058.8819 1968 672 720 576 72 
+"$s" row 5 127.425809664 77066711.7281 19572889.7982 1944 648 720 576 96 
+"$s" row 6 141.58423296 0 19572889.7982 2112 648 720 744 96 
+"$o" {TableSlot} {SpringPeakJuneJulyExtData}
+set s "$o.SpringPeakJuneJulyExtData"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 12
+"$s" userDescript {Days available referes to the number of days which can be bumped up to 5000 cfs.  This ensures that there are enough days to ramp down by July 31.}
+"$s" resize 4 6
+"$s" setRowLabels {1-week} {2-week} {3-week} {Max} 
+"$s" setColumnLabels {Total Days Available} {June Days Available} {July Days Available} {Days Ramping Down} {June Days @ Normal Peak} {Ramp Down Volume Above Base Release} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Time} {Time} {Time} {Time} {Time} {Volume} 
+"$s" setScales 1 1 1 1 1 1 
+"$s" setUsrUnits {day} {day} {day} {day} {day} {acre-ft} 
+"$s" setUsrFormat {%d} {%d} {%d} {%d} {%d} {%f} 
+"$s" setUsrPrecision {0} {0} {0} {0} {0} {2} 
+"$s" row 0 1128 552 576 168 168 34252557.1469 
+"$s" row 1 1056 480 576 168 240 34252557.1469 
+"$s" row 2 960 384 576 168 336 34252557.1469 
+"$s" row 3 792 384 408 336 336 70951108.7776 
+"$o" {TableSlot} {Level1To3RampDown}
+set s "$o.Level1To3RampDown"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 13
+"$s" resize 7 1
+"$s" setRowLabels {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Daily Flow Rate} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Flow} 
+"$s" setScales 1 
+"$s" setUsrUnits {cfs} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row 0 113.267386368 
+"$s" row 1 99.108963072 
+"$s" row 2 84.950539776 
+"$s" row 3 70.79211648 
+"$s" row 4 56.633693184 
+"$s" row 5 42.475269888 
+"$s" row 6 28.316846592 
+"$o" {TableSlot} {Level4RampDown}
+set s "$o.Level4RampDown"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 14
+"$s" resize 14 1
+"$s" setRowLabels {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Daily Flow Rate} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Flow} 
+"$s" setScales 1 
+"$s" setUsrUnits {cfs} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row 0 127.425809664 
+"$s" row 1 113.267386368 
+"$s" row 2 113.267386368 
+"$s" row 3 99.108963072 
+"$s" row 4 84.950539776 
+"$s" row 5 84.950539776 
+"$s" row 6 70.79211648 
+"$s" row 7 70.79211648 
+"$s" row 8 56.633693184 
+"$s" row 9 56.633693184 
+"$s" row 10 42.475269888 
+"$s" row 11 42.475269888 
+"$s" row 12 28.316846592 
+"$s" row 13 28.316846592 
+"$o" {TableSlot} {SpringPeakReleaseData_250}
+set s "$o.SpringPeakReleaseData_250"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 15
+"$s" resize 5 11
+"$s" setRowLabels {0-day} {1-week} {2-week} {3-week} {Max} 
+"$s" setColumnLabels {Volume Above Base Release} {Days at Peak Operations} {April Days at Peak Ops} {May Days at Peak Ops} {June Days at Peak Ops} {April Vol Above Base Release} {May Vol Above Base Release} {June Vol Above Base Release} {Apirl Days at 5000 cfs} {May Days at 5000 cfs} {June Days at 5000 cfs} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Volume} {Time} {Time} {Time} {Time} {Volume} {Volume} {Volume} {Time} {Time} {Time} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {acre-ft} {day} {day} {day} {day} {acre-ft} {acre-ft} {acre-ft} {day} {day} {day} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 1 158416072.396 504 0 168 336 0 38533972.605 119882099.791 0 0 168 
+"$s" row 2 228143567.191 648 0 240 408 0 73397103.2614 154746463.93 0 72 240 
+"$s" row 3 321113560.251 840 0 336 504 0 119882099.791 201230226.978 0 168 336 
+"$s" row 4 477694211.673 1512 96 744 672 7339216.93341 228143567.191 242211427.548 0 168 336 
+"$o" {TableSlot} {ExtendedMaxHydrographData_250}
+set s "$o.ExtendedMaxHydrographData_250"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 16
+"$s" resize 7 8
+"$s" setRowLabels {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Extended Bench} {Volume above in Standard Max} {Ramp up Vol Below Bench} {Max Day Avail for Bench} {March Days Avail} {April Days Avail} {May Days Avail} {Days Ramping Up} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Flow} {Volume} {Volume} {Time} {Time} {Time} {Time} {Time} 
+"$s" setScales 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {cfs} {acre-ft} {acre-ft} {day} {day} {day} {day} {day} 
+"$s" setUsrFormat {%f} {%f} {%f} {%d} {%d} {%d} {%d} {%d} 
+"$s" setUsrPrecision {2} {2} {2} {0} {0} {0} {0} {0} 
+"$s" row 0 56.633693184 192667396.061 1836654.45611 1680 720 720 240 24 
+"$s" row 1 70.79211648 192667396.061 6116836.4324 1656 696 720 240 48 
+"$s" row 2 84.950539776 145571826.022 6116836.4324 1824 696 720 408 48 
+"$s" row 3 99.108963072 145571826.022 12844246.3744 1800 672 720 408 72 
+"$s" row 4 113.267386368 81348127.1863 12844246.3744 1968 672 720 576 72 
+"$s" row 5 127.425809664 81348127.1863 22018884.2821 1944 648 720 576 96 
+"$s" row 6 141.58423296 0 22018884.2821 2112 648 720 744 96 
+"$o" {TableSlot} {SpringPeakJuneJulyExtData_250}
+set s "$o.SpringPeakJuneJulyExtData_250"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 17
+"$s" resize 4 6
+"$s" setRowLabels {1-week} {2-week} {3-week} {Max} 
+"$s" setColumnLabels {Total Days Available} {June Days Available} {July Days Available} {Days Ramping Down} {June Days @ Normal Peak} {Ramp Down Volume Above Base Release} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Time} {Time} {Time} {Time} {Time} {Volume} 
+"$s" setScales 1 1 1 1 1 1 
+"$s" setUsrUnits {day} {day} {day} {day} {day} {acre-ft} 
+"$s" setUsrFormat {%d} {%d} {%d} {%d} {%d} {%f} 
+"$s" setUsrPrecision {0} {0} {0} {0} {0} {2} 
+"$s" row 0 1128 552 576 168 168 38533972.605 
+"$s" row 1 1056 480 576 168 240 38533972.605 
+"$s" row 2 960 384 576 168 336 38533972.605 
+"$s" row 3 792 384 408 336 336 79513939.6938 
+# Section: Links

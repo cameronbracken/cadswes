@@ -1,0 +1,1 @@
+FlamingGorgeData.GreenAboveFlamingGorge: file=$(MIDTERM_MODEL_HOME)/dmi/%o.%s.dat units=cfs

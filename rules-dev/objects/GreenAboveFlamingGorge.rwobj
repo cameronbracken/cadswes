@@ -1,0 +1,353 @@
+# RiverWare_Object 5.1.3 Patch
+# Created 16:11 May 10, 2010
+# 
+DST 0
+FlagEncoding 3
+# Section: Objects
+set obj {GreenAboveFlamingGorge}
+set o "$ws.GreenAboveFlamingGorge"
+$ws SimObj $obj {AggReach} 401 1947 {} 40 6390
+"$o" sDM {Agg Reach Invisible WQ Category} {None}
+"$o" {AggSeriesSlot} {Inflow}
+set s "$o.Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 64 @ 24 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 28.619383781 @ 3 22.1091515581 @ 4 43.7498625432 43.6600554818 47.1473586555 48.4512750824 48.2863202545 25.2215517999 @ 3 24.6058669047 @ 4 44.9668068671 45.9965731661 171.749794163 92.6544682841 45.5387962907 26.1734320641 
+"$o" {AggSeriesSlot} {Outflow}
+set s "$o.Outflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 23.4869973547 23.794016928 17.0395863162 18.4211743959 20.3948716526 32.2370551928 54.7262389344 101.316459177 176.075725267 92.1058719794 40.5265836709 28.5528203136 27.0992221885 24.1259532964 16.6219889495 18.7740692905 23.1348636657 47.6572528143 67.5923128151 121.281053954 190.232575405 101.03450864 44.4008154563 27.8354601999 
+"$o" {SeriesSlot} {Total Diversion}
+set s "$o.Total Diversion"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 0 @ 24 
+"$o" {SeriesSlot} {Total Return Flow}
+set s "$o.Total Return Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 0 @ 24 
+"$o" {SeriesSlot} {Total Local Inflow}
+set s "$o.Total Local Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN -5.1323864263 -4.825366853 -5.06956524194 -3.68797716224 -1.71427990554 10.1279036347 10.9763763912 57.6564036952 128.928366612 43.654596897 -7.75973658361 3.33126851371 1.87767038861 -1.09559850349 -7.98387795517 -5.83179761417 -1.47100323897 23.0513859096 22.625505948 75.2844807879 18.4827812418 8.38004035587 -1.13798083437 1.6620281358 
+"$o" {SeriesSlot} {Inflow Salt Concentration}
+set s "$o.Inflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Outflow Salt Concentration}
+set s "$o.Outflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax 0 10
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+$ws ElemObj {Reach} {GreenAboveFlamingGorge:InterveningAboveFlamingGorge} {GreenAboveFlamingGorge}
+set obj {GreenAboveFlamingGorge:InterveningAboveFlamingGorge}
+set o "$ws.GreenAboveFlamingGorge:InterveningAboveFlamingGorge"
+$ws SimObj $obj {Reach} 0 0 {} 0 0
+"$o" sDM {routingMethodCategory} {noRouting}
+"$o" sDM {Routing Parameters} {No Parameters}
+"$o" sDM {Local Inflow Solution Direction} {calcLocalInflow}
+"$o" sDM {Generate Local Inflows} {No Forecast Local Inflow}
+"$o" sDM {Evaporation Calculation} {No Evaporation}
+"$o" sDM {depthtoFlowMethod} {noDepthtoFlowMethod}
+"$o" sDM {Stage Calculation} {No Stage Calc}
+"$o" sDM {Volume Calculation} {No Volume Calc}
+"$o" sDM {GainLoss Calculation} {No GainLoss}
+"$o" sDM {Apply GainLoss} {Current Outflow}
+"$o" sDM {Reach Uncertainty Calculation} {No Uncertainty}
+"$o" sDM {Seepage Calc} {No Seepage}
+"$o" sDM {Seepage Routing} {No Routing}
+"$o" sDM {Drain Elevation Calc} {No Drain Elevation}
+"$o" sDM {Reach Bank Storage Calculation} {No Bank Storage}
+"$o" sDM {Negative Outflow Adjustment} {No Adjustment}
+"$o" sDM {Diversion from Reach} {No Diversion}
+"$o" sDM {Minimum Diversion Bypass} {None}
+"$o" sDM {MODFLOW Link Category Reach} {No Link to MODFLOW}
+"$o" sDM {Reach PassThrough Slot Inflow} {none}
+"$o" sDM {Pass Through Acct Gain Loss} {No Gain Loss}
+"$o" sDM {ReachFinalInflowCategory} {Constrain Final Inflows}
+"$o" sDM {Reach Invisible WQ Category} {None}
+"$o" sDM {waterQualSolutionType} {noWQ}
+"$o" sDM {Water Elevation at Diversion STLE} {Line}
+"$o" sDM {Water Elevation at Diversion STGE} {Piecewise}
+"$o" sDM {Water Elevation at Diversion MTLE} {Line}
+"$o" sDM {Water Elevation at Diversion MTGE} {Piecewise}
+"$o" sDM {Instantiate Reach Optimization Slots} {Instantiate Reach Optimization Slots}
+"$o" {AggSeriesSlot} {Inflow}
+set s "$o.Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax 0.0046052936 NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 64 @ 24 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 28.619383781 @ 3 22.1091515581 @ 4 43.7498625432 43.6600554818 47.1473586555 48.4512750824 48.2863202545 25.2215517999 @ 3 24.6058669047 @ 4 44.9668068671 45.9965731661 171.749794163 92.6544682841 45.5387962907 26.1734320641 
+"$o" {AggSeriesSlot} {Outflow}
+set s "$o.Outflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {acre-feet/month} {%f} 0
+"$s" minMax 0.0046052936 NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 23.4869973547 23.794016928 17.0395863162 18.4211743959 20.3948716526 32.2370551928 54.7262389344 101.316459177 176.075725267 92.1058719794 40.5265836709 28.5528203136 27.0992221885 24.1259532964 16.6219889495 18.7740692905 23.1348636657 47.6572528143 67.5923128151 121.281053954 190.232575405 101.03450864 44.4008154563 27.8354601999 
+"$o" {SimObjMultiSlot} {Return Flow}
+set s "$o.Return Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 0 0.0001
+"$s" unit {Flow} 1 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 0 @ 24 
+"$o" {SeriesSlot} {Local Inflow}
+set s "$o.Local Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 2 @ 38 64 2 @ 3 
+"$s" setDSeries {cms} {08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 NaN @ 15 -5.1323864263 -4.825366853 -5.06956524194 -3.68797716224 -1.71427990554 10.1279036347 10.9763763912 57.6564036952 128.928366612 43.654596897 -7.75973658361 3.33126851371 1.87767038861 -1.09559850349 -7.98387795517 -5.83179761417 -1.47100323897 23.0513859096 22.625505948 75.2844807879 18.4827812418 8.38004035587 -1.13798083437 1.6620281358 NaN @ 3 
+"$o" {SeriesSlot} {Local Inflow Adjust}
+set s "$o.Local Inflow Adjust"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 2 @ 25 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 NaN 0 @ 24 
+"$o" {AggSeriesSlot} {Diversion}
+set s "$o.Diversion"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 0 0.0001
+"$s" unit {Flow} 1 {acre-feet/month} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Available For Diversion}
+set s "$o.Available For Diversion"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 0 0.0001
+"$s" unit {Flow} 1 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Inflow Salt Concentration}
+set s "$o.Inflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Outflow Salt Concentration}
+set s "$o.Outflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax 0 10
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Diversion Salt Concentration}
+set s "$o.Diversion Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SimObjMultiSlot} {Return Flow Salt Mass}
+set s "$o.Return Flow Salt Mass"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Mass} 1 {kg} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Local Inflow Salt Concentration}
+set s "$o.Local Inflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Variable GainLoss Coeff}
+set s "$o.Variable GainLoss Coeff"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {NONE} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Variable Lag Time}
+set s "$o.Variable Lag Time"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Time} 1 {hr} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {hr} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {hr} {10-01-2009 00:00:00} {10-01-2009 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {LagTime}
+set s "$o.LagTime"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {LagTime} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Time} 
+"$s" setScales 1 
+"$s" setUsrUnits {hr} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Num of Coeff}
+set s "$o.Num of Coeff"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Lag Coeff}
+set s "$o.Lag Coeff"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {Lag Coeff} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {GainLoss Coefficient}
+set s "$o.GainLoss Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Variable GainLoss Coeff Table}
+set s "$o.Variable GainLoss Coeff Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 12 10
+"$s" setRowLabels {Season 1} {Season 2} {Season 3} {Season 4} {Season 5} {Season 6} {Season 7} {Season 8} {Season 9} {Season 10} {Season 11} {Season 12} 
+"$s" setColumnLabels {Flow Range 1} {Flow Range 2} {Flow Range 3} {Flow Range 4} {Flow Range 5} {Flow Range 6} {Flow Range 7} {Flow Range 8} {Flow Range 9} {Flow Range 10} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Number of Seasons}
+set s "$o.Number of Seasons"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Number of Seasons} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Flow Range}
+set s "$o.Flow Range"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 10
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Flow Range 1} {Flow Range 2} {Flow Range 3} {Flow Range 4} {Flow Range 5} {Flow Range 6} {Flow Range 7} {Flow Range 8} {Flow Range 9} {Flow Range 10} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Flow} {Flow} {Flow} {Flow} {Flow} {Flow} {Flow} {Flow} {Flow} {Flow} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {cms} {cms} {cms} {cms} {cms} {cms} {cms} {cms} {cms} {cms} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Date Range}
+set s "$o.Date Range"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 2 12
+"$s" setRowLabels {Begin Day} {End Day} 
+"$s" setColumnLabels {Season 1} {Season 2} {Season 3} {Season 4} {Season 5} {Season 6} {Season 7} {} {Season 9} {Season 10} {Season 11} {Season 12} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 0 
+# Section: Links

@@ -1,0 +1,1923 @@
+# RiverWare_Ruleset 5.2.7 Patch
+# Created 16:55 August 18, 2010
+# 
+RULESET
+AGENDA_ORDER ASCENDING;
+DESCRIPTION "";
+PRECISION   8;
+IS_GLOBAL   TRUE;
+BEGIN
+
+  UTILITY_GROUP "Powell Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "FindReleaseColumnBounds" ( NUMERIC release )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WHILE ( release - $ "PowellData.PowellMonthlyReleaseTable" ["AnnualTotal", result] > 0.01000000 "1000 acre-ft" ) WITH NUMERIC result = 0.00000000 DO
+      result + 1.00000000
+   ENDWHILE;
+
+    END;
+
+    FUNCTION       "CurrentAnnualVolume" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( "MonthIs"( { "August" , "September" } ) )
+   THEN
+      $ "PowellData.AnnualReleaseVolume" [@"t - 2"]
+   ELSE
+      $ "PowellData.AnnualReleaseVolume" []
+   ENDIF;
+
+    END;
+
+    FUNCTION       "EqualizationRelease" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.AnnualReleaseVolume" [] + ( $ "PowellData.PowellEOWYStorage" [] - $ "PowellData.MeadEOWYStorage" [] ) / 2.00000000;
+
+    END;
+
+    FUNCTION       "EqualizationLevelRelease" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EqualizationRelease"(  ) + "ElevationToStorage"( % "Powell", "PowellEOWYElevationEqualization"(  ) ) - "ElevationToStorage"( % "Powell", "EqLevel"(  ) );
+
+    END;
+
+    FUNCTION       "Equalization20ftBelowRelease" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EqualizationRelease"(  ) + "ElevationToStorage"( % "Powell", "PowellEOWYElevationEqualization"(  ) ) - "ElevationToStorage"( % "Powell", "EqLevel"(  ) - 20.00000000 "ft" );
+
+    END;
+
+    FUNCTION       "PowellEOWYStorage" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function is designed to be called every timestep to calculate the Powell elevation at the end of the water year.  It assumes the current release pattern will be followed roughly ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      ( "PrevStorage"( % "Powell" ) + $ "PowellData.PowellForecastedInflowVolumeUntilEOWY" [] ) COMMENTED_BY "Gains: Previous Storage and Inflow" - ( $ "PowellData.PowellEstimatedReleaseVolumeUntilEOWY" [] + $ "PowellData.PowellEstimatedEvapUntilEOWY" [] + $ "PowellData.PowellEstimatedBankStorageUntilEOWY" [] ) COMMENTED_BY "Losses: Release Volume, Evap and Bank Storage";
+
+    END;
+
+    FUNCTION       "PowellJan1Elevation" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function estimates the Powell Jan1 Elevation by assuming an average 8.23 release pattern in october, november and december based on the initial estimate of end of water year storage. ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "StorageToElevation"( % "Powell", EOWYStorage + "PowellForecastedInflowVolumeOND"(  ) - ( $ "PowellData.ONDReleaseVolumeInitialProjection" [] + "PowellEstimateEvaporationOND"( EOWYStorage ) + "PowellEstimateBankStorageOND"( EOWYStorage ) ) );
+
+    END;
+
+    FUNCTION       "MeadEOWYStorage" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      ( "PrevStorage"( % "Mead" ) + $ "PowellData.MeadInflowBelowUntilEOWY" [] + $ "PowellData.MeadGainsBelowPowellVolumeUntilEOWY" [] + $ "PowellData.PowellEstimatedReleaseVolumeUntilEOWY" [] ) COMMENTED_BY "Gains: Previous Storage and Inflow" - ( $ "PowellData.MeadDemandsBelowUntilEOWY" [] + $ "PowellData.MeadEstimatedEvapUntilEOWY" [] + $ "PowellData.MeadEstimatedBankStorageUntilEOWY" [] + $ "PowellData.MohaveEstimatedEvapUntilEOWY" [] + $ "PowellData.MohaveEstimatedDeltaStorageUntilEOWY" [] + $ "PowellData.HavasuEstimatedEvapUntilEOWY" [] + $ "PowellData.HavasuEstimatedDeltaStorageUntilEOWY" [] ) COMMENTED_BY "Losses: Release Volume, Evap and Bank Storage";
+
+    END;
+
+    FUNCTION       "MeadJan1Elevation" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function estimates the Powell Jan1 Elevation by assuming an average 8.23 release pattern in october, november and december based on the initial estimate of end of water year storage. ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "StorageToElevation"( % "Mead", EOWYStorage + "MeadGainsBelowPowellOND"(  ) + "MeadInflowBelowOND"(  ) + $ "PowellData.ONDReleaseVolumeInitialProjection" [] - ( "MeadDiversionsBelowOND"(  ) + "MeadEstimateBankStorageOND"( EOWYStorage ) + "MeadEstimateEvaporationOND"( EOWYStorage ) + "MohaveEstimateDeltaStorageOND"(  ) + "MohaveEstimateEvaporationOND"(  ) + "HavasuEstimateDeltaStorageOND"(  ) + "HavasuEstimateEvaporationOND"(  ) ) );
+
+    END;
+
+    FUNCTION       "MeadEOWYElevationEqualization" ( NUMERIC release )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "StorageToElevation"( % "Mead", $ "PowellData.MeadEOWYStorage" [] + release - 8230.00000000 "1000 acre-ft" ) COMMENTED_BY "Add the extra water provided by equalization above 8.23";
+
+    END;
+
+    FUNCTION       "MeadEOWYElevationEqualizationLevel" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "StorageToElevation"( % "Mead", $ "PowellData.MeadEOWYStorage" [] + "EqualizationLevelRelease"(  ) - 8230.00000000 "1000 acre-ft" ) COMMENTED_BY "Add the extra water provided by equalization above 8.23";
+
+    END;
+
+    FUNCTION       "PowellEOWYElevationEqualization" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "StorageToElevation"( % "Powell", $ "PowellData.PowellEOWYStorage" [] + 8230.00000000 "1000 acre-ft" - "EqualizationRelease"(  ) ) COMMENTED_BY "Reove the extra water provided by equalization above 8.23";
+
+    END;
+
+    FUNCTION       "PowellRemainingReleaseVolume" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns the total outlfow volume from Powell from the beginning of the current water year to the previous timestep. ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.AnnualReleaseVolume" [] - IF ( "MonthIs"( { "October" } ) )
+   THEN
+      0.00000000 "acre-feet" COMMENTED_BY "If it is october there are no previous releases set for the water year"
+   ELSE
+      "SumFlowsToVolume"( $ "Powell.Outflow", "OffsetDate"( @"t", "MonthsSinceEOWY"( @"t" ), "-1 months" ), @"t - 1" ) COMMENTED_BY "Sum up the release volume from the last october to the previous timestep "
+   ENDIF;
+
+    END;
+
+    FUNCTION       "PowellEstimateEvaporationUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateEvap"( % "Powell", "PrevStorage"( % "Powell" ), "PowellInitialEOWYStorageEstimate"(  ), @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "PowellEstimateEvaporationOND" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateEvap"( % "Powell", EOWYStorage, "PowellInitialJan1StorageEstimate"( EOWYStorage ), @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "PowellEstimateBankStorageUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateBankStorage"( % "Powell", "PrevStorage"( % "Powell" ), "PowellInitialEOWYStorageEstimate"(  ), @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "PowellEstimateBankStorageOND" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateBankStorage"( % "Powell", EOWYStorage, "PowellInitialJan1StorageEstimate"( EOWYStorage ), @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "PowellForecastedInflowVolumeUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumFlowsToVolume"( $ "Powell.Inflow", @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "PowellForecastedInflowVolumeOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumFlowsToVolume"( $ "Powell.Inflow", @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "PowellInitialEOWYStorageEstimate" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns a rough estimate of the storage in powell at the end of the water year from only inflow and outflow gains/losses.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "Powell.Storage" ["OffsetDate"( @"t", 1.00000000, "-1 months" )] + "SumFlowsToVolume"( $ "Powell.Inflow", @"t", "RelativeEOWYDate"(  ) ) - "PowellRemainingReleaseVolume"(  );
+
+    END;
+
+    FUNCTION       "PowellInitialJan1StorageEstimate" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns a rough estimate of the storage in powell at the end of the water year from only inflow and outflow gains/losses.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      EOWYStorage + "PowellForecastedInflowVolumeOND"(  ) - $ "PowellData.ONDReleaseVolumeInitialProjection" [];
+
+    END;
+
+    FUNCTION       "MeadEstimateBankStorageUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateBankStorage"( % "Mead", "PrevStorage"( % "Mead" ), "MeadInitialEOWYStorageEstimate"( @"t", "RelativeEOWYDate"(  ) ), @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "MeadEstimateBankStorageOND" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateBankStorage"( % "Mead", EOWYStorage, "MeadInitialJan1StorageEstimate"( EOWYStorage ), @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "MeadEstimateEvaporationUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateEvap"( % "Mead", "PrevStorage"( % "Mead" ), "MeadInitialEOWYStorageEstimate"( @"t", "RelativeEOWYDate"(  ) ), @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "MeadEstimateEvaporationOND" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateEvap"( % "Mead", EOWYStorage, "MeadInitialJan1StorageEstimate"( EOWYStorage ), @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "MeadDiversionsBelowUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllDiversionsBelowVolume"( % "Mead", @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "MeadDiversionsBelowOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllDiversionsBelowVolume"( % "Mead", @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "MeadInflowBelowUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllGainsBelowVolume"( % "Mead", @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "MeadInflowBelowOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllGainsBelowVolume"( % "Mead", @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "MeadGainsBelowPowellUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllGainsBelowVolume"( % "Powell", @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "MeadGainsBelowPowellOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumAllGainsBelowVolume"( % "Powell", @"24:00:00 October Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "MeadInitialEOWYStorageEstimate" ( DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns a rough estimate of the storage in powell at the end of the water year from only inflow and outflow gains/losses.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "PrevStorage"( % "Mead" ) + "PowellRemainingReleaseVolume"(  ) + "MeadGainsBelowPowellUntilEOWY"(  ) + "MeadInflowBelowUntilEOWY"(  ) - "MeadDiversionsBelowUntilEOWY"(  ) - "HavasuEstimateEvaporationUntilEOWY"(  ) - "MohaveEstimateEvaporationUntilEOWY"(  );
+
+    END;
+
+    FUNCTION       "MeadInitialJan1StorageEstimate" ( NUMERIC EOWYStorage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns a rough estimate of the storage in powell at the end of the water year from only inflow and outflow gains/losses.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      EOWYStorage + $ "PowellData.ONDReleaseVolumeInitialProjection" [] + "MeadGainsBelowPowellOND"(  ) + "MeadInflowBelowOND"(  ) - "MeadDiversionsBelowOND"(  ) - "HavasuEstimateEvaporationOND"(  ) - "MohaveEstimateEvaporationOND"(  );
+
+    END;
+
+    FUNCTION       "MohaveEstimateEvaporationUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( DATETIME date IN @"t" TO "RelativeEOWYDate"(  ) ) WITH NUMERIC evap = 0.00000000 "acre-feet" DO
+      evap + "EstimateEvap"( % "Mohave", "RuleCurveStorage"( % "Mohave", date - 1.00000000 "month" ), "RuleCurveStorage"( % "Mohave", date ), date, date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "MohaveEstimateEvaporationOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( DATETIME date IN "OND"(  ) ) WITH NUMERIC evap = 0.00000000 "acre-feet" DO
+      evap + "EstimateEvap"( % "Mohave", "RuleCurveStorage"( % "Mohave", date - 1.00000000 "month" ), "RuleCurveStorage"( % "Mohave", date ), date, date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "MohaveEstimateDeltaStorageUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateDeltaStorageEOWY"( % "Mohave" );
+
+    END;
+
+    FUNCTION       "MohaveEstimateDeltaStorageOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateDeltaStorageOND"( % "Mohave" );
+
+    END;
+
+    FUNCTION       "HavasuEstimateEvaporationUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( DATETIME date IN @"t" TO "RelativeEOWYDate"(  ) ) WITH NUMERIC evap = 0.00000000 "acre-feet" DO
+      evap + "EstimateEvap"( % "Havasu", "RuleCurveStorage"( % "Havasu", date - 1.00000000 "month" ), "RuleCurveStorage"( % "Havasu", date ), date, date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "HavasuEstimateEvaporationOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( DATETIME date IN "OND"(  ) ) WITH NUMERIC evap = 0.00000000 "acre-feet" DO
+      evap + "EstimateEvap"( % "Havasu", "RuleCurveStorage"( % "Havasu", date - 1.00000000 "month" ), "RuleCurveStorage"( % "Havasu", date ), date, date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "HavasuEstimateDeltaStorageUntilEOWY" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateDeltaStorageEOWY"( % "Havasu" );
+
+    END;
+
+    FUNCTION       "HavasuEstimateDeltaStorageOND" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "EstimateDeltaStorageOND"( % "Havasu" );
+
+    END;
+
+    FUNCTION       "PowellEstimateLosses" ( NUMERIC startStorage, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         FALSE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "RemainingPowellReleaseVolume"( startDate, endDate ) + "EstimatePowellEvaporation"( startStorage, startStorage + "RemainingPowellReleaseVolume"( startDate, endDate ), startDate, endDate ) + "EstimatePowellBankStorage"( startStorage, startStorage + "RemainingPowellReleaseVolume"( startDate, endDate ), startDate, endDate );
+
+    END;
+
+    FUNCTION       "PowellEstimateGains" ( DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         FALSE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "Powell.Storage" [startDate - 1.00000000 "month"] + "PowellForecastedInflowVolume"( @"t", "RelativeEOWYDate"(  ) );
+
+    END;
+
+    FUNCTION       "PowellReleaseTier" ( NUMERIC Jan1Elev )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( Jan1Elev >= "EqLevel"(  ) )
+   THEN
+      0.00000000 COMMENTED_BY "Equalization"
+   ELSE
+      IF ( Jan1Elev >= $ "PowellData.TierBreaks" ["UpperMid", 0.00000000] )
+      THEN
+         1.00000000 COMMENTED_BY "Upper Elevation Balancing"
+      ELSE
+         IF ( Jan1Elev >= $ "PowellData.TierBreaks" ["MidLower", 0.00000000] )
+         THEN
+            2.00000000 COMMENTED_BY "Mid-Elevation Release"
+         ELSE
+            3.00000000 COMMENTED_BY "Lower Elevation Balancing"
+         ENDIF
+      ENDIF
+   ENDIF;
+
+    END;
+
+    FUNCTION       "MonthsSinceEOWY" ( DATETIME time )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.MonthsSinceEOWY" ["GetMonthAsString"( time ), 0.00000000];
+
+    END;
+
+    FUNCTION       "MonthsUntilEOWY" ( DATETIME time )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.MonthsUntilEOWY" ["GetMonthAsString"( time ), 0.00000000];
+
+    END;
+
+    FUNCTION       "TeirIs" ( STRING tier, DATETIME date )
+    RETURN_TYPE    BOOLEAN;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.ReleaseTier" [date] == $ "PowellData.TeirNames" [tier, 0.00000000];
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Powell Steady Flow Experiment Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "GetSeptemberSteadyFlowRelease" ( NUMERIC AnnualReleaseVolume )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.SteadyFlowExperimentRelease" ["SteadyFlowTableRow"( AnnualReleaseVolume ), 1.00000000];
+
+    END;
+
+    FUNCTION       "GetOctoberSteadyFlowRelease" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function returns the october release volume of the current water year under steady flow experiment conditions. ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( "MonthIs"( { "October" , "November" , "December" } ) )
+   THEN
+      $ "Powell.Outflow" [@"24:00:00 September Max DayOfMonth, Current Year"]
+   ELSE
+      $ "Powell.Outflow" [@"24:00:00 September Max DayOfMonth, Previous Year"]
+   ENDIF;
+
+    END;
+
+    FUNCTION       "GetInitialPowellMonthlyVolumes" (  )
+    RETURN_TYPE    LIST;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      APPEND "FlowToVolume"( "GetSeptemberSteadyFlowRelease"( $ "PowellData.AnnualReleaseVolume" [] ), @"24:00:00 September Max DayOfMonth, Current Year" ) ONTO INSERT "FlowToVolume"( "GetOctoberSteadyFlowRelease"(  ), @"24:00:00 October Max DayOfMonth, Current Year" ) INTO FOR ( NUMERIC i IN "GetNumbers"( 2.00000000, 11.00000000, 1.00000000 ) ) WITH LIST result = {  } DO
+      APPEND "Interpolate"( "CurrentAnnualVolume"(  ), $ "PowellData.PowellMonthlyReleaseTable" [0.00000000, "FindReleaseColumnBounds"( "CurrentAnnualVolume"(  ) )], $ "PowellData.PowellMonthlyReleaseTable" [0.00000000, "FindReleaseColumnBounds"( "CurrentAnnualVolume"(  ) ) + 1.00000000], $ "PowellData.PowellMonthlyReleaseTable" [i, "FindReleaseColumnBounds"( "CurrentAnnualVolume"(  ) )], $ "PowellData.PowellMonthlyReleaseTable" [i, "FindReleaseColumnBounds"( "CurrentAnnualVolume"(  ) ) + 1.00000000] ) ONTO result
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "SteadyFlowTableRow" ( NUMERIC AnnualReleaseVolume )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WHILE ( AnnualReleaseVolume >= $ "PowellData.SteadyFlowExperimentRelease" [i, 0.00000000] ) WITH NUMERIC i = 0.00000000 DO
+      i + 1.00000000
+   ENDWHILE;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_1_July" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      IF ( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] >= 0.00000000 "acre-ft" )
+      THEN
+         "Min"( "GetElement"( monthlyRelease, 2.00000000 ) - 800.00000000 "1000 acre-ft", "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] ) COMMENTED_BY "Return either the amount of reduction in july down to 800 kaf <br>or the total reduction (if it all occurs in July)"
+      ELSE
+         0.00000000 "acre-ft"
+      ENDIF COMMENTED_BY "If the monthly releases exceed the annual release volume, then decrease july first"
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_2_August" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      "Min"( "GetElement"( monthlyRelease, 1.00000000 ) COMMENTED_BY "1 in reverse order is august" - 800.00000000 "1000 acre-ft", "Max"( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] - "SteadyFlowReduce_1_July"(  ), 0.00000000 "acre-ft" ) ) COMMENTED_BY "Return either the amount of reduction in August down to 800 kaf <br>or the total reduction (if it all occurs in August)"
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_3_June1" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      "Min"( "Max"( "GetElement"( monthlyRelease, 3.00000000 ) - 800.00000000 "1000 acre-ft", 0.00000000 "acre-ft" ), "Max"( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] - "SteadyFlowReduce_1_July"(  ) - "SteadyFlowReduce_2_August"(  ), 0.00000000 "acre-ft" ) ) COMMENTED_BY "Return either the amount of reduction in June down to 800 kaf <br>or the total reduction (if it all occurs in June), In both cases negatives <br>can occur, so zero these out "
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_4_June2" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      "Min"( "Max"( "GetElement"( monthlyRelease, 3.00000000 ) COMMENTED_BY "3 in reverse order is june" - 600.00000000 "1000 acre-ft", 0.00000000 "acre-ft" ), "Max"( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] - "SteadyFlowReduce_1_July"(  ) - "SteadyFlowReduce_2_August"(  ) - "SteadyFlowReduce_3_June1"(  ), 0.00000000 "acre-ft" ) ) COMMENTED_BY "Return either the amount of reduction in June down to 600 kaf <br>or the total reduction (if it all occurs in June)"
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_5_April" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      "Min"( "Max"( "GetElement"( monthlyRelease, 5.00000000 ) COMMENTED_BY "5 in reverse order is april" - 500.00000000 "1000 acre-ft", 0.00000000 "acre-ft" ), "Max"( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] - "SteadyFlowReduce_1_July"(  ) - "SteadyFlowReduce_2_August"(  ) - "SteadyFlowReduce_3_June1"(  ) - "SteadyFlowReduce_4_June2"(  ), 0.00000000 "acre-ft" ) ) COMMENTED_BY "Return either the amount of reduction in April down to 500 kaf<br>or the total reduction (if it all occurs in June)"
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "SteadyFlowReduce_6_May" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      WITH LIST monthlyRelease = "Reverse"( "GetInitialPowellMonthlyVolumes"(  ) ) DO
+      "Min"( "Max"( "GetElement"( monthlyRelease, 4.00000000 ) COMMENTED_BY "4 in reverse order is may" - 500.00000000 "1000 acre-ft", 0.00000000 "acre-ft" ), "Max"( "Sum"( monthlyRelease ) - $ "PowellData.AnnualReleaseVolume" [] - "SteadyFlowReduce_1_July"(  ) - "SteadyFlowReduce_2_August"(  ) - "SteadyFlowReduce_3_June1"(  ) - "SteadyFlowReduce_4_June2"(  ) - "SteadyFlowReduce_5_April"(  ), 0.00000000 "acre-ft" ) ) COMMENTED_BY "Return either the amount of reduction in June down to 600 kaf <br>or the total reduction (if it all occurs in June)"
+   ENDWITH;
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Midterm Model General Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "MyGetSlot" ( OBJECT obj, STRING slot )
+    RETURN_TYPE    SLOT;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "GetSlot"( ( STRINGIFY obj ) CONCAT ( "." CONCAT slot ) );
+
+    END;
+
+    FUNCTION       "GetElement" ( LIST list, NUMERIC i )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      GET NUMERIC @INDEX i FROM list;
+
+    END;
+
+    FUNCTION       "CurrentYear" (  )
+    RETURN_TYPE    DATETIME;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      @"24:00:00 December Max DayOfMonth, Current Year";
+
+    END;
+
+    FUNCTION       "OND" (  )
+    RETURN_TYPE    LIST;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      @"24:00:00 October Max DayOfMonth, Current Year" TO @"24:00:00 December Max DayOfMonth, Current Year";
+
+    END;
+
+    FUNCTION       "Interpolate" ( NUMERIC x, NUMERIC x0, NUMERIC x1, NUMERIC y0, NUMERIC y1 )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      y0 + ( x - x0 ) / ( x1 - x0 ) * ( y1 - y0 );
+
+    END;
+
+    FUNCTION       "HasAnyRuleFired" ( LIST rules )
+    RETURN_TYPE    BOOLEAN;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( STRING rule IN rules ) WITH BOOLEAN fired = FALSE DO
+      IF ( "HasRuleFiredSuccessfully"( rule ) AND NOT fired )
+      THEN
+         TRUE
+      ELSE
+         fired
+      ENDIF
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "Quantile" ( LIST Data, NUMERIC prob )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      GET NUMERIC @INDEX 1.00000000 FROM Data;
+
+    END;
+
+    FUNCTION       "MyPercentRank" ( LIST Data, NUMERIC num )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      1.00000000;
+
+    END;
+
+    FUNCTION       "MonthIs" ( LIST months )
+    RETURN_TYPE    BOOLEAN;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "GetMonthAsString"( @"t" ) IN months;
+
+    END;
+
+    FUNCTION       "ECDF" ( LIST Data, NUMERIC num )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( NUMERIC val IN Data ) WITH NUMERIC result = 0.00000000 DO
+      IF ( val <= num )
+      THEN
+         result + 1.00000000
+      ELSE
+         result
+      ENDIF
+   ENDFOR / LENGTH Data;
+
+    END;
+
+    FUNCTION       "GetYearAsString" ( DATETIME date )
+    RETURN_TYPE    STRING;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      ( GET STRING @INDEX 0.00000000 FROM "Split"( STRINGIFY "GetYear"( date ), "." ) );
+
+    END;
+
+    FUNCTION       "SumEvapCoeffCRSS" ( OBJECT res, NUMERIC startRow, NUMERIC endRow )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumTableColumn"( res & "Evaporation Coefficients", 0.00000000, startRow, endRow );
+
+    END;
+
+    FUNCTION       "RelativeEOWYDate" (  )
+    RETURN_TYPE    DATETIME;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Returns the datetime at the end of the water year relative the the current timestep. e.g. if the month is June, the function would return @&quot;t+4&quot;";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "OffsetDate"( @"t", "MonthsUntilEOWY"( @"t" ), "1 months" );
+
+    END;
+
+    FUNCTION       "EstimateEvap" ( OBJECT res, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  TRUE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "FlowToVolume"( ( "StorageToArea"( res, startStorage ) + "StorageToArea"( res, endStorage ) ) / 2.00000000 * "SumEvapCoeffCRSS"( res, "GetMonth"( startDate ) - 1.00000000, "GetMonth"( endDate ) - 1.00000000 ), endDate );
+
+    END;
+
+    FUNCTION       "RuleCurveStorage" ( OBJECT res, DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "UBRuleCurveData.BaseRuleCurves" [STRINGIFY res, "GetMonthAsString"( date )];
+
+    END;
+
+    FUNCTION       "EstimateBankStorage" ( OBJECT res, NUMERIC startStorage, NUMERIC endStorage, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  TRUE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      ( endStorage - "EstimateEvap"( res, startStorage, endStorage, startDate, endDate ) - startStorage ) COMMENTED_BY "Available volume to contibute to bank storage" * res & "Bank Storage Coefficient" [0.00000000, 0.00000000] COMMENTED_BY "proportion of volume available for bank storage <br>that actually becomes bank storage";
+
+    END;
+
+    FUNCTION       "EstimateDeltaStorageEOWY" ( OBJECT res )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "RuleCurveStorage"( res, "RelativeEOWYDate"(  ) ) - "PrevStorage"( res );
+
+    END;
+
+    FUNCTION       "EstimateDeltaStorageOND" ( OBJECT res )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "RuleCurveStorage"( res, @"24:00:00 December Max DayOfMonth, Current Year" ) - "RuleCurveStorage"( res, @"24:00:00 October Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "PrevStorage" ( OBJECT res )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      res & "Storage" [@"t - 1"];
+
+    END;
+
+    FUNCTION       "EqLevel" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      $ "PowellData.EqualizationElevationTable" ["GetYearAsString"( @"t" ), 0.00000000];
+
+    END;
+
+    FUNCTION       "EnsureReleaseLimits" ( NUMERIC release, NUMERIC ll, NUMERIC ul )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( release > ul )
+   THEN
+      ul
+   ELSE
+      IF ( release < ll )
+      THEN
+         ll
+      ELSE
+         release
+      ENDIF
+   ENDIF;
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Flood Control Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "AvailableSpace" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "GetLiveCapacity"( reservoir ) - reservoir & "Storage" [@"t - 1"];
+
+    END;
+
+    FUNCTION       "ComputeMinimumSpace" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "GetLiveCapacity"( reservoir ) - "GetMininumSpace"( reservoir );
+
+    END;
+
+    FUNCTION       "ComputeTargetStorageRelease" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      IF ( "ComputeOutflowAtGivenStorageForSpaceBuilding"( % "Mead", "SpaceBuilding"(  ) ) > $ "MeadFloodControlData.MaxRelease" [0.00000000, 0.00000000] )
+   THEN
+      $ "MeadFloodControlData.MaxRelease" [0.00000000, 0.00000000]
+   ELSE
+      "Max"( "ComputeOutflowAtGivenStorageForSpaceBuilding"( % "Mead", "SpaceBuilding"(  ) ), 0.00000000 "acre-feet/month" )
+   ENDIF;
+
+    END;
+
+    FUNCTION       "ComputeTargetStorage" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      IF ( "ComputeOutflowAtGivenStorage"( % "Mead", "SpaceBuilding"(  ) ) > $ "MeadFloodControlData.MaxRelease" [0.00000000, 0.00000000] )
+   THEN
+      "ComputeStorageWithGivenOutflow"( % "Mead", $ "MeadFloodControlData.MaxRelease" [0.00000000, 0.00000000] )
+   ELSE
+      "SpaceBuilding"(  )
+   ENDIF;
+
+    END;
+
+    FUNCTION       "CurrentAvailableSpace" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "GetLiveCapacity"( reservoir ) - reservoir & "Storage" [];
+
+    END;
+
+    FUNCTION       "FloodControlEvap" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "StorageToArea"( reservoir, "GetLiveCapacity"( reservoir ) - "AvailableSpace"( reservoir ) / 2.00000000 ) * "SumEvapCoeff"( reservoir );
+
+    END;
+
+    FUNCTION       "DeltaBankStorage" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "Mead.Bank Storage Coefficient" [0.00000000, 0.00000000] * ( "AvailableSpace"( % "Mead" ) - $ "MeadFloodControlData.MinSpace" [0.00000000, 0.00000000] ) + $ "Powell.Bank Storage Coefficient" [0.00000000, 0.00000000] * "AvailableSpace"( % "Powell" );
+
+    END;
+
+    FUNCTION       "ForecastMeadInflow" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function computes the inflow forcast for Mead in for the flood control release.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumSlotVolume"( $ "PowellInflow.Unregulated", "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) + "SumGainsBelowVolume"( % "Powell", @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) + $ "MeadFloodControlData.Forcmax" ["Forcmax", "GetMonthAsString"( @"t" )] - $ "FloodControlOutput.Effective" [];
+
+    END;
+
+    FUNCTION       "SouthernNevConsumed" ( LIST dates )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumSlotVolume"( $ "PumpingFromLakeMead:SNWP.Diversion Requested", dates );
+
+    END;
+
+    FUNCTION       "ForecastRunoffSeason " (  )
+    RETURN_TYPE    LIST;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      WHILE ( "VolumeToFlow"( "ComputeMinMeadFloodRelease"( ( GET NUMERIC @INDEX 1.00000000 FROM results ) ), @"t" ) > $ "MeadFloodControlData.Levels" [0.00000000, ( GET NUMERIC @INDEX 1.00000000 FROM results )] AND ( GET NUMERIC @INDEX 1.00000000 FROM results ) <= 5.00000000 ) WITH LIST results = { "Max"( "VolumeToFlow"( "ComputeMinMeadFloodRelease"( 0.00000000 ), @"t" ), 0.00000000 "acre-feet/month" ) , 0.00000000 } DO
+      IF ( "VolumeToFlow"( "ComputeMinMeadFloodRelease"( ( GET NUMERIC @INDEX 1.00000000 FROM results ) + 1.00000000 ), @"t" ) <= $ "MeadFloodControlData.Levels" [0.00000000, ( GET NUMERIC @INDEX 1.00000000 FROM results )] )
+      THEN
+         INSERT $ "MeadFloodControlData.Levels" [0.00000000, ( GET NUMERIC @INDEX 1.00000000 FROM results )] INTO INSERT ( GET NUMERIC @INDEX 1.00000000 FROM results ) + 1.00000000 INTO results
+      ELSE
+         INSERT "Max"( "VolumeToFlow"( "ComputeMinMeadFloodRelease"( ( GET NUMERIC @INDEX 1.00000000 FROM results ) + 1.00000000 ), @"t" ), 0.00000000 "acre-feet/month" ) INTO INSERT ( GET NUMERIC @INDEX 1.00000000 FROM results ) + 1.00000000 INTO results
+      ENDIF
+   ENDWHILE;
+
+    END;
+
+    FUNCTION       "ComputeMinMeadFloodRelease" ( NUMERIC index )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "FloodControlOutput.Withoutrel" [] - "FloodControlLevelVolume"( "GetMonthlyDatelist"( @"t + 1", @"24:00:00 July Max DayOfMonth, Current Year" ), index );
+
+    END;
+
+    FUNCTION       "FloodControlLevelVolume" ( LIST dateList, NUMERIC index )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      FOR ( DATETIME date IN dateList ) WITH NUMERIC result = 0.00000000 "acre-feet" DO
+      result + "FlowToVolume"( $ "MeadFloodControlData.Levels" [0.00000000, index], date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "ComputeDeltaTargetStorage" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "GetTargetStorage"( reservoir ) - reservoir & "Storage" [@"t - 1"];
+
+    END;
+
+    FUNCTION       "UBCreditableSpace" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function sums the flood control creditable space for  Powell, Flaming Gorge, Navajo, and Blue Mesa   These are the upper basin reservoir<br>with flood control functions.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      FOR ( OBJECT reservoir IN "ListSubbasin"( "UBFloodControlReservoirs" ) ) WITH NUMERIC sum = 0.00000000 "acre-feet" DO
+      IF ( ( STRINGIFY reservoir ) == "FlamingGorge" )
+      THEN
+         sum + "Min"( "CurrentAvailableSpace"( % "FlamingGorge" ) + "CurrentAvailableSpace"( % "Fontenelle" ), "GetMaxCreditableSpace"( % "FlamingGorge" ) )
+      ELSE
+         sum + "Min"( "CurrentAvailableSpace"( reservoir ), "GetMaxCreditableSpace"( reservoir ) )
+      ENDIF
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "SpaceBuilding" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      IF ( "CurrentAvailableSpace"( % "Mead" ) + "UBCreditableSpace"(  ) > "SystemSpace"(  ) )
+   THEN
+      "ComputeMinimumSpace"( % "Mead" )
+   ELSE
+      "GetLiveCapacity"( % "Mead" ) - "SystemSpace"(  ) + "UBCreditableSpace"(  )
+   ENDIF;
+
+    END;
+
+    FUNCTION       "SumEvapCoeff" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function sums up all the evaporation coefficients for the specified reservoir until <br>July.<br>During the sum, the coefficient values are adjusted to deal with the unit conversion issue<br>between the current month and the months for which the values were entered, and converted<br>into 31 day months. ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      FOR ( DATETIME date IN "GetMonthlyDatelist"( @"t", @"24:00:00 July Max DayOfMonth, Current Year" ) ) WITH NUMERIC result = 0.00000000 "ft" DO
+      result + reservoir & "Evaporation Coefficients" ["GetMonth"( date ) - 1.00000000, 0.00000000] * 1.00000000 "month"
+   ENDFOR;
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "24 Month General Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "AcreFeetPrint" ( NUMERIC value )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "[acre-feet]";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      value;
+
+    END;
+
+    FUNCTION       "SlotToString" ( OBJECT obj )
+    RETURN_TYPE    LIST;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function starts out with a data object. It gets a list of slots in the object by using the GetSeriesSlots predefined function. It then uses the MAPLIST palette button to convert the list of slots into a list of strings.<br>";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      MAPLIST ( SLOT slotname IN "GetSeriesSlots"( obj ) ) DO
+      "GetSlotName"( slotname )
+   ENDMAPLIST;
+
+    END;
+
+    FUNCTION       "AcreFeetPerMonthPrint" ( NUMERIC value )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "[acre-feet/month]";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      value;
+
+    END;
+
+    FUNCTION       "CFSPrint" ( NUMERIC value )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "[cfs]";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      value;
+
+    END;
+
+    FUNCTION       "GetMonthlyDatelist" ( DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    LIST;
+    SCALE_UNITS    "";
+    DESCRIPTION    "makes a monthly datelist from the current month to the given month.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      IF ( startDate >= endDate )
+   THEN
+      { endDate }
+   ELSE
+      WHILE ( ( GET DATETIME @INDEX 0.00000000 FROM dateList ) > startDate ) WITH LIST dateList = { endDate } DO
+         INSERT ( GET DATETIME @INDEX 0.00000000 FROM dateList ) - "GetDaysInMonth"( ( GET DATETIME @INDEX 0.00000000 FROM dateList ) - 1.00000000 "day" ) INTO dateList
+      ENDWHILE
+   ENDIF;
+
+    END;
+
+    FUNCTION       "SumGainsBelow" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Local Inflow", "SUM", "INPUT", FALSE, @"t", @"t" );
+
+    END;
+
+    FUNCTION       "SumGainsBelowVolume" ( OBJECT reservoir, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Local Inflow", "SUM", "INPUT", TRUE, startDate, endDate );
+
+    END;
+
+    FUNCTION       "SumAllGainsBelowVolume" ( OBJECT reservoir, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Local Inflow", "SUM", "ALL", TRUE, startDate, endDate );
+
+    END;
+
+    FUNCTION       "SumDiversionsBelow" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Total Diversion Requested", "SUM", "INPUT", FALSE, @"t", @"t" );
+
+    END;
+
+    FUNCTION       "SumDiversionsBelowVolume" ( OBJECT reservoir, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Total Diversion Requested", "SUM", "INPUT", TRUE, startDate, endDate );
+
+    END;
+
+    FUNCTION       "SumAllDiversionsBelowVolume" ( OBJECT reservoir, DATETIME startDate, DATETIME endDate )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SumObjectsAggregatedOverTime"( "Below" CONCAT STRINGIFY reservoir, "Total Diversion Requested", "SUM", "ALL", TRUE, startDate, endDate );
+
+    END;
+
+    FUNCTION       "SumSlotVolume" ( SLOT slot, LIST dates )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      FOR ( DATETIME date IN dates ) WITH NUMERIC sum = 0.00000000 "acre-feet" DO
+      sum + "FlowToVolume"( slot [date], date )
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "Compute Head as a Function of Turbine Release" ( NUMERIC turbineRelease )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      ( $ "Mohave.Pool Elevation" [] + $ "Mohave.Pool Elevation" [@"t - 1"] ) / 2.00000000 - "TableInterpolation"( $ "Mohave.Tailwater Table", 0.00000000, 1.00000000, turbineRelease, @"t" );
+
+    END;
+
+    FUNCTION       "Annual Volume" ( SLOT slot )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Find the sum of a given slot over the calendar year<br>";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumFlowsToVolume"( slot, @"24:00:00 January Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "AnnualVolumeSlot" ( SLOT slot )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "Find the sum of a given slot over the calendar year<br>";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      "SumSlot"( slot, @"24:00:00 January Max DayOfMonth, Current Year", @"24:00:00 December Max DayOfMonth, Current Year" );
+
+    END;
+
+    FUNCTION       "SumSlotList" ( OBJECT obj )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This functions starts out with a data object. It gets a list of slots in the object by using the GetSeriesSlots predefined function. It then sums the values of all the slots in the object over the current timestep.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( SLOT slotname IN "GetSeriesSlots"( obj ) ) WITH NUMERIC result = 0.00000000 "acre-ft" DO
+      result + slotname []
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "SumSlotListDates" ( OBJECT obj, DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This functions starts out with a data object. It gets a list of slots in the object by using the GetSeriesSlots predefined function. It then sums the values of all the slots in the object over the current timestep.";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      FOR ( SLOT slotname IN "GetSeriesSlots"( obj ) ) WITH NUMERIC result = 0.00000000 "acre-ft" DO
+      result + slotname [date]
+   ENDFOR;
+
+    END;
+
+    FUNCTION       "GetLastDate" ( DATETIME date )
+    RETURN_TYPE    DATETIME;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( "GetMonth"( date ) > 1.00000000 )
+   THEN
+      @"24:00:00 December 31, Current Year + 2 Year"
+   ELSE
+      @"24:00:00 December 31, Current Year + 1 Year"
+   ENDIF;
+
+    END;
+
+    FUNCTION       "GetFirstDate" ( DATETIME date )
+    RETURN_TYPE    DATETIME;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function is used in rules that set monthly values in outyears. If the start timestep is December, we want the rule to skip the 1st 2 timesteps and set values Feb - Dec (11 total), otherwise set values Jan-Dec (12 total). ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( date == @"Start Timestep + 1" )
+   THEN
+      @"24:00:00 February Max DayOfMonth, Current Year"
+   ELSE
+      @"24:00:00 January Max DayOfMonth, Current Year"
+   ENDIF;
+
+    END;
+
+    FUNCTION       "GetDaysBasedOnFirstDate" ( DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "This function is used in rules that set monthly values in outyears. If the start timestep is December, we want the rule to skip the 1st 2 timesteps and set values Feb - Dec (11 total), otherwise set values Jan-Dec (12 total). ";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG FALSE;
+    BEGIN
+
+      IF ( date == @"Start Timestep + 1" )
+   THEN
+      11.00000000
+   ELSE
+      12.00000000
+   ENDIF;
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Rule Curve Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "ComputeOutflowAtGivenStorage" ( OBJECT reservoir, NUMERIC storage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    MIN_CONSTRAINT "GetMinRelease"( reservoir );
+    MAX_CONSTRAINT "GetMaxRelease"( reservoir );
+    BEGIN
+
+      "SolveOutflow"( reservoir, reservoir & "Inflow" [], storage, reservoir & "Storage" [@"t - 1"], @"t" );
+
+    END;
+
+    FUNCTION       "ComputeOutflowAtGivenStorageForSpaceBuilding" ( OBJECT reservoir, NUMERIC storage )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "SolveOutflow"( reservoir, reservoir & "Inflow" [], storage, reservoir & "Storage" [@"t - 1"], @"t" );
+
+    END;
+
+    FUNCTION       "ComputeStorageWithGivenOutflow" ( OBJECT reservoir, NUMERIC outflow )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    MIN_CONSTRAINT "GetInactiveCapacity"( reservoir );
+    MAX_CONSTRAINT "GetLiveCapacity"( reservoir );
+    BEGIN
+
+      "SolveStorage"( reservoir, reservoir & "Inflow" [], outflow, reservoir & "Storage" [@"t - 1"], @"t" );
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Get Data Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "GetMaxRelease" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "cfs";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "UBRuleCurveData.ReservoirData" [STRINGIFY reservoir, "maxRelease"];
+
+    END;
+
+    FUNCTION       "GetMinRelease" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "cfs";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "UBRuleCurveData.ReservoirData" [STRINGIFY reservoir, "minRelease"];
+
+    END;
+
+    FUNCTION       "GetMininumSpace" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "MeadFloodControlData.MinSpace" [STRINGIFY reservoir, "Min Space"];
+
+    END;
+
+    FUNCTION       "GetMaxCreditableSpace" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "MeadFloodControlData.CredSpace" ["Credit. Space", STRINGIFY reservoir];
+
+    END;
+
+    FUNCTION       "GetInactiveCapacity" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "UBRuleCurveData.ReservoirData" [STRINGIFY reservoir, "inactiveCapacityStorage"];
+
+    END;
+
+    FUNCTION       "GetLiveCapacity" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "UBRuleCurveData.ReservoirData" [STRINGIFY reservoir, "liveCapacityStorage"];
+
+    END;
+
+    FUNCTION       "GetRuleCurveStorage" ( OBJECT reservoir, DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "UBRuleCurveData.BaseRuleCurves" [STRINGIFY reservoir, "GetMonthAsString"( date )];
+
+    END;
+
+    FUNCTION       "GetTargetStorage" ( OBJECT reservoir )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "LBRuleCurveData." CONCAT ( STRINGIFY reservoir ) CONCAT " Target Storage" [];
+
+    END;
+
+    FUNCTION       "SystemSpace" (  )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      $ "MeadFloodControlData.Space" [0.00000000, "GetMonthAsString"( @"t" )];
+
+    END;
+
+  END;
+
+  UTILITY_GROUP "Shortage Functions";
+  DESCRIPTION   "";
+  ACTIVE        TRUE;
+  BEGIN
+
+    FUNCTION       "GetStringTier" ( NUMERIC indextier )
+    RETURN_TYPE    STRING;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      IF ( indextier == 0.00000000 )
+   THEN
+      "1075"
+   ELSE
+      IF ( indextier == 1.00000000 )
+      THEN
+         "1050"
+      ELSE
+         "1025"
+      ENDIF
+   ENDIF;
+
+    END;
+
+    FUNCTION       "Arizona Shortage Depletion" ( STRING user, NUMERIC indextier, DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-ft/month";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      WITH STRING short_elev = "GetStringTier"( indextier ) DO
+      "VolumeToFlow"( % "Arizona_CU_Schedules" & user [date] - "GetObject"( ( "Arizona_Shortage" CONCAT short_elev ) CONCAT "_Schedules" ) & user [date] * $ "Shortage.MonthlyPercents" ["GetMonthAsString"( date ), 0.00000000], date )
+   ENDWITH;
+
+    END;
+
+    FUNCTION       "CAP Shortage Depletion" ( NUMERIC indextier, DATETIME date )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "";
+    DESCRIPTION    "";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      "VolumeToFlow"( $ "Arizona_CU_Schedules.CAP" [date] - "GetAnnualCAPShortage"( indextier ) * $ "Shortage.MonthlyPercents" ["GetMonthAsString"( date ), 0.00000000], date );
+
+    END;
+
+    FUNCTION       "GetAnnualCAPShortage" ( NUMERIC indextier )
+    RETURN_TYPE    NUMERIC;
+    SCALE_UNITS    "acre-feet";
+    DESCRIPTION    "The annual CAP shortage amount is the Arizona shortage amount minus the sum of the non-CAP shortage amounts";
+    ACTIVE         TRUE;
+    PRE_EXEC_DIAG  FALSE;
+    POST_EXEC_DIAG TRUE;
+    BEGIN
+
+      WITH STRING short_elev = "GetStringTier"( indextier ) DO
+      $ "Shortage.State Shortage Volumes" [indextier, "Arizona"] - "SumSlotList"( "GetObject"( ( "Arizona_Shortage" CONCAT short_elev ) CONCAT "_Schedules" ) )
+   ENDWITH;
+
+    END;
+
+  END;
+
+END

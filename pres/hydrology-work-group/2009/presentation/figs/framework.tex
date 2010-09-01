@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+    [
+    node distance=8mm and 5mm,
+    block/.style ={
+        rectangle, 
+        draw=gray!80, 
+        thick, 
+        top color=gray!20, 
+        bottom color=white,
+        text badly centered, 
+        text width=7em,
+        rounded corners
+    },
+    a/.style={
+        -stealth',
+        draw=gray
+    }
+    ]
+    \node (index)[block] {Create ``Index'' gauge};
+    \node (predictors)[block,right=of index] {Identify large scale climate predictors};
+    \node (ensemble)[block,right=of predictors] {Generate ensemble forecasts};
+    \node (spatial)[block,below=of ensemble] {Spatial Disaggregation};
+    \node (temporal)[block,left=of spatial] {Temporal Disaggregation};
+      
+    \draw[a] (index) edge [bend left] node [above] {CDC correlation tool} (predictors.90);
+    \draw[a] (predictors) edge [bend left] node [above] {LWP regression} (ensemble.90);
+    \draw[a] (ensemble) edge node [right] {Nonparametric} (spatial);
+    \draw[a] (spatial) -- (temporal);
+    
+\end{tikzpicture}
