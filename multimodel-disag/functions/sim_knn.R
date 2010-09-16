@@ -57,6 +57,7 @@ sim.knn <- function(dat, nsim, l = length(dat), plot=F, quiet=F){
 	}
 	if(plot){
 		
+		#find the max density for y limits of plotting
 		m <- 0
 		for(i in 1:nsim){
 			x <- density(sims[,i])
@@ -65,7 +66,7 @@ sim.knn <- function(dat, nsim, l = length(dat), plot=F, quiet=F){
 		plot(z <- density(dat),ylim=c(0,m))
 		for(i in 1:nsim){
 			x <- density(sims[,i])
-			lines(x$x,x$y,col='grey')
+			lines(x$x,x$y,col=rgb(.5,.5,.5,.2))
 		}
 		lines(z)
 		
