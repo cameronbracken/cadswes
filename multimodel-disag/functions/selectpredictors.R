@@ -1,19 +1,15 @@
-selectpredictors=function(rawpredictors,response,outputfile){
+selectpredictors <- function(rawpredictors,response,outputfile,debug=F){
 
-  file.remove(outputfile)
+    if(file.exists(outputfile)) file.remove(outputfile)
 	
-	library(lattice)
-	library(akima)
-	library(leaps) 
-	library(locfit)
-	#options(warn=-1) #ignores all the annoying warnings
-        
-	#basepath = '/home/resu/public_html/windbag/R/multimodel/'
-	basepath = './'
-	source(paste(basepath,"functions/leaps_modified.r",sep=''))	# modified leaps commands loaded
-	source(paste(basepath,"functions/Combination_filter.r",sep=''))
+	suppressPackageStartupMessages(require(leaps))
+	suppressPackageStartupMessages(require(locfit))
 	
-	lps=leaps(rawpredictors,response,nbest=10,method="Cp",int=F,strictly.compatible=F)
+	    # calculate the 15 highest correlated subsets of each size (# predictors)
+	    # in practice, more than 4 predictors are never actually used becuse 
+	    # they end up being multicolinear
+	lps=leaps(rawpredictors,response,nbest=15,nvmax=3,method="Cp",int=F,
+	    strictly.compatible=F)
     # leaps uses the Cp statistic to compare subsets and chooses a set of the best 
     # subsets of predictors and stores them in lps$which
     # nbest-max number of subsets of each size to choose
@@ -27,56 +23,45 @@ selectpredictors=function(rawpredictors,response,outputfile){
 	alphas=vector(nsubsets,mode='numeric')
 	gcvs=vector(nsubsets,mode='numeric')
 	
-	alpha1=seq(.4,1,by=0.05)  #for 1st deg locfit .2	
-	alpha2=seq(.5,1,by=0.05)  #for 2nd degree locfit .3
+	alpha1=seq(.2,1,by=0.05)  #for 1st deg locfit .2	
+	alpha2=seq(.2,1,by=0.05)  #for 2nd degree locfit .3
 	deg1gcvs=1:length(alpha1);deg2gcvs=1:length(alpha2)
 	fitobj=list()
   
 	for(i in 1:nsubsets){ 
           # this loop determines the smoothing parameter and the 
           # corresponding locfit degree which minimizes the GCV statistic  
-		options(warn=-1)
-          
+                    
 		predset=rawpredictors[,allsubsets[i,]]     
           #pulls predictors out for particular subset
 		
-		for(j in 1:length(alpha1)){
-			fit=locfit.raw(x=predset,y=response,alpha=alpha1[j],deg=1,kern="bisq")
-			
-			z <- fit$dp[c("lk", "df1", "df2")]
-			n <- fit$mi["n"]
-			deg1gcvs[j] = (-2 * n * z[1])/(n - z[2])^2
-			
-			if(j==1){
-				deg1fits=list(fit)
-			}else{
-				deg1fits=c(deg1fits,list(fit))
-			}
+		for(deg in 1:2){
+		    alpha <- if(deg == 1) alpha1 else alpha2
+		    for(j in 1:length(alpha)){
+    			fit <- locfit.raw(x=predset, y=response, alpha=alpha[j], 
+    			    deg=deg, kern="bisq", maxk=200)
+
+    			z <- fit$dp[c("lk", "df1", "df2")]
+    			n <- fit$mi["n"]
+
+    			if(deg == 1){
+        			deg1gcvs[j] <- (-2 * n * z[1])/(n - z[2])^2
+        			deg1fits <- if(j==1) list(fit) else c(deg1fits,list(fit))
+			    }else{
+			        
+			        deg2gcvs[j] <- (-2 * n * z[1])/(n - z[2])^2
+        			deg2fits <- if(j==1) list(fit) else c(deg2fits,list(fit))
+			    }
+    		}
 		}
-		for(j in 1:length(alpha2)){
-			fit=locfit.raw(x=predset,y=response,alpha=alpha2[j],deg=2,kern="bisq")
-			
-			z <- fit$dp[c("lk", "df1", "df2")]
-			n <- fit$mi["n"]
-			deg2gcvs[j] = (-2 * n * z[1])/(n - z[2])^2
-			
-			if(j==1){
-				deg2fits=list(fit)
-			}else{
-				deg2fits=c(deg2fits,list(fit))
-			}
-		}
-		#deg1gcvs=gcvplot(response~predset,alpha=alpha1,deg=1,kern="bisq",scale=T)
-		#deg2gcvs=gcvplot(response~predset,alpha=alpha2,deg=2,kern="bisq",scale=T)
-          #calculate GCV for all alphas in sequence above 
-          #repeat for a deg 1 and 2 local fit
-          
-        #print(paste(round(min(c(deg1gcvs$values,deg2gcvs$values)),2),' ',i,'/',nsubsets,sep=''))
-		if(is.null(ncol(predset))){
-			print(paste('set',i,'out of',nsubsets,'with',1,'predictors'),quote=F)
-		}else{
-			print(paste('set',i,'out of',nsubsets,'with',ncol(predset),'predictors'),quote=F)
-		}
+		
+		string <- if(is.null(ncol(predset)))
+		    paste('Set',i,'out of',nsubsets,'with',1,'predictors')
+	    else
+		    paste('Set',i,'out of',nsubsets,'with',ncol(predset),'predictors')
+		
+		cat('\r',string)
+		flush.console()
         
         #determine where the lowest GCV value is and what are the alpha and deg
         if(min(deg2gcvs)<min(deg1gcvs)){  #min GCV has degree 2 locfit
@@ -93,15 +78,14 @@ selectpredictors=function(rawpredictors,response,outputfile){
 		  fitobj=c(fitobj,list( deg1fits[[hold[1]]] ))
 		}
 	}
-	
-	#print(fitobj[[1]])
-    
-	print('',quote=F)
-	for(i in 1:nsubsets){
-		print(paste('for subset ',as.integer(i),', GCV=',round(gcvs[i],2),
-				'; alpha=',alphas[i],sep=''),quote=F)
-	}
-	print('',quote=F)
+    cat('\n')
+    if(debug){
+    	for(i in 1:nsubsets){
+    		cat('For subset',as.integer(i),'\n\t\tGCV=',round(gcvs[i],2),
+    				'\n\t\talpha=',alphas[i],'\n')
+    	}
+    	cat('\n')
+    }
   
 	a=1
 	for(n in 1:max(lps$size)){ 
@@ -109,7 +93,9 @@ selectpredictors=function(rawpredictors,response,outputfile){
 			#this whole loop is really just book keeping for la large
 			#number of predictors and not really necessary for most cases
 			#It will discard predictor sets if there are too many 
-		print(paste('there are',length(lps$size[lps$size==n]),'sets with',n,'predictor(s)'),quote=F)
+		if(debug)
+		    cat('There are',length(lps$size[lps$size==n]),
+		        'sets with',n,'predictor(s)\n')
 		
 		b=a+length(lps$size[lps$size==n])-1  #number of sets w/ n predictors
 		
@@ -138,9 +124,9 @@ selectpredictors=function(rawpredictors,response,outputfile){
 				if(nsets<base){keepsets=nsets}
 		}
 		
-		
-		print(paste('keeping',keepsets,'out of',nsets,'sets;','indicies are',a,b),quote=F)
-		print('',quote=F)
+		if(debug)
+		    cat('\tKeeping',keepsets,'out of',
+		        nsets,'sets;','indicies are',a,b,'\n\n')
 		
 		
 		#these conditions are necessary because if there is only one member of a set then
@@ -149,7 +135,8 @@ selectpredictors=function(rawpredictors,response,outputfile){
 			keptpredictors=setswithnpredictors
 			keptpredictorset=c(keptpredictors,gcvssorted)
 			write(n,file=outputfile,append=TRUE,ncol=1)
-			write(t(keptpredictorset),file=outputfile,append=TRUE,ncol=length(keptpredictorset))
+			write(t(keptpredictorset),file=outputfile,append=TRUE,
+			    ncol=length(keptpredictorset))
 		}else{
 			keptpredictors=setswithnpredictors[gcvsordered[1:keepsets],]
 			keptpredictorset=cbind(keptpredictors,gcvssorted[1:keepsets])
@@ -164,20 +151,23 @@ selectpredictors=function(rawpredictors,response,outputfile){
 	#Now finally the last step 
 	allgcvsordered=order(gcvs)
 	
-		#Filters the combinations based on correlation between predictor varibles(multicolinearity)
-		#returns an array that is the same size or smaller than all subsets
-		#where rows corresponding to multicolinear sets have been discarded
+		#Filters the combinations based on correlation between predictor 
+		# varibles(multicolinearity)
+		# returns an array that is the same size or smaller than all subsets
+		# where rows corresponding to multicolinear sets have been discarded
 	combinationskept=combinationfilter(rawpredictors,allsubsets[allgcvsordered,])
 	#print(nrow(allsubsets[allgcvsordered,]))
 	
 	write("----------------------------------------",file=outputfile,append=TRUE)
-	write("Best Combinations that are not correlated among themselves",file=outputfile,append=TRUE)
+	write("Best Combinations that are not correlated among themselves",
+	    file=outputfile, append=TRUE)
 	write(t(combinationskept),file=outputfile,append=TRUE,ncol=length(combinationskept))
 	write("----------------------------------------",file=outputfile,append=TRUE)
 	
 	
 	finalselection=allgcvsordered[combinationskept]		
-	print(finalselection)
+	if(debug)
+	    print(finalselection)
 	finalpredictors=allsubsets[finalselection,]
 	
 	
@@ -188,7 +178,13 @@ selectpredictors=function(rawpredictors,response,outputfile){
   
 	predset=cbind(lps$size[finalselection],finalpredictors,gcvs[finalselection],
 				degs[finalselection],alphas[finalselection],gcvratio)
-				
+	info <- cbind(lps$size[finalselection], gcvs[finalselection],
+				degs[finalselection], alphas[finalselection], gcvratio)
+	
+	rownames(info) <- 1:nrow(predset)	
+	colnames(info) <- c('np', 'gcv', 'deg', 'alpha', 'gcvratio')
+	info <- as.data.frame(info)		
+	
 	hold=fitobj
 	fitobj=list()
 	for(i in 1:length(finalselection)){
@@ -197,9 +193,15 @@ selectpredictors=function(rawpredictors,response,outputfile){
 	}
 	
 	write("Finally selcted Combinations",file=outputfile,append=TRUE)
-	write("npredictors, predictors selected, GCV vals, deg, alpha,GCV ratio",file=outputfile,append=TRUE)
-	write(t(predset),file=outputfile,append=TRUE,ncol=ncol(predset))
-	return(list(p=predset,fitobj=fitobj))
+	write(paste("npredictors, predictors selected, GCV vals, deg, alpha, GCV ratio"),
+	    file=outputfile,append=TRUE)
+	for(i in 1:nrow(predset))
+	    cat(lps$size[finalselection][i],colnames(rawpredictors)[finalpredictors[i,]],
+	        gcvs[finalselection][i], degs[finalselection][i], 
+	        alphas[finalselection][i], gcvratio[i],'\n',sep=' ',
+	        file=outputfile, append=TRUE)
+	#write(t(predset),file=outputfile,append=TRUE,ncol=ncol(predset))
+	return(list(p=finalpredictors,info=info,fitobj=fitobj))
 	
 	
 	

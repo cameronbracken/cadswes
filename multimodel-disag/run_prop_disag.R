@@ -1,6 +1,7 @@
 source("functions/skew.R")
 source("functions/sim_knn.R")
 source('functions/wapply.R')
+source('functions/proportion_disag.R')
 require(lubridate)
 #######get data and format
 
