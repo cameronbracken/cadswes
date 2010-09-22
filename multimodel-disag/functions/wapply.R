@@ -27,3 +27,17 @@ wapply <- function(x, fun, win.length = length(x), ...){
 		
 	
 }
+
+stack.ts <- function(x){
+
+	matrix(pad.ts(x),ncol=frequency(x),byrow=T)
+
+}
+
+pad.ts <- function(x){
+	
+	ts(c(rep(NA,start(x)[2]-1),x,rep(NA,frequency(x)-end(x)[2])),
+		start=c(start(x)[1],1),
+		frequency=frequency(x))
+	
+}

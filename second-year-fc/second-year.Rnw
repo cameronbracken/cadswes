@@ -10,7 +10,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[sc]{mathpazo}
 \linespread{1.05}         % Palatino needs more leading (space between lines)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Verbatim
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \usepackage{fancyvrb}
+\makeatletter
+\let \@sverbatim \@verbatim
+\def \@verbatim {\@sverbatim \verbatimplus}
+{\catcode`'=13 \gdef \verbatimplus{\catcode`'=13 \chardef '=13 }} 
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
