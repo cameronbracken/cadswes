@@ -20,7 +20,7 @@ get.predictors <- function(datafile,predmonth){
 ############################################################
 # combinationfilter:
 #
-combinationfilter=function(AllPredictors,selpredsetcombi){
+combinationfilter=function(AllPredictors,selpredsetcombi,verbose){
   #This function will discard combinations which are highly
   #correlated among themselves (ie. multicolinear)
     predpos=0   
@@ -50,14 +50,14 @@ combinationfilter=function(AllPredictors,selpredsetcombi){
 
             if((max(corvalues)>sigcor) || (min(corvalues)<(-1*sigcor))){
                 decision=0
-                #print(paste("Combination",selpredset1, "NOT Selected",sep=" "),quote=F)
+                if(verbose > 1) cat("Combination",selpredset1, "NOT Selected\n")
             }else{
                 decision=1
-                #print(paste("Combination",selpredset1,"Selected"),quote=F)
+                if(verbose > 1) cat("Combination",selpredset1, "Selected\n")
             }
         }else{
             decision=1
-            #print(paste("Combination",selpredset1,"Selected"),quote=F)
+            if(verbose > 1) cat("Combination",selpredset1, "Selected\n")
         }
         
         if(decision==1){predpos=predpos+1;combinationkept[predpos]=selpredset1}                 

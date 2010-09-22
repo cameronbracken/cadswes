@@ -35,11 +35,11 @@ nat.ann.tot <- window(nat.ann.tot,start=year.s,end=year.e)
     # flow in MAF/year
 response <- nat.ann.tot/10^6
 
-calibration <- selectpredictors(predictors,response,'multimodelinfo.out')
+calibration <- selectpredictors(predictors,response,verbose=1)
 
 
 pred <- multimodel(calibration, predictors, response, predictors, 
-            npts, nsims, outputfile)
+            nrow(predictors), nsims, outputfile)
 #
 #write(t(pred),file=outputfile,ncolumns=nsims)
 #
