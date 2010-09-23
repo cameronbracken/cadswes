@@ -129,7 +129,7 @@ proportion.disag <- function(x,hist,n.sim=250,l=nrow(x)){
 	cat('Done.')
 }
 
-pdisag <- function(hist, nsim=1000,...){
+pdisag <- function(hist, nsim=1000, sims = NULL){
 
 	# hist - a matrix with years down the rows and 
 	#        months along the columns
@@ -142,7 +142,8 @@ pdisag <- function(hist, nsim=1000,...){
 		#all.equal(rep(1,nrow(hist)),rowSums(p))
 	
 	# simulate nsim annual sequences to disaggregate
-	sims <- sim.knn(agg, nsim=nsim,... )
+	if(is.null(sims))
+	    sims <- sim.knn(agg, nsim=nsim )
 	
 	pdisag <- list(hist=hist,agg=agg,p=p,nsim=nsim,sims=sims)
 	class(pdisag) <- 'pdisag'
@@ -160,7 +161,7 @@ print.pdisag <- function(x){
 	cat('\t',dim(x$hist)[1],'Years\n')
 	cat('\t',dim(x$hist)[2],'Periods\n')
 	cat('\t',dim(x$hist)[3],'Sites\n')
-	cat('Simulations: ',nsim,'\n')
+	cat('Simulations: ',x$nsim,'\n')
 }
 
 disag.pdisag <- function(obj, quiet=FALSE,plot=T){
@@ -182,9 +183,10 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 		cat('Disaggregating...\n')
 		pb <- txtProgressBar(1,ny,style=3)
 	}
+	#browser()
 		# the disag
 	for(i in 1:ny){
-		setTxtProgressBar(pb, i)
+		if(!quiet) setTxtProgressBar(pb, i)
 		for(j in 1:ns){
 
 				z <- obj$sims[i,j]
@@ -195,31 +197,35 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 					
 				if(length(d) == 2)	
 					disag[i,,j] <- obj$p[neighbor,]*z
-
 		}
 	}
 			
 	if(!quiet){
 		close(pb)
 	}
-	if(plot){
-
-		#find the max density for y limits of plotting
-		m <- 0
-		for(i in 1:nsim){
-			x <- density(disag[,6,19,i])
-			m <- ifelse(max(x$y)>m,max(x$y),m)
-		}
-		plot(z <- density(obj$hist[,6,19]),ylim=c(0,m))
-		for(i in 1:nsim){
-			x <- density(disag[,6,19,i])
-			lines(x$x,x$y,col=rgb(.5,.5,.5,.2))
-		}
-		lines(z)
-
-	}
 	
-	disag
+	obj$disag <- disag
+	obj
+}
+
+plot.pdisag <- function(obj,mon,site){
+    
+    if(is.null(obj$disag)) stop("No disag data available, run disag() first.")
+
+	#find the max density for y limits of plotting
+	m <- 0
+	for(i in 1:obj$nsim){
+		x <- density(obj$disag[,mon,site,i])
+		m <- ifelse(max(x$y)>m,max(x$y),m)
+	}
+	plot(z <- density(obj$hist[,mon,site]),ylim=c(0,m))
+	for(i in 1:obj$nsim){
+		x <- density(obj$disag[,mon,site,i])
+		lines(x$x,x$y,col=rgb(.5,.5,.5,.2))
+	}
+	lines(z)
+
+	
 }
 
 nn <- function(x, val, k = ceiling(sqrt(length(x))), index = FALSE){

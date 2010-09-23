@@ -1,4 +1,3 @@
-source("functions/skew.R")
 source("functions/sim_knn.R")
 source('functions/wapply.R')
 source('functions/proportion_disag.R')
@@ -47,6 +46,6 @@ for(j in 1:n.sites)
 # all.equal(apply(historical,1,sum),as.vector(nat.ann.tot))
 
 # do the disag 
-pd <- pdisag(historical)
+pd <- pdisag(historical, nsims=nsim)
 d <- disag(pd,plot=F)
 
