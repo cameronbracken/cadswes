@@ -1,21 +1,18 @@
-selectpredictors <- function(rawpredictors,response,verbose=1,debug=F,min.alpha = .3){
+selectpredictors <- function(rawpredictors, response, verbose=1, debug=F, 
+    min.alpha = .3, nvmax=3){
 
 	# verbose 0 = nothing
 	# verbose 1 = only status on long running computations
 	# verbose 2 = output reggarding results
 	# verbose 3 = Tons 
-	
-	suppressMessages(require(leaps))
-	suppressMessages(require(locfit))
 	options(warn=-1)
-	
 	    # Calculate the 15 highest correlated subsets of each size (# predictors)
 	    # in practice, more than 3 predictors are never actually used becuse 
 	    # they end up being multicolinear.
 	    # leaps uses the Cp statistic to compare subsets and chooses a set of the best 
         # subsets of predictors and stores them in lps$which
         # nbest-max number of subsets of each size to choose
-	lps <- leaps(rawpredictors,response,nbest=10,nvmax=3,method="Cp",int=F,
+	lps <- leaps(rawpredictors,response,nbest=10,nvmax=nvmax,method="Cp",int=F,
 	    strictly.compatible=F)
 	
 	if(verbose > 1) cat("------GCV-Results---------\n")
@@ -31,6 +28,11 @@ selectpredictors <- function(rawpredictors,response,verbose=1,debug=F,min.alpha 
 	pars <- data.frame(alpha = rep(alphaseq,2),
 	    deg = c(rep(1,npar/2),rep(2,npar/2)))
   
+    b <- 0
+    if(verbose > 0){ 
+        cat('Selecting best parameters...\n')
+        pb <- txtProgressBar(1,nsubsets*npar,style=3)
+    }
 	for(i in 1:nsubsets){ 
           # this loop determines the smoothing parameter and the 
           # corresponding locfit degree which minimizes the GCV statistic  
@@ -39,6 +41,7 @@ selectpredictors <- function(rawpredictors,response,verbose=1,debug=F,min.alpha 
           #pulls predictors out for particular subset
 		
 		for(p in 1:npar){
+		    b <- b + 1
 		    this.alpha <- pars$alpha[p]
 		    this.deg <- pars$deg[p]
 		    
@@ -67,16 +70,16 @@ selectpredictors <- function(rawpredictors,response,verbose=1,debug=F,min.alpha 
 		    paste('Set',i,'out of',nsubsets,'with',ncol(predset),'predictors')
 		
 		if(verbose > 0){
-		    cat('\r',string)
-		    flush.console()
+		    setTxtProgressBar(pb, b)
 	    }
         
         degs[i] <- pars[["deg"]][best.pos]
         alphas[i] <- pars[["alpha"]][best.pos]
         gcvs[i] <- max.gcv
         fitobj <- c(fitobj, list(best.fitobj))
+        
 	}
-    cat('\n')
+    if(verbose > 0) close(pb)
     if(verbose > 2){
     	for(i in 1:nsubsets){
     		cat('For subset',as.integer(i),'\n\t\tGCV=',round(gcvs[i],2),

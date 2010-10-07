@@ -22,7 +22,7 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 	W <- cumsum(W/sum(W))  #W is the weight function
 	
 	if(verbose > 0){
-	    cat('Making Predicitons...\n')
+	    cat('Making Predictions...\n')
 	    pb <- txtProgressBar(1,npredpts,style=3)
 	}
 	for(j in 1:npredpts){
@@ -70,5 +70,6 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 		}
 	}
 	if(verbose > 0) close(pb)
+	#cat('\n')
 	return(simdata)
 }

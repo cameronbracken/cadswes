@@ -137,3 +137,143 @@ gcvplot=function (..., alpha, df = 2)
     #class(ret) <- "gcvplot"
     ret
 }
+
+############################################################
+############################################################
+# myboxplot.matrix:
+#   Modified version of the boxplot.matrix function to call myboxplot
+#   which in turn calls myboxplot.stats to to 5th and 95th percentiles
+myboxplot.matrix <- function (x, use.cols = TRUE, ...) 
+{
+    groups <- if (use.cols) 
+        split(x, rep.int(1L:ncol(x), rep.int(nrow(x), ncol(x))))
+    else split(x, seq(nrow(x)))
+    if (length(nam <- dimnames(x)[[1 + use.cols]])) 
+        names(groups) <- nam
+    invisible(myboxplot(groups, ...))
+}
+
+############################################################
+############################################################
+# myboxplot:
+#   Modified version of the boxplot function which calls myboxplot.stats for 
+#   5th and 95th percentiles instead if default 1.5*IQR
+myboxplot <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE, 
+    notch = FALSE, outline = TRUE, names, plot = TRUE, border = par("fg"), 
+    col = NULL, log = "", pars = list(boxwex = 0.8, staplewex = 0.5, 
+        outwex = 0.5), horizontal = FALSE, add = FALSE, at = NULL) 
+{
+    args <- list(x, ...)
+    namedargs <- if (!is.null(attributes(args)$names)) 
+        attributes(args)$names != ""
+    else rep(FALSE, length.out = length(args))
+    groups <- if (is.list(x)) 
+        x
+    else args[!namedargs]
+    if (0L == (n <- length(groups))) 
+        stop("invalid first argument")
+    if (length(class(groups))) 
+        groups <- unclass(groups)
+    if (!missing(names)) 
+        attr(groups, "names") <- names
+    else {
+        if (is.null(attr(groups, "names"))) 
+            attr(groups, "names") <- 1L:n
+        names <- attr(groups, "names")
+    }
+    cls <- sapply(groups, function(x) class(x)[1L])
+    cl <- if (all(cls == cls[1L])) 
+        cls[1L]
+    else NULL
+    for (i in 1L:n) groups[i] <- list(myboxplot.stats(unclass(groups[[i]]), 
+        range))
+    stats <- matrix(0, nrow = 5L, ncol = n)
+    conf <- matrix(0, nrow = 2L, ncol = n)
+    ng <- out <- group <- numeric(0L)
+    ct <- 1
+    for (i in groups) {
+        stats[, ct] <- i$stats
+        conf[, ct] <- i$conf
+        ng <- c(ng, i$n)
+        if ((lo <- length(i$out))) {
+            out <- c(out, i$out)
+            group <- c(group, rep.int(ct, lo))
+        }
+        ct <- ct + 1
+    }
+    if (length(cl) && cl != "numeric") 
+        oldClass(stats) <- cl
+    z <- list(stats = stats, n = ng, conf = conf, out = out, 
+        group = group, names = names)
+    if (plot) {
+        if (is.null(pars$boxfill) && is.null(args$boxfill)) 
+            pars$boxfill <- col
+        do.call("bxp", c(list(z, notch = notch, width = width, 
+            varwidth = varwidth, log = log, border = border, 
+            pars = pars, outline = outline, horizontal = horizontal, 
+            add = add, at = at), args[namedargs]))
+        invisible(z)
+    }
+    else z
+}
+
+#This function replaces boxplot.stats --- it uses the middle 50% and
+#middle 90% instead of middle 50%(IQR) and 1.5*IQR.
+myboxplot.stats <- function (x, coef = NULL, do.conf = TRUE, do.out =
+TRUE)
+{
+  nna <- !is.na(x)
+  n <- sum(nna)
+  stats <- quantile(x, c(.05,.25,.5,.75,.95), na.rm = TRUE)
+  iqr <- diff(stats[c(2, 4)])
+  out <- x < stats[1] | x > stats[5]
+  conf <- if (do.conf)
+    stats[3] + c(-1.58, 1.58) * diff(stats[c(2, 4)])/sqrt(n)
+  list(stats = stats, n = n, conf = conf, out = x[out & nna])
+}
+
+# 
+
+wapply <- function(x, fun, win.length = length(x), ...){
+	
+	if(is.null(ncol(x))){
+		return(wapply.single(x, fun, win.length, ...))
+	}else{
+		for(i in 1:ncol(x)){
+			if(i == 1){
+				z <- wapply.single(x[,1], fun, win.length, ...)
+			}else{
+				z <- cbind(z,wapply.single(x[,i], fun, win.length, ...))
+			}
+			
+		}
+		attributes(z)$dimnames[[2]] <- attributes(x)$dimnames[[2]]
+		return(z)
+	}
+		
+	
+}
+
+wapply.single <- 
+function(x, fun, win.len = length(x), ...){
+    
+    r <- (length(x) %% win.len)
+    if(r > 0) x <- x[1:(length(x)-r)]
+    stack <- matrix(x,nrow = win.len)
+    return(apply(stack,2,fun,...))
+    
+}
+
+stack.ts <- function(x){
+
+	matrix(pad.ts(x),ncol=frequency(x),byrow=T)
+
+}
+
+pad.ts <- function(x){
+	
+	ts(c(rep(NA,start(x)[2]-1),x,rep(NA,frequency(x)-end(x)[2])),
+		start=c(start(x)[1],1),
+		frequency=frequency(x))
+	
+}
