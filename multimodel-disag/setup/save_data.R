@@ -23,6 +23,8 @@ year.e <- end(predictors)[1]
 
 nat.mon <- read.csv(datafile,skip=3)
 
+
+
 	# Create a time series object
 nat.mon.ts <- ts(nat.mon,start=c(year.s.flow,1),frequency=12)
 nat.mon.ts <- window( nat.mon.ts, start=c(year.s,1) , end = c(year.e,12))
@@ -35,7 +37,7 @@ nat.ann <- wapply(nat.mon.ts,sum,12)
 	# aggregated interveneing flows, summing the ac-ft/month gives ac-ft/year
 	# basically equivalent to total flow at lees ferry in
 	#  not sure why its slightly off from the natural flow (rounding error?)
-nat.ann.tot <- ts(apply(nat.ann,1,sum),start=year.s.flow,frequency=1)
+nat.ann.tot <- ts(apply(nat.ann,1,sum),start=year.s,frequency=1)
 #nat.ann.tot <- window(nat.ann.tot,start=year.s,end=year.e)
 
 	#array for obs common era data
@@ -50,7 +52,7 @@ if(seasonal)
     historical <- historical[,4:7,]
 
     # flow in MAF/year, sum of all months and sites compose each annual value
-response <- apply(historical,1,sum)
+response <- rowSums(historical)
 
 save(predictors, response, n.sites, n.years, n.months, year.s, 
     year.e, site.names, file='data/multimodel.RData')

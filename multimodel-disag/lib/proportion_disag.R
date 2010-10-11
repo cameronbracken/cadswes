@@ -5,7 +5,7 @@ pdisag <- function(hist, nsim=1000, sims = NULL){
 	#        months along the columns, optionally sites as layers
 	
 	
-	agg <- apply(hist,1,sum)
+	agg <- rowSums(hist)
 		#create the proportion matrix by dividing all the rows by the row sums
 	p <- hist/agg 
 		# check if it works:
