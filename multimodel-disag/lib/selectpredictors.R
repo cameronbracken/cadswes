@@ -31,6 +31,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
     b <- 0
     if(verbose > 0){ 
         cat('Selecting best parameters...\n')
+        flush.console()
         pb <- txtProgressBar(1,nsubsets*npar,style=3)
     }
 	for(i in 1:nsubsets){ 

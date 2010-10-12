@@ -55,6 +55,7 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 
 	if(!quiet) {
 		cat('Disaggregating...\n')
+		flush.console()
 		pb <- txtProgressBar(1,ny,style=3)
 	}
 	#browser()
@@ -65,6 +66,7 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 
 				z <- obj$sims[i,j]
 				neighbor <- nn(obj$agg,z,index=T)
+				#browser()
 				
 				if(length(d) == 3)	
 					disag[i,,,j] <- obj$p[neighbor,,]*z

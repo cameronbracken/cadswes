@@ -3,11 +3,13 @@ nsims <- 1000
     #lead time, could be nov, jan, feb, apr
 predmonth <- "apr"
     # Should forecasts be done only for apr-july
-seasonal <- TRUE
+seasonal <- FALSE
     # minimum proportion of data to use in local regression
 min.alpha  <- .3
     # maximum number of variables to include in a single model 
 nvmax <- 3
+    # should intervening flows be used?  If FALSE, total flows are used. 
+intervening <- T
 
     # load libraries, source code, and data
 source('setup/setup.R')

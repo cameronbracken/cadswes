@@ -23,6 +23,7 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 	
 	if(verbose > 0){
 	    cat('Making Predictions...\n')
+	    flush.console()
 	    pb <- txtProgressBar(1,npredpts,style=3)
 	}
 	for(j in 1:npredpts){
