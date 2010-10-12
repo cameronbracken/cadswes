@@ -1,0 +1,2 @@
+yearlyagg -i %NAVAJO_DIR%\results\ClimateResults_070610\CRBFC.shortages.rdf -o %NAVAJO_DIR%\results\ClimateResults_070610\CRBFC.AnnualShortages.rdf -c %NAVAJO_DIR%\control\AnnualAgg\ClimateShortages2Annual.control
+yearlyagg -i %NAVAJO_DIR%\results\ClimateResults_070610\VIC.shortages.rdf -o %NAVAJO_DIR%\results\ClimateResults_070610\VIC.AnnualShortages.rdf -c %NAVAJO_DIR%\control\AnnualAgg\ClimateShortages2Annual.control

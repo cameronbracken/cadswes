@@ -1,0 +1,25 @@
+# Upper Basin Checks to determine if reversed rule order effects upper basin
+
+# Reservoirs
+Navajo.Inflow: file=$NAVAJO_DIR/results/NF.results.rdf
+Navajo.Outflow: file=$NAVAJO_DIR/results/NF.results.rdf
+Navajo.Storage: file=$NAVAJO_DIR/results/NF.results.rdf
+Navajo.Pool Elevation: file=$NAVAJO_DIR/results/NF.results.rdf
+Navajo.Spill: file=$NAVAJO_DIR/results/NF.results.rdf
+
+# represents the san juan inflow into the san juan/colo confluence, and 
+# essentially the gage at bluff
+SanJuanToPowell.Outflow: file=$NAVAJO_DIR/results/NF.results.rdf
+# represents the same value but in cfs rather than acre-ft/month
+Bluff.Gage Inflow: file=$NAVAJO_DIR/results/NF.results.rdf
+# this is the amount of water coming in from the Dolores River basin
+IntrabasinExportAndDoloresProject.Total Return Flow: file=$NAVAJO_DIR/results/NF.results.rdf
+AggReach.Inflow: file=$NAVAJO_DIR/results/NF.results.rdf
+AggReach.Outflow: file=$NAVAJO_DIR/results/NF.results.rdf
+
+# Shortages
+DepletionShortages.SeriesSlot: file=$NAVAJO_DIR/results/NF.shortages.rdf
+AggDiversionSite.Total Depletion Requested: file=$NAVAJO_DIR/results/NF.shortages.rdf
+AggDiversionSite.Total Diversion Requested: file=$NAVAJO_DIR/results/NF.shortages.rdf
+AggDiversionSite.Total Depletion: file=$NAVAJO_DIR/results/NF.shortages.rdf
+AggDiversionSite.Total Diversion: file=$NAVAJO_DIR/results/NF.shortages.rdf

@@ -1,12 +1,12 @@
 # RiverWare_Object 5.1.3 Patch
-# Created 14:30 November 18, 2009
+# Created 11:49 January 7, 2010
 # 
 DST 0
 FlagEncoding 3
 # Section: Objects
 set obj {Fontenelle}
 set o "$ws.Fontenelle"
-$ws SimObj $obj {LevelPowerReservoir} 456 2096 {} 50 6400
+$ws SimObj $obj {LevelPowerReservoir} 457 2096 {} 50 6400
 "$o" sDM {Alternate Hydrologies} {No Method}
 "$o" sDM {Stochastic Optimization Storage Type} {No Method}
 "$o" sDM {hydrologicInflowCalculationCategory} {inputHydrologicInflow}

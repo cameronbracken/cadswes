@@ -10,6 +10,7 @@ source('libnatcompare.R')
 figPrefix = 'figs'
 paPath = 'pa'
 if(!file.exists(figPrefix)) dir.create(figPrefix)
+if(!file.exists(file.path(figPrefix,paPath))) dir.create(file.path(figPrefix,paPath))
 
 sComp <- 1971
 eComp <- 2000
@@ -329,7 +330,7 @@ f <- function(x) quantile(x,0.95,na.rm=T)
 smax <- as.matrix(seasonal.stat(diff, f))
 
 	#names of months
-mon <- format(as.POSIXct(sprintf("2009-%02d-01",1:12),"%Y-%m-%d"),"%b")
+mon <- month.abb
 
 #########################################################
 # Plot the median cumulative difference, 

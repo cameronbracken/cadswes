@@ -1,0 +1,6 @@
+DoloresRiver.Inflow: file=$(CRSS_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize
+#DoloresRiver.Inflow Salt Concentration:  file=$(NAVAJO_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize
+SJAboveNavajo.Inflow: file=$(CRSS_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize 
+#SJAboveNavajo.Inflow Salt Concentration: file=$(NAVAJO_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize 
+SJBelowNavajo:GainsAboveBluff.Local Inflow: file=$(CRSS_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize 
+#SJBelowNavajo:GainsAboveBluff.Local Inflow Salt Concentration: file=$(NAVAJO_DIR)/dmi/NFSinput/temp/%o.%s  units=acre-feet/month scale=1.0 import=resize 

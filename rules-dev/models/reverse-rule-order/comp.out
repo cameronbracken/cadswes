@@ -1,0 +1,1869 @@
+
+
+Model file differences:
+ - First line is  "24-month-expanded-basline.mdl"
+ - Second line is "24-month-expanded-reverse.mdl"
+
+AAC.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AAC.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AAC.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AAC.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AAC.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AAC.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AAC:Coachella.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AAC:IID.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AAC:Ranch5.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AAC:SaltonSea.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AAC:YumaProject.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+Arizona_CU_AnnualApproval.AzPumpersDvsToPkr.order:
+38 37
+500 500
+
+Arizona_CU_AnnualApproval.Ft Yuma.order:
+37 36
+500 500
+
+AzDvsToPkr.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+AzDvsToPkr.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+AzDvsToPkr.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+AzDvsToPkr.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+AzDvsToPkr.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+AzDvsToPkr:AzPumpersDvsToPkr.Depletion Requested.order:
+500 25
+500 500
+
+AzDvsToPkr:AzPumpersDvsToPkr.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:AzPumpersDvsToPkr.Diversion Requested.order:
+500 24
+500 500
+
+AzDvsToPkr:AzPumpersDvsToPkr.Minimum Diversion Request.order:
+500 26
+500 500
+
+AzDvsToPkr:BullheadCity.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:GoldenShores.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:HavasuNWR.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:LakeHavasuCity.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:MohaveValleyIID.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzDvsToPkr:MohaveWaterConsDist.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AzPkrToImp.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AzPkrToImp.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AzPkrToImp.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AzPkrToImp.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+AzPkrToImp:AzPumpersAbvImp.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:BrookeWater.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:CibolaNWR.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:CibolaValleyIID.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:Ehrenberg.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:ImperialNWR.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+AzPkrToImp:Parker.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+BelowImperialDam.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 25 @ 24 32767 @ 3 END
+
+BelowImperialDam.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:GainsImpToNIB.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:GainsImpToNIB.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:GainsImpToNIB.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:Gila River.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:Gila River.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:Gila River.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:MexicanTreatyDelivery.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:MexicanTreatyDelivery.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:MexicanTreatyDelivery.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:MexicanTreatyDelivery.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 25 @ 24 32767 @ 3 END
+
+BelowImperialDam:MexicanTreatyDelivery.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:OthersBlwImp.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:OthersBlwImp.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:OthersBlwImp.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:OthersBlwImp.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BelowImperialDam:OthersBlwImp.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+BlueMesa.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+BlueMesa.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 10 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 74 @ 24 32767 @ 3 END
+
+BlueMesa.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+BlueMesa.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 10 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 74 @ 24 32767 @ 3 END
+
+BlueMesa.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 10 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 74 @ 24 END
+
+BlueMesa.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+BlueMesa.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+BlueMesa.Storage.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 74 @ 24 END
+
+BlueMesa.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+BlueMesa.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 10 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 74 @ 24 32767 @ 3 END
+
+CAPDiversion.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CAPDiversion.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CAPDiversion.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CAPDiversion.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 57 @ 10 51 @ 2 52 @ 24 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 34 @ 10 26 @ 2 27 @ 24 END
+
+CAPDiversion.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CAPDiversion.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CRIR.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CRIR.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CRIR.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CRIR.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CRIR.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CRIR.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CRIR:CRIRAz.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CRIR:CRIRCa.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaDvsToPkr.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CaDvsToPkr.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CaDvsToPkr.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CaDvsToPkr.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaDvsToPkr.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CaDvsToPkr.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+CaDvsToPkr:Chemehuevi.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaDvsToPkr:Needles.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaDvsToPkr:OtherLCWSP.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaPkrToImp.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CaPkrToImp.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CaPkrToImp.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CaPkrToImp.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaPkrToImp.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CaPkrToImp.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+CaPkrToImp:CaPumpersAbvImp.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CaPkrToImp:Winterhaven.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+CoRivMeadToMohave.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 END
+
+CoRivMeadToMohave.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:GainsAboveDavis.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 END
+
+CoRivMeadToMohave:GainsAboveDavis.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:GainsAboveDavis.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:OthersMeadToMohave.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:OthersMeadToMohave.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:OthersMeadToMohave.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:OthersMeadToMohave.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+CoRivMeadToMohave:OthersMeadToMohave.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+ColoradoAbovePowell.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell:InterveningAbovePowell.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell:InterveningAbovePowell.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 4 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 80 @ 24 32767 @ 3 END
+
+ColoradoAbovePowell:InterveningAbovePowell.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+ColoradoAbovePowell:InterveningAbovePowell.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Crystal.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Crystal.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 9 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 75 @ 24 END
+
+Crystal.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Crystal.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+FlamingGorge.Bank Storage.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 7 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 77 @ 24 32767 @ 3 END
+
+FlamingGorge.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+FlamingGorge.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 7 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 77 @ 24 32767 @ 3 END
+
+FlamingGorge.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+FlamingGorge.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 7 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 77 @ 24 32767 @ 3 END
+
+FlamingGorge.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 7 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 77 @ 24 END
+
+FlamingGorge.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+FlamingGorge.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+FlamingGorge.Storage.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 77 @ 24 END
+
+FlamingGorge.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+FlamingGorge.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 7 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 77 @ 24 32767 @ 3 END
+
+FtMohaveIndRes.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+FtMohaveIndRes.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+FtMohaveIndRes.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+FtMohaveIndRes.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+FtMohaveIndRes.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+FtMohaveIndRes.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+FtMohaveIndRes:AZ.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+FtMohaveIndRes:CA.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+FtMohaveIndRes:NV.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaAndYumaUsers.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaAndYumaUsers.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaAndYumaUsers.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaAndYumaUsers.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaAndYumaUsers.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaAndYumaUsers.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaAndYumaUsers:CocopahIndRes.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaAndYumaUsers:DesertLawnMemorial.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaAndYumaUsers:GilaMonsterFarms.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaGravityMainCanal.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaGravityMainCanal.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaGravityMainCanal.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaGravityMainCanal.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+GilaGravityMainCanal:CityOfYuma.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:MCAirStation.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:NGVIDD.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:UnitB.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:UofA.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:WMIDD.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:YCWUA.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:YID.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:YMIDD.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:YumaProvingGround.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GilaGravityMainCanal:YumaUnionHighScl.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+GreenAboveFlamingGorge.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenAboveFlamingGorge.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenAboveFlamingGorge.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenAboveFlamingGorge.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenAboveFlamingGorge:InterveningAboveFlamingGorge.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 7 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 77 @ 24 32767 @ 3 END
+
+GreenAboveFlamingGorge:InterveningAboveFlamingGorge.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenAboveFlamingGorge:InterveningAboveFlamingGorge.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 7 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 77 @ 24 END
+
+GreenBelowFlamingGorge.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 6 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 78 @ 24 END
+
+GreenBelowFlamingGorge.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge:FlowAtJensen.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge:FlowAtJensen.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 6 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 78 @ 24 32767 @ 3 END
+
+GreenBelowFlamingGorge:FlowAtJensen.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge:YampaRiver.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 6 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 78 @ 24 32767 @ 3 END
+
+GreenBelowFlamingGorge:YampaRiver.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenBelowFlamingGorge:YampaRiver.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 6 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 78 @ 24 END
+
+GreenColorado.Inflow1.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GreenColorado.Inflow2.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 6 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 78 @ 24 END
+
+GreenColorado.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveBlueMesa.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveBlueMesa.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveBlueMesa.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveBlueMesa.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveBlueMesa:InterveningAboveBlueMesa.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 10 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 74 @ 24 32767 @ 3 END
+
+GunnisonAboveBlueMesa:InterveningAboveBlueMesa.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveBlueMesa:InterveningAboveBlueMesa.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 10 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 74 @ 24 END
+
+GunnisonAboveCrystal.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+GunnisonAboveCrystal.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveCrystal.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveCrystal.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveCrystal.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveCrystal:InterveningAboveCrystal.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+GunnisonAboveCrystal:InterveningAboveCrystal.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 8 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 76 @ 24 32767 @ 3 END
+
+GunnisonAboveCrystal:InterveningAboveCrystal.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveCrystal:InterveningAboveCrystal.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint:InterveningAboveMorrowPoint.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 75 @ 24 32767 @ 3 END
+
+GunnisonAboveMorrowPoint:InterveningAboveMorrowPoint.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonAboveMorrowPoint:InterveningAboveMorrowPoint.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonBelowCrystal.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+GunnisonBelowCrystal.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+GunnisonBelowCrystal.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonBelowCrystal.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonBelowCrystal.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+GunnisonBelowCrystal:TunnelDivBelowCrystalForAg.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+GunnisonBelowCrystal:TunnelDivBelowCrystalForAg.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+GunnisonBelowCrystal:TunnelDivBelowCrystalForAg.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Havasu.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+Havasu.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 32767 @ 3 END
+
+Havasu.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+Havasu.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 25 @ 24 32767 @ 3 END
+
+Havasu.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 47 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 32767 @ 3 END
+
+Havasu.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 69 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 16 @ 24 END
+
+Havasu.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+Havasu.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+Havasu.Storage.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 14 0 47 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 14 0 16 @ 24 32767 @ 3 END
+
+Havasu.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+Havasu.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 32767 @ 3 END
+
+HavasuToImperial.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 25 @ 24 END
+
+HavasuToImperial.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:AzPkrToImp.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:AzPkrToImp.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:AzPkrToImp.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:AzPkrToImp.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:AzPkrToImp.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CRIR.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CRIR.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CRIR.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 25 @ 24 END
+
+HavasuToImperial:CRIR.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CRIR.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CaPkrToImp.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CaPkrToImp.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CaPkrToImp.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CaPkrToImp.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:CaPkrToImp.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:DailyOperationalGainLoss.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:DailyOperationalGainLoss.Local Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 40 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 44 @ 24 32767 @ 3 END
+
+HavasuToImperial:DailyOperationalGainLoss.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:DailyOperationalGainLoss.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:GainsPkrToImp.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:GainsPkrToImp.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:GainsPkrToImp.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:PaloVerde.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:PaloVerde.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:PaloVerde.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:PaloVerde.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+HavasuToImperial:PaloVerde.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:AAC.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:AAC.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:AAC.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:AAC.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:AAC.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaAndYumaUsers.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaAndYumaUsers.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaAndYumaUsers.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaAndYumaUsers.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaAndYumaUsers.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaGravityMainCanal.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaGravityMainCanal.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaGravityMainCanal.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaGravityMainCanal.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+ImperialDamDiversions:GilaGravityMainCanal.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MWDAndCAPReach.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:CAPDIVERSION.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:CAPDIVERSION.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:CAPDIVERSION.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:CAPDIVERSION.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:CAPDIVERSION.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:GainsAboveParker.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:GainsAboveParker.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:GainsAboveParker.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:MWDDiversion.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:MWDDiversion.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:MWDDiversion.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:MWDDiversion.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDAndCAPReach:MWDDiversion.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 56 @ 10 54 @ 2 55 @ 24 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 35 @ 10 29 @ 2 30 @ 24 END
+
+MWDDiversion.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MWDDiversion:MWD.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 56 @ 10 54 @ 2 55 @ 24 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 35 @ 10 29 @ 2 30 @ 24 END
+
+MWDDiversion:Tijuana.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+Mead.Available for Diversion.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 0 69 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 0 15 @ 24 END
+
+Mead.Bank Storage.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mead.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mead.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 53 69 @ 2 53 69 @ 11 53 69 @ 8 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 28 15 @ 2 28 15 @ 11 28 15 @ 8 END
+
+Mead.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mead.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mead.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mead.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 69 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 15 @ 24 END
+
+Mead.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mead.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mead.Storage.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 15 @ 24 END
+
+Mead.Tailwater Base Value.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 END
+
+Mead.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mead.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+MexicanTreatyDelivery.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MexicanTreatyDelivery.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MexicanTreatyDelivery.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MexicanTreatyDelivery.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+MexicanTreatyDelivery.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MexicanTreatyDelivery.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+MexicanTreatyDelivery:MexicoBypass.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+MexicanTreatyDelivery:MexicoExcess.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+MexicanTreatyDelivery:MexicoSched.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+Mohave.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mohave.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mohave.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mohave.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 32767 @ 3 END
+
+Mohave.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 46 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+Mohave.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 69 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 15 @ 24 END
+
+Mohave.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mohave.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mohave.Storage.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 14 0 46 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 14 0 15 @ 24 32767 @ 3 END
+
+Mohave.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+Mohave.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 15 @ 24 32767 @ 3 END
+
+MohaveToHavasu.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 END
+
+MohaveToHavasu.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:AzDvsToPkr.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:AzDvsToPkr.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:AzDvsToPkr.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:AzDvsToPkr.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:AzDvsToPkr.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:CaDvsToPkr.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:CaDvsToPkr.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:CaDvsToPkr.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:CaDvsToPkr.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:CaDvsToPkr.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:FtMohaveIndRes.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:FtMohaveIndRes.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:FtMohaveIndRes.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:FtMohaveIndRes.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:FtMohaveIndRes.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:NvDvsToPkr.Available For Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:NvDvsToPkr.Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:NvDvsToPkr.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 69 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 16 @ 24 END
+
+MohaveToHavasu:NvDvsToPkr.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MohaveToHavasu:NvDvsToPkr.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+MorrowPoint.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+MorrowPoint.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+MorrowPoint.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+MorrowPoint.Outflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+MorrowPoint.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 9 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 75 @ 24 END
+
+MorrowPoint.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+MorrowPoint.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+MorrowPoint.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+MorrowPoint.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Navajo.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+Navajo.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+Navajo.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 5 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 79 @ 24 32767 @ 3 END
+
+Navajo.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 5 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 79 @ 24 END
+
+Navajo.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+Navajo.Release.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+Navajo.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+Navajo.Storage.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 79 @ 24 END
+
+NvDvsToPkr.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+NvDvsToPkr.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+NvDvsToPkr.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+NvDvsToPkr.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+NvDvsToPkr.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+NvDvsToPkr.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 16 @ 24 END
+
+NvDvsToPkr:BigBend.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+NvDvsToPkr:SCE.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+OthersBlwImp.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+OthersBlwImp.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+OthersBlwImp.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+OthersBlwImp.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+OthersBlwImp:AzPumpersBlwImp.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp:CaPumpersBlwImp.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp:Ft Yuma.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp:SouthernPacific.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp:YAO.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersBlwImp:YumaIsland.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersMeadToMohave.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+OthersMeadToMohave.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+OthersMeadToMohave.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+OthersMeadToMohave.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersMeadToMohave.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+OthersMeadToMohave.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 15 @ 24 END
+
+OthersMeadToMohave:DavisDamProject.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersMeadToMohave:LMNRA Az Mohave.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+OthersMeadToMohave:LMNRA Nv Mohave.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+PaloVerde.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+PaloVerde.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+PaloVerde.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+PaloVerde.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+PaloVerde.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+PaloVerde.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 69 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 25 @ 24 END
+
+Powell.Bank Storage.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Powell.Bypass.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Powell.Energy.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Powell.Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Powell.Pool Elevation.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+Powell.Previous Storage.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 9 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 @ 2 75 @ 24 END
+
+Powell.Regulated Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Powell.Spill.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Powell.Storage.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 75 @ 24 END
+
+Powell.Tailwater Elevation.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+Powell.Turbine Release.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 32767 @ 3 END
+
+PumpingFromLakeMead.Total Available Water.assignPriorities:
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 0 69 @ 24 END
+{10-01-2009 00:00:00} {11-01-2011 00:00:00} 1 MONTH -1 32767 0 15 @ 24 END
+
+PumpingFromLakeMead.Total Depletion Requested.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 56 69 @ 23 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 35 15 @ 23 END
+
+PumpingFromLakeMead.Total Depletion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 53 69 @ 2 53 69 @ 11 53 69 @ 8 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 28 15 @ 2 28 15 @ 11 28 15 @ 8 END
+
+PumpingFromLakeMead.Total Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 56 @ 9 53 @ 27 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 35 @ 9 28 @ 27 END
+
+PumpingFromLakeMead.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 53 69 @ 2 53 69 @ 11 53 69 @ 8 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 28 15 @ 2 28 15 @ 11 28 15 @ 8 END
+
+PumpingFromLakeMead.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 53 69 @ 2 53 69 @ 11 53 69 @ 8 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 28 15 @ 2 28 15 @ 11 28 15 @ 8 END
+
+PumpingFromLakeMead:LMNRA Az Mead.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 24 @ 36 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 60 @ 36 END
+
+PumpingFromLakeMead:SNWP.Diversion Requested.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 56 @ 9 53 @ 27 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 6 35 @ 9 28 @ 27 END
+
+SanJuanAbvNavajo.Inflow2.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+SanJuanAbvNavajo.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+SanJuanColorado.Inflow1.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+SanJuanColorado.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+TunnelReturnFlow.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 9 @ 24 END
+{08-01-2008 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 0 @ 15 75 @ 24 END
+
+TunnelReturnFlow.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+TunnelReturnFlow.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 9 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 75 @ 24 END
+
+UpperSanJuan.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 5 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 79 @ 24 32767 @ 3 END
+
+UpperSanJuan.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+UpperSanJuan.Total Diversion.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+UpperSanJuan.Total Local Inflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+UpperSanJuan.Total Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+UpperSanJuan:AzoteaTunnel.Inflow.assignPriorities:
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 5 @ 24 32767 @ 3 END
+{08-01-2008 00:00:00} {01-01-2012 00:00:00} 1 MONTH -1 32767 @ 15 79 @ 24 32767 @ 3 END
+
+UpperSanJuan:AzoteaTunnel.Outflow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END
+
+UpperSanJuan:AzoteaTunnel.Return Flow.assignPriorities:
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 5 @ 24 END
+{10-01-2009 00:00:00} {10-01-2011 00:00:00} 1 MONTH -1 32767 79 @ 24 END

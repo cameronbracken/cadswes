@@ -1,0 +1,20 @@
+# Upper Basin Checks to determine if reversed rule order effects upper basin
+
+# Reservoirs
+Navajo.Inflow: file=$NAVAJO_DIR/results/res.rdf
+Navajo.Outflow: file=$NAVAJO_DIR/results/res.rdf
+Navajo.Storage: file=$NAVAJO_DIR/results/res.rdf
+
+
+# Confluences
+# represents the san juan inflow into the san juan/colo confluence
+SanJuanToPowell.Outflow: file=$NAVAJO_DIR/results/reach.rdf
+# represents the same value but in cfs rather than acre-ft/month
+Bluff.Gage Inflow: file=$NAVAJO_DIR/results/reach.rdf
+DoloresRiver.Inflow: file=$NAVAJO_DIR/results/reach.rdf
+DoloresNearCiscoUT.Gage Inflow: file=$NAVAJO_DIR/results/reach.rdf
+SanJuanSJTribs.Inflow1: file=$NAVAJO_DIR/results/reach.rdf
+
+# Other Results
+NavajoResults.SeriesSlot: file=$NAVAJO_DIR/results/otherResults.rdf
+SanJuanUsersDepletionDelta.SeriesSlot: file=$NAVAJO_DIR/results/otherResults.rdf

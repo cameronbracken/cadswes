@@ -1,0 +1,2747 @@
+# RiverWare_Object 5.2.6 Patch
+# Created 16:37 July 12, 2010
+# 
+DST 0
+FlagEncoding 3
+# Section: Objects
+set obj {Fontenelle}
+set o "$ws.Fontenelle"
+$ws SimObj $obj {LevelPowerReservoir} 1594 2643 {} 50 6370
+"$o" sDM {Alternate Hydrologies} {No Method}
+"$o" sDM {Stochastic Optimization Storage Type} {No Method}
+"$o" sDM {hydrologicInflowCalculationCategory} {inputHydrologicInflow}
+"$o" sDM {spillCalculationCategory} {monthlySpillCalc}
+"$o" sDM {Unregulated Spill Type} {Bare Crest Only}
+"$o" sDM {Regulated Spill Overflow} {None}
+"$o" sDM {Input Outflow Adjustment} {No Outflow Adjustment}
+"$o" sDM {energyInStorageCalcCategory} {noEIS}
+"$o" sDM {Evaporation and Precipitation} {MonthlyEvaporationCalc}
+"$o" sDM {bankStorageCalcCategory} {NoBankStorage}
+"$o" sDM {SedimentCalculationCategory} {NoSedimentCalc}
+"$o" sDM {Seepage Calculation} {No Seepage}
+"$o" sDM {Diversion from Reservoir} {No Diversion}
+"$o" sDM {targetOperationCalculationCategory} {simpleTarget}
+"$o" sDM {Surcharge Release Calculation} {None}
+"$o" sDM {Flood Control Release Calculation} {None}
+"$o" sDM {Operating Levels} {None}
+"$o" sDM {Low Flow Releases} {None}
+"$o" sDM {Storage Account Slot Inflow} {No Accounting Inflow Calculation}
+"$o" sDM {Storage Account Gain Loss} {No Loss Calc}
+"$o" sDM {Sediment Transport Calculations} {Perm Pool Sed (Pre2000)}
+"$o" sDM {Reservoir Reconciliation} {No Method}
+"$o" sDM {Spill Lower Bound MTLE} {Piecewise}
+"$o" sDM {Spill Upper Bound MTGE} {Line}
+"$o" sDM {Optimization Spill Computation} {optNoSpillCalc}
+"$o" sDM {Optimization Evaporation Computation} {No Evaporation}
+"$o" sDM {Evaporation Linearization Automation} {None}
+"$o" sDM {Pool Elevation Linearization Automation} {None}
+"$o" sDM {Surface Area STLE} {Substitution}
+"$o" sDM {Surface Area STGE} {Substitution}
+"$o" sDM {Surface Area MTLE} {Tangent}
+"$o" sDM {Surface Area MTGE} {Tangent}
+"$o" sDM {Energy In Storage STLE} {Substitution}
+"$o" sDM {Energy In Storage STGE} {Substitution}
+"$o" sDM {Energy In Storage MTLE} {Tangent}
+"$o" sDM {Energy In Storage MTGE} {Tangent}
+"$o" sDM {Instantiate Reservoir Optimization Slots} {Instantiate Reservoir Optimization Slots}
+"$o" sDM {Creditable Capacity Available} {None}
+"$o" sDM {Live Capacity Available} {None}
+"$o" sDM {Worst Case Outflow Available} {None}
+"$o" sDM {Reservoir Invisible WQ Category} {None}
+"$o" sDM {Reservoir Water Quality Routing Category} {Predictor-Corrector Salt}
+"$o" sDM {Bank Storage Salt Category} {No Bank Storage Salt}
+"$o" sDM {distributeInflowCategory} {noDistributeInflow}
+"$o" sDM {distributeOutflowCategory} {noDistributeOutflow}
+"$o" sDM {surfaceFluxCalculationCategory} {noCalcSurfaceFlux}
+"$o" sDM {powerCalculationCategory} {PeakPowerCalc}
+"$o" sDM {powerReleaseCalcCategory} {getNoPowerRelease}
+"$o" sDM {Input Energy Adjustment} {No Energy Adjustment}
+"$o" sDM {tailwaterCalculationCategory} {TWbaseValuePlusLookupTable}
+"$o" sDM {FutureValueCalcCategory} {noFutureValueCalc}
+"$o" sDM {Cumul Stor Val Table Automation} {None}
+"$o" sDM {Ramping Modeling} {None}
+"$o" sDM {Regulation Category} {None}
+"$o" sDM {Hole Cuts} {None}
+"$o" sDM {Additional Hydropower Release Calculation} {No Additional Release}
+"$o" sDM {Load Calculation} {No Method}
+"$o" sDM {Optimization Future Value Computation} {optNoFutureValueCalc}
+"$o" sDM {Cumul Stor Val Linearization Automation} {None}
+"$o" sDM {Cumulative Storage Value STGE} {Line}
+"$o" sDM {Cumulative Storage Value MTGE} {Line}
+"$o" sDM {Optimization Power Computation} {lambdaMethod}
+"$o" sDM {Power Lambda Computation} {With Reducing Constraints}
+"$o" sDM {Power Linearization Automation} {None}
+"$o" sDM {Optimization Head Computation} {noEstimatedHead}
+"$o" sDM {Optimization Tailwater Computation} {optTWValueOnly}
+"$o" sDM {Tailwater Linearization Automation} {None}
+"$o" sDM {Smooth Energy Invisible Category} {No Smoothing}
+"$o" sDM {Turbine Capacity STLE} {Tangent}
+"$o" sDM {Turbine Capacity STGE} {Tangent}
+"$o" sDM {Turbine Capacity MTLE} {Tangent}
+"$o" sDM {Turbine Capacity MTGE} {Tangent}
+"$o" sDM {Instantiate Power Reservoir Optimization Slots (Group 1)} {Instantiate Power Reservoir Optimization Slots (Group 1)}
+"$o" sDM {Best Turbine Flow STLE} {Line}
+"$o" sDM {Best Turbine Flow STGE} {Piecewise}
+"$o" sDM {Best Turbine Flow MTLE} {Line}
+"$o" sDM {Best Turbine Flow MTGE} {Piecewise}
+"$o" sDM {Instantiate Power Reservoir Optimization Slots (Group 2)} {Instantiate Power Reservoir Optimization Slots (Group 2)}
+"$o" sDM {Power STLE} {Substitution}
+"$o" sDM {Power STGE} {Substitution}
+"$o" sDM {Power MTLE} {Line}
+"$o" sDM {Power MTGE} {Piecewise}
+"$o" sDM {Tailwater Elevation STLE} {None}
+"$o" sDM {Tailwater Elevation STGE} {None}
+"$o" sDM {Tailwater Elevation MTLE} {None}
+"$o" sDM {Tailwater Elevation MTGE} {None}
+"$o" sDM {Instantiate Power Reservoir Optimization Slots (Group 3)} {Instantiate Power Reservoir Optimization Slots (Group 3)}
+"$o" sDM {Instantiate Power Reservoir Optimization Slots (Group 4)} {Instantiate Power Reservoir Optimization Slots (Group 4)}
+"$o" sDM {Startup} {No Method}
+"$o" sDM {Head Loss} {No Method}
+"$o" sDM {Cavitation} {No Method}
+"$o" sDM {Avoidance Zones} {No Method}
+"$o" sDM {Frequency Regulation} {No Method}
+"$o" sDM {Generate Forecast Hydrology} {No Forecast}
+"$o" sDM {Calculate Incremental Hydrologic Inflows on Subbasin} {None}
+"$o" sDM {Pool Elevation STLE} {Substitution}
+"$o" sDM {Pool Elevation STGE} {Substitution}
+"$o" sDM {Pool Elevation MTLE} {Tangent}
+"$o" sDM {Pool Elevation MTGE} {Tangent}
+"$o" sDM {Uncertainty Calculation} {No Uncertainty}
+"$o" sDM {Evaporation Uncertainty} {No Evaporation Uncertainty}
+"$o" sDM {Bank Storage Uncertainty} {No Bank Storage Uncertainty}
+"$o" sDM {Hydrologic Inflow Uncertainty} {No Hydrologic Inflow Uncertainty}
+"$o" {SimObjMultiSlot} {Inflow}
+set s "$o.Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 18
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Outflow}
+set s "$o.Outflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 25
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Storage}
+set s "$o.Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 38
+"$s" cvg 2 1e-008
+"$s" unit {Volume} 1000 {acre-ft} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 1 @ 3 2 @ 1253 
+"$s" setDSeries {m3} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 340440987.163 @ 3 NaN @ 1253 
+"$o" {SeriesSlot} {Previous Storage}
+set s "$o.Previous Storage"
+"$s" flags 0 0 0 0 0 0
+"$s" order 500 500
+"$s" cvg 2 1e-006
+"$s" unit {Volume} 1 {acre-feet} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Pool Elevation}
+set s "$o.Pool Elevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 29
+"$s" cvg 2 1e-008
+"$s" unit {Length} 1 {ft} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m} {03-01-1969 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 1 @ 11 2 @ 419 1 2 @ 11 1 2 @ 11 1 2 @ 11 1 2 @ 29 
+"$s" setDSeries {m} {03-01-1969 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 1976.41770598 1975.32962332 1977.9172979 1981.66017668 1982.51370598 1982.55641944 1981.82790598 1980.7366979 1979.27669402 1978.72811376 1978.03308624 NaN @ 419 1978.08487847 NaN @ 11 1976.3170979 NaN @ 11 1975.917816 NaN @ 11 1973.942712 NaN @ 29 
+"$o" {AggSeriesSlot} {Flow FROM Pumped Storage}
+set s "$o.Flow FROM Pumped Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 12
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Flow TO Pumped Storage}
+set s "$o.Flow TO Pumped Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 13
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Canal Flow}
+set s "$o.Canal Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 3
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Total Inflows}
+set s "$o.Total Inflows"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 43
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Diversion}
+set s "$o.Diversion"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 5
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {ScalarSlot} {Diversion Capacity}
+set s "$o.Diversion Capacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 6
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value NaN {cms}
+"$o" {SimObjMultiSlot} {Return Flow}
+set s "$o.Return Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 36
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Spill}
+set s "$o.Spill"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 37
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Turbine Release}
+set s "$o.Turbine Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 44
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Max Iterations}
+set s "$o.Max Iterations"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 19
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {No. of Iterations} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 20 
+"$o" {TableSlot} {Convergence Percentage}
+set s "$o.Convergence Percentage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 4
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Convergence Value} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 1e-006 
+"$o" {TableSlot} {Elevation Volume Table}
+set s "$o.Elevation Volume Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 8
+"$s" resize 221 2
+"$s" setRowLabels {} {} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {100} {101} {102} {103} {104} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Pool Elevation} {Storage} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Volume} 
+"$s" setScales 1 1000 
+"$s" setUsrUnits {ft} {acre-ft} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 -304.8 0 
+"$s" row 1 0 0 
+"$s" row 2 1953.1584 0 
+"$s" row 3 1953.3108 87429.1926454 
+"$s" row 4 1953.4632 179471.607363 
+"$s" row 5 1953.6156 276151.91379 
+"$s" row 6 1953.768 377445.44229 
+"$s" row 7 1953.9204 485079.067434 
+"$s" row 8 1954.0728 600767.328978 
+"$s" row 9 1954.2252 724497.892102 
+"$s" row 10 1954.3776 856283.091625 
+"$s" row 11 1954.53 996110.59273 
+"$s" row 12 1954.6824 1143992.73023 
+"$s" row 13 1954.8348 1299917.16932 
+"$s" row 14 1954.9872 1463896.2448 
+"$s" row 15 1955.1396 1635917.62187 
+"$s" row 16 1955.292 1815993.63533 
+"$s" row 17 1955.4444 2004111.95037 
+"$s" row 18 1955.5968 2200284.90182 
+"$s" row 19 1955.7492 2404500.15484 
+"$s" row 20 1955.9016 2616770.04427 
+"$s" row 21 1956.054 2837082.23527 
+"$s" row 22 1956.2064 3065449.06267 
+"$s" row 23 1956.3588 3301858.19166 
+"$s" row 24 1956.5112 3546321.95704 
+"$s" row 25 1956.6636 3798828.02401 
+"$s" row 26 1956.816 4059388.72737 
+"$s" row 27 1956.9684 4335244.60552 
+"$s" row 28 1957.1208 4633636.19684 
+"$s" row 29 1957.2732 4954575.83615 
+"$s" row 30 1957.4256 5298051.18863 
+"$s" row 31 1957.578 5664074.58911 
+"$s" row 32 1957.7304 6052633.70275 
+"$s" row 33 1957.8828 6463740.86439 
+"$s" row 34 1958.0352 6897383.7392 
+"$s" row 35 1958.1876 7353574.662 
+"$s" row 36 1958.34 7832301.29797 
+"$s" row 37 1958.4924 8333575.98193 
+"$s" row 38 1958.6448 8857386.37906 
+"$s" row 39 1958.7972 9403744.82418 
+"$s" row 40 1958.9496 9972638.98248 
+"$s" row 41 1959.102 10564081.1888 
+"$s" row 42 1959.2544 11178059.1082 
+"$s" row 43 1959.4068 11814585.0757 
+"$s" row 44 1959.5592 12473646.7563 
+"$s" row 45 1959.7116 13155256.4849 
+"$s" row 46 1959.864 13859401.9267 
+"$s" row 47 1960.0164 14588130.6615 
+"$s" row 48 1960.1688 15343465.5995 
+"$s" row 49 1960.3212 16125419.0756 
+"$s" row 50 1960.4736 16933978.755 
+"$s" row 51 1960.626 17769156.9723 
+"$s" row 52 1960.7784 18630941.393 
+"$s" row 53 1960.9308 19519344.3516 
+"$s" row 54 1961.0832 20434353.5135 
+"$s" row 55 1961.2356 21375981.2135 
+"$s" row 56 1961.388 22344215.1167 
+"$s" row 57 1961.5404 23339067.558 
+"$s" row 58 1961.6928 24360526.2025 
+"$s" row 59 1961.8452 25408603.385 
+"$s" row 60 1961.9976 26483286.7708 
+"$s" row 61 1962.15 27584588.6946 
+"$s" row 62 1962.3024 28712496.8217 
+"$s" row 63 1962.4548 29867023.4868 
+"$s" row 64 1962.6072 31048156.3552 
+"$s" row 65 1962.7596 32255907.7616 
+"$s" row 66 1962.912 33490265.3713 
+"$s" row 67 1963.0644 34748404.5107 
+"$s" row 68 1963.2168 36027475.837 
+"$s" row 69 1963.3692 37327491.6849 
+"$s" row 70 1963.5216 38648439.7195 
+"$s" row 71 1963.674 39990332.2758 
+"$s" row 72 1963.8264 41353157.0188 
+"$s" row 73 1963.9788 42736926.2834 
+"$s" row 74 1964.1312 44141627.7348 
+"$s" row 75 1964.2836 45567273.7079 
+"$s" row 76 1964.436 47013851.8677 
+"$s" row 77 1964.5884 48481374.5491 
+"$s" row 78 1964.7408 49969829.4173 
+"$s" row 79 1964.8932 51479228.807 
+"$s" row 80 1965.0456 53009560.3836 
+"$s" row 81 1965.198 54560836.4818 
+"$s" row 82 1965.3504 56133044.7667 
+"$s" row 83 1965.5028 57726197.5733 
+"$s" row 84 1965.6552 59340282.5666 
+"$s" row 85 1965.8076 60975312.0816 
+"$s" row 86 1965.96 62631273.7833 
+"$s" row 87 1966.1124 64307945.6451 
+"$s" row 88 1966.2648 66005093.3054 
+"$s" row 89 1966.4172 67722716.7642 
+"$s" row 90 1966.5696 69460816.0214 
+"$s" row 91 1966.722 71219391.0772 
+"$s" row 92 1966.8744 72998441.9315 
+"$s" row 93 1967.0268 74797968.5843 
+"$s" row 94 1967.1792 76617971.0356 
+"$s" row 95 1967.3316 78458449.2854 
+"$s" row 96 1967.484 80319403.3337 
+"$s" row 97 1967.6364 82200833.1806 
+"$s" row 98 1967.7888 84102738.8259 
+"$s" row 99 1967.9412 86025120.2697 
+"$s" row 100 1968.0936 87967977.512 
+"$s" row 101 1968.246 89931310.5528 
+"$s" row 102 1968.3984 91915119.3922 
+"$s" row 103 1968.5508 93919404.03 
+"$s" row 104 1968.7032 95944164.4663 
+"$s" row 105 1968.8556 97989400.7012 
+"$s" row 106 1969.008 100055112.735 
+"$s" row 107 1969.1604 102144458.28 
+"$s" row 108 1969.3128 104260607.386 
+"$s" row 109 1969.4652 106403547.717 
+"$s" row 110 1969.6176 108573291.608 
+"$s" row 111 1969.77 110769826.725 
+"$s" row 112 1969.9224 112993165.403 
+"$s" row 113 1970.0748 115243295.306 
+"$s" row 114 1970.2272 117520228.769 
+"$s" row 115 1970.3796 119823953.457 
+"$s" row 116 1970.532 122154481.706 
+"$s" row 117 1970.6844 124511801.181 
+"$s" row 118 1970.8368 126895924.216 
+"$s" row 119 1970.9892 129306838.476 
+"$s" row 120 1971.1416 131744556.297 
+"$s" row 121 1971.294 134209065.343 
+"$s" row 122 1971.4464 136700377.95 
+"$s" row 123 1971.5988 139218481.782 
+"$s" row 124 1971.7512 141763389.174 
+"$s" row 125 1971.9036 144335087.792 
+"$s" row 126 1972.056 146933589.97 
+"$s" row 127 1972.2084 149561597.034 
+"$s" row 128 1972.3608 152221834.979 
+"$s" row 129 1972.5132 154914291.468 
+"$s" row 130 1972.6656 157638978.839 
+"$s" row 131 1972.818 160395884.754 
+"$s" row 132 1972.9704 163185021.551 
+"$s" row 133 1973.1228 166006376.892 
+"$s" row 134 1973.2752 168859963.115 
+"$s" row 135 1973.4276 171745767.883 
+"$s" row 136 1973.58 174663803.531 
+"$s" row 137 1973.7324 177614057.725 
+"$s" row 138 1973.8848 180596542.799 
+"$s" row 139 1974.0372 183611246.419 
+"$s" row 140 1974.1896 186658180.919 
+"$s" row 141 1974.342 189737333.965 
+"$s" row 142 1974.4944 192848717.891 
+"$s" row 143 1974.6468 195992320.363 
+"$s" row 144 1974.7992 199168153.716 
+"$s" row 145 1974.9516 202376205.613 
+"$s" row 146 1975.104 205616488.392 
+"$s" row 147 1975.2564 209264819.297 
+"$s" row 148 1975.4088 212665837.093 
+"$s" row 149 1975.5612 216115577.423 
+"$s" row 150 1975.7136 219614040.284 
+"$s" row 151 1975.866 223161225.679 
+"$s" row 152 1976.0184 226757133.606 
+"$s" row 153 1976.1708 230401764.065 
+"$s" row 154 1976.3232 234095117.057 
+"$s" row 155 1976.4756 237837192.582 
+"$s" row 156 1976.628 241627990.639 
+"$s" row 157 1976.7804 245467511.229 
+"$s" row 158 1976.9328 249355754.351 
+"$s" row 159 1977.0852 253292720.006 
+"$s" row 160 1977.2376 257278408.194 
+"$s" row 161 1977.39 261312818.914 
+"$s" row 162 1977.5424 265395952.167 
+"$s" row 163 1977.6948 269527807.952 
+"$s" row 164 1977.8472 273708386.27 
+"$s" row 165 1977.9996 277937687.12 
+"$s" row 166 1978.152 282215710.504 
+"$s" row 167 1978.3044 285222014.112 
+"$s" row 168 1978.4568 289395808.28 
+"$s" row 169 1978.6092 293593655.344 
+"$s" row 170 1978.7616 297815555.303 
+"$s" row 171 1978.914 302061508.158 
+"$s" row 172 1979.0664 306331513.909 
+"$s" row 173 1979.2188 310625572.556 
+"$s" row 174 1979.3712 314943684.099 
+"$s" row 175 1979.5236 319285848.538 
+"$s" row 176 1979.676 323652065.872 
+"$s" row 177 1979.8284 328042336.103 
+"$s" row 178 1979.9808 332456659.229 
+"$s" row 179 1980.1332 336895035.251 
+"$s" row 180 1980.2856 341357464.168 
+"$s" row 181 1980.438 345843945.982 
+"$s" row 182 1980.5904 350354480.691 
+"$s" row 183 1980.7428 354889068.297 
+"$s" row 184 1980.8952 359447708.798 
+"$s" row 185 1981.0476 364030402.195 
+"$s" row 186 1981.2 368637148.488 
+"$s" row 187 1981.3524 373395304.676 
+"$s" row 188 1981.5048 378079451.954 
+"$s" row 189 1981.6572 382789502.351 
+"$s" row 190 1981.8096 387525455.866 
+"$s" row 191 1981.962 392287312.5 
+"$s" row 192 1982.1144 397075072.252 
+"$s" row 193 1982.2668 401888735.123 
+"$s" row 194 1982.4192 406728301.113 
+"$s" row 195 1982.5716 411595472.426 
+"$s" row 196 1982.724 416491926.598 
+"$s" row 197 1982.8764 421417688.298 
+"$s" row 198 1983.0288 426372732.858 
+"$s" row 199 1983.1812 431357084.945 
+"$s" row 200 1983.3336 436370719.892 
+"$s" row 201 1983.486 441413662.367 
+"$s" row 202 1983.6384 446485887.701 
+"$s" row 203 1983.7908 451587420.563 
+"$s" row 204 1983.9432 456718236.284 
+"$s" row 205 1984.0956 461878359.534 
+"$s" row 206 1984.248 467067765.642 
+"$s" row 207 1984.4004 472291413.206 
+"$s" row 208 1984.5528 477554297.828 
+"$s" row 209 1984.7052 482856259.154 
+"$s" row 210 1984.8576 488197309.519 
+"$s" row 211 1985.01 493577448.924 
+"$s" row 212 1985.1624 498996665.034 
+"$s" row 213 1985.3148 504454982.518 
+"$s" row 214 1985.4672 509952376.706 
+"$s" row 215 1985.6196 515488847.599 
+"$s" row 216 1985.772 521064419.866 
+"$s" row 217 1985.9244 526679068.838 
+"$s" row 218 1986.0768 532332806.849 
+"$s" row 219 1994.154 798667154.994 
+"$s" row 220 2012.8992 1527383554.98 
+"$o" {AggSeriesSlot} {Energy}
+set s "$o.Energy"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 9
+"$s" cvg 2 0.0001
+"$s" unit {Energy} 1 {GWH} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {MWH} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {MWH} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Power}
+set s "$o.Power"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 30
+"$s" cvg 2 0.0001
+"$s" unit {Power} 1 {MW} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {MW} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 2 @ 1105 1 @ 5 2 1 @ 5 2 @ 140 
+"$s" setDSeries {MW} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 NaN @ 1105 7.16111111111 9.50672043011 8.70698924731 7.84523809524 6.46908602151 NaN 8.77822580645 10.9055555556 11.1787634409 11.4260752688 8.53611111111 NaN @ 140 
+"$o" {AggSeriesSlot} {Operating Head}
+set s "$o.Operating Head"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 24
+"$s" cvg 1 1e-005
+"$s" unit {Length} 1 {ft} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Tailwater Elevation}
+set s "$o.Tailwater Elevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 41
+"$s" cvg 1 1e-005
+"$s" unit {Length} 1 {ft} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Hydrologic Inflow}
+set s "$o.Hydrologic Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 15
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Hydrologic Inflow Adjust}
+set s "$o.Hydrologic Inflow Adjust"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 16
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Hydrologic Inflow Net}
+set s "$o.Hydrologic Inflow Net"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 17
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Unregulated Spill}
+set s "$o.Unregulated Spill"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 45
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Regulated Spill}
+set s "$o.Regulated Spill"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 35
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Bypass}
+set s "$o.Bypass"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 2
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Maximum Controlled Release}
+set s "$o.Maximum Controlled Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 20
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Flow} 
+"$s" setScales 1 
+"$s" setUsrUnits {cfs} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {0} 
+"$s" row -1 529.52503127 
+"$o" {AggSeriesSlot} {Evaporation}
+set s "$o.Evaporation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 10
+"$s" cvg 2 1e-008
+"$s" unit {Volume} 1000 {acre-ft} {%f} 3
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 2 @ 1104 1 @ 12 2 @ 101 1 @ 9 2 @ 30 
+"$s" setDSeries {m3} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 NaN @ 1104 1544243.49892 969415.239594 855199.463029 762190.896526 581547.129875 557672.408027 802523.316487 1701549.59185 2839521.4308 3325592.39649 2799138.94998 2229096.55084 NaN @ 101 585151.448914 838742.979896 1622916.7233 2590940.93459 2802039.01626 2328196.96837 1756786.50713 1145596.25662 718219.469549 NaN @ 30 
+"$o" {TableSlot} {Evaporation Coefficients}
+set s "$o.Evaporation Coefficients"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 11
+"$s" resize 12 1
+"$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Velocity} 
+"$s" setScales 1 
+"$s" setUsrUnits {ft/month} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {3} 
+"$s" row 0 1.13799283154e-008 
+"$s" row 1 1.13799283154e-008 
+"$s" row 2 1.13799283154e-008 
+"$s" row 3 1.59318996416e-008 
+"$s" row 4 2.84498207885e-008 
+"$s" row 5 3.86917562724e-008 
+"$s" row 6 3.98297491039e-008 
+"$s" row 7 3.30017921147e-008 
+"$s" row 8 2.7311827957e-008 
+"$s" row 9 1.82078853047e-008 
+"$s" row 10 1.13799283154e-008 
+"$s" row 11 1.13799283154e-008 
+"$o" {SeriesSlot} {Precipitation Rate}
+set s "$o.Precipitation Rate"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 33
+"$s" cvg 2 0.0001
+"$s" unit {Velocity} 1 {m/s} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m/s} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m/s} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Precipitation Volume}
+set s "$o.Precipitation Volume"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 34
+"$s" cvg 2 0.0001
+"$s" unit {Volume} 1 {acre-feet} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Surface Area}
+set s "$o.Surface Area"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 39
+"$s" cvg 2 1e-008
+"$s" unit {Area} 1 {acre} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m2} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m2} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Elevation Area Table}
+set s "$o.Elevation Area Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 7
+"$s" resize 220 2
+"$s" setRowLabels {} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {100} {101} {102} {103} {104} {105} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Elev} {Area} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Area} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {ft} {acre} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 0 0 
+"$s" row 1 1953.1584 0 
+"$s" row 2 1953.3108 588817.609459 
+"$s" row 3 1953.4632 619169.032627 
+"$s" row 4 1953.6156 649520.455795 
+"$s" row 5 1953.768 679871.878963 
+"$s" row 6 1953.9204 732683.355276 
+"$s" row 7 1954.0728 785494.831588 
+"$s" row 8 1954.2252 838306.3079 
+"$s" row 9 1954.3776 891117.784212 
+"$s" row 10 1954.53 943929.260525 
+"$s" row 11 1954.6824 996740.736837 
+"$s" row 12 1954.8348 1049552.21315 
+"$s" row 13 1954.9872 1102363.68946 
+"$s" row 14 1955.1396 1155175.16577 
+"$s" row 15 1955.292 1207986.64209 
+"$s" row 16 1955.4444 1260798.1184 
+"$s" row 17 1955.5968 1313609.59471 
+"$s" row 18 1955.7492 1366421.07102 
+"$s" row 19 1955.9016 1419232.54734 
+"$s" row 20 1956.054 1472044.02365 
+"$s" row 21 1956.2064 1524855.49996 
+"$s" row 22 1956.3588 1577666.97627 
+"$s" row 23 1956.5112 1630478.45258 
+"$s" row 24 1956.6636 1683289.9289 
+"$s" row 25 1956.816 1736101.40521 
+"$s" row 26 1956.9684 1884014.00745 
+"$s" row 27 1957.1208 2031926.60969 
+"$s" row 28 1957.2732 2179839.21193 
+"$s" row 29 1957.4256 2327751.81416 
+"$s" row 30 1957.578 2475664.4164 
+"$s" row 31 1957.7304 2623577.01864 
+"$s" row 32 1957.8828 2771489.62088 
+"$s" row 33 1958.0352 2919402.22312 
+"$s" row 34 1958.1876 3067314.82536 
+"$s" row 35 1958.34 3215227.4276 
+"$s" row 36 1958.4924 3363140.02984 
+"$s" row 37 1958.6448 3511052.63207 
+"$s" row 38 1958.7972 3658965.23431 
+"$s" row 39 1958.9496 3806877.83655 
+"$s" row 40 1959.102 3954790.43879 
+"$s" row 41 1959.2544 4102703.04103 
+"$s" row 42 1959.4068 4250615.64327 
+"$s" row 43 1959.5592 4398528.24551 
+"$s" row 44 1959.7116 4546440.84775 
+"$s" row 45 1959.864 4694353.44998 
+"$s" row 46 1960.0164 4868975.30461 
+"$s" row 47 1960.1688 5043597.15924 
+"$s" row 48 1960.3212 5218219.01386 
+"$s" row 49 1960.4736 5392840.86849 
+"$s" row 50 1960.626 5567462.72312 
+"$s" row 51 1960.7784 5742084.57774 
+"$s" row 52 1960.9308 5916706.43237 
+"$s" row 53 1961.0832 6091328.287 
+"$s" row 54 1961.2356 6265950.14162 
+"$s" row 55 1961.388 6440571.99625 
+"$s" row 56 1961.5404 6615193.85088 
+"$s" row 57 1961.6928 6789815.7055 
+"$s" row 58 1961.8452 6964437.56013 
+"$s" row 59 1961.9976 7139059.41476 
+"$s" row 60 1962.15 7313681.26938 
+"$s" row 61 1962.3024 7488303.12401 
+"$s" row 62 1962.4548 7662924.97864 
+"$s" row 63 1962.6072 7837546.83326 
+"$s" row 64 1962.7596 8012168.68789 
+"$s" row 65 1962.912 8186790.54252 
+"$s" row 66 1963.0644 8324181.31806 
+"$s" row 67 1963.2168 8461572.0936 
+"$s" row 68 1963.3692 8598962.86914 
+"$s" row 69 1963.5216 8736353.64468 
+"$s" row 70 1963.674 8873744.42022 
+"$s" row 71 1963.8264 9011135.19576 
+"$s" row 72 1963.9788 9148525.9713 
+"$s" row 73 1964.1312 9285916.74684 
+"$s" row 74 1964.2836 9423307.52238 
+"$s" row 75 1964.436 9560698.29792 
+"$s" row 76 1964.5884 9698089.07346 
+"$s" row 77 1964.7408 9835479.849 
+"$s" row 78 1964.8932 9972870.62454 
+"$s" row 79 1965.0456 10110261.4001 
+"$s" row 80 1965.198 10247652.1756 
+"$s" row 81 1965.3504 10385042.9512 
+"$s" row 82 1965.5028 10522433.7267 
+"$s" row 83 1965.6552 10659824.5022 
+"$s" row 84 1965.8076 10797215.2778 
+"$s" row 85 1965.96 10934606.0533 
+"$s" row 86 1966.1124 11068961.6865 
+"$s" row 87 1966.2648 11203317.3198 
+"$s" row 88 1966.4172 11337672.953 
+"$s" row 89 1966.5696 11472028.5862 
+"$s" row 90 1966.722 11606384.2194 
+"$s" row 91 1966.8744 11740739.8527 
+"$s" row 92 1967.0268 11875095.4859 
+"$s" row 93 1967.1792 12009451.1191 
+"$s" row 94 1967.3316 12143806.7523 
+"$s" row 95 1967.484 12278162.3856 
+"$s" row 96 1967.6364 12412518.0188 
+"$s" row 97 1967.7888 12546873.652 
+"$s" row 98 1967.9412 12681229.2852 
+"$s" row 99 1968.0936 12815584.9185 
+"$s" row 100 1968.246 12949940.5517 
+"$s" row 101 1968.3984 13084296.1849 
+"$s" row 102 1968.5508 13218651.8181 
+"$s" row 103 1968.7032 13353007.4514 
+"$s" row 104 1968.8556 13487363.0846 
+"$s" row 105 1969.008 13621718.7178 
+"$s" row 106 1969.1604 13797554.6294 
+"$s" row 107 1969.3128 13973390.5409 
+"$s" row 108 1969.4652 14149226.4525 
+"$s" row 109 1969.6176 14325062.364 
+"$s" row 110 1969.77 14500898.2756 
+"$s" row 111 1969.9224 14676734.1871 
+"$s" row 112 1970.0748 14852570.0987 
+"$s" row 113 1970.2272 15028406.0102 
+"$s" row 114 1970.3796 15204241.9218 
+"$s" row 115 1970.532 15380077.8333 
+"$s" row 116 1970.6844 15555913.7449 
+"$s" row 117 1970.8368 15731749.6564 
+"$s" row 118 1970.9892 15907585.568 
+"$s" row 119 1971.1416 16083421.4795 
+"$s" row 120 1971.294 16259257.3911 
+"$s" row 121 1971.4464 16435093.3027 
+"$s" row 122 1971.5988 16610929.2142 
+"$s" row 123 1971.7512 16786765.1258 
+"$s" row 124 1971.9036 16962601.0373 
+"$s" row 125 1972.056 17138436.9489 
+"$s" row 126 1972.2084 17349885.1969 
+"$s" row 127 1972.3608 17561333.445 
+"$s" row 128 1972.5132 17772781.6931 
+"$s" row 129 1972.6656 17984229.9411 
+"$s" row 130 1972.818 18195678.1892 
+"$s" row 131 1972.9704 18407126.4373 
+"$s" row 132 1973.1228 18618574.6854 
+"$s" row 133 1973.2752 18830022.9334 
+"$s" row 134 1973.4276 19041471.1815 
+"$s" row 135 1973.58 19252919.4296 
+"$s" row 136 1973.7324 19464367.6776 
+"$s" row 137 1973.8848 19675815.9257 
+"$s" row 138 1974.0372 19887264.1738 
+"$s" row 139 1974.1896 20098712.4218 
+"$s" row 140 1974.342 20310160.6699 
+"$s" row 141 1974.4944 20521608.918 
+"$s" row 142 1974.6468 20733057.1661 
+"$s" row 143 1974.7992 20944505.4141 
+"$s" row 144 1974.9516 21155953.6622 
+"$s" row 145 1975.104 21367401.9103 
+"$s" row 146 1975.2564 22156538.9126 
+"$s" row 147 1975.4088 22476240.57 
+"$s" row 148 1975.5612 22795942.2274 
+"$s" row 149 1975.7136 23115643.8847 
+"$s" row 150 1975.866 23435345.5421 
+"$s" row 151 1976.0184 23755047.1995 
+"$s" row 152 1976.1708 24074748.8569 
+"$s" row 153 1976.3232 24394450.5142 
+"$s" row 154 1976.4756 24714152.1716 
+"$s" row 155 1976.628 25033853.829 
+"$s" row 156 1976.7804 25353555.4863 
+"$s" row 157 1976.9328 25673257.1437 
+"$s" row 158 1977.0852 25992958.8011 
+"$s" row 159 1977.2376 26312660.4584 
+"$s" row 160 1977.39 26632362.1158 
+"$s" row 161 1977.5424 26952063.7732 
+"$s" row 162 1977.6948 27271765.4306 
+"$s" row 163 1977.8472 27591467.0879 
+"$s" row 164 1977.9996 27911168.7453 
+"$s" row 165 1978.152 28230870.4027 
+"$s" row 166 1978.3044 27308187.1384 
+"$s" row 167 1978.4568 27466014.5388 
+"$s" row 168 1978.6092 27623841.9393 
+"$s" row 169 1978.7616 27781669.3398 
+"$s" row 170 1978.914 27939496.7402 
+"$s" row 171 1979.0664 28097324.1407 
+"$s" row 172 1979.2188 28255151.5412 
+"$s" row 173 1979.3712 28412978.9417 
+"$s" row 174 1979.5236 28570806.3421 
+"$s" row 175 1979.676 28728633.7426 
+"$s" row 176 1979.8284 28886461.1431 
+"$s" row 177 1979.9808 29044288.5436 
+"$s" row 178 1980.1332 29202115.944 
+"$s" row 179 1980.2856 29359943.3445 
+"$s" row 180 1980.438 29517770.745 
+"$s" row 181 1980.5904 29675598.1455 
+"$s" row 182 1980.7428 29833425.5459 
+"$s" row 183 1980.8952 29991252.9464 
+"$s" row 184 1981.0476 30149080.3469 
+"$s" row 185 1981.2 30306907.7474 
+"$s" row 186 1981.3524 30650890.5433 
+"$s" row 187 1981.5048 30820858.513 
+"$s" row 188 1981.6572 30990826.4827 
+"$s" row 189 1981.8096 31160794.4525 
+"$s" row 190 1981.962 31330762.4222 
+"$s" row 191 1982.1144 31500730.392 
+"$s" row 192 1982.2668 31670698.3617 
+"$s" row 193 1982.4192 31840666.3314 
+"$s" row 194 1982.5716 32032892.0115 
+"$s" row 195 1982.724 32225117.6916 
+"$s" row 196 1982.8764 32417343.3716 
+"$s" row 197 1983.0288 32609569.0517 
+"$s" row 198 1983.1812 32801794.7318 
+"$s" row 199 1983.3336 32994020.4118 
+"$s" row 200 1983.486 33186246.0919 
+"$s" row 201 1983.6384 33378471.772 
+"$s" row 202 1983.7908 33570697.452 
+"$s" row 203 1983.9432 33762923.1321 
+"$s" row 204 1984.0956 33955148.8121 
+"$s" row 205 1984.248 34147374.4922 
+"$s" row 206 1984.4004 34405078.3092 
+"$s" row 207 1984.5528 34661568.0692 
+"$s" row 208 1984.7052 34918017.3607 
+"$s" row 209 1984.8576 35174507.1208 
+"$s" row 210 1985.01 35430956.4123 
+"$s" row 211 1985.1624 35687446.1723 
+"$s" row 212 1985.3148 35943895.4638 
+"$s" row 213 1985.4672 36200385.2239 
+"$s" row 214 1985.6196 36456834.5153 
+"$s" row 215 1985.772 36713324.2754 
+"$s" row 216 1985.9244 36969773.5669 
+"$s" row 217 1986.0768 37226263.3269 
+"$s" row 218 1994.154 50820220.6097 
+"$s" row 219 2012.8992 82368461.096 
+"$o" {TableSlot} {Number of Units}
+set s "$o.Number of Units"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 23
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 1 
+"$o" {TableSlot} {Maximum Turbine Power}
+set s "$o.Maximum Turbine Power"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 21
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Power} 
+"$s" setScales 1 
+"$s" setUsrUnits {HP} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 13.1052805216 
+"$o" {SeriesSlot} {Peak Flow}
+set s "$o.Peak Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 26
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Generator Efficiency}
+set s "$o.Generator Efficiency"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 14
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Generator Efficiency} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0.975 
+"$o" {TableSlot} {Best Generator Flow}
+set s "$o.Best Generator Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 0
+"$s" resize 111 15
+"$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Head} {Flow} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Length} {Flow} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {feet} {cfs} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row 0 0 23.5372460557 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 1 0.3048 23.8492977052 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 2 0.6096 24.1604998492 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 3 0.9144 24.4705693194 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 4 1.2192 24.7795061157 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 5 1.524 25.0875934066 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 6 1.8288 25.3948311922 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 7 2.1336 25.7009363038 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 8 2.4384 26.0059087416 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 9 2.7432 26.3103148425 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 10 3.048 26.613305101 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 11 3.3528 26.9157290226 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 12 3.6576 27.2167371019 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 13 3.9624 27.5171788442 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 14 4.2672 27.8164879127 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 15 4.572 28.1146643073 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 16 4.8768 28.4119911965 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 17 5.1816 28.7084685804 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 18 5.4864 29.0038132903 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 19 5.7912 29.2980253264 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 20 6.096 29.5913878571 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 21 6.4008 29.8839008824 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 22 6.7056 30.1752812338 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 23 7.0104 30.4658120799 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 24 7.3152 30.755210252 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 25 7.62 31.0437589188 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 26 7.9248 31.3314580802 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 27 8.2296 31.6180245677 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 28 8.5344 31.9034583813 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 29 8.8392 32.1880426896 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 30 9.144 32.4717774924 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 31 9.4488 32.7543796214 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 32 9.7536 33.0358490766 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 33 10.0584 33.3167521947 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 34 10.3632 33.5962394706 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 35 10.668 33.8751604095 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 36 10.9728 34.1526655061 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 37 11.2776 34.4296042658 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 38 11.5824 34.7054103516 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 39 11.8872 34.9800837636 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 40 12.192 35.2539076701 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 41 12.4968 35.5265989028 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 42 12.8016 35.7987237985 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 43 13.1064 36.069432852 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 44 13.4112 36.3392924 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 45 13.716 36.6083024426 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 46 14.0208 36.8761798114 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 47 14.3256 37.1432076747 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 48 14.6304 37.4091028642 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 49 14.9352 37.6741485483 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 50 15.24 37.9380615586 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 51 15.5448 38.2011250634 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 52 15.8496 38.4633390628 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 53 16.1544 38.7244203884 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 54 16.4592 38.9843690401 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 55 16.764 39.2434681865 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 56 17.0688 39.5017178274 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 57 17.3736 39.7588347944 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 58 17.6784 40.0151022561 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 59 17.9832 40.2702370439 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 60 18.288 40.5245223263 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 61 18.5928 40.7776749348 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 62 18.8976 41.0299780379 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 63 19.2024 41.2814316357 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 64 19.5072 41.5317525596 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 65 19.812 41.7809408096 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 66 20.1168 42.0292795542 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 67 20.4216 42.2767687934 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 68 20.7264 42.5231253587 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 69 21.0312 42.7686324187 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 70 21.336 43.0130068048 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 71 21.6408 43.2565316855 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 72 21.9456 43.4989238923 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 73 22.2504 43.7404665937 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 74 22.5552 43.9808766213 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 75 22.86 44.2204371435 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 76 23.1648 44.4588649918 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 77 23.4696 44.6964433347 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 78 23.7744 44.9331721722 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 79 24.0792 45.1687683358 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 80 24.384 45.4035149941 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 81 24.6888 45.6371289785 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 82 24.9936 45.8698934574 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 83 25.2984 46.1015252626 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 84 25.6032 46.3323075623 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 85 25.908 46.5619571882 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 86 26.2128 46.7907573086 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 87 26.5176 47.0184247552 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 88 26.8224 47.2452426964 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 89 27.1272 47.4712111322 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 90 27.432 47.6960468942 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 91 27.7368 47.9197499822 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 92 28.0416 48.1426035649 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 93 28.3464 48.3646076422 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 94 28.6512 48.5854790456 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 95 28.956 48.8055009436 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 96 29.2608 49.0243901678 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 97 29.5656 49.2424298866 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 98 29.8704 49.4593369315 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 99 30.1752 49.6753944709 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 100 30.48 49.890602505 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 101 30.7848 50.1046778653 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 102 31.0896 50.3176205517 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 103 31.3944 50.5297137326 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 104 31.6992 50.7409574082 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 105 32.004 50.9510684099 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 106 32.3088 51.1603299062 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 107 32.6136 51.3684587287 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 108 32.9184 51.5757380457 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 109 33.2232 51.7818846889 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 110 33.528 51.9871818267 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$o" {TableSlot} {Best Generator Power}
+set s "$o.Best Generator Power"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 1
+"$s" resize 71 15
+"$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Head} {Power} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Length} {Power} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {feet} {HP} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row 0 12.192 2.39696834335 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 1 12.4968 2.57880719941 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 2 12.8016 2.7605634782 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 3 13.1064 2.94223717972 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 4 13.4112 3.12382830397 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 5 13.716 3.30533685094 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 6 14.0208 3.48676282065 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 7 14.3256 3.66810621308 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 8 14.6304 3.84936702825 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 9 14.9352 4.03054526614 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 10 15.24 4.21164092677 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 11 15.5448 4.39265401012 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 12 15.8496 4.5735845162 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 13 16.1544 4.75443244501 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 14 16.4592 4.93519779655 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 15 16.764 5.11588057082 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 16 17.0688 5.29648076782 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 17 17.3736 5.47699838754 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 18 17.6784 5.65743343 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 19 17.9832 5.83778589518 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 20 18.288 6.0180557831 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 21 18.5928 6.19824309374 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 22 18.8976 6.37834782712 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 23 19.2024 6.55836998322 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 24 19.5072 6.73830956205 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 25 19.812 6.91816656361 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 26 20.1168 7.0979409879 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 27 20.4216 7.27763283492 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 28 20.7264 7.45724210467 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 29 21.0312 7.63676879715 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 30 21.336 7.81621291235 0 0 0 0 0 0 0 0 0 0 0 0 0 
+"$s" row 31 21.6408 7.99557445029 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 32 21.9456 8.17485341096 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 33 22.2504 8.35404979435 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 34 22.5552 8.53316360047 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 35 22.86 8.71219482933 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 36 23.1648 8.89114348091 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 37 23.4696 9.07000955522 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 38 23.7744 9.24879305226 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 39 24.0792 9.42749397203 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 40 24.384 9.60611231453 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 41 24.6888 9.78464807976 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 42 24.9936 9.96310126772 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 43 25.2984 10.1414718784 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 44 25.6032 10.3197599118 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 45 25.908 10.497965368 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 46 26.2128 10.6760882468 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 47 26.5176 10.8541285484 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 48 26.8224 11.0320862728 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 49 27.1272 11.2099614198 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 50 27.432 11.3877539896 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 51 27.7368 11.5654639822 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 52 28.0416 11.7430913974 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 53 28.3464 11.9206362354 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 54 28.6512 12.0980984961 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 55 28.956 12.2754781795 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 56 29.2608 12.4527752857 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 57 29.5656 12.6299898146 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 58 29.8704 12.8071217662 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 59 30.1752 12.9841711406 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 60 30.48 13.1611379377 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 61 30.7848 13.3380221575 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 62 31.0896 13.5148238 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 63 31.3944 13.6915428653 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 64 31.6992 13.8681793533 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 65 32.004 14.044733264 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 66 32.3088 14.2212045975 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 67 32.6136 14.3975933537 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 68 32.9184 14.5738995326 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 69 33.2232 14.7501231342 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" row 70 33.528 14.9262641586 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$o" {SeriesSlot} {Peak Hours}
+set s "$o.Peak Hours"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 27
+"$s" cvg 2 0.0001
+"$s" unit {Time} 1 {hr} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {hr} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {hr} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Plant Efficiency}
+set s "$o.Plant Efficiency"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 28
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Min and Max Operating Head}
+set s "$o.Min and Max Operating Head"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 22
+"$s" resize 1 2
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Minimum Head} {Maximum Head} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Length} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {ft} {ft} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 20.196048 33.528 
+"$o" {SeriesSlot} {Power Plant Cap Fraction}
+set s "$o.Power Plant Cap Fraction"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 32
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 2 @ 1104 1 @ 36 2 @ 116 
+"$s" setDSeries {NONE} {11-01-1905 00:00:00} {06-01-2010 00:00:00} 1 MONTH -1 NaN @ 1104 1 0.600000023842 1 @ 11 0.6 1 @ 11 0.6 1 @ 10 NaN @ 116 
+"$o" {AggSeriesSlot} {Power Capacity}
+set s "$o.Power Capacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 31
+"$s" cvg 2 0.0001
+"$s" unit {Power} 1 {MW} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {MW} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {MW} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Tailwater Base Value}
+set s "$o.Tailwater Base Value"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 40
+"$s" cvg 2 0.0001
+"$s" unit {Length} 1 {ft} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Tailwater Table}
+set s "$o.Tailwater Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 42
+"$s" resize 375 2
+"$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Outflow} {TW Elevation} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Flow} {Length} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {cfs} {feet} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 0 1949.125896 
+"$s" row 1 1.4158423296 1949.131992 
+"$s" row 2 2.8316846592 1949.141136 
+"$s" row 3 4.2475269888 1949.15028 
+"$s" row 4 5.6633693184 1949.159424 
+"$s" row 5 7.079211648 1949.168568 
+"$s" row 6 8.4950539776 1949.177712 
+"$s" row 7 9.9108963072 1949.186856 
+"$s" row 8 11.3267386368 1949.192952 
+"$s" row 9 12.7425809664 1949.202096 
+"$s" row 10 14.158423296 1949.21124 
+"$s" row 11 15.5742656256 1949.220384 
+"$s" row 12 16.9901079552 1949.229528 
+"$s" row 13 18.4059502848 1949.238672 
+"$s" row 14 19.8217926144 1949.244768 
+"$s" row 15 21.237634944 1949.253912 
+"$s" row 16 22.6534772736 1949.263056 
+"$s" row 17 24.0693196032 1949.2722 
+"$s" row 18 25.4851619328 1949.278296 
+"$s" row 19 26.9010042624 1949.28744 
+"$s" row 20 28.316846592 1949.296584 
+"$s" row 21 29.7326889216 1949.305728 
+"$s" row 22 31.1485312512 1949.311824 
+"$s" row 23 32.5643735808 1949.320968 
+"$s" row 24 33.9802159104 1949.330112 
+"$s" row 25 35.39605824 1949.339256 
+"$s" row 26 36.8119005696 1949.345352 
+"$s" row 27 38.2277428992 1949.354496 
+"$s" row 28 39.6435852288 1949.36364 
+"$s" row 29 41.0594275584 1949.369736 
+"$s" row 30 42.475269888 1949.37888 
+"$s" row 31 43.8911122176 1949.388024 
+"$s" row 32 45.3069545472 1949.39412 
+"$s" row 33 46.7227968768 1949.403264 
+"$s" row 34 48.1386392064 1949.412408 
+"$s" row 35 49.554481536 1949.418504 
+"$s" row 36 50.9703238656 1949.427648 
+"$s" row 37 52.3861661952 1949.436792 
+"$s" row 38 53.8020085248 1949.442888 
+"$s" row 39 55.2178508544 1949.452032 
+"$s" row 40 56.633693184 1949.458128 
+"$s" row 41 58.0495355136 1949.467272 
+"$s" row 42 59.4653778432 1949.476416 
+"$s" row 43 60.8812201728 1949.482512 
+"$s" row 44 62.2970625024 1949.491656 
+"$s" row 45 63.712904832 1949.497752 
+"$s" row 46 65.1287471616 1949.506896 
+"$s" row 47 66.5445894912 1949.51604 
+"$s" row 48 67.9604318208 1949.522136 
+"$s" row 49 69.3762741504 1949.53128 
+"$s" row 50 70.79211648 1949.537376 
+"$s" row 51 72.2079588096 1949.54652 
+"$s" row 52 73.6238011392 1949.552616 
+"$s" row 53 75.0396434688 1949.56176 
+"$s" row 54 76.4554857984 1949.567856 
+"$s" row 55 77.871328128 1949.577 
+"$s" row 56 79.2871704576 1949.583096 
+"$s" row 57 80.7030127872 1949.59224 
+"$s" row 58 82.1188551168 1949.598336 
+"$s" row 59 83.5346974464 1949.60748 
+"$s" row 60 84.950539776 1949.613576 
+"$s" row 61 86.3663821056 1949.62272 
+"$s" row 62 87.7822244352 1949.628816 
+"$s" row 63 89.1980667648 1949.63796 
+"$s" row 64 90.6139090944 1949.644056 
+"$s" row 65 92.029751424 1949.650152 
+"$s" row 66 93.4455937536 1949.659296 
+"$s" row 67 94.8614360832 1949.665392 
+"$s" row 68 96.2772784128 1949.674536 
+"$s" row 69 97.6931207424 1949.680632 
+"$s" row 70 99.108963072 1949.689776 
+"$s" row 71 100.524805402 1949.695872 
+"$s" row 72 101.940647731 1949.701968 
+"$s" row 73 103.356490061 1949.711112 
+"$s" row 74 104.77233239 1949.717208 
+"$s" row 75 106.18817472 1949.726352 
+"$s" row 76 107.60401705 1949.732448 
+"$s" row 77 109.019859379 1949.738544 
+"$s" row 78 110.435701709 1949.747688 
+"$s" row 79 111.851544038 1949.753784 
+"$s" row 80 113.267386368 1949.75988 
+"$s" row 81 114.683228698 1949.769024 
+"$s" row 82 116.099071027 1949.77512 
+"$s" row 83 117.514913357 1949.781216 
+"$s" row 84 118.930755686 1949.79036 
+"$s" row 85 120.346598016 1949.796456 
+"$s" row 86 121.762440346 1949.802552 
+"$s" row 87 123.178282675 1949.811696 
+"$s" row 88 124.594125005 1949.817792 
+"$s" row 89 126.009967334 1949.823888 
+"$s" row 90 127.425809664 1949.829984 
+"$s" row 91 128.841651994 1949.839128 
+"$s" row 92 130.257494323 1949.845224 
+"$s" row 93 131.673336653 1949.85132 
+"$s" row 94 133.089178982 1949.857416 
+"$s" row 95 134.505021312 1949.86656 
+"$s" row 96 135.920863642 1949.872656 
+"$s" row 97 137.336705971 1949.878752 
+"$s" row 98 138.752548301 1949.884848 
+"$s" row 99 140.16839063 1949.893992 
+"$s" row 100 141.58423296 1949.900088 
+"$s" row 101 143.00007529 1949.906184 
+"$s" row 102 144.415917619 1949.91228 
+"$s" row 103 145.831759949 1949.918376 
+"$s" row 104 147.247602278 1949.92752 
+"$s" row 105 148.663444608 1949.933616 
+"$s" row 106 150.079286938 1949.939712 
+"$s" row 107 151.495129267 1949.945808 
+"$s" row 108 152.910971597 1949.951904 
+"$s" row 109 154.326813926 1949.961048 
+"$s" row 110 155.742656256 1949.967144 
+"$s" row 111 157.158498586 1949.97324 
+"$s" row 112 158.574340915 1949.979336 
+"$s" row 113 159.990183245 1949.985432 
+"$s" row 114 161.406025574 1949.991528 
+"$s" row 115 162.821867904 1949.997624 
+"$s" row 116 164.237710234 1950.006768 
+"$s" row 117 165.653552563 1950.012864 
+"$s" row 118 167.069394893 1950.01896 
+"$s" row 119 168.485237222 1950.025056 
+"$s" row 120 169.901079552 1950.031152 
+"$s" row 121 171.316921882 1950.037248 
+"$s" row 122 172.732764211 1950.043344 
+"$s" row 123 174.148606541 1950.04944 
+"$s" row 124 175.56444887 1950.055536 
+"$s" row 125 176.9802912 1950.061632 
+"$s" row 126 178.39613353 1950.067728 
+"$s" row 127 179.811975859 1950.073824 
+"$s" row 128 181.227818189 1950.082968 
+"$s" row 129 182.643660518 1950.089064 
+"$s" row 130 184.059502848 1950.09516 
+"$s" row 131 185.475345178 1950.101256 
+"$s" row 132 186.891187507 1950.107352 
+"$s" row 133 188.307029837 1950.113448 
+"$s" row 134 189.722872166 1950.119544 
+"$s" row 135 191.138714496 1950.12564 
+"$s" row 136 192.554556826 1950.131736 
+"$s" row 137 193.970399155 1950.137832 
+"$s" row 138 195.386241485 1950.143928 
+"$s" row 139 196.802083814 1950.150024 
+"$s" row 140 198.217926144 1950.15612 
+"$s" row 141 199.633768474 1950.162216 
+"$s" row 142 201.049610803 1950.168312 
+"$s" row 143 202.465453133 1950.174408 
+"$s" row 144 203.881295462 1950.180504 
+"$s" row 145 205.297137792 1950.1866 
+"$s" row 146 206.712980122 1950.189648 
+"$s" row 147 208.128822451 1950.195744 
+"$s" row 148 209.544664781 1950.20184 
+"$s" row 149 210.96050711 1950.207936 
+"$s" row 150 212.37634944 1950.214032 
+"$s" row 151 213.79219177 1950.220128 
+"$s" row 152 215.208034099 1950.226224 
+"$s" row 153 216.623876429 1950.23232 
+"$s" row 154 218.039718758 1950.238416 
+"$s" row 155 219.455561088 1950.244512 
+"$s" row 156 220.871403418 1950.250608 
+"$s" row 157 222.287245747 1950.256704 
+"$s" row 158 223.703088077 1950.259752 
+"$s" row 159 225.118930406 1950.265848 
+"$s" row 160 226.534772736 1950.271944 
+"$s" row 161 227.950615066 1950.27804 
+"$s" row 162 229.366457395 1950.284136 
+"$s" row 163 230.782299725 1950.290232 
+"$s" row 164 232.198142054 1950.296328 
+"$s" row 165 233.613984384 1950.299376 
+"$s" row 166 235.029826714 1950.305472 
+"$s" row 167 236.445669043 1950.311568 
+"$s" row 168 237.861511373 1950.317664 
+"$s" row 169 239.277353702 1950.32376 
+"$s" row 170 240.693196032 1950.329856 
+"$s" row 171 242.109038362 1950.332904 
+"$s" row 172 243.524880691 1950.339 
+"$s" row 173 244.940723021 1950.345096 
+"$s" row 174 246.35656535 1950.351192 
+"$s" row 175 247.77240768 1950.357288 
+"$s" row 176 249.18825001 1950.360336 
+"$s" row 177 250.604092339 1950.366432 
+"$s" row 178 252.019934669 1950.372528 
+"$s" row 179 253.435776998 1950.378624 
+"$s" row 180 254.851619328 1950.38472 
+"$s" row 181 256.267461658 1950.387768 
+"$s" row 182 257.683303987 1950.393864 
+"$s" row 183 259.099146317 1950.39996 
+"$s" row 184 260.514988646 1950.406056 
+"$s" row 185 261.930830976 1950.409104 
+"$s" row 186 263.346673306 1950.4152 
+"$s" row 187 264.762515635 1950.421296 
+"$s" row 188 266.178357965 1950.424344 
+"$s" row 189 267.594200294 1950.43044 
+"$s" row 190 269.010042624 1950.436536 
+"$s" row 191 270.425884954 1950.442632 
+"$s" row 192 271.841727283 1950.44568 
+"$s" row 193 273.257569613 1950.451776 
+"$s" row 194 274.673411942 1950.457872 
+"$s" row 195 276.089254272 1950.46092 
+"$s" row 196 277.505096602 1950.467016 
+"$s" row 197 278.920938931 1950.473112 
+"$s" row 198 280.336781261 1950.47616 
+"$s" row 199 281.75262359 1950.482256 
+"$s" row 200 283.16846592 1950.488352 
+"$s" row 201 284.58430825 1950.4914 
+"$s" row 202 286.000150579 1950.497496 
+"$s" row 203 287.415992909 1950.503592 
+"$s" row 204 288.831835238 1950.50664 
+"$s" row 205 290.247677568 1950.512736 
+"$s" row 206 291.663519898 1950.518832 
+"$s" row 207 293.079362227 1950.52188 
+"$s" row 208 294.495204557 1950.527976 
+"$s" row 209 295.911046886 1950.534072 
+"$s" row 210 297.326889216 1950.53712 
+"$s" row 211 298.742731546 1950.543216 
+"$s" row 212 300.158573875 1950.546264 
+"$s" row 213 301.574416205 1950.55236 
+"$s" row 214 302.990258534 1950.558456 
+"$s" row 215 304.406100864 1950.561504 
+"$s" row 216 305.821943194 1950.5676 
+"$s" row 217 307.237785523 1950.570648 
+"$s" row 218 308.653627853 1950.576744 
+"$s" row 219 310.069470182 1950.58284 
+"$s" row 220 311.485312512 1950.585888 
+"$s" row 221 312.901154842 1950.591984 
+"$s" row 222 314.316997171 1950.595032 
+"$s" row 223 315.732839501 1950.601128 
+"$s" row 224 317.14868183 1950.604176 
+"$s" row 225 318.56452416 1950.610272 
+"$s" row 226 319.98036649 1950.61332 
+"$s" row 227 321.396208819 1950.619416 
+"$s" row 228 322.812051149 1950.622464 
+"$s" row 229 324.227893478 1950.62856 
+"$s" row 230 325.643735808 1950.634656 
+"$s" row 231 327.059578138 1950.637704 
+"$s" row 232 328.475420467 1950.6438 
+"$s" row 233 329.891262797 1950.646848 
+"$s" row 234 331.307105126 1950.652944 
+"$s" row 235 332.722947456 1950.655992 
+"$s" row 236 334.138789786 1950.662088 
+"$s" row 237 335.554632115 1950.665136 
+"$s" row 238 336.970474445 1950.671232 
+"$s" row 239 338.386316774 1950.67428 
+"$s" row 240 339.802159104 1950.680376 
+"$s" row 241 341.218001434 1950.683424 
+"$s" row 242 342.633843763 1950.686472 
+"$s" row 243 344.049686093 1950.692568 
+"$s" row 244 345.465528422 1950.695616 
+"$s" row 245 346.881370752 1950.701712 
+"$s" row 246 348.297213082 1950.70476 
+"$s" row 247 349.713055411 1950.710856 
+"$s" row 248 351.128897741 1950.713904 
+"$s" row 249 352.54474007 1950.72 
+"$s" row 250 353.9605824 1950.723048 
+"$s" row 251 355.37642473 1950.729144 
+"$s" row 252 356.792267059 1950.732192 
+"$s" row 253 358.208109389 1950.73524 
+"$s" row 254 359.623951718 1950.741336 
+"$s" row 255 361.039794048 1950.744384 
+"$s" row 256 362.455636378 1950.75048 
+"$s" row 257 363.871478707 1950.753528 
+"$s" row 258 365.287321037 1950.756576 
+"$s" row 259 366.703163366 1950.762672 
+"$s" row 260 368.119005696 1950.76572 
+"$s" row 261 369.534848026 1950.771816 
+"$s" row 262 370.950690355 1950.774864 
+"$s" row 263 372.366532685 1950.777912 
+"$s" row 264 373.782375014 1950.784008 
+"$s" row 265 375.198217344 1950.787056 
+"$s" row 266 376.614059674 1950.790104 
+"$s" row 267 378.029902003 1950.7962 
+"$s" row 268 379.445744333 1950.799248 
+"$s" row 269 380.861586662 1950.805344 
+"$s" row 270 382.277428992 1950.808392 
+"$s" row 271 383.693271322 1950.81144 
+"$s" row 272 385.109113651 1950.817536 
+"$s" row 273 386.524955981 1950.820584 
+"$s" row 274 387.94079831 1950.823632 
+"$s" row 275 389.35664064 1950.829728 
+"$s" row 276 390.77248297 1950.832776 
+"$s" row 277 392.188325299 1950.835824 
+"$s" row 278 393.604167629 1950.84192 
+"$s" row 279 395.020009958 1950.844968 
+"$s" row 280 396.435852288 1950.848016 
+"$s" row 281 397.851694618 1950.851064 
+"$s" row 282 399.267536947 1950.85716 
+"$s" row 283 400.683379277 1950.860208 
+"$s" row 284 402.099221606 1950.863256 
+"$s" row 285 403.515063936 1950.869352 
+"$s" row 286 404.930906266 1950.8724 
+"$s" row 287 406.346748595 1950.875448 
+"$s" row 288 407.762590925 1950.881544 
+"$s" row 289 409.178433254 1950.884592 
+"$s" row 290 410.594275584 1950.88764 
+"$s" row 291 412.010117914 1950.890688 
+"$s" row 292 413.425960243 1950.896784 
+"$s" row 293 414.841802573 1950.899832 
+"$s" row 294 416.257644902 1950.90288 
+"$s" row 295 417.673487232 1950.905928 
+"$s" row 296 419.089329562 1950.912024 
+"$s" row 297 420.505171891 1950.915072 
+"$s" row 298 421.921014221 1950.91812 
+"$s" row 299 423.33685655 1950.921168 
+"$s" row 300 424.75269888 1950.927264 
+"$s" row 301 426.16854121 1950.930312 
+"$s" row 302 427.584383539 1950.93336 
+"$s" row 303 429.000225869 1950.936408 
+"$s" row 304 430.416068198 1950.942504 
+"$s" row 305 431.831910528 1950.945552 
+"$s" row 306 433.247752858 1950.9486 
+"$s" row 307 434.663595187 1950.951648 
+"$s" row 308 436.079437517 1950.954696 
+"$s" row 309 437.495279846 1950.960792 
+"$s" row 310 438.911122176 1950.96384 
+"$s" row 311 440.326964506 1950.966888 
+"$s" row 312 441.742806835 1950.969936 
+"$s" row 313 443.158649165 1950.972984 
+"$s" row 314 444.574491494 1950.97908 
+"$s" row 315 445.990333824 1950.982128 
+"$s" row 316 447.406176154 1950.985176 
+"$s" row 317 448.822018483 1950.988224 
+"$s" row 318 450.237860813 1950.991272 
+"$s" row 319 451.653703142 1950.99432 
+"$s" row 320 453.069545472 1951.000416 
+"$s" row 321 454.485387802 1951.003464 
+"$s" row 322 455.901230131 1951.006512 
+"$s" row 323 457.317072461 1951.00956 
+"$s" row 324 458.73291479 1951.012608 
+"$s" row 325 460.14875712 1951.015656 
+"$s" row 326 461.56459945 1951.018704 
+"$s" row 327 462.980441779 1951.0248 
+"$s" row 328 464.396284109 1951.027848 
+"$s" row 329 465.812126438 1951.030896 
+"$s" row 330 467.227968768 1951.033944 
+"$s" row 331 468.643811098 1951.036992 
+"$s" row 332 470.059653427 1951.04004 
+"$s" row 333 471.475495757 1951.043088 
+"$s" row 334 472.891338086 1951.049184 
+"$s" row 335 474.307180416 1951.052232 
+"$s" row 336 475.723022746 1951.05528 
+"$s" row 337 477.138865075 1951.058328 
+"$s" row 338 478.554707405 1951.061376 
+"$s" row 339 479.970549734 1951.064424 
+"$s" row 340 481.386392064 1951.067472 
+"$s" row 341 482.802234394 1951.07052 
+"$s" row 342 484.218076723 1951.073568 
+"$s" row 343 485.633919053 1951.076616 
+"$s" row 344 487.049761382 1951.079664 
+"$s" row 345 488.465603712 1951.08576 
+"$s" row 346 489.881446042 1951.088808 
+"$s" row 347 491.297288371 1951.091856 
+"$s" row 348 492.713130701 1951.094904 
+"$s" row 349 494.12897303 1951.097952 
+"$s" row 350 495.54481536 1951.101 
+"$s" row 351 496.96065769 1951.104048 
+"$s" row 352 498.376500019 1951.107096 
+"$s" row 353 499.792342349 1951.110144 
+"$s" row 354 501.208184678 1951.113192 
+"$s" row 355 502.624027008 1951.11624 
+"$s" row 356 504.039869338 1951.119288 
+"$s" row 357 505.455711667 1951.122336 
+"$s" row 358 506.871553997 1951.125384 
+"$s" row 359 508.287396326 1951.128432 
+"$s" row 360 509.703238656 1951.13148 
+"$s" row 361 511.119080986 1951.134528 
+"$s" row 362 512.534923315 1951.137576 
+"$s" row 363 513.950765645 1951.143672 
+"$s" row 364 515.366607974 1951.14672 
+"$s" row 365 516.782450304 1951.149768 
+"$s" row 366 518.198292634 1951.152816 
+"$s" row 367 519.614134963 1951.155864 
+"$s" row 368 521.029977293 1951.158912 
+"$s" row 369 522.445819622 1951.16196 
+"$s" row 370 523.861661952 1951.165008 
+"$s" row 371 525.277504282 1951.168056 
+"$s" row 372 526.693346611 1951.171104 
+"$s" row 373 528.109188941 1951.174152 
+"$s" row 374 529.52503127 1951.1772 
+"$o" {AggSeriesSlot} {Available for Diversion}
+set s "$o.Available for Diversion"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 0
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Bank Storage}
+set s "$o.Bank Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Volume} 1 {acre-feet} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Change in Bank Storage}
+set s "$o.Change in Bank Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Volume} 1 {acre-feet} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {AggSeriesSlot} {Spill Lower Bound}
+set s "$o.Spill Lower Bound"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Spill Lower Bound LP Param}
+set s "$o.Spill Lower Bound LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Line} {Piecewise} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Volume} {Volume} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {m3} {m3} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 9.1794850247e-314 1.72005982267e-306 
+"$o" {TableSlot} {Spill Bounds Linearization Table}
+set s "$o.Spill Bounds Linearization Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Storage} {Spill Lower Bound} {Spill Upper Bound} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Volume} {Flow} {Flow} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {m3} {cms} {cms} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row 0 4.72910766033e-306 9.1794850247e-314 1.72005982267e-306 
+"$o" {AggSeriesSlot} {Spill Upper Bound}
+set s "$o.Spill Upper Bound"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Spill Upper Bound LP Param}
+set s "$o.Spill Upper Bound LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Line} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Volume} 
+"$s" setScales 1 
+"$s" setUsrUnits {m3} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 4.53182791852e-306 
+"$o" {AggSeriesSlot} {Turbine Capacity}
+set s "$o.Turbine Capacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {acre-feet/month} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Turbine Capacity LP Param}
+set s "$o.Turbine Capacity LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Tangent} {Line} {Piecewise} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Length} {Length} {Length} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {feet} {feet} {feet} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Max Turbine Q}
+set s "$o.Max Turbine Q"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 111 2
+"$s" setRowLabels {0} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Operating Head} {Turbine Capacity} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {feet} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 0 23.5373724055 
+"$s" row 1 0.3048 23.8493834712 
+"$s" row 2 0.6096 24.1604151592 
+"$s" row 3 0.9144 24.4704674722 
+"$s" row 4 1.2192 24.7795404074 
+"$s" row 5 1.524 25.0876339649 
+"$s" row 6 1.8288 25.3947481445 
+"$s" row 7 2.1336 25.7008829464 
+"$s" row 8 2.4384 26.0060383705 
+"$s" row 9 2.7432 26.3102144196 
+"$s" row 10 3.048 26.613411091 
+"$s" row 11 3.3528 26.9156283846 
+"$s" row 12 3.6576 27.2168663003 
+"$s" row 13 3.9624 27.5171248412 
+"$s" row 14 4.2672 27.8164040042 
+"$s" row 15 4.572 28.1147037895 
+"$s" row 16 4.8768 28.4120241857 
+"$s" row 17 5.1816 28.7083652239 
+"$s" row 18 5.4864 29.0037268673 
+"$s" row 19 5.7912 29.2981091443 
+"$s" row 20 6.096 29.5915120548 
+"$s" row 21 6.4008 29.8839355705 
+"$s" row 22 6.7056 30.1753797198 
+"$s" row 23 7.0104 30.4658444743 
+"$s" row 24 7.3152 30.7553298907 
+"$s" row 25 7.62 31.043835884 
+"$s" row 26 7.9248 31.3313625391 
+"$s" row 27 8.2296 31.6179097712 
+"$s" row 28 8.5344 31.9034776651 
+"$s" row 29 8.8392 32.1880661643 
+"$s" row 30 9.144 32.4716752969 
+"$s" row 31 9.4488 32.7543050349 
+"$s" row 32 9.7536 33.0359554063 
+"$s" row 33 10.0584 33.3166264113 
+"$s" row 34 10.3632 33.5963180215 
+"$s" row 35 10.668 33.8750302653 
+"$s" row 36 10.9728 34.1527631426 
+"$s" row 37 11.2776 34.4295166252 
+"$s" row 38 11.5824 34.7052907413 
+"$s" row 39 11.8872 34.9800854626 
+"$s" row 40 12.192 35.2539008174 
+"$s" row 41 12.4968 35.5267368058 
+"$s" row 42 12.8016 35.7985933995 
+"$s" row 43 13.1064 36.0694706266 
+"$s" row 44 13.4112 36.339368459 
+"$s" row 45 13.716 36.608286925 
+"$s" row 46 14.0208 36.8762260245 
+"$s" row 47 14.3256 37.1431857292 
+"$s" row 48 14.6304 37.4091660674 
+"$s" row 49 14.9352 37.6741670392 
+"$s" row 50 15.24 37.9381886163 
+"$s" row 51 15.5448 38.2012308268 
+"$s" row 52 15.8496 38.4632936426 
+"$s" row 53 16.1544 38.724377092 
+"$s" row 54 16.4592 38.9844811749 
+"$s" row 55 16.764 39.243605863 
+"$s" row 56 17.0688 39.5017511846 
+"$s" row 57 17.3736 39.7589171398 
+"$s" row 58 17.6784 40.0151037002 
+"$s" row 59 17.9832 40.2703108942 
+"$s" row 60 18.288 40.5245386934 
+"$s" row 61 18.5928 40.7777871262 
+"$s" row 62 18.8976 41.0300561924 
+"$s" row 63 19.2024 41.281345864 
+"$s" row 64 19.5072 41.531656169 
+"$s" row 65 19.812 41.7809870793 
+"$s" row 66 20.1168 42.0293386231 
+"$s" row 67 20.4216 42.2767108005 
+"$s" row 68 20.7264 42.5231035831 
+"$s" row 69 21.0312 42.7685169992 
+"$s" row 70 21.336 43.0129510489 
+"$s" row 71 21.6408 43.2564057038 
+"$s" row 72 21.9456 43.4988809923 
+"$s" row 73 22.2504 43.740376886 
+"$s" row 74 22.5552 43.9808934415 
+"$s" row 75 22.86 44.220430574 
+"$s" row 76 23.1648 44.4589883683 
+"$s" row 77 23.4696 44.6965667395 
+"$s" row 78 23.7744 44.9331657726 
+"$s" row 79 24.0792 45.1687854109 
+"$s" row 80 24.384 45.4034256827 
+"$s" row 81 24.6888 45.6370865598 
+"$s" row 82 24.9936 45.8697680705 
+"$s" row 83 25.2984 46.1014702146 
+"$s" row 84 25.6032 46.332192964 
+"$s" row 85 25.908 46.561936347 
+"$s" row 86 26.2128 46.7907003634 
+"$s" row 87 26.5176 47.0184849852 
+"$s" row 88 26.8224 47.2452902404 
+"$s" row 89 27.1272 47.4711161009 
+"$s" row 90 27.432 47.6959625949 
+"$s" row 91 27.7368 47.9198297225 
+"$s" row 92 28.0416 48.1427174553 
+"$s" row 93 28.3464 48.3646258216 
+"$s" row 94 28.6512 48.5855547932 
+"$s" row 95 28.956 48.8055043983 
+"$s" row 96 29.2608 49.024474637 
+"$s" row 97 29.5656 49.2424654808 
+"$s" row 98 29.8704 49.4594769583 
+"$s" row 99 30.1752 49.6755090692 
+"$s" row 100 30.48 49.8905617854 
+"$s" row 101 30.7848 50.1046351352 
+"$s" row 102 31.0896 50.3177290901 
+"$s" row 103 31.3944 50.5298436786 
+"$s" row 104 31.6992 50.7409789007 
+"$s" row 105 32.004 50.951134728 
+"$s" row 106 32.3088 51.1603111888 
+"$s" row 107 32.6136 51.3685082832 
+"$s" row 108 32.9184 51.5757259828 
+"$s" row 109 33.2232 51.7819643159 
+"$s" row 110 33.528 51.9872232543 
+"$o" {AggSeriesSlot} {Best Turbine Flow}
+set s "$o.Best Turbine Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Best Turbine Flow LP Param}
+set s "$o.Best Turbine Flow LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Tangent} {Line} {Piecewise} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Length} {Length} {Length} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {m} {m} {m} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row 0 2.79645334441e-298 1.0609655164e-314 NaN 
+"$o" {TableSlot} {Best Turbine Q}
+set s "$o.Best Turbine Q"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Operating Head} {Best Turbine Flow} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {feet} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Power LP Param}
+set s "$o.Power LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Operating Head} {Line} {Piecewise} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Flow} {Flow} {Flow} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {acre-feet/month} {acre-feet/month} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Plant Power Table}
+set s "$o.Plant Power Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Operating Head} {Turbine Release} {Power} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Length} {Flow} {Power} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {feet} {acre-feet/month} {MW} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {AggSeriesSlot} {Energy In Storage}
+set s "$o.Energy In Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Energy} 1 {MWH} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {MWH} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {MWH} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Energy In Storage LP Param}
+set s "$o.Energy In Storage LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Tangent} {Line} {Piecewise} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Length} {Length} {Length} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {m} {m} {m} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Energy In Storage Table}
+set s "$o.Energy In Storage Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Pool Elevation} {Energy In Storage} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Energy} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {feet} {MWH} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Power Lambda Coefficients Params}
+set s "$o.Power Lambda Coefficients Params"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Pool Elevation} {Tailwater Base Value} {Outflow} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Length} {Length} {Flow} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {m} {m} {cms} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Power Lambda Coefficients}
+set s "$o.Power Lambda Coefficients"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 8
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Pool Elevation} {Tailwater Base Value} {Tailwater Elevation} {Spill} {Turbine Release} {Power} {Best Turbine Flow} {Hydro Capacity} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Length} {Length} {Length} {Flow} {Flow} {Power} {Flow} {Power} 
+"$s" setScales 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {m} {m} {m} {cms} {cms} {MW} {cms} {MW} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Best Power Coefficient}
+set s "$o.Best Power Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Head} {Power Coeff} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {PowerPerFlow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {feet} {MW/cms} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Max Power Coefficient}
+set s "$o.Max Power Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Head} {Power Coeff} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {PowerPerFlow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {feet} {MW/cms} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Unregulated Spill Table}
+set s "$o.Unregulated Spill Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 24 2
+"$s" setRowLabels {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Elevation} {Unreg Spill} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {ft} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 1983.0288 0 
+"$s" row 1 1983.1812 15.5742656256 
+"$s" row 2 1983.293976 28.316846592 
+"$s" row 3 1983.3336 31.714868183 
+"$s" row 4 1983.492096 56.633693184 
+"$s" row 5 1983.644496 84.950539776 
+"$s" row 6 1983.77556 113.267386368 
+"$s" row 7 1983.891384 141.58423296 
+"$s" row 8 1984.00416 169.901079552 
+"$s" row 9 1984.104744 198.217926144 
+"$s" row 10 1984.196184 226.534772736 
+"$s" row 11 1984.284576 254.851619328 
+"$s" row 12 1984.376016 283.16846592 
+"$s" row 13 1984.458312 311.485312512 
+"$s" row 14 1984.534512 339.802159104 
+"$s" row 15 1984.616808 368.119005696 
+"$s" row 16 1984.693008 396.435852288 
+"$s" row 17 1984.772256 424.75269888 
+"$s" row 18 1984.839312 453.069545472 
+"$s" row 19 1984.91856 481.386392064 
+"$s" row 20 1984.985616 509.703238656 
+"$s" row 21 1985.05572 538.020085248 
+"$s" row 22 1985.134968 566.33693184 
+"$s" row 23 1985.19288 594.653778432 
+"$o" {TableSlot} {Regulated Spill Table}
+set s "$o.Regulated Spill Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 13 2
+"$s" setRowLabels {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Elevation} {Max Reg Spill} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {ft} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 1953.1584 0 
+"$s" row 1 1953.768 33.9802159104 
+"$s" row 2 1954.3776 56.633693184 
+"$s" row 3 1955.292 84.950539776 
+"$s" row 4 1956.816 113.267386368 
+"$s" row 5 1958.34 135.920863642 
+"$s" row 6 1961.0832 169.901079552 
+"$s" row 7 1966.5696 226.534772736 
+"$s" row 8 1969.3128 249.18825001 
+"$s" row 9 1973.8848 283.16846592 
+"$s" row 10 1978.152 311.485312512 
+"$s" row 11 1983.0288 339.802159104 
+"$s" row 12 1985.19288 353.394245468 
+"$o" {TableSlot} {Bypass Table}
+set s "$o.Bypass Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Elevation} {Max Bypass } 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {m} {cms} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Minimum Power Elevation}
+set s "$o.Minimum Power Elevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Min Power Elev} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Length} 
+"$s" setScales 1 
+"$s" setUsrUnits {feet} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 6463.5 
+"$o" {TableSlot} {Pool Elevation LP Param}
+set s "$o.Pool Elevation LP Param"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Tangent} {Line} {Piecewise} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Volume} {Volume} {Volume} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {acre-feet} {acre-feet} {acre-feet} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Evaporation Table}
+set s "$o.Evaporation Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 14 2
+"$s" setRowLabels {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} 
+"$s" setColumnLabels {0} {1} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Pan Evaporation Coefficient}
+set s "$o.Pan Evaporation Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Bank Storage Coefficient}
+set s "$o.Bank Storage Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} {0} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {SimObjMultiSlot} {Return Flow Salt Mass}
+set s "$o.Return Flow Salt Mass"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Mass} 1 {kg} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Regulated Spill Drift Index}
+set s "$o.Regulated Spill Drift Index"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Regulated Spill Index Table}
+set s "$o.Regulated Spill Index Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Gate Index} {Pool Elevation} {Spill} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {NONE} {Length} {Flow} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {NONE} {m} {cms} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {SeriesSlot} {Bypass Drift Index}
+set s "$o.Bypass Drift Index"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Bypass Index Table}
+set s "$o.Bypass Index Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Gate Index} {Pool Elevation} {Spill} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {NONE} {Length} {Flow} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {NONE} {m} {cms} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {AggSeriesSlot} {Hydro Capacity}
+set s "$o.Hydro Capacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Power} 1 {MW} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {MW} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {MW} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Stage Flow Tailwater Table}
+set s "$o.Stage Flow Tailwater Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Outflow} {Downstream Stage} {TW Elevation} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {Flow} {Length} {Length} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {cms} {m} {m} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {SeriesSlot} {Power Coefficient}
+set s "$o.Power Coefficient"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {PowerPerFlow} 1 {MW/cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {MW/cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {MW/cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Generator Unit Types}
+set s "$o.Generator Unit Types"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Unit No.} {Type} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Full Generator Flow}
+set s "$o.Full Generator Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 15
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Head} {Flow} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Length} {Flow} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {feet} {acre-feet/month} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Full Generator Power}
+set s "$o.Full Generator Power"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 15
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Head} {Power} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} 
+"$s" setMaximums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+"$s" setUnitTypes {Length} {Power} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+"$s" setUsrUnits {feet} {MW} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Tail Water Reference Elevation}
+set s "$o.Tail Water Reference Elevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Length} 
+"$s" setScales 1 
+"$s" setUsrUnits {feet} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Off Peak Capacity}
+set s "$o.Off Peak Capacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Off Peak Capacity} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Power} 
+"$s" setScales 1 
+"$s" setUsrUnits {MW} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {SeriesSlot} {Base Flow}
+set s "$o.Base Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1000 {acre-feet/month} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Base Flow Table}
+set s "$o.Base Flow Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 2
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {Reservoir Outflow} {Base Flow} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Flow} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {acre-feet/month} {acre-feet/month} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Hoover Tailwater Table}
+set s "$o.Hoover Tailwater Table"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 3
+"$s" setRowLabels {0} 
+"$s" setColumnLabels {0} {1} {2} 
+"$s" setMaximums NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN 
+"$s" setUnitTypes {NONE} {NONE} {NONE} 
+"$s" setScales 1 1 1 
+"$s" setUsrUnits {NONE} {NONE} {NONE} 
+"$s" setUsrFormat {%f} {%f} {%f} 
+"$s" setUsrPrecision {2} {2} {2} 
+"$s" row -1 0 
+"$o" {TableSlot} {Lower Colo Power Coeffs}
+set s "$o.Lower Colo Power Coeffs"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 2 1
+"$s" setRowLabels {0} {1} 
+"$s" setColumnLabels {0} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {SeriesSlot} {LCR Input Efficiency}
+set s "$o.LCR Input Efficiency"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {NONE} 1 {NONE} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {NONE} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Reservoir Salt Concentration}
+set s "$o.Reservoir Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Bank Storage Salt Concentration}
+set s "$o.Bank Storage Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Dead Storage}
+set s "$o.Dead Storage"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {Dead Storage} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Volume} 
+"$s" setScales 1 
+"$s" setUsrUnits {m3} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 0 
+"$o" {SeriesSlot} {Diversion Salt Concentration}
+set s "$o.Diversion Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SimObjMultiSlot} {Inflow Salt Concentration}
+set s "$o.Inflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Outflow Salt Concentration}
+set s "$o.Outflow Salt Concentration"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax 0 10
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Hydrologic Inflow Salt Conc}
+set s "$o.Hydrologic Inflow Salt Conc"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Concentration} 1 {mg/l} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {g/m3} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {TableSlot} {Plant Efficiency Value}
+set s "$o.Plant Efficiency Value"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {NONE} 
+"$s" setScales 1 
+"$s" setUsrUnits {NONE} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Head Loss}
+set s "$o.Head Loss"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 1 1
+"$s" setRowLabels {} 
+"$s" setColumnLabels {} 
+"$s" setMaximums NaN 
+"$s" setMinimums NaN 
+"$s" setUnitTypes {Length} 
+"$s" setScales 1 
+"$s" setUsrUnits {m} 
+"$s" setUsrFormat {%f} 
+"$s" setUsrPrecision {2} 
+"$s" row -1 NaN 
+"$o" {TableSlot} {Net Head vs Peak Release}
+set s "$o.Net Head vs Peak Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" resize 72 2
+"$s" setRowLabels {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} 
+"$s" setColumnLabels {Net Head} {Peak Release} 
+"$s" setMaximums NaN NaN 
+"$s" setMinimums NaN NaN 
+"$s" setUnitTypes {Length} {Flow} 
+"$s" setScales 1 1 
+"$s" setUsrUnits {ft} {cfs} 
+"$s" setUsrFormat {%f} {%f} 
+"$s" setUsrPrecision {2} {2} 
+"$s" row 0 12.192 91.0213141567 
+"$s" row 1 12.4968 97.9263747468 
+"$s" row 2 12.8016 104.828299588 
+"$s" row 3 13.1064 111.727088679 
+"$s" row 4 13.4112 118.622742022 
+"$s" row 5 13.716 125.515259614 
+"$s" row 6 14.0208 132.404641458 
+"$s" row 7 14.3256 139.290887553 
+"$s" row 8 14.6304 146.173997898 
+"$s" row 9 14.9352 153.053972494 
+"$s" row 10 15.24 159.930811341 
+"$s" row 11 15.5448 166.804514438 
+"$s" row 12 15.8496 173.675081787 
+"$s" row 13 16.1544 180.542513386 
+"$s" row 14 16.4592 187.406809235 
+"$s" row 15 16.764 194.267969336 
+"$s" row 16 17.0688 201.125993687 
+"$s" row 17 17.3736 207.980882289 
+"$s" row 18 17.6784 214.832635142 
+"$s" row 19 17.9832 221.681252245 
+"$s" row 20 18.288 228.526733599 
+"$s" row 21 18.5928 235.369079204 
+"$s" row 22 18.8976 242.20828906 
+"$s" row 23 19.2024 249.044363166 
+"$s" row 24 19.5072 255.877301523 
+"$s" row 25 19.812 262.707104131 
+"$s" row 26 20.1168 269.533770989 
+"$s" row 27 20.4216 276.357302099 
+"$s" row 28 20.7264 283.177697459 
+"$s" row 29 21.0312 289.99495707 
+"$s" row 30 21.336 296.809080931 
+"$s" row 31 21.6408 303.620069044 
+"$s" row 32 21.9456 310.427921407 
+"$s" row 33 22.2504 317.23263802 
+"$s" row 34 22.5552 324.034218885 
+"$s" row 35 22.86 330.832664 
+"$s" row 36 23.1648 337.627973366 
+"$s" row 37 23.4696 344.420146983 
+"$s" row 38 23.7744 351.20918485 
+"$s" row 39 24.0792 357.995086969 
+"$s" row 40 24.384 364.777853338 
+"$s" row 41 24.6888 371.557483957 
+"$s" row 42 24.9936 378.333978828 
+"$s" row 43 25.2984 385.107337949 
+"$s" row 44 25.6032 391.87756132 
+"$s" row 45 25.908 398.644648945 
+"$s" row 46 26.2128 405.408600816 
+"$s" row 47 26.5176 412.16941694 
+"$s" row 48 26.8224 418.927097317 
+"$s" row 49 27.1272 425.68164194 
+"$s" row 50 27.432 432.433050817 
+"$s" row 51 27.7368 439.181323947 
+"$s" row 52 28.0416 445.926461323 
+"$s" row 53 28.3464 452.668462953 
+"$s" row 54 28.6512 459.407328832 
+"$s" row 55 28.956 466.14305896 
+"$s" row 56 29.2608 472.875653342 
+"$s" row 57 29.5656 479.605111974 
+"$s" row 58 29.8704 486.331434855 
+"$s" row 59 30.1752 493.05462199 
+"$s" row 60 30.48 499.774673375 
+"$s" row 61 30.7848 506.491589009 
+"$s" row 62 31.0896 513.205368892 
+"$s" row 63 31.3944 519.916013029 
+"$s" row 64 31.6992 526.623521416 
+"$s" row 65 32.004 533.327894053 
+"$s" row 66 32.3088 540.029130942 
+"$s" row 67 32.6136 546.727232082 
+"$s" row 68 32.9184 553.422197471 
+"$s" row 69 33.2232 560.11402711 
+"$s" row 70 33.528 566.802721002 
+"$s" row 71 12.192 91.0213141567 
+"$o" {SeriesSlot} {Peak Release}
+set s "$o.Peak Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cms} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SeriesSlot} {Peak Time}
+set s "$o.Peak Time"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 500
+"$s" cvg 2 0.0001
+"$s" unit {Time} 1 {hr} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {hr} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {hr} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+set obj {FontenelleData}
+set o "$ws.FontenelleData"
+$ws SimObj $obj {DataObj} 1501 2629 {} 264 2043
+"$o" {ScalarSlot} {SafeChannelCapacity}
+set s "$o.SafeChannelCapacity"
+"$s" flags 0 0 0 0 1 0
+"$s" order 0 0
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 325.643735808 {cms}
+"$o" {ScalarSlot} {MaxElevation}
+set s "$o.MaxElevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 1 1
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1983.0288 {m}
+"$o" {ScalarSlot} {August1Target}
+set s "$o.August1Target"
+"$s" flags 0 0 0 0 1 0
+"$s" order 6 5
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1982.8764 {m}
+"$o" {ScalarSlot} {April1Target}
+set s "$o.April1Target"
+"$s" flags 0 0 0 0 1 0
+"$s" order 4 3
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1971.4464 {m}
+"$o" {ScalarSlot} {MinFlow}
+set s "$o.MinFlow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 3 2
+"$s" units {Flow} 1 {cfs} {%f} 2
+"$s" value 8.4950539776 {cms}
+"$o" {ScalarSlot} {July1Target}
+set s "$o.July1Target"
+"$s" flags 0 0 0 0 1 0
+"$s" order 5 4
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1981.2 {m}
+"$o" {AggSeriesSlot} {Obs Release}
+set s "$o.Obs Release"
+"$s" flags 0 0 0 0 1 0
+"$s" order 9 6
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {11-01-1905 00:00:00} {01-01-2008 00:00:00} 1 MONTH -1 2 @ 1212 1 @ 14 2 
+"$s" setDSeries {cms} {11-01-1905 00:00:00} {01-01-2008 00:00:00} 1 MONTH -1 NaN @ 1212 25.1069961099 25.7975901963 26.129143658 25.7993883161 25.6651749583 25.6550630124 24.3562627048 22.7658300258 22.8271529888 22.9339046688 22.9046760197 20.3012902728 20.0629417117 20.0426640178 NaN 
+"$o" {SeriesSlot} {ObsElevation}
+set s "$o.ObsElevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 8 7
+"$s" cvg 2 0.0001
+"$s" unit {Length} 1 {ft} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {m} {11-01-1905 00:00:00} {01-01-2008 00:00:00} 1 MONTH -1 2 @ 1212 1 @ 14 2 
+"$s" setDSeries {m} {11-01-1905 00:00:00} {01-01-2008 00:00:00} 1 MONTH -1 NaN @ 1212 1978.36536 1977.7575888 1976.6106264 1975.0814448 1973.3389032 1972.38366 1973.0078904 1974.3880248 1977.3403176 1978.0047816 1977.5695272 1976.5902048 1975.7809608 1975.2896232 NaN 
+"$o" {ScalarSlot} {MinElevation}
+set s "$o.MinElevation"
+"$s" flags 0 0 0 0 1 0
+"$s" order 9 8
+"$s" units {Length} 1 {ft} {%f} 2
+"$s" value 1971.4464 {m}
+"$o" {TableSlot} {InflowStats}
+set s "$o.InflowStats"
+"$s" flags 0 0 0 0 1 0
+"$s" order 11 9
+"$s" resize 539 4
+"$s" setRowLabels {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12} {13} {14} {15} {16} {17} {18} {19} {20} {21} {22} {23} {24} {25} {26} {27} {28} {29} {30} {31} {32} {33} {34} {35} {36} {37} {38} {39} {40} {41} {42} {43} {44} {45} {46} {47} {48} {49} {50} {51} {52} {53} {54} {55} {56} {57} {58} {59} {60} {61} {62} {63} {64} {65} {66} {67} {68} {69} {70} {71} {72} {73} {74} {75} {76} {77} {78} {79} {80} {81} {82} {83} {84} {85} {86} {87} {88} {89} {90} {91} {92} {93} {94} {95} {96} {97} {98} {99} {100} {101} {102} {103} {104} {105} {106} {107} {108} {109} {110} {111} {112} {113} {114} {115} {116} {117} {118} {119} {120} {121} {122} {123} {124} {125} {126} {127} {128} {129} {130} {131} {132} {133} {134} {135} {136} {137} {138} {139} {140} {141} {142} {143} {144} {145} {146} {147} {148} {149} {150} {151} {152} {153} {154} {155} {156} {157} {158} {159} {160} {161} {162} {163} {164} {165} {166} {167} {168} {169} {170} {171} {172} {173} {174} {175} {176} {177} {178} {179} {180} {181} {182} {183} {184} {185} {186} {187} {188} {189} {190} {191} {192} {193} {194} {195} {196} {197} {198} {199} {200} {201} {202} {203} {204} {205} {206} {207} {208} {209} {210} {211} {212} {213} {214} {215} {216} {217} {218} {219} {220} {221} {222} {223} {224} {225} {226} {227} {228} {229} {230} {231} {232} {233} {234} {235} {236} {237} {238} {239} {240} {241} {242} {243} {244} {245} {246} {247} {248} {249} {250} {251} {252} {253} {254} {255} {256} {257} {258} {259} {260} {261} {262} {263} {264} {265} {266} {267} {268} {269} {270} {271} {272} {273} {274} {275} {276} {277} {278} {279} {280} {281} {282} {283} {284} {285} {286} {287} {288} {289} {290} {291} {292} {293} {294} {295} {296} {297} {298} {299} {300} {301} {302} {303} {304} {305} {306} {307} {308} {309} {310} {311} {312} {313} {314} {315} {316} {317} {318} {319} {320} {321} {322} {323} {324} {325} {326} {327} {328} {329} {330} {331} {332} {333} {334} {335} {336} {337} {338} {339} {340} {341} {342} {343} {344} {345} {346} {347} {348} {349} {350} {351} {352} {353} {354} {355} {356} {357} {358} {359} {360} {361} {362} {363} {364} {365} {366} {367} {368} {369} {370} {371} {372} {373} {374} {375} {376} {377} {378} {379} {380} {381} {382} {383} {384} {385} {386} {387} {388} {389} {390} {391} {392} {393} {394} {395} {396} {397} {398} {399} {400} {401} {402} {403} {404} {405} {406} {407} {408} {409} {410} {411} {412} {413} {414} {415} {416} {417} {418} {419} {420} {421} {422} {423} {424} {425} {426} {427} {428} {429} {430} {431} {432} {433} {434} {435} {436} {437} {438} {439} {440} {441} {442} {443} {444} {445} {446} {447} {448} {449} {450} {451} {452} {453} {454} {455} {456} {457} {458} {459} {460} {461} {462} {463} {464} {465} {466} {467} {468} {469} {470} {471} {472} {473} {474} {475} {476} {477} {478} {479} {480} {481} {482} {483} {484} {485} {486} {487} {488} {489} {490} {491} {492} {493} {494} {495} {496} {497} {498} {499} {500} {501} {502} {503} {504} {505} {506} {507} {508} {509} {510} {511} {512} {513} {514} {515} {516} {517} {518} {519} {520} {521} {522} {523} {524} {525} {526} {527} {528} {529} {530} {531} {532} {533} {534} {535} {536} {537} {538} {539} 
+"$s" setColumnLabels {Percent of time equaled or exceeded} {Inflow} {Rank} {Date} 
+"$s" setMaximums NaN NaN NaN NaN 
+"$s" setMinimums NaN NaN NaN NaN 
+"$s" setUnitTypes {Fraction} {Flow} {NONE} {DateTime} 
+"$s" setScales 1 1 1 1 
+"$s" setUsrUnits {percent} {cfs} {NONE} {FullDateTime} 
+"$s" setUsrFormat {%f} {%f} {%d} {%d} 
+"$s" setUsrPrecision {3} {2} {0} {0} 
+"$s" setStatFnData 1 {Duration Curve} 0 0 0 1 {GreenAboveFontenelle.Inflow} NaN NaN 0 0 0 NaN 
+"$s" row -1 NaN 
+set obj {GreenAboveFontenelle}
+set o "$ws.GreenAboveFontenelle"
+$ws SimObj $obj {Reach} 1641 2874 {} 379 1175
+"$o" sDM {routingMethodCategory} {noRouting}
+"$o" sDM {Routing Parameters} {No Parameters}
+"$o" sDM {Local Inflow Solution Direction} {noLocalInflow}
+"$o" sDM {Generate Local Inflows} {No Forecast Local Inflow}
+"$o" sDM {Evaporation Calculation} {No Evaporation}
+"$o" sDM {depthtoFlowMethod} {noDepthtoFlowMethod}
+"$o" sDM {Stage Calculation} {No Stage Calc}
+"$o" sDM {Volume Calculation} {No Volume Calc}
+"$o" sDM {GainLoss Calculation} {No GainLoss}
+"$o" sDM {Apply GainLoss} {Current Outflow}
+"$o" sDM {Reach Uncertainty Calculation} {No Uncertainty}
+"$o" sDM {Seepage Calc} {No Seepage}
+"$o" sDM {Seepage Routing} {No Routing}
+"$o" sDM {Drain Elevation Calc} {No Drain Elevation}
+"$o" sDM {Reach Bank Storage Calculation} {No Bank Storage}
+"$o" sDM {Negative Outflow Adjustment} {No Adjustment}
+"$o" sDM {Diversion from Reach} {No Diversion}
+"$o" sDM {Minimum Diversion Bypass} {None}
+"$o" sDM {MODFLOW Link Category Reach} {No Link to MODFLOW}
+"$o" sDM {Reach PassThrough Slot Inflow} {none}
+"$o" sDM {Pass Through Acct Gain Loss} {No Gain Loss}
+"$o" sDM {ReachFinalInflowCategory} {Constrain Final Inflows}
+"$o" sDM {Reach Invisible WQ Category} {None}
+"$o" sDM {waterQualSolutionType} {noWQ}
+"$o" sDM {Water Elevation at Diversion STLE} {Line}
+"$o" sDM {Water Elevation at Diversion STGE} {Piecewise}
+"$o" sDM {Water Elevation at Diversion MTLE} {Line}
+"$o" sDM {Water Elevation at Diversion MTGE} {Piecewise}
+"$o" sDM {Instantiate Reach Optimization Slots} {Instantiate Reach Optimization Slots}
+"$o" {AggSeriesSlot} {Inflow}
+set s "$o.Inflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 0
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {02-01-1965 00:00:00} {12-01-2009 00:00:00} 1 MONTH -1 2 @ 10 1 @ 529 
+"$s" setDSeries {cms} {02-01-1965 00:00:00} {12-01-2009 00:00:00} 1 MONTH -1 NaN @ 10 28.0568637817 18.6230717165 18.3041721928 15.6703979926 19.222911598 53.951831516 71.5101940482 79.1685844878 38.6268717969 24.6563274763 19.3505636253 16.2410512188 16.1040802731 12.8810477326 12.0472881666 14.2023014221 19.0417568543 29.757920761 63.2469303084 218.001764613 178.654162526 38.3495463707 23.1592227034 25.327109596 21.2116492167 15.0944624114 14.9503723924 15.2266368175 21.5450791593 32.5472000646 43.1775882815 179.16307966 76.3723428079 63.5042257283 38.9292205372 30.6700442494 21.5397307017 15.943126561 17.2932381528 18.7722451787 22.4646168675 85.2013958316 131.999930617 140.441248649 66.2631437373 32.9098875027 19.0293901002 20.4417425823 17.8373757472 12.8152512204 11.2455507122 13.8570674859 15.8760139525 20.7354215877 53.5904408479 146.155118543 69.9008238268 27.2164389623 23.2363272793 18.0048146317 18.530623394 13.2741979472 15.0941836717 16.9852635601 21.7271989667 43.1265375378 119.15301572 286.721192638 127.30676448 49.0268583208 31.0114156998 29.7263071822 24.378547525 16.903098506 18.1140915061 20.4196532162 40.9926124298 58.1328460549 139.250136913 351.682927888 110.457452983 51.9645099152 34.2614602749 31.1637149426 24.8220096543 18.4579893771 16.8657909332 15.3756705389 17.0849460894 46.5396131574 92.5174732574 107.181023535 65.3023048522 32.8767241995 35.6036587834 23.8663559661 25.0740001876 17.4691376013 16.561146733 17.1665378264 28.2656415045 51.3174526406 105.50574843 233.150991511 91.9662008596 35.1302796593 17.2391346661 16.6153380981 16.7295988933 10.0002763607 11.5362046345 13.2182524638 17.9999382413 28.6901920947 65.0635374283 149.576069786 211.891076561 48.7610943515 22.8763744557 22.7282881991 21.3381078531 20.6667937165 14.6629297279 15.0830053927 18.0488740168 62.8608676533 148.113975965 174.1702006 100.481918943 51.8549049731 25.4610321086 21.2899333733 17.6469996337 12.9363503244 12.0096458405 11.8010704019 14.7825607478 22.6485896641 9.31337488171 45.034306611 23.4284173266 19.3553904555 16.4631813995 14.8026663687 14.8658751006 15.0605148307 13.2536577732 13.4943602656 22.469595609 46.4955835475 81.516644818 226.938912328 157.74421333 55.6014297823 29.7769021096 21.4084734301 18.2849718445 15.6861023458 13.9784270596 14.5791660774 19.1171297219 42.9828310422 87.5645599996 100.841783106 43.7611984332 32.8182747169 17.5730843107 17.5960515698 13.4350719417 12.0239518852 12.0795227197 13.491427385 14.6307367241 49.8021390906 143.874967788 165.162158006 97.7777847157 29.6001763586 22.3734717626 19.1262910345 17.9131745937 15.837295507 13.2432489761 13.4283057275 19.0284890949 20.699848821 32.2901651598 103.304215038 43.8731164368 17.7171100788 13.7553323618 15.9651980619 14.6480594247 13.9353348109 14.1733048494 13.80821057 17.1729464356 36.286072246 111.991703906 194.340988692 222.863592316 92.1203024414 46.7151904338 59.5545194745 29.2577503321 21.6174521402 19.6931037544 17.8837685594 29.0410104416 55.1518430107 108.799600073 248.738256127 165.618929753 73.8156157202 49.4198241134 46.4455139825 33.3200171555 24.6290172568 22.7202416556 19.6322451793 23.146503297 51.9844775112 112.164753026 174.595304711 133.756202267 63.9487751594 39.1599567088 42.7350118267 30.2577335198 16.8827606615 18.2294578561 16.6885525226 21.9821716377 76.2044938785 106.438977144 83.0561284673 50.6870636531 26.5694244009 21.6749250598 24.7927889651 22.0027426035 21.0614018608 17.4825390048 22.9314492555 45.4656989874 85.5707955234 132.483418685 407.184092474 165.672320601 62.5995463141 35.19770949 33.5366045881 28.5723108746 17.3936420905 14.9093276075 16.9887911114 21.0406836474 80.4160553856 115.063517463 83.4383265525 62.4625841834 39.282033183 23.7970272331 18.1637976923 18.8008611248 13.7951167214 11.7680122505 12.4999024961 18.2141014489 34.1901057292 54.5235293366 69.3904344992 24.7311369604 12.8406713357 9.74669596671 10.3252889876 13.147070195 10.1175654953 10.5413651794 10.8956734757 22.6446583287 32.2457728394 44.0955611526 101.906902687 64.8085349934 29.9651963686 19.2863199495 16.4013478272 17.9869724585 13.5340536998 12.0852834735 12.412490656 21.3008613003 39.493188595 32.1229732096 105.789700649 68.8157827785 28.5029904413 20.5077701005 18.4956981373 20.1325640677 13.1172460228 11.9056115725 11.4806623208 19.1492765041 33.1945355522 67.6178859575 170.049388328 55.5308120976 32.4655871183 27.0482605664 19.5057545844 21.8145007788 12.3771172852 10.1899254165 10.8639956658 28.9766727539 18.8491920156 40.7838387478 31.1485467405 30.9264722392 16.1483165592 12.0399779971 12.2745078587 13.602191902 11.5875860567 12.3408706002 9.94580526471 20.6285292155 31.1971157675 100.714484411 145.49227576 76.9893788165 80.5623958294 21.7030355332 22.3849821955 15.1456516698 12.3517391157 10.5135514949 9.74548037262 22.6440945686 31.3325073326 71.4923578328 49.4507794955 18.3142566997 16.2999238883 11.7427452812 16.2423498181 13.8847183485 12.1374936901 9.99401424579 13.602942205 33.0887800589 24.5136434708 38.9932553197 202.772461495 194.413031451 46.4688267043 23.3870263739 20.4395869284 22.8727009962 13.7195612894 12.5428158814 14.4293365733 22.9940574805 46.0677101339 90.2800621947 237.637161188 119.34056533 33.4191539257 18.5762129988 19.4976109057 24.0399239612 17.2010573734 19.8040195909 16.6094066815 37.9212040584 46.8005776193 164.359216491 306.339917783 88.4466442125 64.4281959941 39.8886645911 32.2672734246 25.3267529424 17.6399068838 17.5598440696 17.8515410572 28.5411114297 48.9038255301 95.3102950835 162.264055646 150.39590768 53.9232463672 27.5543766383 27.1827961275 25.3365399724 15.3065660951 16.4839408139 16.7874176153 28.4247794243 46.0616057014 126.769794129 270.448702669 126.409565527 43.0555237571 30.1484688896 23.1157272229 21.8196407962 15.5757012812 14.7148319393 16.5972058018 22.957407861 43.0078546112 71.8328849315 85.2691568562 33.8572711001 18.3005230489 15.6677024978 17.3961333614 14.9989213229 12.3785225682 11.4169089115 12.0546766661 22.4570295157 24.9723935569 49.3033171665 34.6988535575 23.2831772698 12.6443626673 9.63010240708 9.79711780175 12.8468689108 10.7429131752 10.1642267908 9.49245574774 13.7064819928 26.16467611 21.0884801936 76.2105461797 31.9997432204 13.222949113 13.6157567362 14.5763143387 15.1394377729 11.919754835 11.737707397 12.3409106742 27.1684226887 26.7137394426 35.0553533398 89.9810090539 31.9185726964 16.2216325647 14.9557836738 12.3450251828 12.72643015 12.9616342102 11.5219186948 11.380280473 26.6184915325 31.2492657712 30.7735061347 86.4110508834 77.472741328 25.6898841735 19.4918298997 24.7743025667 23.4538907823 16.1545982948 16.4146546156 14.5032299622 29.7193977017 59.4022864365 108.235161984 153.296967311 74.4207338477 27.2043617451 15.7684280328 18.6912139227 18.1984044411 14.3264218771 15.4508653219 14.141130481 17.9982810489 46.6151512057 100.930281719 103.301117742 39.4549763131 15.9520783459 13.6913658031 18.878572559 18.8812061447 13.2401603189 12.1560208365 13.1379950166 28.7484835977 23.5330650167 50.0694253735 42.4068002626 21.3151669542 16.0195516288 12.0898061807 15.0717355114 15.3818731544 12.5514969204 11.2302850804 12.1188084168 14.8737157466 25.3720192821 60.6857738713 106.53238686 79.6156473789 21.5052873779 16.9157489156 19.893161882 19.6139438257 13.5910350786 15.016335957 13.5297948234 21.0491886944 43.3699319628 69.7715040165 227.18180226 113.609609929 33.3170069897 17.6988662509 21.9803608292 19.9008197598 
+"$o" {AggSeriesSlot} {Outflow}
+set s "$o.Outflow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 1
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+"$o" {SimObjMultiSlot} {Return Flow}
+set s "$o.Return Flow"
+"$s" flags 0 0 0 0 1 0
+"$s" order 500 2
+"$s" cvg 2 0.0001
+"$s" unit {Flow} 1 {cfs} {%f} 2
+"$s" minMax NaN NaN
+"$s" setFSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 2 
+"$s" setDSeries {cms} {08-01-2004 00:00:00} {08-01-2004 00:00:00} 1 MONTH -1 NaN 
+# Section: Links
+$ws Link {Fontenelle.Inflow} {GreenAboveFontenelle.Outflow}
