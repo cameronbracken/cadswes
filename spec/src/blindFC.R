@@ -34,7 +34,7 @@ blindFC <- function(hts, models, I, fc = TRUE, blind = TRUE, tol = 0.2,
 			embeddedts[i,] <- hts[(xx - 1) * T + i]
 			response[i] <- hts[(DIM - 1)*T + 1 + i]
 		}
-
+        #browser()
 			#fit the local polynomial model 
 		fit <- locfit.raw(x=embeddedts,y=response,alpha=alpha,deg=deg,scale=T,kern="bisq",maxk=5000)
 

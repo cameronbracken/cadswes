@@ -8,18 +8,20 @@ nalpha <- 25
 
 	# other parameters
 n.ahead <- 100
-ts.start <- 1490
+#ts.start <- 1490# for sawp
+ts.start <- 1906 # for lf
 
 	#Load functions
 source('dts.R')
 source('blindFC.R')
 
 	#load data
-x <- scan('data/SAWP_decade.txt',quiet=T)
+#x <- scan('data/SAWP_decade.txt',quiet=T)
+x <- scan('data/lf.txt',quiet=T)
 x <- ts(x,start=ts.start,frequency=1)
 
 	#forecast from end of timeseries
-I <- 509#length(x) + 1
+I <- 95
 fitted.models <- paste('data/fitted-models-',I,'.Rdata',sep='')
 plot.file <- paste('plots/blindfc-',I,'.pdf',sep='')
 
