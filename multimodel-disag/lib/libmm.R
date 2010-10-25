@@ -2,17 +2,45 @@
 ############################################################
 # get.predictors:
 #   Reads a specifically formatted data file containing predictors
-get.predictors <- function(datafile,predmonth){
+get.predictors <- function(climatefile, swefile, pdsifile ,predmonth, 
+    leadtimes=c('nov','dec','jan','feb','mar','apr')){
     
-    data <- as.matrix(read.table(datafile,header=T))
-    years <- data[,1]
-    data <- data[,-1]
+    climate <- as.matrix(read.table(climatefile,header=T))
+    swe <- as.matrix(read.table(swefile,header=T))
+    pdsi <- as.matrix(read.table(pdsifile,header=T))
+    years <- as.numeric(rownames(climate))
+    nrows <-min( c(nrow(climate), nrow(swe), nrow(pdsi)) )
+    data <- cbind(climate[1:nrows,],swe[1:nrows,],pdsi[1:nrows,])
     pnames <- colnames(data)
         # The data file is arranged in colums by month 
-        # so find where the month ends and then include all
-        # the data up to that month
-    cols <- 1:max(grep(predmonth,pnames))
-    return(ts(data[,cols],start=years[1],frequency=1))
+        # but the months are not necessarily in order
+        # so find all the months before and including the 
+        # current predmonth
+    prevs <- 1:max(grep(predmonth,leadtimes))
+    cols <- c()
+    for(i in prevs)
+        cols <- c(cols,grep(leadtimes[i],pnames))
+
+    data <- data[,cols]
+    pnames <- colnames(data)
+    swecols <- grep("swe",pnames)
+    if(length(swecols) > 1){
+        swepc <- prcomp(cbind(data[,swecols]))
+        swep <- t(t(swepc$rotation[,1])%*%t(cbind(data[,swecols])))
+        data <- data[,-swecols]
+        data <- cbind(data,swep)
+        colnames(data)[ncol(data)] <- 'swe_pc1'
+    }
+    pnames <- colnames(data)
+    pdsicols <- grep("pdi",pnames)
+    if(length(pdsicols) > 1){
+        pdsipc <- prcomp(cbind(data[,pdsicols]))
+        pdsip <- t(t(pdsipc$rotation[,1])%*%t(cbind(data[,pdsicols])))
+        data <- data[,-pdsicols]
+        data <- cbind(data,pdsip)
+        colnames(data)[ncol(data)] <- 'pdi_pc1'
+    }
+    return(ts(data,start=years[1],frequency=1))
     
 }
 
@@ -64,6 +92,18 @@ combinationfilter=function(AllPredictors,selpredsetcombi,verbose){
     }
     combinationkept=combinationkept[1:predpos]
     combinationkept
+}
+
+############################################################
+############################################################
+# sigcor:
+#       Returns the minimum significant correlation at the 
+#       given alpha value
+sigcor <- function(n,alpha=.05){
+ 
+    k <- qnorm(alpha)^2/(n-2)
+    sqrt(k/(k+1))   
+    
 }
 
 
@@ -452,7 +492,6 @@ total2intervening <- function(data,mat){
     
 }
 
-
 ts.annual.mean <- function(x){
 
     options(warn=-1)
@@ -506,4 +545,57 @@ CapFirst <- function(x) {
     s <- strsplit(x, " ")[[1]]
     paste(toupper(substring(s, 1,1)), substring(s, 2),
           sep="", collapse=" ")
+}
+
+print.xtable.booktabs <- function(mat) {
+    print(mat, 
+          sanitize.text.function = function(x){x},
+          #floating=FALSE, 
+          NA.string = "*",
+          hline.after=NULL, 
+          add.to.row=list(pos=list(-1,0, nrow(mat)), 
+          command=c('\\toprule ',
+                    '\\midrule ',
+                    '\\bottomrule ')),
+          table.placement = "!ht",
+          caption.placement="top")
+}
+
+latexSummary <- function(d,file){
+    
+    tables <- d$xtables
+    sink(file)
+    cat('\\documentclass[11pt]{article}\n')
+    cat('\\usepackage{mathpazo}\n')
+    cat('\\usepackage{booktabs}\n')
+    cat('\\begin{document}\n')
+    for(i in 1:length(tables)){
+        print.xtable.booktabs(tables[[i]])
+    }
+    cat('\\end{document}\n')
+    sink()
+    
+}
+
+as.integer.matrix <- function(m){
+    
+    x <- matrix(as.integer(m),ncol=ncol(m))
+    colnames(x) <- colnames(m)
+    rownames(x) <- rownames(m)
+    x
+    
+}
+
+#options(tikzSanitizeCharacters = c(options()$tikzSanitizeCharacters,"_"))
+#options(tikzReplacementCharacters = c(options()$tikzReplacementCharacters,"\\_"))
+
+modelSummary <- function(d,file){
+    
+    w <- getOption("width")
+    options(width=1000)
+    sink(file)
+    print(as.integer.matrix(d$model$psets))
+    print(d$model$info)
+    sink()
+    options(width=w)
 }

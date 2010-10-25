@@ -6,6 +6,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 	# verbose 2 = output reggarding results
 	# verbose 3 = Tons 
 	options(warn=-1)
+	
 	    # Calculate the 15 highest correlated subsets of each size (# predictors)
 	    # in practice, more than 3 predictors are never actually used becuse 
 	    # they end up being multicolinear.
@@ -14,9 +15,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
         # nbest-max number of subsets of each size to choose
 	lps <- leaps(rawpredictors,response,nbest=15,nvmax=nvmax,method="Cp",int=F,
 	    strictly.compatible=F)
-	
-	if(verbose > 1) cat("------GCV-Results---------\n")
-	
+		
 	allsubsets <- lps$which
 	nsubsets <- length(allsubsets[,1])
 	degs <- alphas <- gcvs <- numeric(nsubsets)
@@ -30,7 +29,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
   
     b <- 0
     if(verbose > 0){ 
-        cat('Selecting best parameters...\n')
+        cat('Selecting best predictors...\n')
         flush.console()
         pb <- txtProgressBar(1,nsubsets*npar,style=3)
     }
@@ -118,9 +117,9 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 		nsets <- length(gcvssorted)
 		    # the min number of sets to keep
 		base <- 5
-		if((range(gcvssorted)[2]/gcvssorted[1]) >1.1 ){
+		if((range(gcvssorted)[2]/gcvssorted[1]) >1.5 ){
 			keepsets=0
-			while((gcvssorted[keepsets+1])<=(1.1*gcvssorted[1]))
+			while((gcvssorted[keepsets+1])<=(1.5*gcvssorted[1]))
 			    keepsets <- keepsets + 1
 			if(keepsets<base) keepsets <- base
 			if(nsets<base) keepsets <- nsets 
@@ -128,7 +127,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 			keepsets <- base
 			if(nsets<base) keepsets=nsets 
 		}
-		
+
 		if(verbose > 2)
 		    cat('\tKeeping',keepsets,'out of',
 		        nsets,'sets;','indicies are',a,b,'\n\n')
@@ -154,10 +153,8 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 			        ncol=ncol(keptpredictorset))
 			}
 		}
-		
 		a <- b+1
 	}
-	
 	#Now finally the last step 
 	allgcvsordered=order(gcvs)
 	
@@ -176,15 +173,17 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
     }
 	
 	
-	finalselection <- allgcvsordered[combinationskept]		
+	finalselection <- allgcvsordered[combinationskept]	
+	
+	
+	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
+	finalselection <- finalselection[which(gcvratio < 1.5)]
+	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
+	
+		
 	if(verbose > 2)
 	    print(finalselection)
 	finalpredictors <- allsubsets[finalselection,]
-	
-	
-	gcvratio <- 1:length(gcvs[finalselection])
-	for(igcv in 1:length(gcvratio))
-		gcvratio[igcv]= gcvs[finalselection][igcv] / gcvs[finalselection][1]
   
 	predset <- cbind(lps$size[finalselection],finalpredictors,
 	            gcvs[finalselection], degs[finalselection],
@@ -211,7 +210,8 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
     	        alphas[finalselection][i], gcvratio[i],'\n')
 	}
 	#write(t(predset),file=outputfile,append=TRUE,ncol=ncol(predset))
-	return(list(p=finalpredictors,info=info,fitobj=fitobj))
+	return(list(psets=finalpredictors,info=info,fitobj=fitobj,
+	    rawpredictors=rawpredictors, response=response))
 	
 	
 	

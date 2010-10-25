@@ -1,5 +1,4 @@
-multimodel <- function(obj, trainingmodel, trainingresponse,
-    allpredictors, nsims=1, verbose = 1)
+multimodel <- function(obj, newdata, nsims=1, verbose = 1)
 {
 
 	#The process goes:
@@ -10,11 +9,11 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 	# verbose = 0 No output
 	# verbose = 1 info on prgerss of long computations
     suppressMessages(require(locfit))
-    npredpts <- nrow(allpredictors)
+    npredpts <- nrow(newdata)
     
     gcvs <- obj$info[['gcv']]
     locfitcalib <- obj$fitobj
-    psets <- obj$p   # Grabs only predictors information 
+    psets <- obj$psets   # Grabs only predictors information
 	
 	simdata <- matrix(0,nrow=npredpts,ncol=nsims)
 	
@@ -42,7 +41,7 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 	             #pull out combination for this iteration
 			selectedpset <- as.logical(psets[modelnumber,])   
 			    #pull out predictors corresponding to this combo
-			modeldata <- allpredictors[,selectedpset]	
+			modeldata <- newdata[,selectedpset]	
 			
 			if(sum(psets[modelnumber,])==1){
 				    #then there is only one predictor
@@ -59,18 +58,14 @@ multimodel <- function(obj, trainingmodel, trainingresponse,
 			locfitpredicted <- predict.locfit(locfitcalib[[modelnumber]],
 			    predictat,se.fit=T,band="global")
 	
-			#if(j%%1==0){print(paste('model',modelnumber,'on point',j,
-			#    'out of',npredpts),quote=F)}
-	
 			resid <- rnorm(1,0,locfitpredicted$se.fit[1])
 			simdata[j,i] <- locfitpredicted$fit[1]+resid
-		
-			#if(is.nan(simdata[j,i])){simdata[j,i]=0}
-			#if(simdata[j,i]<0){simdata[j,i]=0}
 	
 		}
 	}
 	if(verbose > 0) close(pb)
 	#cat('\n')
-	return(simdata)
+	obj$newdata <- newdata
+	obj$pred <- t(simdata)
+	return(obj)
 }

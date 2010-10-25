@@ -1,21 +1,31 @@
 
-pdisag <- function(hist, nsim=1000, sims = NULL){
+pdisag <- function(obj, hist, agg = NULL, simname=NULL, nsim=1000){
 
 	# hist - a matrix with years down the rows and 
-	#        months along the columns, optionally sites as layers
+	#        months along the columns, optionally sites as layers	
 	
+	# Create an aggregate series along the first index of the data,
+	# for example if your data is years X months X sites then the aggregate
+	# series will be yearly summed values across all months and sites. 
+	if(is.null(agg))
+	    agg <- rowSums(hist)
 	
-	agg <- rowSums(hist)
 		#create the proportion matrix by dividing all the rows by the row sums
 	p <- hist/agg 
 		# check if it works:
 		#all.equal(rep(1,nrow(hist)),rowSums(p))
 	
 	# simulate nsim annual sequences to disaggregate
-	if(is.null(sims))
-	    sims <- sim.knn(agg, nsim=nsim )
+	if(is.null(simname)){
+	    sims <- t(sim.knn(agg, nsim=nsim ))
+	}else{
+	    sims <- obj[[simname]]
+	    obj[[simname]] <- NULL
+	    #model <- obj[-which(names(obj)==simname)]
+	}
+	model <- obj
 	
-	pdisag <- list(hist=hist,agg=agg,p=p,nsim=nsim,sims=sims)
+	pdisag <- list(hist=hist,agg=agg,p=p,nsim=nsim,sims=sims, model=model)
 	class(pdisag) <- 'pdisag'
 	pdisag
 	
@@ -27,6 +37,10 @@ disag <- function (object, ...) {
 
 diagnostics <- function (object, ...) {
 	UseMethod("diagnostics")
+}
+
+rpss <- function (object, ...) {
+	UseMethod("rpss")
 }
 
 print.pdisag <- function(x){
@@ -64,7 +78,7 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 		if(!quiet) setTxtProgressBar(pb, i)
 		for(j in 1:ns){
 
-				z <- obj$sims[i,j]
+				z <- obj$sims[j,i]
 				neighbor <- nn(obj$agg,z,index=T, k = 12)
 				#browser()
 				
@@ -135,33 +149,73 @@ oneoverk <- function(k){
 	
 }
 
-diagnostics.pdisag <- function(d, main='', time.names=NULL, site.names=NULL, 
-    cn = NULL, dir='diagnostics', density=T,ylab=''){
+diagnostics.pdisag <- function(d, calibration, pred, main='', 
+    time.names=NULL, site.names=NULL, 
+    cn = NULL, dir='diagnostics', vtype, density=T,ylab=''){
     
     if(is.null(d$disag)) stop("No disag data available, run disag() first.")
     if(!file.exists(dir)) dir.create(dir)
+    if(!file.exists(file.path(dir,'plots'))) 
+        dir.create(file.path(dir,'plots'))
+    if(!file.exists(file.path(dir,'reports'))) 
+        dir.create(file.path(dir,'reports'))
     
     # year, month, site, sim
     dims <- dim(d$disag)
+    time.names <- month.name[if(dims[2]==4) 4:7 else 1:12]
+    
+    #browser()
+    rpss.ann <- median(RPSS(d$agg,d$sims))
+    mc.ann <- cor(apply(d$sims,2,median)[1:length(d$agg)],d$agg)
+    pdf(file.path(dir,'plots',paste(main,"Annual","Lees Ferry",vtype,'box.pdf')),
+        width=8,height=5)
+        
+        colnames(d$sims) <- time(d$model$newdata)
+        myboxplot.matrix(d$sims,cex=.3,main=main,outline=F, 
+            ylab=ylab,xlab='Time')
+        mtext(paste("Annual","Lees Ferry"))
+        lines(d$model$response,type='b',cex=.5)
+        abline(h=quantile(d$model$response,1/3))
+        abline(h=quantile(d$model$response,2/3))
+        title(sub=paste("RPSS = ",round(rpss.ann,2), "MC = ",round(mc.ann,2)))
+        
+    dev.off()
+    
     cat('Diagnostics...\n')
     flush.console()
     pb <- txtProgressBar(1,dims[2]*dims[3],style=3)
-    b <- 0
+    b <- rpss <- mc <- 0
     for(time in 1:dims[2]){
         for(site in 1:dims[3]){
             b <- b +  1
             this.time <- ifelse(is.null(time.names),paste('Time',time),time.names[time])
             this.site <- ifelse(is.null(site.names),paste('Site',site),site.names[site])
+            #print(this.time)
+            #print(this.site)
             this.data <- t(d$disag[,time,site,])
             colnames(this.data) <- cn
             
-            pdf(file.path(dir,paste(main,this.time,this.site,'box.pdf')),
+            #if(this.time == "July" && this.site == "San Juan River Near Archuleta,NM")
+            #    browser()
+            rpss[b] <- median(RPSS(d$hist[,time,site],this.data))
+            mc[b] <- cor(apply(this.data,2,median),d$hist[,time,site])
+            # cat(rpss[b],"\n")
+            # flush.console()
+            
+            pdf(file.path(dir,'plots',paste(main,this.time,this.site,vtype,'box.pdf')),
                 width=8,height=5)
                 
                 myboxplot.matrix(this.data,cex=.3,main=main,outline=F, 
                     ylab=ylab,xlab='Time')
                 mtext(paste(this.time,this.site))
-                lines(d$hist[,time,site])
+                lines(d$hist[,time,site],type='b',cex=.5)
+                abline(h=quantile(d$hist[,time,site],1/3))
+                abline(h=quantile(d$hist[,time,site],2/3))
+                #browser()
+                mc[b] <- ifelse(abs(mc[b]) < sigcor(length(d$hist[,time,site])),
+                    NA, round(mc[b],2))
+                title(sub=paste("RPSS = ",round(rpss[b],2), "MC = ",mc[b]))
+                
                 
             dev.off()
             
@@ -172,7 +226,7 @@ diagnostics.pdisag <- function(d, main='', time.names=NULL, site.names=NULL,
             		x <- density(d$disag[,time,site,i])
             		m <- ifelse(max(x$y)>m,max(x$y),m)
             	}
-            	pdf(file.path(dir,paste(main,this.time,this.site,'density.pdf')),
+            	pdf(file.path(dir,'plots',paste(main,this.time,this.site,vtype,'density.pdf')),
             	    width=8,height=5)
         	    
             	    plot(z <- density(d$hist[,time,site]),ylim=c(0,m), main=main,
@@ -193,5 +247,23 @@ diagnostics.pdisag <- function(d, main='', time.names=NULL, site.names=NULL,
         }
     }
     close(pb)
+    
+    nt <- dims[2]
+    d$stats$rpss <- matrix(rpss,ncol=nt,byrow=T)
+    d$stats$mc <- matrix(mc,ncol=nt,byrow=T)
+    colnames(d$stats$rpss) <- colnames(d$stats$mc) <- time.names
+    rownames(d$stats$rpss) <- rownames(d$stats$mc) <- site.names
+    
+    d$xtables$rpss <- xtable(d$stats$rpss,digits=rep(2,ncol(d$stats$rpss)+1),
+        caption=paste(main,'RPSS after disaggregation'))             
+    d$xtables$mc <- xtable(d$stats$mc,digits=rep(2,ncol(d$stats$mc)+1),
+        caption=paste(main,'MC after disaggregation (* indicates non-significant correlation)'))
+    
+
+    file <- file.path(dir,'reports',gsub(' ','',main))
+    latexSummary(d, file = paste(file,'_',vtype,'.tex',sep=''))
+    modelSummary(d, file = paste(file,'_',vtype,'.txt',sep=''))
+    
+    return(d)
     
 }
