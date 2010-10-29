@@ -1,0 +1,59 @@
+\begin{tikzpicture}
+    [
+    node distance=3mm and 5mm,
+    block/.style ={
+        rectangle, 
+        draw=gray!80, 
+        thick, 
+        top color=gray!20, 
+        bottom color=white,
+        text badly centered, 
+        text width=5em,
+        rounded corners
+    },
+    phantom/.style={
+        inner sep=0,
+        outer sep=-.7pt,
+    },
+    a/.style={
+        -stealth',
+        draw=gray
+    },
+    l/.style={
+        draw=gray
+    }
+    ]
+    \footnotesize
+    \node (lead1)[block] {Nov 1};
+    \node (lead2)[block,below=of lead1] {Jan 1};
+    \node (lead3)[block,below=of lead2] {Feb 1};
+    \node (lead4)[block,below=of lead3] {April 1};
+    \node (leaddes)[block,draw=black,text width=8em,below=of lead4] {Lead Times};
+    
+    \node (p1)[below right=of lead1]{};
+    
+    \node (f)[block,right=of p1,draw=black] {Framework};
+    
+    \node (p2)[right=of f]{};
+    
+    \node (fc1)[block,above right=of p2] {April};
+    \node (fc2)[block,below=of fc1] {May};
+    \node (fc3)[block,below=of fc2] {June};
+    \node (fc4)[block,below=of fc3] {July};
+    \node (fcdes)[block,draw=black,text width=8em,below=of fc4] {Forecast Times};
+      
+    \draw[l] (lead1) -| (p1.center);
+    \draw[l] (lead2) -| (p1.center);
+    \draw[l] (lead3) -| (p1.center);
+    \draw[l] (lead4) -| (p1.center);
+    
+    \draw[a] (p1.center) -- (f);
+    
+    \draw[a] (p2.center) |- (fc1);
+    \draw[a] (p2.center) |- (fc2);
+    \draw[a] (p2.center) |- (fc3);
+    \draw[a] (p2.center) |- (fc4);
+    
+    \draw[l] (p2.center) -- (f);
+    
+\end{tikzpicture}

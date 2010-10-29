@@ -7,7 +7,7 @@
     #number of simulations to perform
 nsims <- 1000
     #lead time, could be nov, jan, feb, apr
-predmonth <- "apr"
+predmonth <- "jan"
     # Should forecasts be done only for apr-july
 seasonal <- TRUE
     # minimum proportion of data to use in local regression
@@ -17,7 +17,7 @@ nvmax <- 3
     # should intervening flows be used?  If FALSE, total flows are used. 
 intervening <- FALSE
     # Verification type
-vtype <- "back"
+vtype <- "all"
 
     # load libraries, source code, and data, 
     # depends on the values of the parameters above

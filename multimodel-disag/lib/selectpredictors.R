@@ -1,5 +1,5 @@
 selectpredictors <- function(rawpredictors, response, verbose=1, debug=F, 
-    min.alpha = .3, nvmax=3){
+    min.alpha = .3, nvmax=3, ratio=1.5){
 
 	# verbose 0 = nothing
 	# verbose 1 = only status on long running computations
@@ -116,7 +116,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 			#to keep from the subset that has the same number of predictors
 		nsets <- length(gcvssorted)
 		    # the min number of sets to keep
-		base <- 5
+		base <- ncol(rawpredictors)
 		if((range(gcvssorted)[2]/gcvssorted[1]) >1.5 ){
 			keepsets=0
 			while((gcvssorted[keepsets+1])<=(1.5*gcvssorted[1]))
@@ -174,8 +174,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 	
 	
 	finalselection <- allgcvsordered[combinationskept]	
-	
-	
+		
 	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
 	finalselection <- finalselection[which(gcvratio < 1.5)]
 	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
