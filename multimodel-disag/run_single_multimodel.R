@@ -7,7 +7,7 @@
     #number of simulations to perform
 nsims <- 1000
     #lead time, could be nov, jan, feb, apr
-predmonth <- "jan"
+predmonth <- "nov"
     # Should forecasts be done only for apr-july
 seasonal <- TRUE
     # minimum proportion of data to use in local regression
@@ -16,8 +16,12 @@ min.alpha  <- .3
 nvmax <- 3
     # should intervening flows be used?  If FALSE, total flows are used. 
 intervening <- FALSE
-    # Verification type
+    # Verification type, "drop-one", "retro", "all"
 vtype <- "all"
+    # in retroactive verification mode, the number of years back to simulate
+nback <- 15
+
+
 
     # load libraries, source code, and data, 
     # depends on the values of the parameters above
@@ -26,16 +30,17 @@ vtype <- "all"
     # year.e, site.names, time.names
 source('setup/setup.R')
 
-training <- verificationsetup(predictors,response,historical,vtype)
+training <- verificationsetup(predictors, response, historical, vtype, 
+    nback = nback)
 
     # Run the model a bunch of times to get 
     # an estimate of the best parameters
-fit <- selectpredictors(training$predictors,training$response, min.alpha = min.alpha, 
-    nvmax = nvmax, verbose=1)
+fit <- selectpredictors(training$predictors,training$response, 
+	min.alpha = min.alpha, nvmax = nvmax, verbose=1)
     
     # using the best set of predictors, run the multimodel 
     # and generate ensembles using new data
-fit <- multimodel(fit, training$newdata, nsims)
+fit <- multimodel(fit, training$newdata, nsims, vtype = vtype, nback = nback)
 
     # set up the proportion disag object
 pd <- pdisag(fit, training$historical, nsim=nsims, simname="pred")
@@ -44,8 +49,11 @@ pd <- pdisag(fit, training$historical, nsim=nsims, simname="pred")
 d <- disag(pd, plot=F)
 
 main <- paste(CapFirst(predmonth),'1')
+years <- time(training$newdata)
+cn <- if(vtype=="retro") years[-(1:(length(years)-nback))] else years
+    
     # save a bunch of plots and return stats
 d <- diagnostics(d, main=main,time.names=time.names,
-    site.names = site.names, cn = time(training$newdata),
-    ylab='Flow Volume [MAF/month]',vtype=vtype ,density=F)
+    site.names = site.names, cn = cn,
+    ylab='Flow Volume [MAF/month]',vtype=vtype, nback=nback ,density=F)
  

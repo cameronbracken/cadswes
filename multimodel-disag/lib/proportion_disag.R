@@ -151,7 +151,7 @@ oneoverk <- function(k){
 
 diagnostics.pdisag <- function(d, calibration, pred, main='', 
     time.names=NULL, site.names=NULL, 
-    cn = NULL, dir='diagnostics', vtype, density=T,ylab=''){
+    cn = NULL, dir='diagnostics', vtype, nback, density=T,ylab=''){
     
     if(is.null(d$disag)) stop("No disag data available, run disag() first.")
     if(!file.exists(dir)) dir.create(dir)
@@ -159,6 +159,9 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
         dir.create(file.path(dir,'plots'))
     if(!file.exists(file.path(dir,'reports'))) 
         dir.create(file.path(dir,'reports'))
+    
+    cat('Diagnostics...\n')
+    flush.console()
     
     # year, month, site, sim
     dims <- dim(d$disag)
@@ -170,19 +173,18 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
     pdf(file.path(dir,'plots',paste(main,"Annual","Lees Ferry",vtype,'box.pdf')),
         width=8,height=5)
         
-        colnames(d$sims) <- time(d$model$newdata)
+        colnames(d$sims) <- cn
+        
         myboxplot.matrix(d$sims,cex=.3,main=main,outline=F, 
-            ylab=ylab,xlab='Time')
+            ylab=ylab,xlab='Time',ylim=range(c(d$sims,d$agg)))
         mtext(paste("Annual","Lees Ferry"))
-        lines(d$model$response,type='b',cex=.5)
+        lines(d$agg,type='b',cex=.5)
         abline(h=quantile(d$model$response,1/3))
         abline(h=quantile(d$model$response,2/3))
         title(sub=paste("RPSS = ",round(rpss.ann,2), "MC = ",round(mc.ann,2)))
         
     dev.off()
     
-    cat('Diagnostics...\n')
-    flush.console()
     pb <- txtProgressBar(1,dims[2]*dims[3],style=3)
     b <- rpss <- mc <- 0
     for(time in 1:dims[2]){
@@ -190,8 +192,7 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
             b <- b +  1
             this.time <- ifelse(is.null(time.names),paste('Time',time),time.names[time])
             this.site <- ifelse(is.null(site.names),paste('Site',site),site.names[site])
-            #print(this.time)
-            #print(this.site)
+    
             this.data <- t(d$disag[,time,site,])
             colnames(this.data) <- cn
             
@@ -199,8 +200,7 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
             #    browser()
             rpss[b] <- median(RPSS(d$hist[,time,site],this.data))
             mc[b] <- cor(apply(this.data,2,median),d$hist[,time,site])
-            # cat(rpss[b],"\n")
-            # flush.console()
+
             
             pdf(file.path(dir,'plots',paste(main,this.time,this.site,vtype,'box.pdf')),
                 width=8,height=5)

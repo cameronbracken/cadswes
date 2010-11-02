@@ -1,12 +1,5 @@
-verificationsetup <- function(predictors, response, historical, type){
+verificationsetup <- function(predictors, response, historical, type, nback){
     
-    if(type == "all"){
-        
-        predictors <- window(predictors,start=start(response),end=end(response))
-        newdata <- predictors
-        response <- response
-        historical <- historical
-    }
     if(type == "back"){
         
         ti <- time(response)
@@ -16,7 +9,23 @@ verificationsetup <- function(predictors, response, historical, type){
         s <- which(ti==time(training$newdata)[1])
         e <- which(ti==time(training$newdata)[length(time(training$newdata))])
         historical <- historical[s:e,,]
+    }else if(type == "retro"){
+        
+        predictors <- window(predictors,start=start(response),end=end(response))
+        newdata <- predictors
+        response <- response
+        s <- nrow(historical) - nback + 1
+        e <- nrow(historical)
+        historical <- historical[s:e,,]
+    
+    }else{
+
+        predictors <- window(predictors,start=start(response),end=end(response))
+        newdata <- predictors
+        response <- response
+        historical <- historical
     }
+    
     return(list(predictors=predictors,newdata=newdata,
         response=as.vector(response), historical=historical))
 }

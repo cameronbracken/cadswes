@@ -48,7 +48,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 		        # Must unclass the data because warnings occur 
 		        # if ts objects are passed in
     		fit <- locfit.raw(x=unclass(predset), y=unclass(response), alpha=this.alpha, 
-			    deg=this.deg, kern="bisq", maxk=200)
+			    deg=this.deg, kern="bisq", maxk=200, scale = T)
 
             #if(lps$size[i] > 1) browser()
             
