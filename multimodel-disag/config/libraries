@@ -1,3 +1,5 @@
 e1071
 leaps
 locfit
+xtable
+tikzDevice

@@ -1,0 +1,335 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="author" content="ESRL Web Team">
+    
+        
+    
+
+    
+        <meta name="keywords" content="earth system research, climate, forecasts">
+    
+
+    
+        <meta name="description" content="Earth System Research Laboratory">
+    
+
+    <title>
+        
+            ESRL
+        
+	
+		: PSD
+	
+        : Time-series Plot
+    </title>
+
+    <!-- site-wide style sheets -->
+    <link rel="stylesheet" type="text/css" href="/css/noleft.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/print.css" media="print">
+
+    
+	<!-- A style sheet with settings for all divisions -->
+	<link rel="stylesheet" type="text/css" href="/css/division.css" media="all">
+
+	<!-- A style sheet specifically for the defined division -->
+	<link rel="stylesheet" type="text/css" href="/psd/css/psd.css" media="all">
+
+	
+
+    
+
+    
+
+    <!--[if IE]>
+       <style type="text/css">
+		body { 
+			max-width: none;
+		}
+		#container { 
+			max-width: none;
+		}
+		#major_header {
+			height: 4.5em;
+		}
+		ul#nav li { width: 10%; }
+		ul#nav li li a { width: 100%; }
+		
+		#pbody {
+			padding-top: 0px;
+		}
+		#content {
+			font-size: 100%;
+		    z -index: 0;
+		}
+		blockquote#news div {
+			padding: 0em 0em 0.2em 0em;
+		}
+
+		#footer { margin-top: 5px; }
+		#policies { padding: 0em; }
+        </style>
+    <![endif]-->
+
+<script type="text/javascript">
+//<![CDATA[
+
+// startList = function() {
+function startList ( ) {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("nav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.nodeName="LI") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+		navRoot = document.getElementById("vertnav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.nodeName="LI") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+
+window.onload=startList;
+
+//]]>
+</script>
+</head>
+
+<body onload="startList()">
+
+<div id="container">
+
+<div id="banner">
+    <div id="minor_header">
+		<a href="http://www.doc.gov/">U.S. Department of Commerce</a> | <a href="http://www.noaa.gov/">National Oceanic &amp; Atmospheric Administration</a> | 
+<a href="http://www.research.noaa.gov/">NOAA Research</a>
+    </div>
+
+    <div id="major_header">
+
+<img lang="en" src="/img/banner_psd.png" width="540" height="80" alt="NOAA Earth System Research Laboratory" usemap="#banner"></a>
+
+<map name="banner" id="banner">
+<area shape="circle" coords="40,40,26" href="http://www.noaa.gov/" alt="NOAA Logo links to NOAA website" title="Link to NOAA Website" target="_top">
+<area shape="rect" coords="80,5,540,70" href="http://www.esrl.noaa.gov/" alt="ESRL links to ESRL homepage." title="Return to ESRL homepage." target="_top">
+<area shape="default" nohref>
+</map>
+	<div id="search">
+		<form method="get" action="http://usasearch.gov/search">
+		<p>
+
+		<em>Search PSD:</em>
+		<br>
+		<input type="hidden" name="affiliate" value="etl.noaa.gov" />
+                <input type="hidden" name="v:project" value="firstgov" />
+                <input type="text" name="query" id="query-field" />
+                <input type="submit" value="Search" />
+		</p>
+		</form>
+
+		<a style="font-size:80%;" href="http://www.esrl.noaa.gov/calendar/">Calendar</a>&nbsp;|&nbsp;<a style="font-size:80%;" href="http://nsd.rdc.noaa.gov/nsd/pubsearch">People</a>&nbsp;|&nbsp;<a style="font-size:80%;" href="http://www.esrl.noaa.gov/search/pubs/">Publications</a>
+	</div>
+
+	<!-- force major_header height to include search div -->
+	<div class="clear">
+	</div>
+	<p class="textvers"><a href="#content_link">Skip navigation</a></p>
+    </div> <!-- end major_header -->
+
+    <!-- major navigation -->
+    
+	<div id="major_nav">
+
+
+	<div id="name">
+	<h1><a href="/psd/">Physical Sciences Division</a></h1>
+	</div>
+
+
+   <p class="textvers">Site navigation:</p>
+    <ul id="nav">
+        <li>
+	    <div><a href="">About</a></div>
+	    <ul>
+	        <li><a href="/psd/about/">Overview</a></li>
+	        <li><a href="/psd/about/org.html">Organization</a></li>
+	        <li><a href="/psd/contributions/">Contributions</a></li>
+	        <li><a href="/psd/staff/">Staff</a></li>
+	        <li><a href="http://www.esrl.noaa.gov/about/visiting.html">Visiting ESRL</a></li>
+	    </ul>
+	    </li>
+   	    <li>
+	    <div><a href="">Contact</a></div>
+	    <ul>
+	    	<li><a href="/psd/about/contacts.html">Points of Contact</a></li>
+	    	<li><a href="/psd/staff/">Staff List</a></li>
+	    </ul>
+        </li>
+	    <li>
+	    <div><a href="">Research</a></div>
+	    <ul>
+	    		<li><a href="/psd/psd2/coastal/climate/">Climate-Weather Connection</a></li>
+	    		<li><a href="/psd/enso/">El Ni&ntilde;o / La Ni&ntilde;a</a></li>
+	    		<li><a href="/psd/arctic/">Polar Processes</a></li>
+	      		<li><a href="/psd/psd3/air-sea/">Boundary Layer Applications</a></li>
+	       	    <li><a href="/psd/pubs/">Publications</a></li>
+       	        <li><a href="/psd/programs/">Field Programs</a></li>
+       	        <li><a href="/psd/technology/">Observing Facillities</a></li>
+       	</ul>
+        </li>
+	    <li>
+	    <div><a href="">Data</a></div>
+	    <ul>
+	    		<li><a href="/psd/data/">All</a></li>	    
+       	        <li><a href="/psd/data/gridded/">Gridded Climate</a></li>
+       	        <li><a href="/psd/psd3/cruises">Cruise Data</a></li>
+       	        <li><a href="/psd/data/obs/">Profiler Network Data &amp; Image Library</a></li>
+       	        <li><a href="/psd/psd2/coastal/satres/">Satellite</a></li>
+       	</ul>
+        </li>        
+        
+        <li>
+	    <div><a href="">Products</a></div>
+	    <ul>
+	    		<li><a href="/psd/products/">All</a></li>
+ 	    		<li><a href="/psd/pubs/">Publications</a></li>
+       	        <li><a href="/psd/map/">Map Room</a></li>
+       	        <li><a href="/psd/cgi-bin/data//getpage.pl">Plotting &amp; Analysis</a></li>
+       	        <li><a href="/psd/forecasts/reforecast/">Reforecast</a></li>
+       	</ul>
+        </li>
+        <li>
+        <div><a href="">Outreach</a></div>
+        <ul>
+        		<li><a href="/psd/news/">News</a></li>
+        		<li><a href="/psd/spotlight/">PSD Research Spotlight Articles</a></li>
+        		<li><a href="/psd/outreach/resources/">PSD Science Handouts</a></li>        		
+        		<li><a href="/psd/outreach/education/">Education Resources</a></li>
+        </ul>
+        </li>
+        <li>
+
+     
+
+        </li>
+    </ul>
+</div>
+
+    
+</div> <!-- end banner -->
+
+<div id="pbody">
+
+    <div id="content">
+    
+    
+    
+
+<!-- whenever possible, use the webwarning script to update this file -->
+<!-- rather than editing it by hand.-->
+<!--
+<div id="alert">
+<span>
+</span>
+</div>
+ -->
+
+    
+    
+    <a class="textvers" name="content_link">&nbsp;</a>
+    
+
+<pre>
+       1948        2010
+1948   23.321
+1949   23.552
+1950   23.561
+1951   23.859
+1952   23.688
+1953   24.066
+1954   24.092
+1955   24.211
+1956   22.944
+1957   22.647
+1958   23.790
+1959   23.700
+1960   24.394
+1961   24.297
+1962   23.392
+1963   22.963
+1964   23.836
+1965   22.999
+1966   23.684
+1967   23.615
+1968   23.159
+1969   23.798
+1970   23.813
+1971   23.097
+1972   23.074
+1973   23.693
+1974   23.029
+1975   23.607
+1976   23.581
+1977   23.764
+1978   23.353
+1979   23.707
+1980   22.805
+1981   23.392
+1982   23.469
+1983   22.882
+1984   22.969
+1985   22.980
+1986   23.640
+1987   23.402
+1988   24.704
+1989   23.078
+1990   23.915
+1991   22.934
+1992   23.653
+1993   22.813
+1994   23.879
+1995   22.697
+1996   23.127
+1997   23.183
+1998   23.609
+1999   24.812
+2000   24.122
+2001   24.356
+2002   24.017
+2003   23.842
+2004   23.302
+2005   23.596
+2006   23.895
+2007   24.003
+2008   24.520
+2009   23.656
+2010   23.879
+ -999.9990    
+Surface Gauss SST(C)
+Latitude Range used:   25.7 to  23.8
+Longitude Range used: 157.5 to 161.3
+</pre>
+NCEP Reanalysis
+Produced at NOAA/ESRL PSD at http://www.esrl.noaa.gov/psd/data/timeseries/
+Date submitted: 10/25/2010 at 00:17
+

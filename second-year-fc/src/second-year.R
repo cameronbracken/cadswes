@@ -4,7 +4,7 @@
 source('setup.R')
 
 ns <- 2 # states
-q <- 2 #years back
+q <- 4 #years back
 r <- 2 #years ahead, 2 or greater
 nsims <- 250
 
@@ -22,6 +22,7 @@ n <- length(paleo)
 nh <- length(hist)
 
 	#all state tansitions of paleo
+paleo.qr <- laglead(paleo,q,r)
 paleo.bqr <- laglead(paleo.b,q,r)
 	
 	#block transition probabilities 
@@ -74,13 +75,14 @@ for(y in q:nh){
 	cat('Forecasting From Year',time(hist)[y],'\n')
 	
 		# The historical quantiles removing the current year
-	Qh <- ecdf(hist[-((y-q+1):y)])(hist)
+	this.hist <- hist[-((y-q+1):y)]
+	Qh <- ecdf(this.hist)(hist)
 	Qh.qr <- laglead(Qh,q,r)
 
 		#current binary and quantile state
 	state <- hist.b[(y-q+1):y]
 	Qstate <- Qh[(y-q+1):y]
-	Qsum <- sum(Qstate)
+	Qsum <- sum(Qstate^2)
 	
 		#all the probabilities of coming from the current state
 	which.from.p <- rows.equal(tr.paleo$from,state)
@@ -113,8 +115,8 @@ for(y in q:nh){
 			# 4. Repeat 
 			
 			# 1. Simulate a transition from the current state 
-		rand <- runif(1) 
-		which.to <- rank(c(rand,cumsum(this.p)))[1]
+		rand1 <- runif(1) 
+		which.to <- rank(c(rand1,cumsum(this.p)))[1]
 		state.to <- tr.paleo$to[which.to,]
 			
 			# 2. corresponding pool
@@ -123,8 +125,8 @@ for(y in q:nh){
 		this.pool.from <- pool.from[those.to,]
 		
 			# 3. Knn 
-		rand <- runif(1)
-		this.neighbor <- rank(c(rand,w))[1]
+		rand2 <- runif(1)
+		this.neighbor <- rank(c(rand2,w))[1]
 		
 			#find nearest quantile neighbors
 		d <- sqrt(apply((this.pool.from - Qstate)^2,1,sum))
@@ -135,7 +137,7 @@ for(y in q:nh){
 		#this.quant <- this.pool.to[sample(1:nrow(this.pool.to),1),]
 	
 		this.sim[i,] <- this.quant
-		browser()
+		#browser()
 	}
 	
 	sim.y1[,y-q+1] <- quantile(hist,this.sim[,1])
