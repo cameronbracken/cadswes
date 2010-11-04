@@ -48,6 +48,8 @@ pd <- pdisag(fit, training$historical, nsim=nsims, simname="pred")
     # do the proportion disag
 d <- disag(pd, plot=F)
 
+
+
 main <- paste(CapFirst(predmonth),'1')
 years <- time(training$newdata)
 cn <- if(vtype=="retro") years[-(1:(length(years)-nback))] else years

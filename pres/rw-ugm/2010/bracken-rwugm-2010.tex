@@ -119,18 +119,18 @@
 \pause
 
 \begin{center}
-\begin{tikzpicture} [small mindmap,level 1 concept/.append style={sibling angle=45}]
+\begin{tikzpicture} [small mindmap,level 1 concept/.append style={sibling angle=60}]
 	\path[mindmap,concept color=gray!30] 
-		node[concept] {Probablistic Midterm Model} [counterclockwise from=180] 
+		node[concept] {Midterm Probablistic Model} [counterclockwise from=180] 
 			child[concept color=green!50!gray] { node[concept] {Multiple Traces} }
 			child[concept color=blue!40] { node[concept] {Second Year Forecasts} 
-				% [clockwise from=-30] 
+				 %[clockwise from=-90] 
 				%	child[concept color=purple!40] { node[concept] {Operational Mode} } 
 				%	child[concept color=purple!40] { node[concept] {Analysis Mode} }
 			} 
-			child[concept color=red!70] { node[concept] {Demands} }
+			%child[concept color=red!70] { node[concept] {Demands} }
 			child[concept color=orange!80] { node[concept] {Real Time Data Inputs} }
-			child[concept color=Purple] { node[concept] {Operational Rules} 
+			child[concept color=red!70] { node[concept] {Operational Rules} 
 		}; 
 \end{tikzpicture} 
 \end{center}
@@ -165,7 +165,9 @@
 \framesubtitle{Operator Notes}
 \begin{itemize}
 \item Baseflows: steady release mid August to mid April (usually 1000-1200 cfs)
-	\begin{itemize}		\item Flows are steady to protect fish (spawning, etc.) and to prevent flooding due to ice jamming		\item Set flow to put reservoir at March/April 6468ft target
+	\begin{itemize}
+		\item Flows are steady to protect fish (spawning, etc.) and to prevent flooding due to ice jamming
+		\item Set flow to put reservoir at March/April 6468ft target
 	\end{itemize}
 \end{itemize}
 \end{frame}
