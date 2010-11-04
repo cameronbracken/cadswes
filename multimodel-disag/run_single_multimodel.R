@@ -43,6 +43,8 @@ pd <- pdisag(fit, training$historical, nsim=nsims, simname="pred")
     # do the proportion disag
 d <- disag(pd, plot=F)
 
+
+
 main <- paste(CapFirst(predmonth),'1')
     # save a bunch of plots and return stats
 d <- diagnostics(d, main=main,time.names=time.names,
