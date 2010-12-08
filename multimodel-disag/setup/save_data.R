@@ -29,6 +29,7 @@ save_data <- function(){
     nat.mon.intv <- read.csv(datafile,skip=3)
 
     i2t <- as.matrix(read.table('data/i2t.txt'))
+    t2i <- as.matrix(read.table('data/t2i.txt'))
     nat.mon.tot <- intervening2total(nat.mon.intv,i2t)
 
     n.sites <- ncol(nat.mon.intv)
@@ -75,7 +76,8 @@ save_data <- function(){
         # flow in MAF/year, sum of all months and sites compose each annual value
     response <- ts(rowSums(historical),start = year.s, frequency=1)
 
-    save(predictors, response, historical, n.sites, n.years, n.months, year.s, 
+    save(predictors, response, historical, historical.intv, historical.tot, 
+        n.sites, n.years, n.months, year.s, t2i, i2t,
         year.e, site.names, time.names, file='data/multimodel.RData')
 }
 save_data()

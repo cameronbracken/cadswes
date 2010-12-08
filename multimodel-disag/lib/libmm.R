@@ -31,15 +31,17 @@ get.predictors <- function(climatefile, swefile, pdsifile ,predmonth,
         data <- cbind(data,swep)
         colnames(data)[ncol(data)] <- 'swe_pc1'
     }
-    pnames <- colnames(data)
-    pdsicols <- grep("pdi",pnames)
-    if(length(pdsicols) > 1){
-        pdsipc <- prcomp(cbind(data[,pdsicols]))
-        pdsip <- t(t(pdsipc$rotation[,1])%*%t(cbind(data[,pdsicols])))
-        data <- data[,-pdsicols]
-        data <- cbind(data,pdsip)
-        colnames(data)[ncol(data)] <- 'pdi_pc1'
-    }
+      # principal component on pdsi, not really necessary. 
+    #pnames <- colnames(data)
+    #pdsicols <- grep("pdi",pnames)
+    #if(length(pdsicols) > 1){
+    #    pdsipc <- prcomp(cbind(data[,pdsicols]))
+    #    pdsip <- t(t(pdsipc$rotation[,1])%*%t(cbind(data[,pdsicols])))
+    #    data <- data[,-pdsicols]
+    #    data <- cbind(data,pdsip)
+    #    colnames(data)[ncol(data)] <- 'pdi_pc1'
+    #}
+    
     return(ts(data,start=years[1],frequency=1))
     
 }
@@ -586,9 +588,6 @@ as.integer.matrix <- function(m){
     
 }
 
-#options(tikzSanitizeCharacters = c(options()$tikzSanitizeCharacters,"_"))
-#options(tikzReplacementCharacters = c(options()$tikzReplacementCharacters,"\\_"))
-
 modelSummary <- function(d,file){
     
     w <- getOption("width")
@@ -598,4 +597,41 @@ modelSummary <- function(d,file){
     print(d$model$info)
     sink()
     options(width=w)
+}
+
+# disag sims to intervening
+disagSimsToIntervening <- function(d,t2i){
+    
+    dims <- dim(d$disag)
+    cat('Converting Flows to Intervening...\n')
+    flush.console()
+    pb <- txtProgressBar(1,dims[2]*dims[4],style=3)
+    b <- 0
+    for(i in 1:dims[2]){
+        for(j in 1:dims[4]){
+            b <- b + 1
+            d$disag[,i,,j] <- total2intervening(d$disag[,i,,j],t2i)
+            setTxtProgressBar(pb, b)
+        }
+    }
+    close(pb)
+    d
+}
+
+mylag <- 
+function(x,lag,docor=FALSE){
+
+    if(lag>length(x)) 
+		warning("Lag is larger than input vector length, returning NA's") 
+
+    if(lag<0)  lagn = c(rep(NA,abs(lag)),x[-(length(x):(length(x)+lag+1))])
+    if(lag==0) lagn = x    
+    if(lag>0)  lagn = c(x[-(1:lag)],rep(NA,lag))
+
+    remove = !is.na(lagn) & !is.na(x)
+    if(docor){
+		return(cor(x[remove],lagn[remove]))
+    }else{
+		return(lagn)
+	}
 }

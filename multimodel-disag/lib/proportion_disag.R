@@ -255,9 +255,10 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
     rownames(d$stats$rpss) <- rownames(d$stats$mc) <- site.names
     
     d$xtables$rpss <- xtable(d$stats$rpss,digits=rep(2,ncol(d$stats$rpss)+1),
-        caption=paste(main,'RPSS after disaggregation'))             
+        caption=paste(main,'RPSS after disaggregation',vtype))             
     d$xtables$mc <- xtable(d$stats$mc,digits=rep(2,ncol(d$stats$mc)+1),
-        caption=paste(main,'MC after disaggregation (* indicates non-significant correlation)'))
+        caption=paste(main,'MC after disaggregation',vtype,
+            '(* indicates non-significant correlation)'))
     
 
     file <- file.path(dir,'reports',gsub(' ','',main))

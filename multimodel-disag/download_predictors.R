@@ -3,7 +3,7 @@
 dl <- F
 na.strings = "-999.999"
 
-require(XML)
+library(XML)
 
 base <- "http://www.esrl.noaa.gov/psd/cgi-bin/data/timeseries/timeseries.pl?"
 args <- list()
@@ -113,10 +113,10 @@ for(i in seq(2,ncol(raw_predictors),by=2)){
     c1 <- cor(raw_predictors[1:length(lf.ts),i],lf.ts)
     c2 <- cor(raw_predictors[1:length(lf.ts),i-1],lf.ts)
     c3 <- cor(raw_predictors_diff[1:length(lf.ts),b],lf.ts)
-    if(abs(c1) > abs(c3))
-        raw_predictors_diff[,b] <- raw_predictors[,i]
-    if(abs(c2) > abs(c1))
-        raw_predictors_diff[,b] <- raw_predictors[,i-1]
+    #if(abs(c1) > abs(c3))
+    #    raw_predictors_diff[,b] <- raw_predictors[,i]
+    #if(abs(c2) > abs(c1))
+    #    raw_predictors_diff[,b] <- raw_predictors[,i-1]
         
     colnames(raw_predictors_diff)[b] <- substr(colnames(raw_predictors)[i],1,7)
 }
