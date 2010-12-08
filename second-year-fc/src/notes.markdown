@@ -1,11 +1,39 @@
 #A method for obtaining 2 year seasonal volume forecasts
 
 
-- m = length of years leading up 
+- q = length of years leading up 
 - p = length of years after
-- get length m state from historical (store magnitudes)
-- find all the length m transitions from paleo that start with historic state
-	- possibly from a block of paleo
-- get magnitude and state of subsequent p years from paleo
-- 
-- f(x\_future | x\_past, S\_past)
+
+Results:
+
+ns  q  r  m rpss
+ 7  2  1  1  0.100216
+ 6  2  1  1 -0.00368
+ 5  2  1  1  0.08272
+ 4  2  1  1 -0.041408
+ 3  2  1  1 0.006904
+ 2  2  1  1 -0.10736
+ 7  2  1  3 0.118936
+ 6  2  1  3 -0.07208
+ 5  2  1  3  0.0820432
+ 4  2  1  3 -0.1056824
+ 3  2  1  3 -0.0899072
+ 2  2  1  3 0.1373248
+ 7  2  1  5 0.41824
+ 6  2  1  5 0.3209104
+ 5  2  1  5  0.1684
+ 4  2  1  5 0.1593568
+ 3  2  1  5 0.0764128
+ 2  2  1  5 -0.472832
+ 7  2  1  11  0.3502
+ 6  2  1  11 0.351496
+ 5  2  1  11 0.20224
+ 4  2  1  11 0.0947296
+ 3  2  1  11 0.0764128
+ 2  2  1  11 -0.472832
+ 7  3  1  3 0.26272 *
+ 6  3  1  3 0.236152 *
+ 5  3  1  3 0.221248
+ 4  3  1  3 0.0076384
+ 3  3  1  3 0.0735904
+ 2  3  1  3 -0.204668
