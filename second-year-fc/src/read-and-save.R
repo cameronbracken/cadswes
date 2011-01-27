@@ -3,8 +3,6 @@
 source('lib.R')
 require(gtools)
 require(Hmisc)
-seasonal.total <- TRUE
-running.mean <- TRUE
 if(!running.mean)m <- 1
 
     # NINO3 index (kaplan reconstruction)
@@ -15,9 +13,10 @@ enso <- ts(array(t(enso[,-1])), start = sy, frequency=12)
 
   # nino3 cook reconstructions
 cook <- read.table('data/cook.txt',header=T)
-cook <- ts(cook[,2],start=cook[1,1])
+sy.cook <- cook[1,1]
+cook <- cook[,2]
 if(running.mean) cook <- as.vector(running(cook,width=m))
-cook <- ts(cook,start = start(cook) + m-1)
+cook <- ts(cook,start = sy.cook + m-1)
 
   # nino3 observed
 nino3 <- read.table('data/nino3.txt',header=T)

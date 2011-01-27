@@ -1,15 +1,23 @@
-nsi <- 3 # states
-q <- 2 #years back
-r <- 2 #years ahead
-m <- 1
+nsi <- 4 # states
+q <- 1 #years back
+r <- 1 #years ahead
+m <- 1 #running mean length
 nsims <- 250
 
-dataset <- 'meko'
-cache <- FALSE
+plotdir <- 'plots'
+dataset <- 'meko' # 'meko' or 'woodhouse' or 'nino3'
+  # dont regenerate the transition information if it exits, 
+  # just load it from a data file
+cache <- TRUE
+hist.cdf <- 'gamma' # 'ecdf' or 'gamma'
+transition <- 'knn' # knn or locfit or gamma
+back.weight <- 'equal' # equal or flow
+seasonal.total <- TRUE
+running.mean <- TRUE
+
 
 #Paramters to implement
 mode <- 'drop-one' # or 'retroactive'
-hist.cdf <- 'ecdf' # or 'gamma'
 conditional.pools <- FALSE
 scaled <- FALSE
 

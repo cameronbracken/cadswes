@@ -35,16 +35,16 @@ function(x,q,r){
     ##   [6,]    9   10
     
     
-	n <- length(x)
+    n <- length(x)
 
   lag <- matrix(NA, n-q-r+1, q)
-	lead <- matrix(NA, n-q-r+1, r)
+    lead <- matrix(NA, n-q-r+1, r)
 
-	for(i in 1:(n-q-r+1)){
-		lag[i,] <- x[i:(i+q-1)]
-		lead[i,] <- x[(i+q):(i+q+r-1)]
-	}
-	return(list(lag=lag,lead=lead))
+    for(i in 1:(n-q-r+1)){
+        lag[i,] <- x[i:(i+q-1)]
+        lead[i,] <- x[(i+q):(i+q+r-1)]
+    }
+    return(list(lag=lag,lead=lead))
 }
 
 
@@ -165,16 +165,16 @@ function(x, n, limit.type = 'prob', tie = 1 ){
     
     b <- integer(length(x))
     
-	for(i in 1:(n+1)){
-    	filter <- 
-		if(tie == 1) 
-			x >= limit[i] & x <= limit[i+1]
-		else 
-			x > limit[i] & x <= limit[i+1]
+    for(i in 1:(n+1)){
+        filter <- 
+        if(tie == 1) 
+            x >= limit[i] & x <= limit[i+1]
+        else 
+            x > limit[i] & x <= limit[i+1]
     
-	    #only need to set the 1's because b is already 0's
-	    b[filter] <- as.integer(i-1)
-	}
+        #only need to set the 1's because b is already 0's
+        b[filter] <- as.integer(i-1)
+    }
     
     if(class(x) == 'ts') 
         return(ts(b,start=start(x),end=end(x))) 
@@ -209,128 +209,130 @@ binarys <- function(i,align=F){
 }
 
 rows.equal <- function(x, y){
-	
-	if(is.null(dim(x))) x <- rbind(x)
-	which( as.logical( 
-			apply(x, 1, all.equal, y)))
+    
+    if(is.null(dim(x))) x <- rbind(x)
+    which( as.logical( 
+            apply(x, 1, all.equal, y)))
 }
 
 trprob <- function(lag,lead,ns = max(lead)+1){
-	
-	q <- ncol(lag)
-	r <- ncol(lead)
-	
-	states.lag <- permutations(ns,q,0:(ns-1),repeats.allowed=T)
-	states.lead <- permutations(ns,r,0:(ns-1),repeats.allowed=T)
-	nfrom <- nrow(states.lag)
-	nto <- nrow(states.lead)
-	
-	nc <- ns^(q+r)
-	
-	tpm <- list(
-		from = matrix(NA,nrow=nc,ncol=q),
-		to = matrix(NA,nrow=nc,ncol=r), 
-		p = matrix(NA,nrow=nfrom,ncol=nto),
-		cor = matrix(NA,nrow=nfrom,ncol=nto),
-		pts = matrix(NA,nrow=nfrom,ncol=nto),
-		sig = matrix(NA,nrow=nfrom,ncol=nto),
-		pval = matrix(NA,nrow=nfrom,ncol=nto),
-		pools = list()
-		)
-		
-	pb <- txtProgressBar(1,nrow(states.lag),style=3)
-	
-	n <- 0
-	tpm$pools$to <- tpm$pools$from <- list()
-	rownames(tpm$p) <- character(nfrom)
-	colnames(tpm$p) <- character(nto)
-	
-	for(i in 1:nfrom){
-		setTxtProgressBar(pb,i)
-		
-			#all rows starting in a particular state
-		pool <- rows.equal(lag,states.lag[i,])
-		tpm$pools$from[[i]] <- pool
-		tpm$pools$to[[i]] <- list()
-	
-		attr(tpm$pools$from[[i]],'state.from') <- states.lag[i,]
-		
-		for(j in 1:nto){
-		  
-			n <- n + 1
-			  # record the current to and from states
-			tpm$from[n,] <- states.lag[i,]
-			tpm$to[n,] <- states.lead[j,]
-			
-			#matches <- rows.equal(cbind(lead[pool,]), states.lead[j,])
-			this.state <- rbind(states.lead[j,])
-			
-			  # turn vectors (single state to) into matricies, 
-			  # rbind handles the case of one entry only in the pool, 
-			  # but multiple to states 
-			this.pool <- if(q==1) cbind(lead[pool,]) else rbind(lead[pool,])
-			
-			  # If we get this condition, something is wrong.
-			if(ncol(this.state) != ncol(this.pool))browser()
-			
-			  # find the matching rows
-			matches <- 
-			if(nrow(this.pool) == 0)
-			  # then we're empty
-			  integer(0)
-			else
-			  find.matches(this.state, this.pool, maxmatch=nrow(lag))$matches
-			
-			  # find.matches returns a single 0 if there are no matches
-		  if(length(matches) == 1) if( matches == 0 ) matches <- integer(0)
-		  
-		    # record the transition probability
-			possible <- nrow(this.pool)
-			tpm$p[i,j] <- length( matches ) / possible
-			  # set the transition state names, this sets them way too much
-			  # but it doesnt hurt anything
-			rownames(tpm$p)[i] <- paste(tpm$from[n,],collapse='')
-			colnames(tpm$p)[j] <- paste(tpm$to[n,],collapse='')
-				
-				#save the indexes of the states from and to
-			tpm$pools$to[[i]][[j]] <- as.vector(matches)
-		  attr(tpm$pools$to[[i]],'state.from') <- states.lag[i,]
-		  attr(tpm$pools$to[[i]][[j]],'state.to') <- states.lead[j,]
-		   #browser()
-		}
-	}
-	close(pb)
-	return(tpm)
-	
+    
+    q <- ncol(lag)
+    r <- ncol(lead)
+    
+    states.lag <- permutations(ns,q,0:(ns-1),repeats.allowed=T)
+    states.lead <- permutations(ns,r,0:(ns-1),repeats.allowed=T)
+    nfrom <- nrow(states.lag)
+    nto <- nrow(states.lead)
+    
+    nc <- ns^(q+r)
+    
+    tpm <- list(
+        from = matrix(NA,nrow=nc,ncol=q),
+        to = matrix(NA,nrow=nc,ncol=r), 
+        p = matrix(NA,nrow=nfrom,ncol=nto),
+        cor = matrix(NA,nrow=nfrom,ncol=nto),
+        pts = matrix(NA,nrow=nfrom,ncol=nto),
+        sig = matrix(NA,nrow=nfrom,ncol=nto),
+        pval = matrix(NA,nrow=nfrom,ncol=nto),
+        gcv = matrix(NA,nrow=nfrom,ncol=nto),
+        pools = list()
+        )
+        
+    pb <- txtProgressBar(1,nrow(states.lag),style=3)
+    
+    n <- 0
+    tpm$pools$to <- tpm$pools$from <- list()
+    rownames(tpm$p) <- character(nfrom)
+    colnames(tpm$p) <- character(nto)
+    
+    for(i in 1:nfrom){
+        setTxtProgressBar(pb,i)
+        
+            #all rows starting in a particular state
+        pool <- rows.equal(lag,states.lag[i,])
+        tpm$pools$from[[i]] <- pool
+        tpm$pools$to[[i]] <- list()
+    
+        attr(tpm$pools$from[[i]],'state.from') <- states.lag[i,]
+        
+        for(j in 1:nto){
+          
+            n <- n + 1
+              # record the current to and from states
+            tpm$from[n,] <- states.lag[i,]
+            tpm$to[n,] <- states.lead[j,]
+            
+            #matches <- rows.equal(cbind(lead[pool,]), states.lead[j,])
+            this.state <- rbind(states.lead[j,])
+            
+              # turn vectors (single state to) into matricies, 
+              # rbind handles the case of one entry only in the pool, 
+              # but multiple to states 
+            this.pool <- if(r==1) cbind(lead[pool,]) else rbind(lead[pool,])
+            
+              # If we get this condition, something is wrong.
+            if(ncol(this.state) != ncol(this.pool))browser()
+            
+              # find the matching rows
+            matches <- 
+            if(nrow(this.pool) == 0){
+              # then we're empty
+              integer(0)
+            }else{
+              find.matches(this.state, this.pool, maxmatch=nrow(lag))$matches
+            }
+            
+              # find.matches returns a single 0 if there are no matches
+          if(length(matches) == 1) if( matches == 0 ) matches <- integer(0)
+          
+            # record the transition probability
+            possible <- nrow(this.pool)
+            tpm$p[i,j] <- length( matches ) / possible
+              # set the transition state names, this sets them way too much
+              # but it doesnt hurt anything
+            rownames(tpm$p)[i] <- paste(tpm$from[n,],collapse='')
+            colnames(tpm$p)[j] <- paste(tpm$to[n,],collapse='')
+                
+                #save the indexes of the states from and to
+            tpm$pools$to[[i]][[j]] <- as.vector(matches)
+          attr(tpm$pools$to[[i]],'state.from') <- states.lag[i,]
+          attr(tpm$pools$to[[i]][[j]],'state.to') <- states.lead[j,]
+           #browser()
+        }
+    }
+    close(pb)
+    return(tpm)
+    
 }
 
 binary.combos <- function(n){
-	as.matrix( expand.grid( rep( list(c(T,F)), n ) ) )
+    as.matrix( expand.grid( rep( list(c(T,F)), n ) ) )
 }
 
 sim.pqr <- function(tr.paleo, conditional.pool = FALSE){
-	
-	if(conditional.pool){
-			#simulate transition
-		rand <- runif(1)
-		which.to <- rank(c(rand,cumsum(this.p)))[1]
-		state.to <- tr.paleo$to[which.to,]
+    
+    if(conditional.pool){
+            #simulate transition
+        rand <- runif(1)
+        which.to <- rank(c(rand,cumsum(this.p)))[1]
+        state.to <- tr.paleo$to[which.to,]
 
 
-			#conditional pool, quantiles given state.to
-		pool.from <- tr.paleo$pools$from[[ which.from[which.to] ]]
-		pool.to <- tr.paleo$pools$to[[ which.from[which.to] ]]
-		pool.from <- matrix(pool.from,,q)
-		pool.to <- matrix(pool.to,,r)
-	}
-	
+            #conditional pool, quantiles given state.to
+        pool.from <- tr.paleo$pools$from[[ which.from[which.to] ]]
+        pool.to <- tr.paleo$pools$to[[ which.from[which.to] ]]
+        pool.from <- matrix(pool.from,,q)
+        pool.to <- matrix(pool.to,,r)
+    }
+    
 }
 
 mylag <- 
 function(x,lag,docor=FALSE){
 
     if(lag>length(x)) 
-		warning("Lag is larger than input vector length, returning NA's") 
+        warning("Lag is larger than input vector length, returning NA's") 
 
     if(lag<0)  lagn = c(rep(NA,abs(lag)),x[-(length(x):(length(x)+lag+1))])
     if(lag==0) lagn = x    
@@ -338,56 +340,56 @@ function(x,lag,docor=FALSE){
 
     remove = !is.na(lagn) & !is.na(x)
     if(docor){
-		return(cor(x[remove],lagn[remove]))
+        return(cor(x[remove],lagn[remove]))
     }else{
-		return(lagn)
-	}
+        return(lagn)
+    }
 }
 searchCriteria <- function(x, lag.max.ami = 200, lag.max.acf = 400, d.max = 7, show = T){
-	
-	require(tseriesChaos)
-
-	acf <- acf(x, lag.max = lag.max.acf,plot=F)
-	acf <- acf$acf[,,1]
-
-	ami <- mutual(x, lag.max = lag.max.ami, plot=F)
-
-	T.acf.picked <- T.ami.picked <- FALSE
-	for(i in 1:max(c(lag.max.acf,lag.max.ami))){
-	    if(i == max(c(lag.max.acf,lag.max.ami))) 
-	        stop('One of the T criteria is monotonically 
-	decreasing, pick a lager lag.max.')
     
-	    if(!T.acf.picked){
-	        if(acf[i+1] > acf[i]){
-	            T.acf <- i
-	            T.acf.picked <- TRUE
-	        }
-	    }
-	    if(!T.ami.picked){
-	        if(ami[i+1] > ami[i]){ 
-	            T.ami <- i
-	            T.ami.picked <- TRUE
-	        }
-	    }
-	    if(T.acf.picked & T.ami.picked) break
-	}
-	cat('The lag suggested by the ACF criteria is:', T.acf,'\n')
-	cat('The lag suggested by the AMI criteria is:', T.ami,'\n')
+    require(tseriesChaos)
 
-	fnn.acf <- false.nearest(x, m = d.max, d = T.acf, t=length(x)/10, eps=sd(x))
-	fnn.ami <- false.nearest(x, m = d.max, d = T.ami, t=length(x)/10, eps=sd(x))
+    acf <- acf(x, lag.max = lag.max.acf,plot=F)
+    acf <- acf$acf[,,1]
 
-	d.acf <- order(abs(fnn.acf[1,1:(d.max-1)]-fnn.acf[1,2:d.max]))[1]
-	d.ami <- order(abs(fnn.ami[1,1:(d.max-1)]-fnn.ami[1,2:d.max]))[1]
+    ami <- mutual(x, lag.max = lag.max.ami, plot=F)
 
-	cat('The FNN embedding dimension suggested by the ACF lag is:', d.acf,'\n')
-	cat('The FNN embedding dimension suggested by the AMI lag is:', d.ami,'\n')
+    T.acf.picked <- T.ami.picked <- FALSE
+    for(i in 1:max(c(lag.max.acf,lag.max.ami))){
+        if(i == max(c(lag.max.acf,lag.max.ami))) 
+            stop('One of the T criteria is monotonically 
+    decreasing, pick a lager lag.max.')
+    
+        if(!T.acf.picked){
+            if(acf[i+1] > acf[i]){
+                T.acf <- i
+                T.acf.picked <- TRUE
+            }
+        }
+        if(!T.ami.picked){
+            if(ami[i+1] > ami[i]){ 
+                T.ami <- i
+                T.ami.picked <- TRUE
+            }
+        }
+        if(T.acf.picked & T.ami.picked) break
+    }
+    cat('The lag suggested by the ACF criteria is:', T.acf,'\n')
+    cat('The lag suggested by the AMI criteria is:', T.ami,'\n')
 
-	#calculate correlation integrals
-	cint <- d2(x, m=d.max, d=T.ami, t=.1, eps.min=1)
-	
-	invisible(list(T.acf=T.acf,T.ami=T.ami,d.acf=d.acf,d.ami=d.ami,cint=cint))
+    fnn.acf <- false.nearest(x, m = d.max, d = T.acf, t=length(x)/10, eps=sd(x))
+    fnn.ami <- false.nearest(x, m = d.max, d = T.ami, t=length(x)/10, eps=sd(x))
+
+    d.acf <- order(abs(fnn.acf[1,1:(d.max-1)]-fnn.acf[1,2:d.max]))[1]
+    d.ami <- order(abs(fnn.ami[1,1:(d.max-1)]-fnn.ami[1,2:d.max]))[1]
+
+    cat('The FNN embedding dimension suggested by the ACF lag is:', d.acf,'\n')
+    cat('The FNN embedding dimension suggested by the AMI lag is:', d.ami,'\n')
+
+    #calculate correlation integrals
+    cint <- d2(x, m=d.max, d=T.ami, t=.1, eps.min=1)
+    
+    invisible(list(T.acf=T.acf,T.ami=T.ami,d.acf=d.acf,d.ami=d.ami,cint=cint))
 }
 
 plot.d2.cam <- function (x, ...){
@@ -414,9 +416,9 @@ build.pools.from <- function(tr, qr){
   pools.from <- vector('list',nfrom)
   
   for( i in 1:nfrom )
-	    pools.from[[i]] <- qr$lag[ tr$pools$from[[i]], ]
+        pools.from[[i]] <- cbind(qr$lag[ tr$pools$from[[i]], ])
     
-	return(pools.from)
+    return(pools.from)
   
 }
 
@@ -426,28 +428,31 @@ build.pools.to <- function(tr, qr){
   # tr is an object from trprob()
   # qr is an object from laglead()
   
-  nfrom <- nrow(unique(tr.paleo$from))
-  nto <- nrow(unique(tr.paleo$to))
+  nfrom <- nrow(unique(tr$from))
+  nto <- nrow(unique(tr$to))
+  q <- ncol(tr$from)
+  r <- ncol(tr$to)
   
   pools.to <- vector('list',nto)
+  
   
   for( i in 1:nfrom ){
     
     pools.to[[i]] <- list()
     
     for( j in 1:nto ){
-  		#ito <- (i-1)*nto+j
-  		#browser()
-  		  # filter first by the from state then the to state
-  		pools.to[[i]][[j]] <- 
-    	  if(nto == 1)
-  		    cbind(cbind(qr$lead[ tr$pools$from[[i]], ])[tr$pools$to[[i]][[j]], ])
-  		  else
-  		    rbind(rbind(qr$lead[ tr$pools$from[[i]], ])[tr$pools$to[[i]][[j]], ])
-  	}
+        #ito <- (i-1)*nto+j
+        #browser()
+          # filter first by the from state then the to state
+        pools.to[[i]][[j]] <- 
+          if(r == 1)
+            cbind(cbind(qr$lead[ tr$pools$from[[i]], ])[tr$pools$to[[i]][[j]], ])
+          else
+            rbind(rbind(qr$lead[ tr$pools$from[[i]], ])[tr$pools$to[[i]][[j]], ])
+    }
   }
     
-	return(pools.to)
+    return(pools.to)
    
 }
 
@@ -484,6 +489,7 @@ RPSS <- function(histobs, ensemble, alt=F, altobs=0){
         # probability of simulations falling into each category        
         for(i in 1:ncat)       
             probs[i] <- length(simcat[simcat == i])/nsim 
+        #print(probs)
         probs <- cumsum(probs)
 
         # raw probability of falling into each category   
@@ -518,13 +524,13 @@ RPSS <- function(histobs, ensemble, alt=F, altobs=0){
 
 
 oneoverk <- function(k){
-	
-	W <- numeric(k)
-	for(j in 1:k)
-		W[j] <- 1/j
-	W <- W/sum(W)
-	W
-	
+    
+    W <- numeric(k)
+    for(j in 1:k)
+        W[j] <- 1/j
+    W <- W/sum(W)
+    W
+    
 }
 
 ############################################################
@@ -537,4 +543,66 @@ sigcor <- function(n,alpha=.05){
     k <- qnorm(alpha)^2/(n-2)
     sqrt(k/(k+1))   
     
+}
+
+    #returns the best alpha and degree
+best.par <- 
+function(x,y, a = seq(0.2,1.0,by=0.05), n = length(a), f=c(gcvplot,aicplot),...){
+    
+    require(locfit)
+    options(warn=-1)
+        # get the gcv values for all combinations of deg and alpha
+    d1 <- try(f(y~x, deg=1, alpha=a, kern='bisq', scale=T,...)$values,silent=T)
+    if(class(d1) == "try-error") d1 <- numeric()
+    d2 <- try(f(y~x, deg=2, alpha=a, kern='bisq', scale=T,...)$values,silent=T)
+    if(class(d2) == "try-error") d2 <- numeric()
+    options(warn=0)
+    
+    gcvs <- c(d1,d2)
+    
+    if(length(gcvs)==0){
+        bestalpha <- bestd <- 1
+        gcv <- NA
+    }else{
+        best <- order(gcvs)[1]
+            #get the best alpha and degree
+        bestd <- c(rep(1,n),rep(2,n))[best]
+        bestalpha <- c(a,a)[best]
+        gcv <- gcvs[best]
+    }
+    
+    return(list(p=bestd,a=bestalpha,gcv=gcv))
+}
+
+
+plot.sy.sims <- function(sims,hist,q,r,fn=NULL){
+    
+    if(!is.null(fn)) pdf(fn,width=10,height=4)
+    hist.plot <- list()
+    layout(cbind(1:r))
+    for( s in 1:r ){
+
+        # the forst year simualted is the start year + q - 1 + s 
+        # (the number of years forecasted ahead), for example 
+        # if q = 3, we need three years back to initilize, so if the first year
+        # year in the record is 1906 then the forst year we can forecast is 
+        # 1906 + 3 - 1 + 1 = 1909
+        colnames(sim[[s]])  <- (start(hist)[1]+q -1 ):(end(hist)[1]) + s
+        hist.plot[[s]] <- window(hist,start(hist)[1] + q + s - 1)
+        boxplot(sim[[s]],outline=F) #[,2:ncol(sim[[s]])]
+        lines(1:length(hist.plot[[s]]),hist.plot[[s]],col='red',lwd=2,type='b',cex=.5)
+
+    }
+    if(!is.null(fn)) dev.off()
+    invisible(hist.plot)
+}
+
+rank.histogram <- function(sim,hist){
+    ranks <- integer(length(hist))
+    for(i in 1:length(hist)){
+       ranks[i] <- 
+        rank(c(hist[i],sim[,i]),ties.method='first')[1]
+    }
+    hist(ranks)
+    invisible(ranks)
 }

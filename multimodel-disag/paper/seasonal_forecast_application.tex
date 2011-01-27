@@ -1,5 +1,5 @@
 
-\documentclass[11pt,twoside]{article}
+\documentclass[11pt]{article}
 
 %%------------page layout
 \usepackage[margin=1in]{geometry} %changes margins
@@ -24,6 +24,7 @@
 \usepackage{graphicx,epstopdf} %functionality for including graphics, 
 \usepackage{subfigure} %a b c figures with different captions
 \usepackage{wallpaper} %background image
+\usepackage{tikz}
 
 %%------------mathematics %extra math symbols
 \usepackage{amsmath,amssymb,amsthm} 
@@ -36,6 +37,7 @@
 
 %%------------tables
 \usepackage{booktabs} %nice tables i.e. pleasing
+\usepackage{rotating}
 
 %%------------misc
 \usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref}  %
@@ -57,41 +59,163 @@
 
 \begin{document}
 
-\textbf{\Large Multisite seasonal ensemble forecast application to the Upper Colorado River Basin}
+\thispagestyle{empty}
+\textbf{\Large Multisite seasonal ensemble forecast: Application to twenty sites in the Upper Colorado River Basin}
 
 Cameron Bracken, Balaji Rajagopalan
 
 
- \doublespacing 
- \linenumbers
+ %\doublespacing 
+ %\linenumbers
 {\flushleft\small
-%We demonstrate the feasbility of extending recent forecast and dissagreagation techniques to all natural flow nodes in the Upper Colorado River Basin (20 sites).
 
-The generation of forecasts at a large number of sites is crucial for operations of the Upper Colorado River Basin.  We show that the framework of \cite{Bracken:2010p2682} can be extended to generate monthly peak season (April-July) forecasts at twenty sites in the Upper Colorado River Basin at long lead times.     We also incorporate the flexible disaggregation method of \cite{Nowak:2010p2738} into the framework to perform spatial and temporal disaggregation.  With few exceptions, skills are positive for all sites, months and lead times.  The November 1 forecasts show an average 16\% increase in skill over climatology for all the sites considered. 
+The generation of forecasts at a large number of sites is crucial for operations of the Upper Colorado River Basin.  We show that the framework of \cite{Bracken:2010p2682} can be extended to generate monthly peak season (April-July) forecasts at twenty sites in the Upper Colorado River Basin at long lead times.  We also improve the framework to incorporate the flexible disaggregation method of \cite{Nowak:2010p2738} into the framework to perform spatial and temporal disaggregation.  With few exceptions, skills are positive for all sites, months and lead times.  The November 1 forecasts show an average 11\% increase in skill over climatology for all the sites considered. 
 }
 
-\section{Introduction}
-The nonparametric multisite ensemble forecast framework developed by \cite{Bracken:2010p2682} was able to show skill at long lead times in forcasts generated for four key sites in the Upper Colorado River Basin (Colorado River near Cisco, Utah, Green River at Green River, Utah, San Juan River near Bluff, Utah, and Colorado River at Lees Ferry, Arizona).  While promising, these results leave open the question of this skill translating to a larger number of sites on the same river network. The generation of forecasts at a large number of sites is crucial for operations of the Upper Colorado River Basin.  For example, the Bureau of Reclmation's primary water supply forecast model, the ``24-Month Study'' requires input at 12 locations in the Upper Basin.  
 
+%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+\section{Introduction}
+In the last ten years water supply management in the Upper Colorado River Basin (UCRB) has come under increasing scrutiny and regulation.  Drought \citep{Fulp:2005p3934}, climate change \citep{Rajagopalan:2009p3818}, environmental flows and increasing demands \citep{USDepartmentoftheInterior:2008p3864} have all put the reliability of the system into question.  In 2007 the ``Interim Guidelines'' were passed as a repsonse to some of these factors \citep{USDepartmentoftheInterior:2007p3865}.  These guidelines lay a framework for coordinated operations of Lake Powell and Lake Mead which depend heavily on water supply forecasts.   These factors all underscore the need for skilful forecasts at long lead times at many locations throughout the UCRB.  
+
+The generation of forecasts at a large number of sites is crucial for operations of the Upper Colorado River Basin.  The ``24-Month Study'' is the Bureau of Reclmation's primary water supply forecast model in the Upper (and since January 2010) and Lower Colorado River Basin.  This model is run monthly and requires inflow forecasts at 12 locations throught the Upper Basin.  Operators use these inflow forecasts to gerate reservoir outflows which are then run through the ``24-Month Study'' model to obtain a picture of water resources for the next 24 to 36 months. Beyond initial reservoir states, the predictive capability of the model largely on the skill of the inflow forecasts. 
+
+The nonparametric multisite ensemble forecast framework developed by \cite{Bracken:2010p2682} was able to show skill at long lead times in forecasts generated for four key sites in the Upper Colorado River Basin (Colorado River near Cisco, Utah, Green River at Green River, Utah, San Juan River near Bluff, Utah, and Colorado River at Lees Ferry, Arizona).  The framework of \cite{Bracken:2010p2682} is similar to many recent studies \citep{Moradkhani:2010p3069,Opitz-Stapleton2007,Regonda2006,Grantz:2005p115}. This framework includes (1) identifying large scale climate predictors for Lees Ferry seasonal (April-July) total volume, (2) calibrating the model by selecting the best sets of predictors of seasonal flow volume for each lead time, (3) generating ensemble forecasts of Lees Ferry seasonal flow volume and (4), disaggregating these forecasts in space and time to four sites in the UCRB.  While promising, these results leave open the question of this skill translating to a larger number of sites on the same river network. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Study Area}
-We 
+The Upper Colorado River Basin has a drains 279,300 square kilometers.  The terain varies over 4000 m from east to west. Lees Ferry is located at the outlet of the Upper Basin.  The sites used in this study are all the natural flow nodes in the upper basin.  Figure \ref{fig:map} (b) shows the UCRB with natural flow node location. Figure \ref{fig:map} (a) shows the network relationship of the nodes.  This network structure is exploited in the conversion from total flow to intervening. 
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=\textwidth]{map_both.pdf} 
+   \caption{Map of Upper Colorado River Basin with site numbers.}
+   \label{fig:map}
+\end{figure}
+
+% latex table generated in R 2.12.0 by xtable 1.5-6 package
+% Fri Jan  7 16:43:47 2011
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrr}
+  \toprule
+ Node & USGS Gauge & Site Name \\ 
+  \midrule
+  1  & 09072500 &  Colorado River At Glenwood Springs, CO        \\ 
+  2  & 09095500 &  Colorado River Near Cameo, CO                 \\ 
+  3  & 09109000 &  Taylor River Below Taylor Park Reservoir, CO  \\ 
+  4  & 09124700 &  Gunnision River Above Blue Mesa Reservoir, CO \\ 
+  5  & 09127800 &  Gunnison River At Crystal Reservoir, CO       \\ 
+  6  & 09152500 &  Gunnison River Near Grand Junction, CO        \\ 
+  7  & 09180000 &  Dolores River Near Cisco, UT                  \\ 
+  8  & 09180500 &  Colorado River Near Cisco, UT                 \\ 
+  9  & 09211200 &  Green R Bel Fontenelle Res, WY                \\ 
+  10 & 09217000 &  Green R. Nr Green River, WY                   \\ 
+  11 & 09234500 &  Green River Near Greendale, UT                \\ 
+  12 & 09251000 &  Yampa River Near Maybell, CO                  \\ 
+  13 & 09260000 &  Little Snake River Near Lily, CO              \\ 
+  14 & 09302000 &  Duchesne River Near Randlett, UT              \\ 
+  15 & 09306500 &  White River Near Watson, UT                   \\ 
+  16 & 09315000 &  Green River At Green River, UT                \\ 
+  17 & 09328500 &  San Rafael River Near Green River, UT         \\ 
+  18 & 09355500 &  San Juan River Near Archuleta, NM             \\ 
+  19 & 09379500 &  San Juan River Near Bluff, UT                 \\ 
+  20 & 09380000 &  Colorado R At Lees Ferry, AZ                  \\ 
+   \bottomrule
+\end{tabular}
+\caption{Site Information}
+\end{center}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data}
 
+The data inputs are the same as \citep{Bracken:2010p2682} though we obtained the most recent observations for all of the predictors (through 2010 where available).  We use zonal and meridonal wind, SST and geopotential height from the NOAA Earth Science Research Laboratory as predictors of large scale climate.  Regions of high correlation with Lees Ferry Flow are determined using the ESRL linear correlation tool (\url{http://www.esrl.noaa.gov/psd/data/correlation/}). The variables are averaged over these regions and the resulting timeseries is used as a predictor.  This analysis is repeated for each lead time to obtain a suite of predictors.  Soil moisture data was obtained by climate division and averaged over a region covering the UCRB (\url{http://www.esrl.noaa.gov/psd/data/timeseries/)}.   Snow water equivalent (SWE) data was obtained from Natural Resources Conservation Service (NRCS) (\url{http://www.wcc.nrcs.usda.gov/snow}).  The most recent data was obtained for the ten sites used in \citep{Bracken:2010p2682}. Lastly, we obtained the most recent natural flow data developed by the Bureau of Reclamation in the UCRB which currently extends to 2007. The data is available at from \url{http:// www.usbr.gov/lc/region/g4000/NaturalFlow/index.html}. 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}
 
-We use the the same framework as \cite{Bracken:2010p2682} with some notable changes
+We use the the same framework as \cite{Bracken:2010p2682} with some notable changes. Most importantly we (1) expand the disaggregation to include all 20 natural flow nodes in the UCRB, (2) We include the flexible disaggregation method of \cite{Nowak:2010p2738} instead of the disaggregation method of \cite{Prairie:2007p481}, (3) we use Lees Ferry total seasonal flow as our ``index'' gauge and (4) we make forecasts in total flow space but then convert to intervening for the final result. 
 
+This disaggregation method of \cite{Nowak:2010p2738} is known as `proportion disaggregation` is flexible and easy to use for large data sets.  It is nonparametric and preserves the sumability criteria of the network. The method is able to simultaneously conduct space and time disaggregation. We will not describe the method in depth; The interested reader is refered to \cite{Nowak:2010p2738}. 
 
+Concerning the third and fourth change, \cite{Nowak:2010p2738} suggest performing diasaggregation of total flow as opposed to intervening flow.  This eliminates incorrect weighting of negative values.  Streamflow forecasts as interveining flow are also more useful as input to other models (such as planning models) so we perform disaggregation on the total flow then transform back for the final results.  The transformation is done by exploiting the network stucture of the 20 sites.  We create two matricies to capture the conversions, $A$ the total to intervening matrix is defined as 
+
+$$A_{ij} = 
+\left\{
+\begin{array}{l}
+1 \quad\mbox{If site $i$ is directly downstream of site $j$} \\ 
+0 \quad\mbox{Otherwise}
+\end{array}\right.
+$$
+
+and $B$ the intervening to total matrix is defined as
+
+$$B_{ij} = 
+\left\{
+\begin{array}{l}
+1 \quad\mbox{If site $i$ contributes to the flow at site $j$} \\ 
+0 \quad\mbox{Otherwise}
+\end{array}\right.
+$$
+
+These matricies are readily computed from the network structure shown in Figure 1. Once they are computed, they provide a map for conversion to and from total flow.  Total flow at site $i$ is computed by summing intervening flow from the sites with a $1$ in row $i$ of $B$.  Intervening flow is computed from the total flow at site $i$ less allaqZAAaq	Z the sites with a $1$ in row $i$ of $A$. 
+
+These modifications are the only deviation from the framework described by \cite{Bracken:2010p2682}. The methodology is then (1) Create a total flow index gauge by summing all the total seasonal flow at each site, (2) identify large scale predictors of index gauge total flow, (3) identify the best \citep{Hagedorn2005,Krishnamurti2000,Rajagopalan2002,Regonda2006} locally weighted polynomial \cite{Loader1999} models for each lead time as those which minimize the generalized cross validation value (GCV) \citep{Craven1979}, (4) Generate ensemble forecasts  \cite{Regonda2006} of total seasonal flow at Less Ferry, (5) disaggregate the total seasonal flow at Less Ferry to total monthly flow at each site and (6) convert the total flow at each site to interveining flow.  Please see \cite{Bracken:2010p2682} for a detailed description of the methods. 
+
+We also verify the results using the same methods as \cite{Bracken:2010p2682}. Both leave-one-out and ``retroactive'' verification are carried out.  Retroactive verification only uses the data available prior to the forecast year, as would be the case in real operations.  The ranked probability skill score (RPSS) \citep{Wilks:1995p3976} is computed for each year in the history and then the median value is presented. 
+
+\section{Results}
+
+When this analysis was repeated with the most recent flow data, some of the correlation regions were slightly but not notably different than those using the four site index gauge from \cite{Bracken:2010p2682} so we will not reproduce them here.  Interestingly enough, the results with the slight modifications described in the methodology are somewhat different than those using the index gauge. For instance the RPSS values for the index gauge in this study are slightly lower except for the earliest lead times where they are slightly higher (Table \ref{tab:indexskill}).  One reason for this may be that we saw slightly different models being selected during predictor identification. 
+
+Table \ref{tab:dropone} gives the results in terms of the RPSS after spatial and temporal disaggregation. The retroactive results show similar trends whith slightly lower skills. In general we see the skills decreasing as lead time increases.  Some sites such as the Duchesne River Near Randlett, UT (14) have consistantly postitive skill back to the Nov 1 lead time.  June had the highest overall skill of any month, likely because the average peak flow occurs in June. The sites included in the original study (8, 16, 19 and 20) all tend to do very well.  This makes intuitive sense because these are the largest tributaries and will have a stronger response to large-scale climate.  Another trend we see is that the skills tend to be better as we move toward the outlet of the basin. That is consistant with the result that the larger tributaries perform better. 
+
+Magnitudes of the disaggregated skills tend to be less that those seen in \cite{Bracken:2010p2682}.  Its seems that some of the skill is ``distributed'' among the new sites. Figure \ref{fig:box} shows some sample ensemble forecasts for three sites and months.  These plots show the general trend that applies across most sites, ensemble variability increases and skill decreases as lead time increaeses. 
+
+\begin{table}[ht]
+\centering
+\caption{RPSS values for the index gauge for each lead time.}\label{tab:indexskill}
+\begin{tabular}{ccccc} 
+\toprule
+& Apr1 & Feb1 & Jan1 & Nov1 \\
+\midrule
+Leave-one out & 0.85 & 0.74 & 0.49 & 0.30 \\
+Retroactive   & 0.62 & 0.58 & 0.55 & 0.52\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\input{drop.tex}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=.9\textwidth]{Apr1-June-Colorado-River-Near-Cameo-CO.pdf}\\
+   \includegraphics[width=.9\textwidth]{Feb1-June-San-Rafael-River-Near-Green-River-UT.pdf}\\
+   \includegraphics[width=.9\textwidth]{Nov1-July-Dolores-River-Near-Cisco-UT.pdf}
+   \caption{Sample ensemble forecasts for (a) Apr1 June flow at Colorado River Near Cameo, CO, (b) Feb1 June San Rafael River Near Green River, UT and (c) Nov1 July Dolores River Near Cisco, UT. The horizontal lines represent the 33rd and 66th percentiles of the historical data, boxplots extend to the 5th and 95th percentiles of each ensemble. MC stands for the median correlation, the correlation of the median of the ensembles withe the historical record.}
+   \label{fig:box}
+\end{figure}
+
+%\input{retro.tex}
+
+\section{Conclusions}
+
+We have shown that the framework of \cite{Bracken:2010p2682} can be extended successfully to twenty sites in the Upper Colorado River Basin.  We slightly modification to the method including incorporating the disaggregation method of \cite{Nowak:2010p2738}.  The modifications and the incorporation of the most recent data caused out results to differ slightly but not notably from the original method. 
+
+To a large extent the skills are postive even after spatial and temporal disaggregation. We see a degradation of the skill as lead time increases which is to be expected. June has the highest predictability because that is the peak flow month in the UCRB on average. We also see that larger tributaries tend to have higher skill. 
+
+The only remaining step to make these forcasts truely useful would be to provide them as unregulated flow. The 24-Month Study takes input as unregulated flow to avoid explicitly modeling demands. In many cases this is as simple as subtracing a constant but in others it requires intimate knowledge of regional consumtive use. 
+
+\clearpage
 \bibliography{../../references}
+
 
 
 \end{document}  

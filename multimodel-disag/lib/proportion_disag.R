@@ -201,7 +201,6 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
             rpss[b] <- median(RPSS(d$hist[,time,site],this.data))
             mc[b] <- cor(apply(this.data,2,median),d$hist[,time,site])
 
-            
             pdf(file.path(dir,'plots',paste(main,this.time,this.site,vtype,'box.pdf')),
                 width=8,height=5)
                 
@@ -212,8 +211,8 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
                 abline(h=quantile(d$hist[,time,site],1/3))
                 abline(h=quantile(d$hist[,time,site],2/3))
                 #browser()
-                mc[b] <- ifelse(abs(mc[b]) < sigcor(length(d$hist[,time,site])),
-                    NA, round(mc[b],2))
+                mc[b] <- round(mc[b],2)
+                #ifelse(abs(mc[b]) < sigcor(length(d$hist[,time,site])),NA, round(mc[b],2))
                 title(sub=paste("RPSS = ",round(rpss[b],2), "MC = ",mc[b]))
                 
                 
@@ -249,8 +248,8 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
     close(pb)
     
     nt <- dims[2]
-    d$stats$rpss <- matrix(rpss,ncol=nt,byrow=T)
-    d$stats$mc <- matrix(mc,ncol=nt,byrow=T)
+    d$stats$rpss <- matrix(rpss,ncol=nt)
+    d$stats$mc <- matrix(mc,ncol=nt)
     colnames(d$stats$rpss) <- colnames(d$stats$mc) <- time.names
     rownames(d$stats$rpss) <- rownames(d$stats$mc) <- site.names
     

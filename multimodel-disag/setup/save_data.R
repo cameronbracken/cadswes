@@ -7,6 +7,7 @@ save_data <- function(){
     year.s.flow <- 1906
     year.e.flow <- 2007
 
+
     site.names <- c("Colorado River At Glenwood Springs, CO", 
     "Colorado River Near Cameo, CO", 
     "Taylor River Below Taylor Park Reservoir, CO", 
@@ -20,6 +21,16 @@ save_data <- function(){
     "White River Near Watson, UT", "Green River At Green River, UT", 
     "San Rafael River Near Green River, UT", "San Juan River Near Archuleta, NM", 
     "San Juan River Near Bluff, UT", "Colorado R At Lees Ferry, AZ")
+    
+    usgs.num <- structure(c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "09072500", 
+    "09095500", "09109000", "09124700", "09127800", "09152500", "09180000", 
+    "09180500", "09211200", "09217000", "09234500", "09251000", "09260000", 
+    "09302000", "09306500", "09315000", "09328500", "09355500", "09379500", 
+    "09380000"), .Dim = c(20L, 2L), .Dimnames = list(NULL, c("Node Number", 
+    "USGS Gauge Number")))
+    rownames(usgs.num) <- site.names
+    
     time.names <- month.name[if(seasonal) 4:7 else 1:12]
 
     predictors <- get.predictors(predictorfile, swefile, pdsifile, predmonth)#input file

@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# This is the control script for the multimode ensemble forecast framework
+# This is the control script for the multimodel ensemble forecast framework
 # it will run all the lead times and verification modes, takes a long time
 
     #Load all the model options/parameters
