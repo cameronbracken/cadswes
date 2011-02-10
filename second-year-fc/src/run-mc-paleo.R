@@ -1,7 +1,7 @@
-nsi <- 4 # states
-q <- 1 #years back
-r <- 1 #years ahead
-m <- 1 #running mean length
+nsi <- 4  #states
+q <- 1  #years back
+r <- 1  #years ahead
+m <- 1  #running mean length
 nsims <- 250
 
 plotdir <- 'plots'
@@ -11,7 +11,7 @@ dataset <- 'meko' # 'meko' or 'woodhouse' or 'nino3'
 cache <- TRUE
 hist.cdf <- 'gamma' # 'ecdf' or 'gamma'
 transition <- 'knn' # knn or locfit or gamma
-back.weight <- 'equal' # equal or flow
+back.weight <- 'flow' # equal or flow
 seasonal.total <- TRUE
 running.mean <- TRUE
 

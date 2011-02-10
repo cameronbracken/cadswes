@@ -7,7 +7,7 @@ T.max <- 5
 nalpha <- 25
 
 	# other parameters
-n.ahead <- 100
+n.ahead <- 10
 ts.start <- 1906
 
 	#Load functions
@@ -15,12 +15,12 @@ source('dts.R')
 source('blindFC.R')
 
 	#load data
-#x <- read.table('data/lf-annual.txt')[,2]
-x <- sin(seq(0,10*pi,,1000))
-x <- ts(x,start=ts.start,frequency=1)
+x <- ts(read.table('data/lf-annual.txt')[,2]/10^6,start=1906,frequency=1)
+#x <- sin(seq(0,10*pi,,1000))
+#x <- ts(x,start=ts.start,frequency=1)
 
 	#forecast from end of timeseries
-I <- 99#length(x) + 1
+I <- 94#length(x) + 1
 fitted.models <- paste('data/fitted-models-',I,'.Rdata',sep='')
 plot.file <- paste('plots/blindfc-',I,'.pdf',sep='')
 
@@ -43,4 +43,5 @@ pdf(plot.file)
 	lines(fc.med,col='red')
 	lines(fc.90,col='blue',lty=2)
 	lines(fc.10,col='blue',lty=2)
+	abline(v=time(x)[I],lty=2)
 dev.off()

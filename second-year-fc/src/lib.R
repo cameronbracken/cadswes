@@ -217,6 +217,8 @@ rows.equal <- function(x, y){
 
 trprob <- function(lag,lead,ns = max(lead)+1){
     
+    require(gtools)
+    
     q <- ncol(lag)
     r <- ncol(lead)
     
@@ -605,4 +607,204 @@ rank.histogram <- function(sim,hist){
     }
     hist(ranks)
     invisible(ranks)
+}
+
+# Read monthly data file with year in first column and months along rows 
+# create a yearly timeseries aggregated april <---> march, the "runoff year"
+make.runoff.year <- function(file='data/LeesFerry.txt',start=c(1906,1)){
+    
+    x <- ts(as.vector(t(as.matrix(read.table(file)[,-1]))),start=start,frequency=12)
+    y <- numeric(0)
+    chunk <- 4:15
+    for(i in 1:(length(unique(floor(time(x))))-1)){
+        
+        y[i] <- sum(x[chunk])
+        chunk <- chunk + 12
+    }
+    y <- ts(y,start=start,frequency=1)
+    y
+    
+}
+
+    # modified from code Zucchini and McDonald (2009) to work with the 
+    # the HiddenMarkov package to do state prediciton
+hmm.state.prediction <- function(x, H = 1, ...) {
+    require(HiddenMarkov)
+    n <- length(x$x)
+    m <- ncol(x$Pi)
+    fb <- forwardback(x$x, x$Pi, x$delta, x$distn, x$pm)
+    la <- t(fb$logalpha)
+    c <- max(la[, n])
+    llk <- c + log(sum(exp(la[, n] - c)))
+    statepreds <- matrix(NA, ncol = H, nrow = m)
+    foo1 <- exp(la[, n] - llk)
+    foo2 <- diag(m)
+    for (i in 1:H) {
+        foo2 <- foo2 %*% x$Pi
+        statepreds[, i] <- foo1 %*% foo2
+    }
+    statepreds
+}
+
+
+    # generate forcest distributions for H steps out for a given hmm
+    # model x, this function assumes a normal distributions for the 
+    # components
+hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
+
+    #lower <- qnorm(0.001, min(x$pm$mean),x$pm$sd[which.min(x$pm$mean)])
+    #upper <- qnorm(0.999, max(x$pm$mean),x$pm$sd[which.max(x$pm$mean)])
+    range <- extendrange(x$x,f=.1)
+    xrange <- seq(range[1],range[2],,len)
+        
+    n <- length(x$x)
+    m <- ncol(x$Pi)
+    
+    allprobs <- matrix(NA,nrow=length(x$x),ncol=m)
+    for(i in 1:m)
+        allprobs[,i] <- dnorm(x$x, x$pm$mean[i], x$pm$sd[i])
+        
+    allprobs <- outer(x$x, x$pm$mean, dnorm, x$pm$sd)
+    allprobs <- ifelse(!is.na(allprobs), allprobs, 1)
+    foo <- x$delta * allprobs[1, ]
+    sumfoo <- sum(foo)
+    lscale <- log(sumfoo)
+    foo <- foo/sumfoo
+    
+    for (i in 2:n) {
+        foo <- foo %*% x$Pi * allprobs[i, ]
+        sumfoo <- sum(foo)
+        lscale <- lscale + log(sumfoo)
+        foo <- foo/sumfoo
+    }
+    xi <- matrix(NA, nrow = m, ncol = H)
+    for (i in 1:H) {
+        foo <- foo %*% x$Pi
+        xi[, i] <- foo
+    }
+    
+    allprobs.out <- matrix(NA,nrow=len,ncol=m)
+    for(i in 1:m)
+        allprobs.out[,i] <- dnorm(xrange, x$pm$mean[i], x$pm$sd[i])
+    
+    fdists <- allprobs.out %*% xi[, 1:H]
+    list(x = xrange, y = fdists)
+}
+
+    #boxplot the forecast distributions bases on their summary stats
+hmm.boxplot.fc <- function(hmm.fc,sy,...){
+    
+    bx <- boxplot(matrix(0,nrow=1,ncol=length(hmm.fc)), plot = FALSE)
+    
+    for(i in 1:length(hmm.fc)){
+        
+        bx$stats[,i] <- hmm.fcdist.fivenum(hmm.fc[[i]])
+        
+    }
+    
+    bx$names <- paste(sy:(sy+length(hmm.fc)-1))
+    bxp(bx,...)
+    
+}
+
+
+    # takes a list of the forecast distribution for each year and 
+    # generated ensembles from them by sampling
+hmm.ensemble.fc <- function(hmm.fc,sy,nsims=1000,...){
+    
+    years <- sy:(sy+length(hmm.fc)-1)
+    ens <- matrix(NA,nrow=nsims,ncol=length(hmm.fc))
+    
+    pb <- txtProgressBar(1,length(hmm.fc),style=3)
+    
+    for(i in 1:length(hmm.fc)){
+        
+        setTxtProgressBar(pb,i)
+        ens[,i] <- hmm.fcdist.sim(hmm.fc[[i]],nsims)
+        
+    }
+    close(pb)
+    
+    names(ens) <- paste(years)
+    ens
+}
+
+    # returns 5th, 25th, 50th, 75th and 95th percentile 
+    # of a given forecast distribution
+hmm.fcdist.fivenum <- function(fcdist){
+    
+    pts <- c(.05,.25,.5,.75,.95)
+    fivenum <- numeric(5)
+    
+    for(i in 1:5){
+        
+        cdf <- cumsum(fcdist$y)
+        cdf <- cdf/max(cdf)
+        
+        fivenum[i] <- approx(cdf,fcdist$x,pts[i])$y
+        
+    }
+    
+    fivenum
+    
+}
+
+    # simulate nsim values from a forecast distribution
+hmm.fcdist.sim <- function(fcdist,nsim=1000){
+    
+    pts <- runif(nsim)
+    
+    cdf <- cumsum(fcdist$y)
+    cdf <- cdf/max(cdf)
+    
+    sim <- numeric(nsim)
+    
+    for(i in 1:nsim){
+        
+        sim[i] <- approx(cdf,fcdist$x,pts[i])$y
+        
+    }
+    
+    sim
+    
+}
+
+    # plot transition probabilities over time for the 2 state models only
+    # hmm is a list of fitted models
+    # sy is the start year for plotting
+plot.hmm.trprob.2state <- function(hmm,sy){
+    
+    #ww <- wd <- dw <- dd <- numeric(length(hmm))
+    require(ggplot2)
+    
+    theme_set(theme_bw())
+    myopts <- opts(
+    		panel.grid.major = theme_blank(), 
+    		panel.grid.minor = theme_blank(),
+    	  	axis.text.x = theme_text(size =  11), 
+    		axis.text.y = theme_text(size =  11,angle=90),
+    	 	axis.title.x = theme_text(size = 11), 
+    		axis.title.y = theme_text(size = 11,angle=90),
+    		panel.background = theme_rect())
+    		
+    tr <- matrix(NA,ncol=4,nrow=length(hmm))
+    
+    for(i in 1:length(hmm)){
+        tr[i,1] <- hmm[[i]]$Pi[1,1]
+        tr[i,2] <- hmm[[i]]$Pi[1,2]
+        tr[i,3] <- hmm[[i]]$Pi[2,1]
+        tr[i,4] <- hmm[[i]]$Pi[2,2]
+    }
+    
+    rownames(tr) <- sy:(sy+length(hmm)-1)
+    colnames(tr) <- c("ww", "wd", "dw", "dd" )
+    tr <- melt(tr)
+    names(tr) <- c('Time','Transition','Probability')
+    
+    qplot(Time,Probability,data=tr,geom="line",col=Transition,linetype=Transition) + 
+        myopts +
+        opts(legend.position = c(0.2, 0.5)) + 
+        ylab('Hidden State Transition Probability') +
+        xlab('Time')
+    
 }

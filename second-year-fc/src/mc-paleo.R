@@ -10,11 +10,11 @@ cat('Second Year Model using the', dataset, ' dataset\n\t',
     m, 'Year Running Mean\n')
 flush.console()
 
-paleo   <- switch(dataset, meko = meko,   woodhouse = wood,   nino3 = cook)
-paleo.b <- switch(dataset, meko = meko.b, woodhouse = wood.b, nino3 = cook.b)
+paleo   <- switch(dataset, meko = meko,   woodhouse = wood,   nino3 = cook, synth = synth)
+paleo.b <- switch(dataset, meko = meko.b, woodhouse = wood.b, nino3 = cook.b, synth = synth.b)
 
-hist <-   switch(dataset, meko = lees,   woodhouse = lees,   nino3 = nino3)
-hist.b <- switch(dataset, meko = lees.b, woodhouse = lees.b, nino3 = nino3.b)
+hist <-   switch(dataset, meko = lees,   woodhouse = lees,   nino3 = nino3, synth = synth.h)
+hist.b <- switch(dataset, meko = lees.b, woodhouse = lees.b, nino3 = nino3.b, synth = synth.h.b)
 
 n <- length(paleo)
 nh <- length(hist)
@@ -31,7 +31,7 @@ tr.hist <- trprob( hist.bqr$lag, hist.bqr$lead )
     # ns^q from states and 
     # ns^p to states
 tr.base <- paste("tr_ns",ns,"_q",q,"_r",r,"_m",m,'_',dataset,sep='')
-tr.file <- file.path("data/",paste(tr.base,".Rdata",sep=""))
+tr.file <- file.path("cache/",paste(tr.base,".Rdata",sep=""))
 if(file.exists(tr.file) & cache){
   load(tr.file)
 }else{
@@ -294,6 +294,8 @@ for(y in (q+1):(nh+r+ifelse(q==1 & r > 1,-1,0))){
                 if(hist.cdf == "ecdf") quantile(hist,this.sim[,s]) else
                     qgamma(this.sim[,s],shape=shape.hist,rate=rate.hist)
 
+    #browser()
+
 }
 close(pb)
 
@@ -313,4 +315,4 @@ if(q > 1){
         if(abs(comp.pos[i,1]-comp.pos[i,2])>1) comp.pos[i,ncol(comp.pos)] <- 1
 }
 
-save(sim, hist.plot, hist ,file='data/fc.Rdata')
+save(sim, hist.plot, hist ,file='cache/fc.Rdata')

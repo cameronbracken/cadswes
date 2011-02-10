@@ -24,7 +24,10 @@ nino3 <- ts(nino3[,3],start=c(nino3[1,1],nino3[1,2]),frequency=12)
 nino3 <- ts(wapply(nino3,mean,12),start=start(nino3))
   
 
-  
+  # Synthetic
+  synth <- sin(seq(0,40*pi,,2000)) + .8*rnorm(2000) + 5
+  synth <- ts(synth,1,1000)
+  synth.h <- sin(seq(0,4*pi,,100)) + .8*rnorm(100) + 5
 
   ######################################################
   #
@@ -68,11 +71,13 @@ wood.b <- ntile.ts(wood,ns)
 cook.b <- ntile.ts(cook,ns) 
 lees.b <- ntile.ts(lees,ns)
 nino3.b <- ntile.ts(lees,ns)
+synth.b <- ntile.ts(synth,ns)
+synth.h.b <- ntile.ts(synth.h,ns)
 
 #plot(wood,type='n');grid()
 #lines(wood,type='s')
 #lines(lees,col='red',type='s')
 
 save(enso, meko, meko.raw, meko.b, wood, wood.raw, wood.b, lees, lees.b, 
-  cook, cook.b, nino3, nino3.b,
+  cook, cook.b, nino3, nino3.b, synth, synth.h, synth.b, synth.h.b,
   file = 'data/ts.Rdata')
