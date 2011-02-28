@@ -10,7 +10,6 @@
     # also loads historical, n.sites, n.years, n.months, year.s, 
     # year.e, site.names, time.names
 source('setup/setup.R')
-
 training <- verificationsetup(predictors, response, historical.tot, vtype, 
     nback = nback)
 training.intv <- verificationsetup(predictors, response, historical.intv, vtype, 
@@ -20,7 +19,8 @@ training.intv <- verificationsetup(predictors, response, historical.intv, vtype,
     # an estimate of the best parameters
 fit <- selectpredictors(training$predictors,training$response, 
 	min.alpha = min.alpha, nvmax = nvmax, verbose=1)
-    
+
+
     # using the best set of predictors, run the multimodel 
     # and generate ensembles using new data
 fit <- multimodel(fit, training$newdata, nsims, vtype = vtype, nback = nback)
@@ -39,7 +39,8 @@ d$hist <- training.intv$historical
 main <- paste(CapFirst(predmonth),'1')
 years <- time(training$newdata)
 cn <- if(vtype=="retro") years[-(1:(length(years)-nback))] else years
-    
+  
+# browser()  
     # save a bunch of plots and return stats
 d <- diagnostics(d, main=main,time.names=time.names,
     site.names = site.names, cn = cn,

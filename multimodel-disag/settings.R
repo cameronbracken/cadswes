@@ -1,7 +1,7 @@
     #number of simulations to perform
 nsims <- 1000
     #lead time, could be nov, jan, feb, apr
-predmonth <- "nov"
+predmonth <- "apr"
     # Should forecasts be done only for apr-july
 seasonal <- TRUE
     # minimum proportion of data to use in local regression
@@ -13,6 +13,6 @@ nvmax <- 3
     #                   but will get converted to total flow internally 
 intervening <- FALSE
     # Verification type, "drop-one", "retro", "all"
-vtype <- "drop-one"
+vtype <- "all"
     # in retroactive verification mode, the number of years back to simulate
 nback <- 15

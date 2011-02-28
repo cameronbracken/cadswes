@@ -56,7 +56,7 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 	
 	# simdata, a 
 	d <- dim(obj$hist)
-	ny <- d[1]
+	ny <- dim(obj$sims)[2]
 	nt <- d[2]
 	ns <- obj$nsim
 	
@@ -65,7 +65,7 @@ disag.pdisag <- function(obj, quiet=FALSE,plot=T){
 	# when we disag the simulation matrix (nyears by nsims), we want a 
 	# disagregated matrix out for each simulated series that is the same 
 	# dimensions as the historical data
-	disag <- array(NA,c(d,ns))
+	disag <- array(NA,c(ny,d[2:3],ns))
 
 	if(!quiet) {
 		cat('Disaggregating...\n')
@@ -197,9 +197,9 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
             colnames(this.data) <- cn
             
             #if(this.time == "July" && this.site == "San Juan River Near Archuleta,NM")
-            #    browser()
+              
             rpss[b] <- median(RPSS(d$hist[,time,site],this.data))
-            mc[b] <- cor(apply(this.data,2,median),d$hist[,time,site])
+            mc[b] <- cor(apply(this.data[,1:length(d$hist[,time,site])],2,median),d$hist[,time,site])
 
             pdf(file.path(dir,'plots',paste(main,this.time,this.site,vtype,'box.pdf')),
                 width=8,height=5)

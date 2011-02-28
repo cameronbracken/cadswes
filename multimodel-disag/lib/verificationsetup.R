@@ -2,16 +2,16 @@ verificationsetup <- function(predictors, response, historical, type, nback){
     
     if(type == "all"){
         
+        newdata <- predictors
         predictors <- window(predictors,start=start(response),end=end(response))
           # could use newdata as the entire predictor range but then we cant disag
-        newdata <- predictors
         response <- response
         historical <- historical
 
       }else if(type == "retro"){
         
-        predictors <- window(predictors,start=start(response),end=end(response))
         newdata <- predictors
+        predictors <- window(predictors,start=start(response),end=end(response))
         response <- response
         s <- nrow(historical) - nback + 1
         e <- nrow(historical)
@@ -19,8 +19,8 @@ verificationsetup <- function(predictors, response, historical, type, nback){
     
     }else{
 
-        predictors <- window(predictors,start=start(response),end=end(response))
         newdata <- predictors
+        predictors <- window(predictors,start=start(response),end=end(response))
         response <- response
         historical <- historical
     }

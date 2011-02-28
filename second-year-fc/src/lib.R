@@ -1,3 +1,96 @@
+############################################################
+############################################################
+# myboxplot.matrix:
+#   Modified version of the boxplot.matrix function to call myboxplot
+#   which in turn calls myboxplot.stats to to 5th and 95th percentiles
+myboxplot.matrix <- function (x, use.cols = TRUE, ...) 
+{
+    groups <- if (use.cols) 
+        split(x, rep.int(1L:ncol(x), rep.int(nrow(x), ncol(x))))
+    else split(x, seq(nrow(x)))
+    if (length(nam <- dimnames(x)[[1 + use.cols]])) 
+        names(groups) <- nam
+    invisible(myboxplot(groups, ...))
+}
+
+############################################################
+############################################################
+# myboxplot:
+#   Modified version of the boxplot function which calls myboxplot.stats for 
+#   5th and 95th percentiles instead if default 1.5*IQR
+myboxplot <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE, 
+    notch = FALSE, outline = TRUE, names, plot = TRUE, border = par("fg"), 
+    col = NULL, log = "", pars = list(boxwex = 0.8, staplewex = 0.5, 
+        outwex = 0.5), horizontal = FALSE, add = FALSE, at = NULL) 
+{
+    args <- list(x, ...)
+    namedargs <- if (!is.null(attributes(args)$names)) 
+        attributes(args)$names != ""
+    else rep(FALSE, length.out = length(args))
+    groups <- if (is.list(x)) 
+        x
+    else args[!namedargs]
+    if (0L == (n <- length(groups))) 
+        stop("invalid first argument")
+    if (length(class(groups))) 
+        groups <- unclass(groups)
+    if (!missing(names)) 
+        attr(groups, "names") <- names
+    else {
+        if (is.null(attr(groups, "names"))) 
+            attr(groups, "names") <- 1L:n
+        names <- attr(groups, "names")
+    }
+    cls <- sapply(groups, function(x) class(x)[1L])
+    cl <- if (all(cls == cls[1L])) 
+        cls[1L]
+    else NULL
+    for (i in 1L:n) groups[i] <- list(myboxplot.stats(unclass(groups[[i]]), 
+        range))
+    stats <- matrix(0, nrow = 5L, ncol = n)
+    conf <- matrix(0, nrow = 2L, ncol = n)
+    ng <- out <- group <- numeric(0L)
+    ct <- 1
+    for (i in groups) {
+        stats[, ct] <- i$stats
+        conf[, ct] <- i$conf
+        ng <- c(ng, i$n)
+        if ((lo <- length(i$out))) {
+            out <- c(out, i$out)
+            group <- c(group, rep.int(ct, lo))
+        }
+        ct <- ct + 1
+    }
+    if (length(cl) && cl != "numeric") 
+        oldClass(stats) <- cl
+    z <- list(stats = stats, n = ng, conf = conf, out = out, 
+        group = group, names = names)
+    if (plot) {
+        if (is.null(pars$boxfill) && is.null(args$boxfill)) 
+            pars$boxfill <- col
+        do.call("bxp", c(list(z, notch = notch, width = width, 
+            varwidth = varwidth, log = log, border = border, 
+            pars = pars, outline = outline, horizontal = horizontal, 
+            add = add, at = at), args[namedargs]))
+        invisible(z)
+    }
+    else z
+}
+
+#This function replaces boxplot.stats --- it uses the middle 50% and
+#middle 90% instead of middle 50%(IQR) and 1.5*IQR.
+myboxplot.stats <- function (x, coef = NULL, do.conf = TRUE, do.out =
+TRUE)
+{
+  nna <- !is.na(x)
+  n <- sum(nna)
+  stats <- quantile(x, c(.05,.25,.5,.75,.95), na.rm = TRUE)
+  iqr <- diff(stats[c(2, 4)])
+  out <- x < stats[1] | x > stats[5]
+  conf <- if (do.conf)
+    stats[3] + c(-1.58, 1.58) * diff(stats[c(2, 4)])/sqrt(n)
+  list(stats = stats, n = n, conf = conf, out = x[out & nna])
+}
 
 laglead <- 
 function(x,q,r){
@@ -654,17 +747,38 @@ hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
 
     #lower <- qnorm(0.001, min(x$pm$mean),x$pm$sd[which.min(x$pm$mean)])
     #upper <- qnorm(0.999, max(x$pm$mean),x$pm$sd[which.max(x$pm$mean)])
-    range <- extendrange(x$x,f=.1)
+    range <- extendrange(x$x,f=.2)
     xrange <- seq(range[1],range[2],,len)
-        
+
     n <- length(x$x)
     m <- ncol(x$Pi)
     
-    allprobs <- matrix(NA,nrow=length(x$x),ncol=m)
-    for(i in 1:m)
-        allprobs[,i] <- dnorm(x$x, x$pm$mean[i], x$pm$sd[i])
+        # the probability density for each observation and each state
+    
+    dfun.hmm <- function(x,xrange=x$x){
         
-    allprobs <- outer(x$x, x$pm$mean, dnorm, x$pm$sd)
+        m <- ncol(x$Pi)
+        allprobs <- matrix(NA,nrow=length(xrange),ncol=m)
+        np <- length(x$pm)
+        fun <- paste('d',x$distn,sep='')
+        for(i in 1:m){
+            allprobs[,i] <- 
+                if(np == 1)
+                    eval(call(fun, xrange, x$pm[[1]][i]))
+                else if(np == 2)
+                    eval(call(fun, xrange, x$pm[[1]][i], x$pm[[2]][i]))
+                else if(np == 3)
+                    eval(call(fun, xrange, x$pm[[1]][i], x$pm[[2]][i], x$pm[[3]][i]))
+        }
+        allprobs
+        
+    }
+    
+    allprobs <- dfun.hmm(x)
+    
+       
+    #   browser() 
+    #allprobs <- outer(x$x, x$pm$mean, dnorm, x$pm$sd)
     allprobs <- ifelse(!is.na(allprobs), allprobs, 1)
     foo <- x$delta * allprobs[1, ]
     sumfoo <- sum(foo)
@@ -682,11 +796,10 @@ hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
         foo <- foo %*% x$Pi
         xi[, i] <- foo
     }
+    #browser()
+    allprobs.out <- dfun.hmm(x,xrange)
     
-    allprobs.out <- matrix(NA,nrow=len,ncol=m)
-    for(i in 1:m)
-        allprobs.out[,i] <- dnorm(xrange, x$pm$mean[i], x$pm$sd[i])
-    
+        # total probability of being in 
     fdists <- allprobs.out %*% xi[, 1:H]
     list(x = xrange, y = fdists)
 }
@@ -762,6 +875,8 @@ hmm.fcdist.sim <- function(fcdist,nsim=1000){
     for(i in 1:nsim){
         
         sim[i] <- approx(cdf,fcdist$x,pts[i])$y
+        while(is.na(sim[i]))
+            sim[i] <- approx(cdf,fcdist$x,runif(1))$y
         
     }
     
@@ -806,5 +921,51 @@ plot.hmm.trprob.2state <- function(hmm,sy){
         opts(legend.position = c(0.2, 0.5)) + 
         ylab('Hidden State Transition Probability') +
         xlab('Time')
+    
+}
+
+get.named.parlist <- function(x,m,dist,ic,...){
+    require(MASS)
+    fit <- fitdistr(x,dist,...)
+    np <- length(fit$estimate)
+    pars <- vector('list',np)
+    names(pars) <- names(fit$estimate)
+    
+    for(j in 1:m){
+        this.fit <- fitdistr(x[ntile.ts(x,m) == (j-1)],dist,...)
+        for(k in 1:np)
+            pars[[k]][j] <- this.fit$estimate[k]
+        #for(k in 1:np)
+        #    pars[[k]][j] <- fit$estimate[k]
+        if(dist == 'normal'){
+            if(ic == 'same.both'){
+                pars[[k]][j] <- mean(x)
+                pars[[k]][j] <- sd(x)
+            } else if( ic == 'same.sd'){
+                pars[[k]][j] <- mean(x[ntile.ts(x,m) == (j-1)])
+                pars[[k]][j] <- sd(x)
+            }else{
+                pars[[k]][j] <- mean(x[ntile.ts(x,m) == (j-1)])
+                pars[[k]][j] <- sd(x[ntile.ts(x,m) == (j-1)])
+            }
+        }
+    }
+    pars
+}
+
+plot.components <- function(x,m,dist,pars=NULL,...){
+    
+    fd.name <- ifelse(dist == "norm", "normal", dist)
+    pars <- if(is.null(pars)) get.named.parlist(x,m,fd.name,...)
+    hist(x,freq=F)
+    
+    r <- extendrange(x,f=.1)
+    r <- seq(r[1],r[2],,1000)
+    
+    for(i in 1:m){
+        
+        dens <- eval(call(paste('d',dist,sep=''),r,pars[[2]][i],pars[[1]][i]))
+        lines(r,1/m*dens)
+    }
     
 }

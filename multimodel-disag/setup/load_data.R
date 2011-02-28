@@ -1,4 +1,4 @@
-source('setup/save_data.R')
+source('setup/save_data.R',local=TRUE)
 
 
 data <- scan('config/data',what=character(0),quiet=T)

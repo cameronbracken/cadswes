@@ -13,7 +13,7 @@ flush.console()
 paleo   <- switch(dataset, meko = meko,   woodhouse = wood,   nino3 = cook, synth = synth)
 paleo.b <- switch(dataset, meko = meko.b, woodhouse = wood.b, nino3 = cook.b, synth = synth.b)
 
-hist <-   switch(dataset, meko = lees,   woodhouse = lees,   nino3 = nino3, synth = synth.h)
+hist <-   switch(dataset, meko = window(lees,1980),   woodhouse = window(lees,1980),   nino3 = nino3, synth = synth.h)
 hist.b <- switch(dataset, meko = lees.b, woodhouse = lees.b, nino3 = nino3.b, synth = synth.h.b)
 
 n <- length(paleo)

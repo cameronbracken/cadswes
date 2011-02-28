@@ -1,0 +1,380 @@
+
+United States           Natural Resources             Water and Climate Center
+Department of           Conservation                          Portland, Oregon
+Agriculture             Service                                               
+ 
+          S N O W  -  P R E C I P I T A T I O N    U P D A T E
+ 
+              Based on Mountain Data from NRCS SNOTEL Sites
+                    As of THURSDAY: FEBRUARY 24 , 2011
+-----------------------------------------------------------------------------
+BASIN                    ELEV.  SNOW WATER EQUIVALENT   TOTAL PRECIPITATION
+ Data Site Name          (Ft)                      %                      %  
+                                Current  Average  Avg  Current  Average  Avg
+-----------------------------------------------------------------------------
+
+COLORADO RIVER BASIN ABOVE LAKE POWELL
+ 
+
+UPPER GREEN RIVER BASIN
+
+ BIG SANDY OPENING        9080    11.5    11.6    99     11.9    10.9   109 
+ BLACKS FORK JCT          8870     8.5      -M      *    13.5      -M      *
+ BLIND BULL SUM           8650    22.6    22.0   103     16.0    18.3    87 
+ EAST RIM DIVIDE          7930    11.9    10.5   113     10.3     9.8   105 
+ EF BLACKS FORK GS        9308    15.9      -M      *    12.0      -M      *
+ ELKHART PARK G.S.        9400    10.3    10.6    97     10.2    10.5    97 
+ GROS VENTRE SUMMIT       8750    12.0    11.0   109     11.6    10.3   113 
+ GUNSIGHT PASS            9820    13.3      -M      *    13.4      -M      *
+ HAMS FORK                7840    12.8    10.4   123     12.2    10.0   122 
+ HEWINTA                  9519    10.0     8.6   116     13.4    11.1   121 
+ HICKERSON PARK           9145     5.9     5.6   105      7.6     6.0   127 
+ HOLE-IN-ROCK             9150     6.5     5.4   120      8.2     5.5   149 
+ INDIAN CREEK             9425    24.6    21.2   116     22.4    20.2   111 
+ KELLEY R.S.              8180    16.3    13.3   123     19.1    16.5   116 
+ KENDALL R.S.             7740    10.2    11.8    86     11.8    12.0    98 
+ KING'S CABIN             8724    10.6     8.9   119     13.1     9.4   139 
+ LOOMIS PARK              8240    15.3    13.8   111     16.1    14.2   113 
+ NEW FORK LAKE            8340     9.9     9.2   108      9.2     9.3    99 
+ SNIDER BASIN             8060    15.8    11.9   133     15.6    13.2   118 
+ SPIRIT LK               10223    12.5      -M      *    14.4      -M      *
+ SPRING CREEK DIVIDE      9000    27.1    21.2   128     26.4    21.6   122 
+ STEEL CREEK PARK        10200    13.6    12.0   113     16.3    12.3   133 
+ TRIPLE PEAK              8500    23.8    19.9   120     25.8    19.8   130 
+ TROUT CREEK              9518    10.4     7.5   139     14.0     9.7   144 
+                                                -----                  -----
+                Basin wide percent of average    114                    116 
+ 
+
+DUCHESNE RIVER BASIN
+
+ LAKEFORK BASIN          10966    27.3    15.7   174     22.6    16.4   138 
+ FIVE POINTS LAKE        10940    21.6    12.9   167     23.3    15.1   154 
+ BROWN DUCK              10600    22.8    14.2   161     24.7    15.4   160 
+ CHEPETA                 10592    13.9    10.8   129     17.2    12.0   143 
+ LAKEFORK #1             10415    12.1     9.9   122     18.4    11.1   166 
+ LAKEFORK #3              8464     9.9      -M      *    14.9      -M      *
+ TRIAL LAKE               9992    27.9    19.6   142     27.4    19.5   141 
+ MOSBY MTN.               9510    13.4     8.8   152     16.9    10.6   159 
+ INDIAN CANYON            9175    13.4     9.1   147     20.5    11.3   181 
+ KING'S CABIN             8724    10.6     8.9   119     13.1     9.4   139 
+ WHITE RIVER #1           8641    14.2    10.9   130     17.7    11.4   155 
+ STRAWBERRY DIVIDE        8123    19.0    15.5   123     23.4    17.4   134 
+ CURRANT CREEK            8000    12.6     9.0   140     19.1    12.1   158 
+ DANIELS-STRAWBERRY       8037    22.9    14.5   158     26.5    16.4   162 
+ ROCK CREEK               7889    10.3     7.5   137     16.2    10.2   159 
+                                                -----                  -----
+                Basin wide percent of average    145                    152 
+ 
+
+YAMPA/WHITE RIVER BASINS
+
+ BISON LAKE              10880    28.0    21.3   131       -M    22.9      *
+ TOWER                   10500    43.8    36.1   121     44.1    30.6   144 
+ RIPPLE CREEK            10340    29.6    20.3   146     27.7    22.6   123 
+ OLD BATTLE              10000    33.4    25.0   134     27.8    27.1   103 
+ TRAPPER LAKE             9700    13.6    16.6    82     20.1    15.7   128 
+ BURRO MOUNTAIN           9400    14.3    13.9   103     17.8    15.4   116 
+ COLUMBINE                9160    26.9    20.9   129     28.2    20.0   141 
+ RABBIT EARS              9400    28.3    20.5   138     33.2    23.3   142 
+ LOST DOG                 9320    27.3    20.8   131     27.0    22.3   121 
+ BUFFALO PARK             9240    14.7    10.3   143     18.4    14.5   127 
+ CROSHO                   9100    13.1     9.8   134     15.4    12.2   126 
+ WHISKEY PARK             8950      -M    22.6      *    31.7    22.5   141 
+ DIVIDE PEAK              8880    17.5    15.0   117     21.5    16.3   132 
+ LYNX PASS                8880    12.5     9.6   130     14.1    10.3   137 
+ ELK RIVER                8700    19.8    15.4   129     21.4    15.4   139 
+ DRY LAKE                 8400    22.9    17.9   128     28.2    19.2   147 
+ SANDSTONE RS             8150    11.5    11.9    97       -M    15.0      *
+ BATTLE MOUNTAIN          7440      -M     9.2      *    10.6    11.8    90 
+                                                -----                  -----
+                Basin wide percent of average    125                    129 
+ 
+
+PRICE-SAN RAFAEL
+
+ SEELEY CREEK             9910    13.6    11.6   117     14.2    10.5   135 
+ BUCK FLAT                9430    16.3    14.5   112     23.3    15.3   152 
+ RED PINE RIDGE           9009    13.9    13.5   103     21.7    14.4   151 
+ MAMMOTH-COTTONWOOD       8727    21.9    16.6   132     20.0    12.9   155 
+ TIMBERLINE               8684    15.0      -M      *    20.4      -M      *
+ WHITE RIVER #1           8641    14.2    10.9   130     17.7    11.4   155 
+                                                -----                  -----
+                Basin wide percent of average    119                    150 
+ 
+
+ESCALANTE RIVER BASINS
+
+ CLAYTON SPRINGS         10049    12.9      -M      *    20.8      -M      *
+ DONKEY RESERVOIR         9800     5.9     6.3    94     12.5     7.2   174 
+ WIDTSOE #3               9640    10.6     9.1   116     17.9    10.3   174 
+                                                -----                  -----
+                Basin wide percent of average    107                    174 
+ 
+
+DIRTY DEVIL RIVER BASIN
+
+ BLACK FLAT-U.M. CK       9462    10.2     8.0   128     15.0     9.0   167 
+ DILL'S CAMP              9182    14.4    11.6   124     21.2    13.3   159 
+ DONKEY RESERVOIR         9800     5.9     6.3    94     12.5     7.2   174 
+ FISH LAKE UTAH           8818     8.4      -M      *    13.1      -M      *
+                                                -----                  -----
+                Basin wide percent of average    118                    165 
+ 
+
+UPPER COLORADO RIVER HEADWATERS
+
+ FREMONT PASS            11400    15.8    12.4   127     15.2    11.7   130 
+ HOOSIER PASS            11400    13.5    11.2   121     13.7    11.2   122 
+ BERTHOUD SUMMIT         11300    18.1    13.6   133     23.5    17.0   138 
+ GRIZZLY PEAK            11100    18.3    13.1   140     18.4    13.5   136 
+ BISON LAKE              10880    28.0    21.3   131       -M    22.9      *
+ LAKE IRENE              10700    25.7    20.0   129     25.2    15.7   161 
+ COPPER MOUNTAIN         10550    15.6    10.6   147     17.4    12.2   143 
+ VAIL MOUNTAIN           10300    17.4    16.1   108     19.0    16.4   116 
+ ARROW                    9680    11.8    10.5   112      9.2    10.7    86 
+ WILLOW CREEK PASS        9540    14.2     9.2   154     13.7     9.9   138 
+ COLUMBINE                9160    26.9    20.9   129     28.2    20.0   141 
+ SUMMIT RANCH             9400     9.5     8.1   117     12.5    10.1   124 
+ BUFFALO PARK             9240    14.7    10.3   143     18.4    14.5   127 
+ PHANTOM VALLEY           9030    11.3     8.0   141     16.8    11.5   146 
+ LYNX PASS                8880    12.5     9.6   130     14.1    10.3   137 
+ STILLWATER CREEK         8720     9.7     6.9   141     11.9     7.8   153 
+                                                -----                  -----
+                Basin wide percent of average    130                    134 
+ 
+
+ROARING FORK RIVER BASIN
+
+ CHAPMAN TUNNEL          10110    13.3      -M      *    15.3      -M      *
+ INDEPENDENCE PASS       10600    16.0    12.5   128     16.0    13.6   118 
+ IVANHOE                 10400    13.6    10.8   126     18.9    14.6   129 
+ KILN                     9600    11.9     9.5   125     13.3    11.2   119 
+ MC CLURE PASS            9500    16.4    13.9   118     17.8    16.6   107 
+ NAST LAKE                8700     9.5     6.9   138     11.8     9.4   126 
+ NORTH LOST TRAIL         9200    19.2    14.0   137     21.1    16.7   126 
+ SCHOFIELD PASS          10700    31.8    26.0   122       -M    25.4      *
+                                                -----                  -----
+                Basin wide percent of average    126                    120 
+ 
+
+SOUTH EASTERN UTAH
+
+ LASAL MOUNTAIN           9560     9.8    10.1    97     16.1    16.1   100 
+ CAMP JACKSON             8968    16.1    12.0   134     17.2    15.2   113 
+ EAST WILLOW CREEK        8301    11.1     6.6   168     15.7     8.5   185 
+                                                -----                  -----
+                Basin wide percent of average    129                    123 
+ 
+
+GUNNISON RIVER BASIN
+
+ SLUMGULLION             11440    11.8    10.4   113     11.5    10.0   115 
+ RED MOUNTAIN PASS       11200    20.0    18.2   110     23.1    19.4   119 
+ PORPHYRY CREEK          10760    13.3    12.1   110     12.0    11.4   105 
+ SCHOFIELD PASS          10700    31.8    26.0   122       -M    25.4      *
+ BUTTE                   10160    12.7    11.9   107     14.9    13.3   112 
+ MESA LAKES              10000    15.3    13.3   115     19.9    16.1   124 
+ PARK RESERVOIR           9960    28.7    20.6   139     26.4    20.6   128 
+ OVERLAND RES.            9840    14.4     9.8   147     15.3    12.4   123 
+ IDARADO                  9800    11.6    10.9   106     15.9    13.9   114 
+ PARK CONE                9600     9.8     8.5   115     12.1    10.1   120 
+ MC CLURE PASS            9500    16.4    13.9   118     17.8    16.6   107 
+ COLUMBINE PASS           9400    18.5    15.1   123     22.1    16.9   131 
+                                                -----                  -----
+                Basin wide percent of average    120                    119 
+ 
+
+DOLORES/SAN MIGUEL RIVER BASINS
+
+ RED MOUNTAIN PASS       11200    20.0    18.2   110     23.1    19.4   119 
+ LIZARD HEAD PASS        10200    11.0    11.9    92     10.8    13.1    82 
+ MINERAL CREEK           10040    12.6    11.7   108     15.5    13.6   114 
+ EL DIENTE PEAK          10000    10.4    11.8    88     14.8    15.1    98 
+ MANCOS                  10000    14.7    14.0   105     16.6    15.1   110 
+ LONE CONE                9600    12.2    14.2    86     14.3    15.8    91 
+ SCOTCH CREEK             9100     9.2    10.4    88     13.5    13.4   101 
+                                                -----                  -----
+                Basin wide percent of average     98                    103 
+ 
+
+SAN JUAN RIVER HEADWATERS
+
+ BEARTOWN                11600    16.9    19.0    89     20.7    19.2   108 
+ MIDDLE CREEK            11250    13.4    14.4    93     17.3    18.4    94 
+ STUMP LAKES             11200      -M    15.3      *    16.5    16.4   101 
+ LILY POND               11000     8.9    12.1    74     11.6    16.0    73 
+ WOLF CREEK SUMMIT       11000    25.7    24.6   104     27.1    25.8   105 
+ VALLECITO               10880    13.2    15.2    87     14.7    15.5    95 
+ UPPER SAN JUAN          10200    24.1    24.2   100     27.8    25.5   109 
+ CUMBRES TRESTLE         10040    20.3    20.5    99     18.1    19.8    91 
+ CHAMITA                  8400     8.9     9.0    99      9.4    11.8    80 
+                                                -----                  -----
+                Basin wide percent of average     95                     97 
+ 
+
+ANIMAS RIVER BASIN
+
+ BEARTOWN                11600    16.9    19.0    89     20.7    19.2   108 
+ RED MOUNTAIN PASS       11200    20.0    18.2   110     23.1    19.4   119 
+ STUMP LAKES             11200      -M    15.3      *    16.5    16.4   101 
+ COLUMBUS BASIN          10785    20.5    18.9   108     24.2    26.0    93 
+ SPUD MOUNTAIN           10660    24.3    23.4   104     26.1    23.8   110 
+ MOLAS LAKE              10500    16.1    16.2    99     17.7    16.1   110 
+ MINERAL CREEK           10040    12.6    11.7   108     15.5    13.6   114 
+ CASCADE #2               8920    11.2    10.1   111     16.0    15.9   101 
+ CASCADE                  8880    12.9    11.8   109     16.6    15.7   106 
+                                                -----                  -----
+                Basin wide percent of average    104                    106 
+ 
+
+COLORADO RIVER BASIN ABOVE LAKE POWELL (TOTAL OF ALL SNOTEL SITES)
+
+ ARROW                    9680    11.8    10.5   112      9.2    10.7    86 
+ BATTLE MOUNTAIN          7440      -M     9.2      *    10.6    11.8    90 
+ BEARTOWN                11600    16.9    19.0    89     20.7    19.2   108 
+ BERTHOUD SUMMIT         11300    18.1    13.6   133     23.5    17.0   138 
+ BIG SANDY OPENING        9080    11.5    11.6    99     11.9    10.9   109 
+ BISON LAKE              10880    28.0    21.3   131       -M    22.9      *
+ BLACK FLAT-U.M. CK       9462    10.2     8.0   128     15.0     9.0   167 
+ BLIND BULL SUM           8650    22.6    22.0   103     16.0    18.3    87 
+ BROWN DUCK              10600    22.8    14.2   161     24.7    15.4   160 
+ BUCK FLAT                9430    16.3    14.5   112     23.3    15.3   152 
+ BUFFALO PARK             9240    14.7    10.3   143     18.4    14.5   127 
+ BURRO MOUNTAIN           9400    14.3    13.9   103     17.8    15.4   116 
+ BUTTE                   10160    12.7    11.9   107     14.9    13.3   112 
+ CAMP JACKSON             8968    16.1    12.0   134     17.2    15.2   113 
+ CASCADE                  8880    12.9    11.8   109     16.6    15.7   106 
+ CASCADE #2               8920    11.2    10.1   111     16.0    15.9   101 
+ CHAMITA                  8400     8.9     9.0    99      9.4    11.8    80 
+ CHAPMAN TUNNEL          10110    13.3      -M      *    15.3      -M      *
+ CHEPETA                 10592    13.9    10.8   129     17.2    12.0   143 
+ CLAYTON SPRINGS         10049    12.9      -M      *    20.8      -M      *
+ COLUMBINE                9160    26.9    20.9   129     28.2    20.0   141 
+ COLUMBINE PASS           9400    18.5    15.1   123     22.1    16.9   131 
+ COLUMBUS BASIN          10785    20.5    18.9   108     24.2    26.0    93 
+ COPPER MOUNTAIN         10550    15.6    10.6   147     17.4    12.2   143 
+ CROSHO                   9100    13.1     9.8   134     15.4    12.2   126 
+ CUMBRES TRESTLE         10040    20.3    20.5    99     18.1    19.8    91 
+ CURRANT CREEK            8000    12.6     9.0   140     19.1    12.1   158 
+ DANIELS-STRAWBERRY       8037    22.9    14.5   158     26.5    16.4   162 
+ DILL'S CAMP              9182    14.4    11.6   124     21.2    13.3   159 
+ DIVIDE PEAK              8880    17.5    15.0   117     21.5    16.3   132 
+ DONKEY RESERVOIR         9800     5.9     6.3    94     12.5     7.2   174 
+ DRY LAKE                 8400    22.9    17.9   128     28.2    19.2   147 
+ EAST RIM DIVIDE          7930    11.9    10.5   113     10.3     9.8   105 
+ EAST WILLOW CREEK        8301    11.1     6.6   168     15.7     8.5   185 
+ EL DIENTE PEAK          10000    10.4    11.8    88     14.8    15.1    98 
+ ELK RIVER                8700    19.8    15.4   129     21.4    15.4   139 
+ ELKHART PARK G.S.        9400    10.3    10.6    97     10.2    10.5    97 
+ FIVE POINTS LAKE        10940    21.6    12.9   167     23.3    15.1   154 
+ FREMONT PASS            11400    15.8    12.4   127     15.2    11.7   130 
+ GRIZZLY PEAK            11100    18.3    13.1   140     18.4    13.5   136 
+ GROS VENTRE SUMMIT       8750    12.0    11.0   109     11.6    10.3   113 
+ GUNSIGHT PASS            9820    13.3      -M      *    13.4      -M      *
+ HAMS FORK                7840    12.8    10.4   123     12.2    10.0   122 
+ HEWINTA                  9519    10.0     8.6   116     13.4    11.1   121 
+ HICKERSON PARK           9145     5.9     5.6   105      7.6     6.0   127 
+ HOLE-IN-ROCK             9150     6.5     5.4   120      8.2     5.5   149 
+ HOOSIER PASS            11400    13.5    11.2   121     13.7    11.2   122 
+ IDARADO                  9800    11.6    10.9   106     15.9    13.9   114 
+ INDEPENDENCE PASS       10600    16.0    12.5   128     16.0    13.6   118 
+ INDIAN CREEK             9425    24.6    21.2   116     22.4    20.2   111 
+ IVANHOE                 10400    13.6    10.8   126     18.9    14.6   129 
+ KELLEY R.S.              8180    16.3    13.3   123     19.1    16.5   116 
+ KENDALL R.S.             7740    10.2    11.8    86     11.8    12.0    98 
+ KILN                     9600    11.9     9.5   125     13.3    11.2   119 
+ KING'S CABIN             8724    10.6     8.9   119     13.1     9.4   139 
+ LAKE IRENE              10700    25.7    20.0   129     25.2    15.7   161 
+ LAKEFORK #1             10415    12.1     9.9   122     18.4    11.1   166 
+ LAKEFORK #3              8464     9.9      -M      *    14.9      -M      *
+ LAKEFORK BASIN          10966    27.3    15.7   174     22.6    16.4   138 
+ LASAL MOUNTAIN           9560     9.8    10.1    97     16.1    16.1   100 
+ LILY POND               11000     8.9    12.1    74     11.6    16.0    73 
+ LIZARD HEAD PASS        10200    11.0    11.9    92     10.8    13.1    82 
+ LONE CONE                9600    12.2    14.2    86     14.3    15.8    91 
+ LOOMIS PARK              8240    15.3    13.8   111     16.1    14.2   113 
+ LOST DOG                 9320    27.3    20.8   131     27.0    22.3   121 
+ LYNX PASS                8880    12.5     9.6   130     14.1    10.3   137 
+ MAMMOTH-COTTONWOOD       8727    21.9    16.6   132     20.0    12.9   155 
+ MANCOS                  10000    14.7    14.0   105     16.6    15.1   110 
+ MC CLURE PASS            9500    16.4    13.9   118     17.8    16.6   107 
+ MCCOY PARK               9480    11.3    12.3    92     13.4    12.9   104 
+ MESA LAKES              10000    15.3    13.3   115     19.9    16.1   124 
+ MIDDLE CREEK            11250    13.4    14.4    93     17.3    18.4    94 
+ MIDDLE FORK CAMP         8940    10.3     7.9   130     12.0     8.6   140 
+ MINERAL CREEK           10040    12.6    11.7   108     15.5    13.6   114 
+ MOLAS LAKE              10500    16.1    16.2    99     17.7    16.1   110 
+ MOSBY MTN.               9510    13.4     8.8   152     16.9    10.6   159 
+ NAST LAKE                8700     9.5     6.9   138     11.8     9.4   126 
+ NEW FORK LAKE            8340     9.9     9.2   108      9.2     9.3    99 
+ NORTH LOST TRAIL         9200    19.2    14.0   137     21.1    16.7   126 
+ OLD BATTLE              10000    33.4    25.0   134     27.8    27.1   103 
+ OVERLAND RES.            9840    14.4     9.8   147     15.3    12.4   123 
+ PARK CONE                9600     9.8     8.5   115     12.1    10.1   120 
+ PARK RESERVOIR           9960    28.7    20.6   139     26.4    20.6   128 
+ PHANTOM VALLEY           9030    11.3     8.0   141     16.8    11.5   146 
+ PORPHYRY CREEK          10760    13.3    12.1   110     12.0    11.4   105 
+ RABBIT EARS              9400    28.3    20.5   138     33.2    23.3   142 
+ RED MOUNTAIN PASS       11200    20.0    18.2   110     23.1    19.4   119 
+ RED PINE RIDGE           9009    13.9    13.5   103     21.7    14.4   151 
+ RIPPLE CREEK            10340    29.6    20.3   146     27.7    22.6   123 
+ ROCK CREEK               7889    10.3     7.5   137     16.2    10.2   159 
+ SANDSTONE RS             8150    11.5    11.9    97       -M    15.0      *
+ SCHOFIELD PASS          10700    31.8    26.0   122       -M    25.4      *
+ SCOTCH CREEK             9100     9.2    10.4    88     13.5    13.4   101 
+ SEELEY CREEK             9910    13.6    11.6   117     14.2    10.5   135 
+ SLUMGULLION             11440    11.8    10.4   113     11.5    10.0   115 
+ SNIDER BASIN             8060    15.8    11.9   133     15.6    13.2   118 
+ SPIRIT LK               10223    12.5      -M      *    14.4      -M      *
+ SPRING CREEK DIVIDE      9000    27.1    21.2   128     26.4    21.6   122 
+ SPUD MOUNTAIN           10660    24.3    23.4   104     26.1    23.8   110 
+ STEEL CREEK PARK        10200    13.6    12.0   113     16.3    12.3   133 
+ STILLWATER CREEK         8720     9.7     6.9   141     11.9     7.8   153 
+ STRAWBERRY DIVIDE        8123    19.0    15.5   123     23.4    17.4   134 
+ STUMP LAKES             11200      -M    15.3      *    16.5    16.4   101 
+ SUMMIT RANCH             9400     9.5     8.1   117     12.5    10.1   124 
+ TIMBERLINE               8684    15.0      -M      *    20.4      -M      *
+ TOWER                   10500    43.8    36.1   121     44.1    30.6   144 
+ TRAPPER LAKE             9700    13.6    16.6    82     20.1    15.7   128 
+ TRIAL LAKE               9992    27.9    19.6   142     27.4    19.5   141 
+ TRIPLE PEAK              8500    23.8    19.9   120     25.8    19.8   130 
+ TROUT CREEK              9518    10.4     7.5   139     14.0     9.7   144 
+ UPPER SAN JUAN          10200    24.1    24.2   100     27.8    25.5   109 
+ VAIL MOUNTAIN           10300    17.4    16.1   108     19.0    16.4   116 
+ VALLECITO               10880    13.2    15.2    87     14.7    15.5    95 
+ WHISKEY PARK             8950      -M    22.6      *    31.7    22.5   141 
+ WHITE RIVER #1           8641    14.2    10.9   130     17.7    11.4   155 
+ WIDTSOE #3               9640    10.6     9.1   116     17.9    10.3   174 
+ WILLOW CREEK PASS        9540    14.2     9.2   154     13.7     9.9   138 
+ WOLF CREEK SUMMIT       11000    25.7    24.6   104     27.1    25.8   105 
+                                                -----                  -----
+                Basin wide percent of average    119                    123 
+
+-----------------------------------------------------------------------------
+
+
+ -M   = Missing data
+  *   = Data may not provide a valid measure of conditions.
+Units = inches for the Current and Average Snow Water Equivalent and 
+	Total Precipitation values
+ 
+If the Basin wide percent of average value is flagged as potentially
+invalid, care should be taken to evaluate if the value is representative
+of conditions in the basin.
+
+The SNOW WATER EQUIVALENT Percent of Average represents the snow water
+equivalent found at selected SNOTEL sites in or near the basin compared to
+the average value for those sites on this day.
+
+The TOTAL PRECIPITATION Percent of Average represents the total precipitation
+(beginning October 1st) found at selected SNOTEL sites in or near the basin
+compared to the average value for those sites on this day.
+
+Contact your state water supply staff for assistance.
+
+Reference period for average conditions is 1971-2000.
+
+Provisional data, subject to revision.
+
+

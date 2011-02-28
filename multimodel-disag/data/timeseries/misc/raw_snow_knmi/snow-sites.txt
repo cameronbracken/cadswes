@@ -1,0 +1,1500 @@
+<br> 
+EAST WILLOW CREEK PILLOW                (utah)<br> 
+coordinates:  39.32N, -109.52E, 2515m<br> 
+NRCS station code: 09K01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09K01S+EAST_WILLOW_CREEK_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+LASAL MOUNTAIN PILLOW                   (utah)<br> 
+coordinates:  38.48N, -109.27E, 3002m<br> 
+NRCS station code: 09L03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09L03S+LASAL_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+LASAL MOUNTAIN-UPPER                    (utah)<br> 
+coordinates:  38.48N, -109.27E, 3002m<br> 
+NRCS station code: 09L02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09L02+LASAL_MOUNTAIN-UPPER+">get data</a>)<br> 
+Found   34 years with data in 1956-1989<br> 
+<br> 
+LASAL MOUNTAIN-LOWER                    (utah)<br> 
+coordinates:  38.48N, -109.28E, 2682m<br> 
+NRCS station code: 09L01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09L01+LASAL_MOUNTAIN-LOWER+">get data</a>)<br> 
+Found   73 years with data in 1931-2003<br> 
+<br> 
+MESA LAKES PILLOW                       (colorado)<br> 
+coordinates:  39.05N, -108.08E, 3048m<br> 
+NRCS station code: 08K04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08K04S+MESA_LAKES_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+MESA LAKES                              (colorado)<br> 
+coordinates:  39.05N, -108.08E, 3048m<br> 
+NRCS station code: 08K04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08K04+MESA_LAKES+">get data</a>)<br> 
+Found   64 years with data in 1937-2000<br> 
+<br> 
+COLUMBINE PASS PILLOW                   (colorado)<br> 
+coordinates:  38.42N, -108.38E, 2786m<br> 
+NRCS station code: 08L02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08L02S+COLUMBINE_PASS_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+ALEXANDER LAKE                          (colorado)<br> 
+coordinates:  39.03N, -107.97E, 3097m<br> 
+NRCS station code: 07K03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K03+ALEXANDER_LAKE+">get data</a>)<br> 
+Found   53 years with data in 1937-1989<br> 
+<br> 
+TRICKLE DIVIDE                          (colorado)<br> 
+coordinates:  39.13N, -107.90E, 3048m<br> 
+NRCS station code: 07K05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K05+TRICKLE_DIVIDE+">get data</a>)<br> 
+Found   47 years with data in 1940-1986<br> 
+<br> 
+PARK RESERVOIR                          (colorado)<br> 
+coordinates:  39.05N, -107.88E, 3036m<br> 
+NRCS station code: 07K06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K06+PARK_RESERVOIR+">get data</a>)<br> 
+Found   54 years with data in 1940-1996<br> 
+<br> 
+PARK RESERVOIR PILLOW                   (colorado)<br> 
+coordinates:  39.05N, -107.87E, 3036m<br> 
+NRCS station code: 07K06S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K06S+PARK_RESERVOIR_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+NAVAL OILSHALE PILLOW                   (colorado)<br> 
+coordinates:  39.60N, -107.95E, 2682m<br> 
+NRCS station code: 07K10S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K10S+NAVAL_OILSHALE_PILLOW+">get data</a>)<br> 
+Found   10 years with data in 1982-1991<br> 
+<br> 
+OVERLAND RES. PILLOW                    (colorado)<br> 
+coordinates:  39.08N, -107.63E, 3011m<br> 
+NRCS station code: 07K14S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K14S+OVERLAND_RES._PILLOW+">get data</a>)<br> 
+Found   14 years with data in 1990-2003<br> 
+<br> 
+MONTICELLO CITY PARK                    (utah)<br> 
+coordinates:  37.87N, -109.33E, 2149m<br> 
+NRCS station code: 09M03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09M03+MONTICELLO_CITY_PARK+">get data</a>)<br> 
+Found   13 years with data in 1973-1985<br> 
+<br> 
+NORTH MOUNTAIN                          (colorado)<br> 
+coordinates:  37.93N, -108.40E, 2853m<br> 
+NRCS station code: 08M09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M09+NORTH_MOUNTAIN+">get data</a>)<br> 
+Found   10 years with data in 1994-2003<br> 
+<br> 
+BUCKBOARD FLAT                          (utah)<br> 
+coordinates:  37.87N, -109.45E, 2743m<br> 
+NRCS station code: 09M01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09M01+BUCKBOARD_FLAT+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+CORRAL                                  (utah)<br> 
+coordinates:  39.65N, -110.38E, 2499m<br> 
+NRCS station code: 10K05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K05+CORRAL+">get data</a>)<br> 
+Found   36 years with data in 1955-2003<br> 
+<br> 
+CAMP JACKSON PILLOW                     (utah)<br> 
+coordinates:  37.80N, -109.48E, 2621m<br> 
+NRCS station code: 09M02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09M02S+CAMP_JACKSON_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+CAMP JACKSON                            (utah)<br> 
+coordinates:  37.80N, -109.48E, 2621m<br> 
+NRCS station code: 09M02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09M02+CAMP_JACKSON+">get data</a>)<br> 
+Found   38 years with data in 1956-1993<br> 
+<br> 
+LONE CONE                               (colorado)<br> 
+coordinates:  37.90N, -108.20E, 2926m<br> 
+NRCS station code: 08M07 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M07+LONE_CONE+">get data</a>)<br> 
+Found   28 years with data in 1965-1992<br> 
+<br> 
+LONE CONE PILLOW                        (colorado)<br> 
+coordinates:  37.90N, -108.18E, 2926m<br> 
+NRCS station code: 08M07S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M07S+LONE_CONE_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+TIMBERLINE                              (utah)<br> 
+coordinates:  39.68N, -110.43E, 2774m<br> 
+NRCS station code: 10K06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K06+TIMBERLINE+">get data</a>)<br> 
+Found   35 years with data in 1957-2003<br> 
+<br> 
+GROUNDHOG                               (colorado)<br> 
+coordinates:  37.80N, -108.27E, 2725m<br> 
+NRCS station code: 08M03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M03+GROUNDHOG+">get data</a>)<br> 
+Found   29 years with data in 1975-2003<br> 
+<br> 
+MC CLURE PASS                           (colorado)<br> 
+coordinates:  39.13N, -107.28E, 2896m<br> 
+NRCS station code: 07K09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K09+MC_CLURE_PASS+">get data</a>)<br> 
+Found   40 years with data in 1950-1989<br> 
+<br> 
+MC CLURE PASS PILLOW                    (colorado)<br> 
+coordinates:  39.13N, -107.28E, 2896m<br> 
+NRCS station code: 07K09S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K09S+MC_CLURE_PASS_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+BURRO MOUNTAIN                          (colorado)<br> 
+coordinates:  39.88N, -107.60E, 2865m<br> 
+NRCS station code: 07K02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K02+BURRO_MOUNTAIN+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+BURRO MOUNTAIN PILLOW                   (colorado)<br> 
+coordinates:  39.88N, -107.60E, 2865m<br> 
+NRCS station code: 07K02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K02S+BURRO_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+OPHIR LOOP                              (colorado)<br> 
+coordinates:  37.92N, -107.83E, 3450m<br> 
+NRCS station code: 07M18 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M18+OPHIR_LOOP+">get data</a>)<br> 
+Found   15 years with data in 1976-1990<br> 
+<br> 
+TELLURIDE                               (colorado)<br> 
+coordinates:  37.93N, -107.80E, 2682m<br> 
+NRCS station code: 07M02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M02+TELLURIDE+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+EL DIENTE PEAK PILLOW                   (colorado)<br> 
+coordinates:  37.78N, -108.02E, 3109m<br> 
+NRCS station code: 08M06S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M06S+EL_DIENTE_PEAK_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+NORTH LOST TRAIL PILLOW                 (colorado)<br> 
+coordinates:  39.07N, -107.15E, 2804m<br> 
+NRCS station code: 07K01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K01S+NORTH_LOST_TRAIL_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+NORTH LOST TRAIL                        (colorado)<br> 
+coordinates:  39.07N, -107.15E, 2804m<br> 
+NRCS station code: 07K01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K01+NORTH_LOST_TRAIL+">get data</a>)<br> 
+Found   55 years with data in 1936-1990<br> 
+<br> 
+TROUT LAKE #2                           (colorado)<br> 
+coordinates:  37.83N, -107.88E, 2981m<br> 
+NRCS station code: 07M28 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M28+TROUT_LAKE_#2+">get data</a>)<br> 
+Found   21 years with data in 1983-2003<br> 
+<br> 
+TROUT LAKE                              (colorado)<br> 
+coordinates:  37.83N, -107.88E, 2981m<br> 
+NRCS station code: 07M09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M09+TROUT_LAKE+">get data</a>)<br> 
+Found   35 years with data in 1949-1983<br> 
+<br> 
+LIZARD HEAD PASS                        (colorado)<br> 
+coordinates:  37.80N, -107.93E, 3109m<br> 
+NRCS station code: 07M29 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M29+LIZARD_HEAD_PASS+">get data</a>)<br> 
+Found   11 years with data in 1979-1989<br> 
+<br> 
+LIZARD HEAD                             (colorado)<br> 
+coordinates:  37.80N, -107.93E, 3109m<br> 
+NRCS station code: 07M03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M03+LIZARD_HEAD+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+LIZARD HEAD PASS PILLOW                 (colorado)<br> 
+coordinates:  37.80N, -107.93E, 3109m<br> 
+NRCS station code: 07M29S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M29S+LIZARD_HEAD_PASS_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+IRONTON PARK                            (colorado)<br> 
+coordinates:  37.97N, -107.67E, 2926m<br> 
+NRCS station code: 07M06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M06+IRONTON_PARK+">get data</a>)<br> 
+Found   67 years with data in 1937-2003<br> 
+<br> 
+RED MOUNTAIN PASS PILLOW                (colorado)<br> 
+coordinates:  37.90N, -107.72E, 3399m<br> 
+NRCS station code: 07M33S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M33S+RED_MOUNTAIN_PASS_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+IDARADO                                 (colorado)<br> 
+coordinates:  37.93N, -107.67E, 2987m<br> 
+NRCS station code: 07M27 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M27+IDARADO+">get data</a>)<br> 
+Found   12 years with data in 1979-1990<br> 
+<br> 
+IDARADO PILLOW                          (colorado)<br> 
+coordinates:  37.93N, -107.67E, 2987m<br> 
+NRCS station code: 07M27S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M27S+IDARADO_PILLOW+">get data</a>)<br> 
+Found   25 years with data in 1979-2003<br> 
+<br> 
+BISON LAKE PILLOW                       (colorado)<br> 
+coordinates:  39.77N, -107.35E, 3316m<br> 
+NRCS station code: 07K12S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K12S+BISON_LAKE_PILLOW+">get data</a>)<br> 
+Found   18 years with data in 1986-2003<br> 
+<br> 
+RED MOUNTAIN PASS                       (colorado)<br> 
+coordinates:  37.88N, -107.70E, 3359m<br> 
+NRCS station code: 07M15 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M15+RED_MOUNTAIN_PASS+">get data</a>)<br> 
+Found   39 years with data in 1951-1989<br> 
+<br> 
+MINERAL CREEK PILLOW                    (colorado)<br> 
+coordinates:  37.85N, -107.73E, 3060m<br> 
+NRCS station code: 07M14S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M14S+MINERAL_CREEK_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+MINERAL CREEK                           (colorado)<br> 
+coordinates:  37.85N, -107.73E, 3060m<br> 
+NRCS station code: 07M14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M14+MINERAL_CREEK+">get data</a>)<br> 
+Found   39 years with data in 1951-1989<br> 
+<br> 
+SCHOFIELD PASS PILLOW                   (colorado)<br> 
+coordinates:  39.02N, -107.05E, 3261m<br> 
+NRCS station code: 07K11S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K11S+SCHOFIELD_PASS_PILLOW+">get data</a>)<br> 
+Found   18 years with data in 1986-2003<br> 
+<br> 
+RICO                                    (colorado)<br> 
+coordinates:  37.67N, -108.03E, 2652m<br> 
+NRCS station code: 08M05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M05+RICO+">get data</a>)<br> 
+Found   57 years with data in 1936-1992<br> 
+<br> 
+KEYSTONE                                (colorado)<br> 
+coordinates:  38.87N, -107.03E, 3036m<br> 
+NRCS station code: 07L04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07L04+KEYSTONE+">get data</a>)<br> 
+Found   40 years with data in 1961-2000<br> 
+<br> 
+CRESTED BUTTE                           (colorado)<br> 
+coordinates:  38.88N, -107.00E, 2719m<br> 
+NRCS station code: 07L01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07L01+CRESTED_BUTTE+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+BUTTE                                   (colorado)<br> 
+coordinates:  38.90N, -106.95E, 3097m<br> 
+NRCS station code: 06L11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L11+BUTTE+">get data</a>)<br> 
+Found   25 years with data in 1965-1989<br> 
+<br> 
+BUTTE PILLOW                            (colorado)<br> 
+coordinates:  38.90N, -106.95E, 3097m<br> 
+NRCS station code: 06L11S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L11S+BUTTE_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+SPUD MOUNTAIN                           (colorado)<br> 
+coordinates:  37.70N, -107.78E, 3249m<br> 
+NRCS station code: 07M11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M11+SPUD_MOUNTAIN+">get data</a>)<br> 
+Found   42 years with data in 1951-1992<br> 
+<br> 
+SPUD MOUNTAIN PILLOW                    (colorado)<br> 
+coordinates:  37.70N, -107.78E, 3249m<br> 
+NRCS station code: 07M11S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M11S+SPUD_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+MOLAS LAKE                              (colorado)<br> 
+coordinates:  37.75N, -107.68E, 3200m<br> 
+NRCS station code: 07M12 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M12+MOLAS_LAKE+">get data</a>)<br> 
+Found   50 years with data in 1951-2000<br> 
+<br> 
+MOLAS LAKE PILLOW                       (colorado)<br> 
+coordinates:  37.75N, -107.68E, 3200m<br> 
+NRCS station code: 07M12S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M12S+MOLAS_LAKE_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+INDIAN CANYON                           (utah)<br> 
+coordinates:  39.90N, -110.75E, 2774m<br> 
+NRCS station code: 10K01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K01+INDIAN_CANYON+">get data</a>)<br> 
+Found   60 years with data in 1930-1989<br> 
+<br> 
+INDIAN CANYON PILLOW                    (utah)<br> 
+coordinates:  39.90N, -110.75E, 2774m<br> 
+NRCS station code: 10K01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K01S+INDIAN_CANYON_PILLOW+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+CASCADE PILLOW                          (colorado)<br> 
+coordinates:  37.65N, -107.80E, 2707m<br> 
+NRCS station code: 07M05S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M05S+CASCADE_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+CASCADE                                 (colorado)<br> 
+coordinates:  37.65N, -107.80E, 2694m<br> 
+NRCS station code: 07M05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M05+CASCADE+">get data</a>)<br> 
+Found   54 years with data in 1936-1989<br> 
+<br> 
+CASCADE #2                              (colorado)<br> 
+coordinates:  37.65N, -107.80E, 2719m<br> 
+NRCS station code: 07M35S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M35S+CASCADE_#2+">get data</a>)<br> 
+Found   13 years with data in 1991-2003<br> 
+<br> 
+SCOTCH CREEK PILLOW                     (colorado)<br> 
+coordinates:  37.50N, -108.02E, 2774m<br> 
+NRCS station code: 08M08S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M08S+SCOTCH_CREEK_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+RIO BLANCO                              (colorado)<br> 
+coordinates:  40.03N, -107.28E, 2591m<br> 
+NRCS station code: 07J01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07J01+RIO_BLANCO+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+MANCOS T-DOWN                           (colorado)<br> 
+coordinates:  37.43N, -108.17E, 3048m<br> 
+NRCS station code: 08M02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M02+MANCOS_T-DOWN+">get data</a>)<br> 
+Found   26 years with data in 1975-2003<br> 
+<br> 
+LAKE CITY                               (colorado)<br> 
+coordinates:  37.98N, -107.25E, 3097m<br> 
+NRCS station code: 07M08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M08+LAKE_CITY+">get data</a>)<br> 
+Found   56 years with data in 1948-2003<br> 
+<br> 
+TRAPPER LAKE PILLOW                     (colorado)<br> 
+coordinates:  40.00N, -107.23E, 2957m<br> 
+NRCS station code: 07K13S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07K13S+TRAPPER_LAKE_PILLOW+">get data</a>)<br> 
+Found   18 years with data in 1986-2003<br> 
+<br> 
+LIFT                                    (colorado)<br> 
+coordinates:  39.15N, -106.82E, 3429m<br> 
+NRCS station code: 06K27 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K27+LIFT+">get data</a>)<br> 
+Found   33 years with data in 1957-1989<br> 
+<br> 
+MANCOS SNOTEL                           (colorado)<br> 
+coordinates:  37.42N, -108.18E, 3048m<br> 
+NRCS station code: 08M02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M02S+MANCOS_SNOTEL+">get data</a>)<br> 
+Found   26 years with data in 1975-2003<br> 
+<br> 
+BEARTOWN PILLOW                         (colorado)<br> 
+coordinates:  37.72N, -107.52E, 3536m<br> 
+NRCS station code: 07M32S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M32S+BEARTOWN_PILLOW+">get data</a>)<br> 
+Found   21 years with data in 1983-2003<br> 
+<br> 
+SLUMGULLION PILLOW                      (colorado)<br> 
+coordinates:  37.98N, -107.20E, 3523m<br> 
+NRCS station code: 07M30S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M30S+SLUMGULLION_PILLOW+">get data</a>)<br> 
+Found   25 years with data in 1979-2003<br> 
+<br> 
+RIPPLE CREEK PILLOW                     (colorado)<br> 
+coordinates:  40.12N, -107.30E, 3152m<br> 
+NRCS station code: 07J05S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07J05S+RIPPLE_CREEK_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+LA PLATA                                (colorado)<br> 
+coordinates:  37.42N, -108.05E, 2847m<br> 
+NRCS station code: 08M04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+08M04+LA_PLATA+">get data</a>)<br> 
+Found   37 years with data in 1950-2003<br> 
+<br> 
+STUART R.S.                             (utah)<br> 
+coordinates:  39.53N, -111.15E, 2423m<br> 
+NRCS station code: 11K27 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K27+STUART_R.S.+">get data</a>)<br> 
+Found   41 years with data in 1955-1995<br> 
+<br> 
+MOSBY MOUNTAIN                          (utah)<br> 
+coordinates:  40.62N, -109.88E, 2896m<br> 
+NRCS station code: 09J05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J05+MOSBY_MOUNTAIN+">get data</a>)<br> 
+Found   60 years with data in 1930-1989<br> 
+<br> 
+MOSBY MTN. PILLOW                       (utah)<br> 
+coordinates:  40.62N, -109.88E, 2896m<br> 
+NRCS station code: 09J05S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J05S+MOSBY_MTN._PILLOW+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+KING'S CABIN PILLOW                     (utah)<br> 
+coordinates:  40.72N, -109.55E, 2661m<br> 
+NRCS station code: 09J01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J01S+KING'S_CABIN_PILLOW+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+KING'S CABIN-UPPER                      (utah)<br> 
+coordinates:  40.72N, -109.55E, 2661m<br> 
+NRCS station code: 09J01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J01+KING'S_CABIN-UPPER+">get data</a>)<br> 
+Found   60 years with data in 1930-1989<br> 
+<br> 
+GRIZZLY RIDGE                           (utah)<br> 
+coordinates:  40.73N, -109.50E, 2591m<br> 
+NRCS station code: 09J13 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J13+GRIZZLY_RIDGE+">get data</a>)<br> 
+Found   18 years with data in 1968-1985<br> 
+<br> 
+MUD CREEK #2                            (utah)<br> 
+coordinates:  39.63N, -111.15E, 2621m<br> 
+NRCS station code: 11K33 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K33+MUD_CREEK_#2+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+UPPER JOE'S VALLEY                      (utah)<br> 
+coordinates:  39.42N, -111.25E, 2713m<br> 
+NRCS station code: 11K29 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K29+UPPER_JOE'S_VALLEY+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+TROUT CREEK PILLOW                      (utah)<br> 
+coordinates:  40.73N, -109.67E, 2865m<br> 
+NRCS station code: 09J16S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J16S+TROUT_CREEK_PILLOW+">get data</a>)<br> 
+Found   29 years with data in 1975-2003<br> 
+<br> 
+TROUT CREEK                             (utah)<br> 
+coordinates:  40.73N, -109.67E, 2865m<br> 
+NRCS station code: 09J16 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J16+TROUT_CREEK+">get data</a>)<br> 
+Found   15 years with data in 1975-1989<br> 
+<br> 
+ORANGE OLSEN                            (utah)<br> 
+coordinates:  39.30N, -111.30E, 2195m<br> 
+NRCS station code: 11K40 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K40+ORANGE_OLSEN+">get data</a>)<br> 
+Found   15 years with data in 1971-1985<br> 
+<br> 
+MC KENZIE GULCH                         (colorado)<br> 
+coordinates:  39.50N, -106.75E, 2591m<br> 
+NRCS station code: 06K28 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K28+MC_KENZIE_GULCH+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+WHITE RIVER #1 PILLOW                   (utah)<br> 
+coordinates:  39.97N, -110.98E, 2606m<br> 
+NRCS station code: 10K02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K02S+WHITE_RIVER_#1_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1955-2003<br> 
+<br> 
+WHITE RIVER #1                          (utah)<br> 
+coordinates:  39.97N, -110.98E, 2606m<br> 
+NRCS station code: 10K02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10K02+WHITE_RIVER_#1+">get data</a>)<br> 
+Found   35 years with data in 1955-1989<br> 
+<br> 
+RED PINE RIDGE PILLOW                   (utah)<br> 
+coordinates:  39.47N, -111.27E, 2804m<br> 
+NRCS station code: 11K28S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K28S+RED_PINE_RIDGE_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1955-2003<br> 
+<br> 
+RED PINE RIDGE                          (utah)<br> 
+coordinates:  39.47N, -111.27E, 2804m<br> 
+NRCS station code: 11K28 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K28+RED_PINE_RIDGE+">get data</a>)<br> 
+Found   35 years with data in 1955-1989<br> 
+<br> 
+ASHLEY-TWIN LAKES                       (utah)<br> 
+coordinates:  40.72N, -109.80E, 3200m<br> 
+NRCS station code: 09J11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J11+ASHLEY-TWIN_LAKES+">get data</a>)<br> 
+Found   34 years with data in 1962-1995<br> 
+<br> 
+PARADISE PARK                           (utah)<br> 
+coordinates:  40.68N, -109.92E, 3078m<br> 
+NRCS station code: 09J03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J03+PARADISE_PARK+">get data</a>)<br> 
+Found   59 years with data in 1931-1989<br> 
+<br> 
+PORCUPINE                               (colorado)<br> 
+coordinates:  37.85N, -107.17E, 3133m<br> 
+NRCS station code: 07M20 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M20+PORCUPINE+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+WRIGLEY CREEK                           (utah)<br> 
+coordinates:  39.13N, -111.35E, 2743m<br> 
+NRCS station code: 11K32 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K32+WRIGLEY_CREEK+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+WHITE RIVER #3                          (utah)<br> 
+coordinates:  39.93N, -111.03E, 2256m<br> 
+NRCS station code: 11K25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K25+WHITE_RIVER_#3+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+STUMP LAKES PILLOW                      (colorado)<br> 
+coordinates:  37.48N, -107.63E, 3414m<br> 
+NRCS station code: 07M34S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M34S+STUMP_LAKES_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+INDEPENDENCE PASS                       (colorado)<br> 
+coordinates:  39.07N, -106.62E, 3231m<br> 
+NRCS station code: 06K04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K04+INDEPENDENCE_PASS+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+INDEPENDENCE PASS PILLOW                (colorado)<br> 
+coordinates:  39.07N, -106.62E, 3231m<br> 
+NRCS station code: 06K04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K04S+INDEPENDENCE_PASS_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+DRY VALLEY DIVIDE                       (utah)<br> 
+coordinates:  39.87N, -111.12E, 2469m<br> 
+NRCS station code: 11K42 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K42+DRY_VALLEY_DIVIDE+">get data</a>)<br> 
+Found   15 years with data in 1971-1985<br> 
+<br> 
+UPPER RIO GRANDE PILLOW                 (colorado)<br> 
+coordinates:  37.72N, -107.27E, 2865m<br> 
+NRCS station code: 07M16S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M16S+UPPER_RIO_GRANDE_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+UPPER RIO GRANDE                        (colorado)<br> 
+coordinates:  37.72N, -107.27E, 2865m<br> 
+NRCS station code: 07M16 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M16+UPPER_RIO_GRANDE+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+LEMON RESERVOIR                         (colorado)<br> 
+coordinates:  37.45N, -107.67E, 2652m<br> 
+NRCS station code: 07M23 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M23+LEMON_RESERVOIR+">get data</a>)<br> 
+Found   35 years with data in 1968-2003<br> 
+<br> 
+LEMON RESERVOIR #2                      (colorado)<br> 
+coordinates:  37.45N, -107.65E, 3048m<br> 
+NRCS station code: 07M24 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M24+LEMON_RESERVOIR_#2+">get data</a>)<br> 
+Found   14 years with data in 1973-1989<br> 
+<br> 
+LAKEFORK MOUNTAIN #3                    (utah)<br> 
+coordinates:  40.55N, -110.35E, 2560m<br> 
+NRCS station code: 10J12 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J12+LAKEFORK_MOUNTAIN_#3+">get data</a>)<br> 
+Found   51 years with data in 1953-2003<br> 
+<br> 
+BEAR RIVER                              (colorado)<br> 
+coordinates:  40.07N, -107.02E, 2774m<br> 
+NRCS station code: 07J03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07J03+BEAR_RIVER+">get data</a>)<br> 
+Found   37 years with data in 1956-2003<br> 
+<br> 
+KILN                                    (colorado)<br> 
+coordinates:  39.32N, -106.62E, 2926m<br> 
+NRCS station code: 06K30 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K30+KILN+">get data</a>)<br> 
+Found   24 years with data in 1967-1990<br> 
+<br> 
+KILN PILLOW                             (colorado)<br> 
+coordinates:  39.32N, -106.62E, 2926m<br> 
+NRCS station code: 06K30S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K30S+KILN_PILLOW+">get data</a>)<br> 
+Found   37 years with data in 1967-2003<br> 
+<br> 
+SANTA MARIA                             (colorado)<br> 
+coordinates:  37.82N, -107.12E, 2926m<br> 
+NRCS station code: 07M17 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M17+SANTA_MARIA+">get data</a>)<br> 
+Found   65 years with data in 1939-2003<br> 
+<br> 
+PARK CONE                               (colorado)<br> 
+coordinates:  38.82N, -106.58E, 2926m<br> 
+NRCS station code: 06L02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L02+PARK_CONE+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+PARK CONE PILLOW                        (colorado)<br> 
+coordinates:  38.82N, -106.58E, 2926m<br> 
+NRCS station code: 06L02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L02S+PARK_CONE_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+NAST LAKE PILLOW                        (colorado)<br> 
+coordinates:  39.30N, -106.60E, 2652m<br> 
+NRCS station code: 06K06S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K06S+NAST_LAKE_PILLOW+">get data</a>)<br> 
+Found   67 years with data in 1936-2003<br> 
+<br> 
+NAST LAKE                               (colorado)<br> 
+coordinates:  39.30N, -106.60E, 2652m<br> 
+NRCS station code: 06K06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K06+NAST_LAKE+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+REYNOLDS PARK                           (utah)<br> 
+coordinates:  40.75N, -109.92E, 3170m<br> 
+NRCS station code: 09J10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J10+REYNOLDS_PARK+">get data</a>)<br> 
+Found   26 years with data in 1964-1989<br> 
+<br> 
+HUNTINGTON-HORSESHOE                    (utah)<br> 
+coordinates:  39.62N, -111.30E, 2987m<br> 
+NRCS station code: 11K05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K05+HUNTINGTON-HORSESHOE+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+BUCK FLAT PILLOW                        (utah)<br> 
+coordinates:  39.13N, -111.43E, 2987m<br> 
+NRCS station code: 11K31S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K31S+BUCK_FLAT_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+BUCK FLAT                               (utah)<br> 
+coordinates:  39.13N, -111.43E, 2987m<br> 
+NRCS station code: 11K31 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K31+BUCK_FLAT+">get data</a>)<br> 
+Found   34 years with data in 1956-1989<br> 
+<br> 
+BLACK'S FORK                            (utah)<br> 
+coordinates:  39.03N, -111.45E, 2804m<br> 
+NRCS station code: 11K14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K14+BLACK'S_FORK+">get data</a>)<br> 
+Found   45 years with data in 1945-1989<br> 
+<br> 
+JACKSON PARK                            (utah)<br> 
+coordinates:  40.62N, -110.30E, 3231m<br> 
+NRCS station code: 10J19 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J19+JACKSON_PARK+">get data</a>)<br> 
+Found   30 years with data in 1956-1985<br> 
+<br> 
+CROSHO PILLOW                           (colorado)<br> 
+coordinates:  40.17N, -107.05E, 2774m<br> 
+NRCS station code: 07J04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07J04S+CROSHO_PILLOW+">get data</a>)<br> 
+Found   17 years with data in 1987-2003<br> 
+<br> 
+CROSHO                                  (colorado)<br> 
+coordinates:  40.17N, -107.05E, 2774m<br> 
+NRCS station code: 07J04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07J04+CROSHO+">get data</a>)<br> 
+Found   21 years with data in 1972-1992<br> 
+<br> 
+VALLECITO PILLOW                        (colorado)<br> 
+coordinates:  37.48N, -107.50E, 3316m<br> 
+NRCS station code: 07M31S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M31S+VALLECITO_PILLOW+">get data</a>)<br> 
+Found   23 years with data in 1981-2003<br> 
+<br> 
+VALLECITO                               (colorado)<br> 
+coordinates:  37.48N, -107.50E, 3316m<br> 
+NRCS station code: 07M31 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M31+VALLECITO+">get data</a>)<br> 
+Found   12 years with data in 1981-1992<br> 
+<br> 
+DILL'S CAMP                             (utah)<br> 
+coordinates:  39.03N, -111.47E, 2804m<br> 
+NRCS station code: 11K15 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K15+DILL'S_CAMP+">get data</a>)<br> 
+Found   45 years with data in 1945-1989<br> 
+<br> 
+DILL'S CAMP PILLOW                      (utah)<br> 
+coordinates:  39.03N, -111.47E, 2804m<br> 
+NRCS station code: 11K15S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K15S+DILL'S_CAMP_PILLOW+">get data</a>)<br> 
+Found   57 years with data in 1945-2003<br> 
+<br> 
+SEELEY CREEK PILLOW                     (utah)<br> 
+coordinates:  39.32N, -111.43E, 3048m<br> 
+NRCS station code: 11K09S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K09S+SEELEY_CREEK_PILLOW+">get data</a>)<br> 
+Found   72 years with data in 1932-2003<br> 
+<br> 
+SEELEY CREEK                            (utah)<br> 
+coordinates:  39.32N, -111.43E, 3048m<br> 
+NRCS station code: 11K09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K09+SEELEY_CREEK+">get data</a>)<br> 
+Found   58 years with data in 1932-1989<br> 
+<br> 
+BURNT CREEK                             (utah)<br> 
+coordinates:  40.85N, -109.65E, 2408m<br> 
+NRCS station code: 09J14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J14+BURNT_CREEK+">get data</a>)<br> 
+Found   21 years with data in 1965-1985<br> 
+<br> 
+BRUMLEY PILLOW                          (colorado)<br> 
+coordinates:  39.08N, -106.53E, 3231m<br> 
+NRCS station code: 06K40S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K40S+BRUMLEY_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+TWIN LAKES TUNNEL                       (colorado)<br> 
+coordinates:  39.08N, -106.53E, 3185m<br> 
+NRCS station code: 06K03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K03+TWIN_LAKES_TUNNEL+">get data</a>)<br> 
+Found   56 years with data in 1937-1992<br> 
+<br> 
+CHEPETA-WHITEROCKS                      (utah)<br> 
+coordinates:  40.77N, -109.98E, 3155m<br> 
+NRCS station code: 09J09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J09+CHEPETA-WHITEROCKS+">get data</a>)<br> 
+Found   27 years with data in 1962-1989<br> 
+<br> 
+IVANHOE                                 (colorado)<br> 
+coordinates:  39.28N, -106.55E, 3170m<br> 
+NRCS station code: 06K10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K10+IVANHOE+">get data</a>)<br> 
+Found   52 years with data in 1946-1997<br> 
+<br> 
+IVANHOE PILLOW                          (colorado)<br> 
+coordinates:  39.28N, -106.55E, 3170m<br> 
+NRCS station code: 06K10S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K10S+IVANHOE_PILLOW+">get data</a>)<br> 
+Found   58 years with data in 1946-2003<br> 
+<br> 
+MAMMOTH-COTTONWOOD                      (utah)<br> 
+coordinates:  39.68N, -111.32E, 2682m<br> 
+NRCS station code: 11K03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K03+MAMMOTH-COTTONWOOD+">get data</a>)<br> 
+Found   65 years with data in 1928-1992<br> 
+<br> 
+MAMMOTH-COTTONWOOD PILLOW               (utah)<br> 
+coordinates:  39.68N, -111.32E, 2682m<br> 
+NRCS station code: 11K03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K03S+MAMMOTH-COTTONWOOD_PILLOW+">get data</a>)<br> 
+Found   75 years with data in 1928-2003<br> 
+<br> 
+G.B.R.C. MEADOWS                        (utah)<br> 
+coordinates:  39.30N, -111.45E, 3048m<br> 
+NRCS station code: 11K10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K10+G.B.R.C._MEADOWS+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+CHEPETA PILLOW                          (utah)<br> 
+coordinates:  40.77N, -110.00E, 3139m<br> 
+NRCS station code: 10J43S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J43S+CHEPETA_PILLOW+">get data</a>)<br> 
+Found   22 years with data in 1982-2003<br> 
+<br> 
+MIDDLE FORK                             (utah)<br> 
+coordinates:  39.25N, -111.48E, 2926m<br> 
+NRCS station code: 11K34 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K34+MIDDLE_FORK+">get data</a>)<br> 
+Found   30 years with data in 1956-1985<br> 
+<br> 
+MT. BALDY R.S.                          (utah)<br> 
+coordinates:  39.13N, -111.50E, 2896m<br> 
+NRCS station code: 11K12 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K12+MT._BALDY_R.S.+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+LAKEFORK #1                             (utah)<br> 
+coordinates:  40.60N, -110.43E, 3078m<br> 
+NRCS station code: 10J10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J10+LAKEFORK_#1+">get data</a>)<br> 
+Found   59 years with data in 1931-1989<br> 
+<br> 
+LAKEFORK #1 PILLOW                      (utah)<br> 
+coordinates:  40.60N, -110.43E, 3078m<br> 
+NRCS station code: 10J10S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J10S+LAKEFORK_#1_PILLOW+">get data</a>)<br> 
+Found   73 years with data in 1931-2003<br> 
+<br> 
+G.B.R.C. HEADQUARTERS                   (utah)<br> 
+coordinates:  39.33N, -111.48E, 2652m<br> 
+NRCS station code: 11K11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K11+G.B.R.C._HEADQUARTERS+">get data</a>)<br> 
+Found   51 years with data in 1953-2003<br> 
+<br> 
+HAGERMAN TUNNEL                         (colorado)<br> 
+coordinates:  39.25N, -106.50E, 3399m<br> 
+NRCS station code: 06K42 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K42+HAGERMAN_TUNNEL+">get data</a>)<br> 
+Found   20 years with data in 1981-2000<br> 
+<br> 
+CLEAR CREEK #3                          (utah)<br> 
+coordinates:  39.92N, -111.23E, 2012m<br> 
+NRCS station code: 11K23 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K23+CLEAR_CREEK_#3+">get data</a>)<br> 
+Found   41 years with data in 1955-1995<br> 
+<br> 
+JOHNSON VALLEY                          (utah)<br> 
+coordinates:  38.62N, -111.48E, 2697m<br> 
+NRCS station code: 11L06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L06+JOHNSON_VALLEY+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+THISTLE FLAT                            (utah)<br> 
+coordinates:  39.23N, -111.52E, 2670m<br> 
+NRCS station code: 11K35 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K35+THISTLE_FLAT+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+CLEAR CREEK #2                          (utah)<br> 
+coordinates:  39.88N, -111.27E, 2530m<br> 
+NRCS station code: 11K22 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K22+CLEAR_CREEK_#2+">get data</a>)<br> 
+Found   35 years with data in 1955-1989<br> 
+<br> 
+CLEAR CREEK #2 PILLOW                   (utah)<br> 
+coordinates:  39.88N, -111.27E, 2530m<br> 
+NRCS station code: 11K22S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K22S+CLEAR_CREEK_#2_PILLOW+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+CLEAR CREEK #1 PILLOW                   (utah)<br> 
+coordinates:  39.87N, -111.28E, 2804m<br> 
+NRCS station code: 11K21S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K21S+CLEAR_CREEK_#1_PILLOW+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+CLEAR CREEK #1                          (utah)<br> 
+coordinates:  39.87N, -111.28E, 2804m<br> 
+NRCS station code: 11K21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K21+CLEAR_CREEK_#1+">get data</a>)<br> 
+Found   35 years with data in 1955-1989<br> 
+<br> 
+BEAVER DAMS PILLOW                      (utah)<br> 
+coordinates:  39.13N, -111.55E, 2438m<br> 
+NRCS station code: 11K13S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K13S+BEAVER_DAMS_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+BEAVER DAMS                             (utah)<br> 
+coordinates:  39.13N, -111.55E, 2438m<br> 
+NRCS station code: 11K13 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K13+BEAVER_DAMS+">get data</a>)<br> 
+Found   42 years with data in 1951-1992<br> 
+<br> 
+SPIRIT LAKE                             (utah)<br> 
+coordinates:  40.83N, -110.00E, 3139m<br> 
+NRCS station code: 10J55 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J55+SPIRIT_LAKE+">get data</a>)<br> 
+Found   41 years with data in 1963-2003<br> 
+<br> 
+FOUR MILE PARK                          (colorado)<br> 
+coordinates:  39.07N, -106.43E, 2957m<br> 
+NRCS station code: 06K07 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K07+FOUR_MILE_PARK+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+ATWOOD LAKE                             (utah)<br> 
+coordinates:  40.73N, -110.28E, 3304m<br> 
+NRCS station code: 10J41 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J41+ATWOOD_LAKE+">get data</a>)<br> 
+Found   13 years with data in 1977-1989<br> 
+<br> 
+BROWN DUCK                              (utah)<br> 
+coordinates:  40.58N, -110.58E, 3231m<br> 
+NRCS station code: 10J30 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J30+BROWN_DUCK+">get data</a>)<br> 
+Found   19 years with data in 1971-1989<br> 
+<br> 
+BROWN DUCK PILLOW                       (utah)<br> 
+coordinates:  40.58N, -110.58E, 3231m<br> 
+NRCS station code: 10J30S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J30S+BROWN_DUCK_PILLOW+">get data</a>)<br> 
+Found   33 years with data in 1971-2003<br> 
+<br> 
+PICKLE KEG PILLOW                       (utah)<br> 
+coordinates:  39.02N, -111.58E, 2926m<br> 
+NRCS station code: 11K39S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K39S+PICKLE_KEG_PILLOW+">get data</a>)<br> 
+Found   39 years with data in 1965-2003<br> 
+<br> 
+PICKLE KEG SPRING                       (utah)<br> 
+coordinates:  39.02N, -111.58E, 2926m<br> 
+NRCS station code: 11K39 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K39+PICKLE_KEG_SPRING+">get data</a>)<br> 
+Found   28 years with data in 1965-1992<br> 
+<br> 
+ROCK CREEK RANCH, DISC. 89              (utah)<br> 
+coordinates:  40.55N, -110.68E, 2408m<br> 
+NRCS station code: 10J18 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J18+ROCK_CREEK_RANCH,_DISC._89+">get data</a>)<br> 
+Found   35 years with data in 1955-1989<br> 
+<br> 
+ROCK CREEK PILLOW                       (utah)<br> 
+coordinates:  40.55N, -110.68E, 2408m<br> 
+NRCS station code: 10J18S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J18S+ROCK_CREEK_PILLOW+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+BLACK FLAT-U.M. CK PILLOW               (utah)<br> 
+coordinates:  38.68N, -111.58E, 2865m<br> 
+NRCS station code: 11L04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L04S+BLACK_FLAT-U.M._CK_PILLOW+">get data</a>)<br> 
+Found   50 years with data in 1954-2003<br> 
+<br> 
+BLACK FLAT-U.M. CREEK                   (utah)<br> 
+coordinates:  38.68N, -111.58E, 2865m<br> 
+NRCS station code: 11L04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L04+BLACK_FLAT-U.M._CREEK+">get data</a>)<br> 
+Found   36 years with data in 1954-1989<br> 
+<br> 
+LOVE LAKE                               (colorado)<br> 
+coordinates:  37.67N, -107.02E, 3048m<br> 
+NRCS station code: 07M10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M10+LOVE_LAKE+">get data</a>)<br> 
+Found   42 years with data in 1962-2003<br> 
+<br> 
+COCHETOPA PASS                          (colorado)<br> 
+coordinates:  38.17N, -106.60E, 3048m<br> 
+NRCS station code: 06L06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L06+COCHETOPA_PASS+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br> 
+<br> 
+HICKERSON PARK                          (utah)<br> 
+coordinates:  40.90N, -109.97E, 2774m<br> 
+NRCS station code: 09J08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J08+HICKERSON_PARK+">get data</a>)<br> 
+Found   29 years with data in 1961-1989<br> 
+<br> 
+HICKERSON PARK PILLOW                   (utah)<br> 
+coordinates:  40.90N, -109.97E, 2774m<br> 
+NRCS station code: 09J08S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+09J08S+HICKERSON_PARK_PILLOW+">get data</a>)<br> 
+Found   42 years with data in 1961-2003<br> 
+<br> 
+EAST PORTAL                             (utah)<br> 
+coordinates:  40.17N, -111.18E, 2304m<br> 
+NRCS station code: 11J07 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J07+EAST_PORTAL+">get data</a>)<br> 
+Found   52 years with data in 1934-1985<br> 
+<br> 
+FIVE POINTS LAKE                        (utah)<br> 
+coordinates:  40.72N, -110.47E, 3328m<br> 
+NRCS station code: 10J26 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J26+FIVE_POINTS_LAKE+">get data</a>)<br> 
+Found   28 years with data in 1962-1989<br> 
+<br> 
+FIVE POINTS LAKE PILLOW                 (utah)<br> 
+coordinates:  40.72N, -110.47E, 3328m<br> 
+NRCS station code: 10J26S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J26S+FIVE_POINTS_LAKE_PILLOW+">get data</a>)<br> 
+Found   22 years with data in 1982-2003<br> 
+<br> 
+MIDDLE CREEK PILLOW                     (colorado)<br> 
+coordinates:  37.62N, -107.03E, 3429m<br> 
+NRCS station code: 07M21S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M21S+MIDDLE_CREEK_PILLOW+">get data</a>)<br> 
+Found   25 years with data in 1979-2003<br> 
+<br> 
+MIDDLE CREEK                            (colorado)<br> 
+coordinates:  37.62N, -107.03E, 3429m<br> 
+NRCS station code: 07M21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07M21+MIDDLE_CREEK+">get data</a>)<br> 
+Found   12 years with data in 1979-1990<br> 
+<br> 
+SAINT ELMO                              (colorado)<br> 
+coordinates:  38.70N, -106.37E, 3170m<br> 
+NRCS station code: 06L05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L05+SAINT_ELMO+">get data</a>)<br> 
+Found   39 years with data in 1949-2003<br> 
+<br> 
+DONKEY RESERVOIR PILLOW                 (utah)<br> 
+coordinates:  38.22N, -111.47E, 2987m<br> 
+NRCS station code: 11L05S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L05S+DONKEY_RESERVOIR_PILLOW+">get data</a>)<br> 
+Found   49 years with data in 1954-2003<br> 
+<br> 
+DONKEY RESERVOIR                        (utah)<br> 
+coordinates:  38.22N, -111.47E, 2987m<br> 
+NRCS station code: 11L05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L05+DONKEY_RESERVOIR+">get data</a>)<br> 
+Found   36 years with data in 1954-1989<br> 
+<br> 
+POOL TABLE MOUNTAIN                     (colorado)<br> 
+coordinates:  37.80N, -106.80E, 2999m<br> 
+NRCS station code: 06M14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M14+POOL_TABLE_MOUNTAIN+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br> 
+<br> 
+TENNESSEE PASS #2                       (colorado)<br> 
+coordinates:  39.35N, -106.35E, 3133m<br> 
+NRCS station code: 06K25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K25+TENNESSEE_PASS_#2+">get data</a>)<br> 
+Found   18 years with data in 1983-2000<br> 
+<br> 
+STRAWBERRY DIVIDE                       (utah)<br> 
+coordinates:  40.18N, -111.22E, 2560m<br> 
+NRCS station code: 11J08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J08+STRAWBERRY_DIVIDE+">get data</a>)<br> 
+Found   56 years with data in 1934-1989<br> 
+<br> 
+STRAWBERRY DIVIDE PILLOW                (utah)<br> 
+coordinates:  40.18N, -111.22E, 2560m<br> 
+NRCS station code: 11J08S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J08S+STRAWBERRY_DIVIDE_PILLOW+">get data</a>)<br> 
+Found   70 years with data in 1934-2003<br> 
+<br> 
+GOOSEBERRY R.S. PILLOW                  (utah)<br> 
+coordinates:  38.80N, -111.68E, 2414m<br> 
+NRCS station code: 11L12S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L12S+GOOSEBERRY_R.S._PILLOW+">get data</a>)<br> 
+Found   23 years with data in 1980-2003<br> 
+<br> 
+GOOSEBERRY R.S.                         (utah)<br> 
+coordinates:  38.78N, -111.68E, 2560m<br> 
+NRCS station code: 11L02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L02+GOOSEBERRY_R.S.+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+FARNSWORTH LAKE PILLOW                  (utah)<br> 
+coordinates:  38.77N, -111.68E, 2926m<br> 
+NRCS station code: 11L01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L01S+FARNSWORTH_LAKE_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+FARNSWORTH LAKE                         (utah)<br> 
+coordinates:  38.77N, -111.68E, 2926m<br> 
+NRCS station code: 11L01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L01+FARNSWORTH_LAKE+">get data</a>)<br> 
+Found   42 years with data in 1951-1992<br> 
+<br> 
+TENNESSEE PASS                          (colorado)<br> 
+coordinates:  39.35N, -106.33E, 3109m<br> 
+NRCS station code: 06K02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K02+TENNESSEE_PASS+">get data</a>)<br> 
+Found   55 years with data in 1936-1990<br> 
+<br> 
+LYNX PASS                               (colorado)<br> 
+coordinates:  40.08N, -106.67E, 2707m<br> 
+NRCS station code: 06J06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J06+LYNX_PASS+">get data</a>)<br> 
+Found   54 years with data in 1936-1989<br> 
+<br> 
+LYNX PASS PILLOW                        (colorado)<br> 
+coordinates:  40.08N, -106.67E, 2707m<br> 
+NRCS station code: 06J06S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J06S+LYNX_PASS_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+PANDO                                   (colorado)<br> 
+coordinates:  39.47N, -106.33E, 2896m<br> 
+NRCS station code: 06K19 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K19+PANDO+">get data</a>)<br> 
+Found   39 years with data in 1952-1990<br> 
+<br> 
+VAIL MOUNTAIN PILLOW                    (colorado)<br> 
+coordinates:  39.62N, -106.38E, 3139m<br> 
+NRCS station code: 06K39S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K39S+VAIL_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   26 years with data in 1978-2003<br> 
+<br> 
+LAKE HUMPHREY                           (colorado)<br> 
+coordinates:  37.67N, -106.87E, 2743m<br> 
+NRCS station code: 06M15 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M15+LAKE_HUMPHREY+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br> 
+<br> 
+MONARCH OFFSHOOT                        (colorado)<br> 
+coordinates:  38.52N, -106.33E, 3200m<br> 
+NRCS station code: 06L09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L09+MONARCH_OFFSHOOT+">get data</a>)<br> 
+Found   60 years with data in 1941-2000<br> 
+<br> 
+MONARCH PASS                            (colorado)<br> 
+coordinates:  38.52N, -106.33E, 3200m<br> 
+NRCS station code: 06L04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L04+MONARCH_PASS+">get data</a>)<br> 
+Found   59 years with data in 1941-2000<br> 
+<br> 
+CURRANT CREEK PILLOW                    (utah)<br> 
+coordinates:  40.37N, -111.10E, 2438m<br> 
+NRCS station code: 11J32S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J32S+CURRANT_CREEK_PILLOW+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+CURRANT CREEK                           (utah)<br> 
+coordinates:  40.37N, -111.10E, 2438m<br> 
+NRCS station code: 11J32 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J32+CURRANT_CREEK+">get data</a>)<br> 
+Found   34 years with data in 1956-1989<br> 
+<br> 
+HOLE-IN-ROCK                            (utah)<br> 
+coordinates:  40.92N, -110.20E, 2789m<br> 
+NRCS station code: 10J01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J01+HOLE-IN-ROCK+">get data</a>)<br> 
+Found   59 years with data in 1931-1989<br> 
+<br> 
+HOLE-IN-ROCK PILLOW                     (utah)<br> 
+coordinates:  40.92N, -110.20E, 2789m<br> 
+NRCS station code: 10J01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J01S+HOLE-IN-ROCK_PILLOW+">get data</a>)<br> 
+Found   18 years with data in 1986-2003<br> 
+<br> 
+PORPHYRY CREEK                          (colorado)<br> 
+coordinates:  38.48N, -106.33E, 3280m<br> 
+NRCS station code: 06L03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L03+PORPHYRY_CREEK+">get data</a>)<br> 
+Found   64 years with data in 1940-2003<br> 
+<br> 
+PORPHYRY CREEK PILLOW                   (colorado)<br> 
+coordinates:  38.48N, -106.33E, 3280m<br> 
+NRCS station code: 06L03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L03S+PORPHYRY_CREEK_PILLOW+">get data</a>)<br> 
+Found   64 years with data in 1940-2003<br> 
+<br> 
+HOLE-IN-ROCK G.S.                       (utah)<br> 
+coordinates:  40.95N, -110.15E, 2530m<br> 
+NRCS station code: 10J03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J03+HOLE-IN-ROCK_G.S.+">get data</a>)<br> 
+Found   35 years with data in 1954-1988<br> 
+<br> 
+LAKEFORK BASIN PILLOW                   (utah)<br> 
+coordinates:  40.75N, -110.62E, 3322m<br> 
+NRCS station code: 10J25S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J25S+LAKEFORK_BASIN_PILLOW+">get data</a>)<br> 
+Found   38 years with data in 1962-2003<br> 
+<br> 
+LAKEFORK BASIN                          (utah)<br> 
+coordinates:  40.75N, -110.62E, 3322m<br> 
+NRCS station code: 10J25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J25+LAKEFORK_BASIN+">get data</a>)<br> 
+Found   28 years with data in 1962-1989<br> 
+<br> 
+MIDDLE BEAVER CREEK                     (utah)<br> 
+coordinates:  40.95N, -110.18E, 2637m<br> 
+NRCS station code: 10J02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J02+MIDDLE_BEAVER_CREEK+">get data</a>)<br> 
+Found   35 years with data in 1954-1988<br> 
+<br> 
+HENRY'S FORK                            (utah)<br> 
+coordinates:  40.88N, -110.37E, 3048m<br> 
+NRCS station code: 10J24 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J24+HENRY'S_FORK+">get data</a>)<br> 
+Found   41 years with data in 1963-2003<br> 
+<br> 
+DANIELS-STRAWBERRY                      (utah)<br> 
+coordinates:  40.30N, -111.25E, 2438m<br> 
+NRCS station code: 11J23 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J23+DANIELS-STRAWBERRY+">get data</a>)<br> 
+Found   60 years with data in 1930-1989<br> 
+<br> 
+DANIELS-STRAWBERRY PILLOW               (utah)<br> 
+coordinates:  40.30N, -111.25E, 2438m<br> 
+NRCS station code: 11J23S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J23S+DANIELS-STRAWBERRY_PILLOW+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+REE'S FLAT                              (utah)<br> 
+coordinates:  39.50N, -111.73E, 2225m<br> 
+NRCS station code: 11K36 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K36+REE'S_FLAT+">get data</a>)<br> 
+Found   48 years with data in 1956-2003<br> 
+<br> 
+LIGHTNING LAKE PILLOW                   (utah)<br> 
+coordinates:  40.72N, -110.75E, 3200m<br> 
+NRCS station code: 10J29S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J29S+LIGHTNING_LAKE_PILLOW+">get data</a>)<br> 
+Found   10 years with data in 1980-1989<br> 
+<br> 
+LIGHTNING LAKE                          (utah)<br> 
+coordinates:  40.72N, -110.75E, 3200m<br> 
+NRCS station code: 10J29 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J29+LIGHTNING_LAKE+">get data</a>)<br> 
+Found   15 years with data in 1974-1989<br> 
+<br> 
+GORE PASS                               (colorado)<br> 
+coordinates:  40.08N, -106.55E, 2865m<br> 
+NRCS station code: 06J11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J11+GORE_PASS+">get data</a>)<br> 
+Found   49 years with data in 1951-2003<br> 
+<br> 
+HOBBLE CREEK SUMMIT                     (utah)<br> 
+coordinates:  40.18N, -111.38E, 2262m<br> 
+NRCS station code: 11J22 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J22+HOBBLE_CREEK_SUMMIT+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+FISH LAKE                               (utah)<br> 
+coordinates:  38.50N, -111.77E, 2652m<br> 
+NRCS station code: 11L03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11L03+FISH_LAKE+">get data</a>)<br> 
+Found   73 years with data in 1931-2003<br> 
+<br> 
+YAMPA VIEW                              (colorado)<br> 
+coordinates:  40.37N, -106.77E, 2499m<br> 
+NRCS station code: 06J10 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J10+YAMPA_VIEW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+FREMONT PASS PILLOW                     (colorado)<br> 
+coordinates:  39.38N, -106.20E, 3475m<br> 
+NRCS station code: 06K08S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K08S+FREMONT_PASS_PILLOW+">get data</a>)<br> 
+Found   65 years with data in 1939-2003<br> 
+<br> 
+FREMONT PASS                            (colorado)<br> 
+coordinates:  39.38N, -106.20E, 3475m<br> 
+NRCS station code: 06K08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K08+FREMONT_PASS+">get data</a>)<br> 
+Found   62 years with data in 1939-2000<br> 
+<br> 
+SHRINE PASS                             (colorado)<br> 
+coordinates:  39.53N, -106.22E, 3261m<br> 
+NRCS station code: 06K09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K09+SHRINE_PASS+">get data</a>)<br> 
+Found   62 years with data in 1942-2003<br> 
+<br> 
+EAST FORK-BLACK'S FORK G.S.             (utah)<br> 
+coordinates:  40.88N, -110.53E, 2847m<br> 
+NRCS station code: 10J21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J21+EAST_FORK-BLACK'S_FORK_G.S.+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+RABBIT EARS                             (colorado)<br> 
+coordinates:  40.37N, -106.73E, 2865m<br> 
+NRCS station code: 06J09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J09+RABBIT_EARS+">get data</a>)<br> 
+Found   50 years with data in 1951-2000<br> 
+<br> 
+RABBIT EARS PILLOW                      (colorado)<br> 
+coordinates:  40.37N, -106.73E, 2865m<br> 
+NRCS station code: 06J09S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J09S+RABBIT_EARS_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+HORSESHOE MOUNTAIN                      (colorado)<br> 
+coordinates:  39.20N, -106.13E, 3420m<br> 
+NRCS station code: 06K35 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K35+HORSESHOE_MOUNTAIN+">get data</a>)<br> 
+Found   37 years with data in 1967-2003<br> 
+<br> 
+STEEL CREEK PARK                        (utah)<br> 
+coordinates:  40.92N, -110.50E, 3078m<br> 
+NRCS station code: 10J20 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J20+STEEL_CREEK_PARK+">get data</a>)<br> 
+Found   28 years with data in 1962-1989<br> 
+<br> 
+STEEL CREEK PARK PILLOW                 (utah)<br> 
+coordinates:  40.92N, -110.50E, 3078m<br> 
+NRCS station code: 10J20S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J20S+STEEL_CREEK_PARK_PILLOW+">get data</a>)<br> 
+Found   42 years with data in 1962-2003<br> 
+<br> 
+MOSQUITO CREEK                          (colorado)<br> 
+coordinates:  39.28N, -106.13E, 3347m<br> 
+NRCS station code: 06K34 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K34+MOSQUITO_CREEK+">get data</a>)<br> 
+Found   37 years with data in 1967-2003<br> 
+<br> 
+SOAPSTONE RANGER STATION                (utah)<br> 
+coordinates:  40.58N, -111.05E, 2377m<br> 
+NRCS station code: 11J25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J25+SOAPSTONE_RANGER_STATION+">get data</a>)<br> 
+Found   59 years with data in 1931-1989<br> 
+<br> 
+PAYSON R.S. PILLOW                      (utah)<br> 
+coordinates:  39.93N, -111.63E, 2454m<br> 
+NRCS station code: 11K52S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K52S+PAYSON_R.S._PILLOW+">get data</a>)<br> 
+Found   62 years with data in 1942-2003<br> 
+<br> 
+PAYSON RANGER STATION                   (utah)<br> 
+coordinates:  39.93N, -111.63E, 2454m<br> 
+NRCS station code: 11K01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11K01+PAYSON_RANGER_STATION+">get data</a>)<br> 
+Found   51 years with data in 1942-1992<br> 
+<br> 
+BIG MEADOWS                             (colorado)<br> 
+coordinates:  37.53N, -106.80E, 2822m<br> 
+NRCS station code: 06M25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M25+BIG_MEADOWS+">get data</a>)<br> 
+Found   35 years with data in 1969-2003<br> 
+<br> 
+COPPER MOUNTAIN PILLOW                  (colorado)<br> 
+coordinates:  39.48N, -106.17E, 3200m<br> 
+NRCS station code: 06K24S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K24S+COPPER_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   26 years with data in 1978-2003<br> 
+<br> 
+BUCK PASTURE                            (utah)<br> 
+coordinates:  40.85N, -110.67E, 2957m<br> 
+NRCS station code: 10J23 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J23+BUCK_PASTURE+">get data</a>)<br> 
+Found   40 years with data in 1963-2003<br> 
+<br> 
+PASS CREEK                              (colorado)<br> 
+coordinates:  37.55N, -106.77E, 2835m<br> 
+NRCS station code: 06M18 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M18+PASS_CREEK+">get data</a>)<br> 
+Found   33 years with data in 1956-1988<br> 
+<br> 
+TRIAL LAKE                              (utah)<br> 
+coordinates:  40.68N, -110.95E, 3036m<br> 
+NRCS station code: 10J08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J08+TRIAL_LAKE+">get data</a>)<br> 
+Found   73 years with data in 1931-2003<br> 
+<br> 
+TRIAL LAKE PILLOW                       (utah)<br> 
+coordinates:  40.68N, -110.95E, 3036m<br> 
+NRCS station code: 10J52S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J52S+TRIAL_LAKE_PILLOW+">get data</a>)<br> 
+Found   73 years with data in 1931-2003<br> 
+<br> 
+HEWINTA PILLOW                          (utah)<br> 
+coordinates:  40.95N, -110.48E, 2896m<br> 
+NRCS station code: 10J04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J04S+HEWINTA_PILLOW+">get data</a>)<br> 
+Found   18 years with data in 1986-2003<br> 
+<br> 
+HEWINTA G.S.                            (utah)<br> 
+coordinates:  40.95N, -110.48E, 2896m<br> 
+NRCS station code: 10J04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J04+HEWINTA_G.S.+">get data</a>)<br> 
+Found   60 years with data in 1930-1989<br> 
+<br> 
+UPPER SAN JUAN                          (colorado)<br> 
+coordinates:  37.48N, -106.83E, 3109m<br> 
+NRCS station code: 06M03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M03+UPPER_SAN_JUAN+">get data</a>)<br> 
+Found   63 years with data in 1936-2000<br> 
+<br> 
+UPPER SAN JUAN PILLOW                   (colorado)<br> 
+coordinates:  37.48N, -106.83E, 3088m<br> 
+NRCS station code: 06M03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M03S+UPPER_SAN_JUAN_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+BEAVER DIVIDE                           (utah)<br> 
+coordinates:  40.62N, -111.07E, 2524m<br> 
+NRCS station code: 11J46 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J46+BEAVER_DIVIDE+">get data</a>)<br> 
+Found   16 years with data in 1974-1989<br> 
+<br> 
+BEAVER DIVIDE PILLOW                    (utah)<br> 
+coordinates:  40.62N, -111.07E, 2524m<br> 
+NRCS station code: 11J46S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J46S+BEAVER_DIVIDE_PILLOW+">get data</a>)<br> 
+Found   30 years with data in 1974-2003<br> 
+<br> 
+WOLF CREEK SUMMIT                       (colorado)<br> 
+coordinates:  37.48N, -106.80E, 3353m<br> 
+NRCS station code: 06M17 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M17+WOLF_CREEK_SUMMIT+">get data</a>)<br> 
+Found   40 years with data in 1951-1990<br> 
+<br> 
+WOLF CREEK SUMMIT PILLOW                (colorado)<br> 
+coordinates:  37.48N, -106.80E, 3353m<br> 
+NRCS station code: 06M17S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M17S+WOLF_CREEK_SUMMIT_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+TROUT CREEK PASS                        (colorado)<br> 
+coordinates:  38.92N, -106.05E, 2963m<br> 
+NRCS station code: 06L12 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06L12+TROUT_CREEK_PASS+">get data</a>)<br> 
+Found   34 years with data in 1967-2000<br> 
+<br> 
+WOLF CREEK PASS                         (colorado)<br> 
+coordinates:  37.47N, -106.78E, 3146m<br> 
+NRCS station code: 06M01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M01+WOLF_CREEK_PASS+">get data</a>)<br> 
+Found   53 years with data in 1936-1988<br> 
+<br> 
+DRY LAKE                                (colorado)<br> 
+coordinates:  40.53N, -106.78E, 2560m<br> 
+NRCS station code: 06J01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J01+DRY_LAKE+">get data</a>)<br> 
+Found   54 years with data in 1936-1989<br> 
+<br> 
+DRY LAKE PILLOW                         (colorado)<br> 
+coordinates:  40.53N, -106.78E, 2560m<br> 
+NRCS station code: 06J01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J01S+DRY_LAKE_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+HIWAY                                   (colorado)<br> 
+coordinates:  37.47N, -106.78E, 3277m<br> 
+NRCS station code: 06M19 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M19+HIWAY+">get data</a>)<br> 
+Found   34 years with data in 1956-1989<br> 
+<br> 
+HAYDEN FORK                             (utah)<br> 
+coordinates:  40.78N, -110.88E, 2774m<br> 
+NRCS station code: 10J07 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J07+HAYDEN_FORK+">get data</a>)<br> 
+Found   43 years with data in 1951-1993<br> 
+<br> 
+HOOSIER PASS                            (colorado)<br> 
+coordinates:  39.37N, -106.07E, 3475m<br> 
+NRCS station code: 06K01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K01+HOOSIER_PASS+">get data</a>)<br> 
+Found   54 years with data in 1936-1989<br> 
+<br> 
+HOOSIER PASS PILLOW                     (colorado)<br> 
+coordinates:  39.37N, -106.07E, 3475m<br> 
+NRCS station code: 06K01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K01S+HOOSIER_PASS_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+SUMMIT RANCH                            (colorado)<br> 
+coordinates:  39.72N, -106.17E, 2865m<br> 
+NRCS station code: 06K14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K14+SUMMIT_RANCH+">get data</a>)<br> 
+Found   36 years with data in 1951-1986<br> 
+<br> 
+SUMMIT RANCH PILLOW                     (colorado)<br> 
+coordinates:  39.72N, -106.17E, 2865m<br> 
+NRCS station code: 06K14S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K14S+SUMMIT_RANCH_PILLOW+">get data</a>)<br> 
+Found   23 years with data in 1981-2003<br> 
+<br> 
+WESTON                                  (colorado)<br> 
+coordinates:  39.07N, -106.02E, 2835m<br> 
+NRCS station code: 06K26 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K26+WESTON+">get data</a>)<br> 
+Found   21 years with data in 1982-2003<br> 
+<br> 
+BLACK'S FORK JUNCTION                   (utah)<br> 
+coordinates:  40.97N, -110.58E, 2722m<br> 
+NRCS station code: 10J22 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J22+BLACK'S_FORK_JUNCTION+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+HAYDEN FORK PILLOW                      (utah)<br> 
+coordinates:  40.80N, -110.88E, 2774m<br> 
+NRCS station code: 10J44S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J44S+HAYDEN_FORK_PILLOW+">get data</a>)<br> 
+Found   52 years with data in 1951-2003<br> 
+<br> 
+BLUE RIVER                              (colorado)<br> 
+coordinates:  39.38N, -106.05E, 3200m<br> 
+NRCS station code: 06K21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K21+BLUE_RIVER+">get data</a>)<br> 
+Found   47 years with data in 1957-2003<br> 
+<br> 
+BEAVER CREEK R.S.                       (utah)<br> 
+coordinates:  40.62N, -111.15E, 2286m<br> 
+NRCS station code: 11J24 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J24+BEAVER_CREEK_R.S.+">get data</a>)<br> 
+Found   55 years with data in 1931-1985<br> 
+<br> 
+COLUMBINE PILLOW                        (colorado)<br> 
+coordinates:  40.40N, -106.60E, 2792m<br> 
+NRCS station code: 06J03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J03S+COLUMBINE_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+COLUMBINE LODGE                         (colorado)<br> 
+coordinates:  40.40N, -106.60E, 2792m<br> 
+NRCS station code: 06J03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J03+COLUMBINE_LODGE+">get data</a>)<br> 
+Found   65 years with data in 1936-2000<br> 
+<br> 
+LILY LAKE PILLOW                        (utah)<br> 
+coordinates:  40.87N, -110.80E, 2758m<br> 
+NRCS station code: 10J35S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J35S+LILY_LAKE_PILLOW+">get data</a>)<br> 
+Found   52 years with data in 1951-2003<br> 
+<br> 
+LILY LAKE                               (utah)<br> 
+coordinates:  40.87N, -110.80E, 2758m<br> 
+NRCS station code: 10J35 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J35+LILY_LAKE+">get data</a>)<br> 
+Found   10 years with data in 1980-1989<br> 
+<br> 
+EAST SHINGLE LAKE                       (utah)<br> 
+coordinates:  40.68N, -111.08E, 2987m<br> 
+NRCS station code: 11J45 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J45+EAST_SHINGLE_LAKE+">get data</a>)<br> 
+Found   22 years with data in 1974-1995<br> 
+<br> 
+STILLWATER CAMP                         (utah)<br> 
+coordinates:  40.87N, -110.83E, 2606m<br> 
+NRCS station code: 10J17 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J17+STILLWATER_CAMP+">get data</a>)<br> 
+Found   49 years with data in 1955-2003<br> 
+<br> 
+ANTERO                                  (colorado)<br> 
+coordinates:  38.92N, -105.97E, 2835m<br> 
+NRCS station code: 05L05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05L05+ANTERO+">get data</a>)<br> 
+Found   38 years with data in 1949-2003<br> 
+<br> 
+TOWER                                   (colorado)<br> 
+coordinates:  40.53N, -106.68E, 3200m<br> 
+NRCS station code: 06J29 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J29+TOWER+">get data</a>)<br> 
+Found   25 years with data in 1965-1989<br> 
+<br> 
+TOWER PILLOW                            (colorado)<br> 
+coordinates:  40.53N, -106.68E, 3200m<br> 
+NRCS station code: 06J29S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J29S+TOWER_PILLOW+">get data</a>)<br> 
+Found   39 years with data in 1965-2003<br> 
+<br> 
+SQUAW SPRINGS                           (utah)<br> 
+coordinates:  38.48N, -112.00E, 2835m<br> 
+NRCS station code: 12L05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12L05+SQUAW_SPRINGS+">get data</a>)<br> 
+Found   50 years with data in 1954-2003<br> 
+<br> 
+UTE PASS                                (colorado)<br> 
+coordinates:  39.82N, -106.10E, 2911m<br> 
+NRCS station code: 06K41 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K41+UTE_PASS+">get data</a>)<br> 
+Found   13 years with data in 1978-1990<br> 
+<br> 
+BOX CREEK                               (utah)<br> 
+coordinates:  38.50N, -112.02E, 2987m<br> 
+NRCS station code: 12L04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12L04+BOX_CREEK+">get data</a>)<br> 
+Found   36 years with data in 1954-1989<br> 
+<br> 
+BOX CREEK PILLOW                        (utah)<br> 
+coordinates:  38.50N, -112.02E, 2987m<br> 
+NRCS station code: 12L04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12L04S+BOX_CREEK_PILLOW+">get data</a>)<br> 
+Found   50 years with data in 1954-2003<br> 
+<br> 
+REDDEN MINE-LOWER                       (utah)<br> 
+coordinates:  40.68N, -111.22E, 2591m<br> 
+NRCS station code: 11J06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J06+REDDEN_MINE-LOWER+">get data</a>)<br> 
+Found   74 years with data in 1930-2003<br> 
+<br> 
+HAHN'S PEAK                             (colorado)<br> 
+coordinates:  40.80N, -106.93E, 2499m<br> 
+NRCS station code: 06J14 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J14+HAHN'S_PEAK+">get data</a>)<br> 
+Found   31 years with data in 1960-1990<br> 
+<br> 
+SMITH &amp; MOREHOUSE PILLOW                (utah)<br> 
+coordinates:  40.78N, -111.10E, 2316m<br> 
+NRCS station code: 11J53S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J53S+SMITH_&_MOREHOUSE_PILLOW+">get data</a>)<br> 
+Found   75 years with data in 1929-2003<br> 
+<br> 
+SMITH &amp; MOREHOUSE                       (utah)<br> 
+coordinates:  40.80N, -111.08E, 2316m<br> 
+NRCS station code: 11J04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J04+SMITH_&_MOREHOUSE+">get data</a>)<br> 
+Found   61 years with data in 1929-1989<br> 
+<br> 
+COMO                                    (colorado)<br> 
+coordinates:  39.35N, -105.92E, 3161m<br> 
+NRCS station code: 05K25 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K25+COMO+">get data</a>)<br> 
+Found   37 years with data in 1967-2003<br> 
+<br> 
+ANTERO RESERVOIR                        (colorado)<br> 
+coordinates:  39.00N, -105.88E, 2743m<br> 
+NRCS station code: 05L06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05L06+ANTERO_RESERVOIR+">get data</a>)<br> 
+Found   21 years with data in 1983-2003<br> 
+<br> 
+ELK RIVER PILLOW                        (colorado)<br> 
+coordinates:  40.85N, -106.97E, 2652m<br> 
+NRCS station code: 06J15S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J15S+ELK_RIVER_PILLOW+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+ELK RIVER #2                            (colorado)<br> 
+coordinates:  40.85N, -106.97E, 2652m<br> 
+NRCS station code: 06J15 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J15+ELK_RIVER_#2+">get data</a>)<br> 
+Found   54 years with data in 1936-1989<br> 
+<br> 
+GLEN MAR RANCH                          (colorado)<br> 
+coordinates:  39.82N, -106.05E, 2667m<br> 
+NRCS station code: 06K20 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K20+GLEN_MAR_RANCH+">get data</a>)<br> 
+Found   54 years with data in 1947-2000<br> 
+<br> 
+SUMMITILLE (DISC.)                      (colorado)<br> 
+coordinates:  37.43N, -106.60E, 3505m<br> 
+NRCS station code: 06M06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M06+SUMMITILLE_(DISC.)+">get data</a>)<br> 
+Found   39 years with data in 1939-1977<br> 
+<br> 
+MIDDLE FORK CAMPGROUND                  (colorado)<br> 
+coordinates:  39.78N, -106.02E, 2743m<br> 
+NRCS station code: 06K12 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06K12+MIDDLE_FORK_CAMPGROUND+">get data</a>)<br> 
+Found   68 years with data in 1936-2003<br> 
+<br> 
+CHALK CREEK #1                          (utah)<br> 
+coordinates:  40.85N, -111.07E, 2774m<br> 
+NRCS station code: 11J01 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J01+CHALK_CREEK_#1+">get data</a>)<br> 
+Found   39 years with data in 1951-1989<br> 
+<br> 
+CHALK CREEK #1 PILLOW                   (utah)<br> 
+coordinates:  40.85N, -111.07E, 2774m<br> 
+NRCS station code: 11J01S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J01S+CHALK_CREEK_#1_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+BATTLE MOUNTAIN PILLOW                  (wyoming)<br> 
+coordinates:  41.05N, -107.27E, 2268m<br> 
+NRCS station code: 07H04S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07H04S+BATTLE_MOUNTAIN_PILLOW+">get data</a>)<br> 
+Found   28 years with data in 1976-2003<br> 
+<br> 
+BATTLE MOUNTAIN                         (wyoming)<br> 
+coordinates:  41.05N, -107.27E, 2268m<br> 
+NRCS station code: 07H04 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+07H04+BATTLE_MOUNTAIN+">get data</a>)<br> 
+Found   21 years with data in 1976-2000<br> 
+<br> 
+GRAYBACK                                (colorado)<br> 
+coordinates:  37.47N, -106.53E, 3536m<br> 
+NRCS station code: 06M21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M21+GRAYBACK+">get data</a>)<br> 
+Found   37 years with data in 1967-2003<br> 
+<br> 
+BURTS-MILLER RANCH                      (utah)<br> 
+coordinates:  41.00N, -110.87E, 2408m<br> 
+NRCS station code: 10J06 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+10J06+BURTS-MILLER_RANCH+">get data</a>)<br> 
+Found   66 years with data in 1937-2003<br> 
+<br> 
+JEFFERSON CREEK                         (colorado)<br> 
+coordinates:  39.43N, -105.87E, 3133m<br> 
+NRCS station code: 05K08 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K08+JEFFERSON_CREEK+">get data</a>)<br> 
+Found   53 years with data in 1940-1992<br> 
+<br> 
+CHALK CREEK #2 PILLOW                   (utah)<br> 
+coordinates:  40.90N, -111.07E, 2499m<br> 
+NRCS station code: 11J02S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J02S+CHALK_CREEK_#2_PILLOW+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+CHALK CREEK #2                          (utah)<br> 
+coordinates:  40.90N, -111.07E, 2499m<br> 
+NRCS station code: 11J02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J02+CHALK_CREEK_#2+">get data</a>)<br> 
+Found   39 years with data in 1951-1989<br> 
+<br> 
+TIMPANOGOS DIVIDE PILLOW                (utah)<br> 
+coordinates:  40.43N, -111.62E, 2481m<br> 
+NRCS station code: 11J21S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J21S+TIMPANOGOS_DIVIDE_PILLOW+">get data</a>)<br> 
+Found   69 years with data in 1935-2003<br> 
+<br> 
+TIMPANOGOS DIVIDE                       (utah)<br> 
+coordinates:  40.43N, -111.62E, 2481m<br> 
+NRCS station code: 11J21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J21+TIMPANOGOS_DIVIDE+">get data</a>)<br> 
+Found   55 years with data in 1935-1989<br> 
+<br> 
+BUTTERHILL                              (colorado)<br> 
+coordinates:  40.93N, -106.98E, 2402m<br> 
+NRCS station code: 06J37 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06J37+BUTTERHILL+">get data</a>)<br> 
+Found   25 years with data in 1976-2003<br> 
+<br> 
+SNAKE RIVER                             (colorado)<br> 
+coordinates:  39.63N, -105.90E, 3048m<br> 
+NRCS station code: 05K16 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K16+SNAKE_RIVER+">get data</a>)<br> 
+Found   53 years with data in 1951-2003<br> 
+<br> 
+CAMP ALTAMONT                           (utah)<br> 
+coordinates:  40.43N, -111.63E, 2225m<br> 
+NRCS station code: 11J20 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J20+CAMP_ALTAMONT+">get data</a>)<br> 
+Found   49 years with data in 1935-1983<br> 
+<br> 
+LOVELAND BASIN PILLOW                   (colorado)<br> 
+coordinates:  39.67N, -105.90E, 3475m<br> 
+NRCS station code: 05K05S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K05S+LOVELAND_BASIN_PILLOW+">get data</a>)<br> 
+Found   11 years with data in 1993-2003<br> 
+<br> 
+SHINGLE MILL                            (utah)<br> 
+coordinates:  38.93N, -112.22E, 1890m<br> 
+NRCS station code: 12L11 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12L11+SHINGLE_MILL+">get data</a>)<br> 
+Found   34 years with data in 1960-1993<br> 
+<br> 
+LOVELAND PASS                           (colorado)<br> 
+coordinates:  39.68N, -105.90E, 3292m<br> 
+NRCS station code: 05K05 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K05+LOVELAND_PASS+">get data</a>)<br> 
+Found   57 years with data in 1936-1992<br> 
+<br> 
+LILY POND PILLOW                        (colorado)<br> 
+coordinates:  37.38N, -106.53E, 3353m<br> 
+NRCS station code: 06M23S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M23S+LILY_POND_PILLOW+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br> 
+<br> 
+OAK CREEK                               (utah)<br> 
+coordinates:  39.35N, -112.20E, 2365m<br> 
+NRCS station code: 12K02 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12K02+OAK_CREEK+">get data</a>)<br> 
+Found   36 years with data in 1968-2003<br> 
+<br> 
+CHALK CREEK #3                          (utah)<br> 
+coordinates:  40.92N, -111.10E, 2286m<br> 
+NRCS station code: 11J03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11J03+CHALK_CREEK_#3+">get data</a>)<br> 
+Found   52 years with data in 1952-2003<br> 
+<br> 
+PLATORO                                 (colorado)<br> 
+coordinates:  37.35N, -106.55E, 3011m<br> 
+NRCS station code: 06M09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+06M09+PLATORO+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br> 
+<br> 
+GRIZZLY PEAK                            (colorado)<br> 
+coordinates:  39.65N, -105.87E, 3383m<br> 
+NRCS station code: 05K09 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K09+GRIZZLY_PEAK+">get data</a>)<br> 
+Found   48 years with data in 1942-1989<br> 
+<br> 
+GRIZZLY PEAK PILLOW                     (colorado)<br> 
+coordinates:  39.65N, -105.87E, 3383m<br> 
+NRCS station code: 05K09S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K09S+GRIZZLY_PEAK_PILLOW+">get data</a>)<br> 
+Found   43 years with data in 1961-2003<br> 
+<br> 
+WIDTSOE #3                              (utah)<br> 
+coordinates:  37.83N, -111.88E, 2896m<br> 
+NRCS station code: 11M03 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11M03+WIDTSOE_#3+">get data</a>)<br> 
+Found   31 years with data in 1959-1989<br> 
+<br> 
+WIDTSOE #3 PILLOW                       (utah)<br> 
+coordinates:  37.83N, -111.88E, 2896m<br> 
+NRCS station code: 11M03S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+11M03S+WIDTSOE_#3_PILLOW+">get data</a>)<br> 
+Found   45 years with data in 1959-2003<br> 
+<br> 
+JONES PASS                              (colorado)<br> 
+coordinates:  39.77N, -105.90E, 3170m<br> 
+NRCS station code: 05K21 (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+05K21+JONES_PASS+">get data</a>)<br> 
+Found   47 years with data in 1957-2003<br> 
+<br> 
+PINE CREEK PILLOW                       (utah)<br> 
+coordinates:  38.88N, -112.25E, 2682m<br> 
+NRCS station code: 12L15S (<a href="http://climexp.knmi.nl/getsnow.cgi?someone@somewhere+12L15S+PINE_CREEK_PILLOW+">get data</a>)<br> 
+Found   55 years with data in 1949-2003<br>

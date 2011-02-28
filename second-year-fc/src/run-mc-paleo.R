@@ -1,8 +1,8 @@
-nsi <- 4  #states
+nsi <- 5  #states
 q <- 1  #years back
 r <- 1  #years ahead
 m <- 1  #running mean length
-nsims <- 250
+nsims <- 500
 
 plotdir <- 'plots'
 dataset <- 'meko' # 'meko' or 'woodhouse' or 'nino3'
@@ -24,5 +24,5 @@ scaled <- FALSE
 
 
 for(ns in nsi){
-  source('second-year.R')
+  source('mc-paleo.R')
 }

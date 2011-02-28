@@ -1,7 +1,7 @@
 ############################################################
 ############################################################
 # get.predictors:
-#   Reads a specifically formatted data file containing predictors
+#   Reads a specifically formatted data files containing predictors
 get.predictors <- function(climatefile, swefile, pdsifile ,predmonth, 
     leadtimes=c('nov','dec','jan','feb','mar','apr')){
     
@@ -21,7 +21,12 @@ get.predictors <- function(climatefile, swefile, pdsifile ,predmonth,
     for(i in prevs)
         cols <- c(cols,grep(leadtimes[i],pnames))
 
+    any.is.na <- function(x)any(is.na(x))
+
     data <- data[,cols]
+#    browser()
+    data <- data[!apply(data,1,any.is.na),]
+    
     pnames <- colnames(data)
     swecols <- grep("swe",pnames)
     if(length(swecols) > 1){
@@ -31,6 +36,7 @@ get.predictors <- function(climatefile, swefile, pdsifile ,predmonth,
         data <- cbind(data,swep)
         colnames(data)[ncol(data)] <- 'swe_pc1'
     }
+
       # principal component on pdsi, not really necessary. 
     #pnames <- colnames(data)
     #pdsicols <- grep("pdi",pnames)
