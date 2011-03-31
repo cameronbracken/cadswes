@@ -173,15 +173,24 @@ diagnostics.pdisag <- function(d, calibration, pred, main='',
     pdf(file.path(dir,'plots',paste(main,"Annual","Lees Ferry",vtype,'box.pdf')),
         width=8,height=5)
         
-        colnames(d$sims) <- cn
+        lees.sims <- matrix(NA,ncol=ncol(d$sims),nrow=nrow(d$sims))
+        for(i in 1:d$nsim)
+            lees.sims[i,] <- apply(d$disag.tot[,,20,i],1,sum)
         
-        myboxplot.matrix(d$sims,cex=.3,main=main,outline=F, 
-            ylab=ylab,xlab='Time',ylim=range(c(d$sims,d$agg)))
-        mtext(paste("Annual","Lees Ferry"))
-        lines(d$agg,type='b',cex=.5)
-        abline(h=quantile(d$model$response,1/3))
-        abline(h=quantile(d$model$response,2/3))
-        title(sub=paste("RPSS = ",round(rpss.ann,2), "MC = ",round(mc.ann,2)))
+        ann <- rowSums(d$hist)    
+        colnames(d$sims) <- cn
+        colnames(lees.sims) <- cn
+        myboxplot.matrix(lees.sims,cex=.3,main=main,outline=F, 
+            ylab='Flow Volume [MAF]',xlab='Time',ylim=range(c(lees.sims,rowSums(d$hist))))
+        mtext(paste("Seasonal","Lees Ferry"))
+        if(vtype=='retro'){
+            lines(ann[(length(ann)-nback+1):length(ann)],type='b',cex=.5)
+        }else{
+            lines(ann,type='b',cex=.5)
+        }
+        abline(h=quantile(ann,1/3))
+        abline(h=quantile(ann,2/3))
+        title(sub=paste("RPSS = ",sprintf('%4.2f',rpss.ann), "MC = ",sprintf('%4.2f',mc.ann)))
         
     dev.off()
     

@@ -6,7 +6,7 @@
     #Load all the model options/parameters
 source('settings.R')
 
-for(predmonth in c("nov", "jan", "feb", "apr")){
+for(predmonth in c("nov", "jan", "feb", "mar", "apr")){
     for(vtype in c("drop-one", "retro", "all")){
         cat('Predicting for:',predmonth,'\n')
         cat('Verification mode:',vtype,'\n')

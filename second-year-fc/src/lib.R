@@ -190,6 +190,174 @@ ts.sim.and.calc <- function(x, order, annual.mean = TRUE, meanvec=NULL, nsims = 
     return(x.sim)
 }
 
+wapply <- function(x, fun, win.length = length(x), ...){
+	
+	if(is.null(ncol(x))){
+		return(wapply.single(x, fun, win.length, ...))
+	}else{
+		for(i in 1:ncol(x)){
+			if(i == 1){
+				z <- wapply.single(x[,1], fun, win.length, ...)
+			}else{
+				z <- cbind(z,wapply.single(x[,i], fun, win.length, ...))
+			}
+			
+		}
+		attributes(z)$dimnames[[2]] <- attributes(x)$dimnames[[2]]
+		return(z)
+	}
+		
+	
+}
+
+wapply.single <- 
+function(x, fun, win.len = length(x), ...){
+    
+    r <- (length(x) %% win.len)
+    if(r > 0) x <- x[1:(length(x)-r)]
+    stack <- matrix(x,nrow = win.len)
+    return(apply(stack,2,fun,...))
+    
+}
+
+stack.ts <- function(x){
+
+	matrix(pad.ts(x),ncol=frequency(x),byrow=T)
+
+}
+
+pad.ts <- function(x){
+	
+	ts(c(rep(NA,start(x)[2]-1),x,rep(NA,frequency(x)-end(x)[2])),
+		start=c(start(x)[1],1),
+		frequency=frequency(x))
+	
+}
+
+
+fcontour <- function (x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1, 
+    length.out = ncol(z)), z, left=TRUE, xlim = range(x, finite = TRUE), 
+    ylim = range(y, finite = TRUE), zlim = range(z, finite = TRUE), 
+    levels = pretty(zlim, nlevels), nlevels = 20, color.palette = terrain.colors, 
+    col = color.palette(length(levels) - 1), plot.title, plot.axes, 
+    xaxs = "i", yaxs = "i", las = 1, axes = TRUE, frame.plot = axes, ...) 
+{
+    if (missing(z)) {
+        if (!missing(x)) {
+            if (is.list(x)) {
+                z <- x$z
+                y <- x$y
+                x <- x$x
+            }
+            else {
+                z <- x
+                x <- seq.int(0, 1, length.out = nrow(z))
+            }
+        }
+        else stop("no 'z' matrix specified")
+    }
+    else if (is.list(x)) {
+        y <- x$y
+        x <- x$x
+    }
+    if (any(diff(x) <= 0) || any(diff(y) <= 0)) 
+        stop("increasing 'x' and 'y' values expected")
+	
+	mar.orig <- (par.orig <- par(c("mar", "las")))$mar
+	par(las = las)
+	mar <- mar.orig
+	on.exit(par(par.orig))
+	if (left){
+		mar[4]<- 1	
+	}
+	else{
+		mar[2]<- 1
+		mar[4]<- 4.1
+	}
+	par(mar=mar)
+	plot.new()
+   plot.window(xlim, ylim, "", xaxs = xaxs, yaxs = yaxs)
+	if (!is.matrix(z) || nrow(z) <= 1 || ncol(z) <= 1) 
+		stop("no proper 'z' matrix specified")
+	if (!is.double(z)) 
+	storage.mode(z) <- "double"
+	.Internal(filledcontour(as.double(x), as.double(y), z, as.double(levels), 
+		col = col))
+    if (missing(plot.axes)) {
+        if (axes && left) {
+            title(main = "", xlab = "", ylab = "")
+            Axis(x, side = 1)
+            Axis(y, side = 2)
+        }
+        else if(axes){
+            title(main = "", xlab = "", ylab = "")
+            Axis(x, side = 1)
+            Axis(y, side = 4) 	
+        	}
+    }
+    else plot.axes
+    if (frame.plot) 
+        box()
+    if (missing(plot.title)) 
+        title(...)
+    else plot.title
+    invisible()
+}
+
+cbar <- function ( nlevels, zlim, rotate=TRUE, levels = pretty(zlim, nlevels), 
+    color.palette = terrain.colors, col = color.palette(length(levels) - 1), 
+    key.title, key.axes, xaxs = "i", yaxs = "i", las = 1, axes = TRUE) 
+{
+	mar.orig <- (par.orig <- par(c("mar", "las")))$mar
+	par(las = las)
+	mar <- mar.orig
+	on.exit(par(par.orig))
+	plot.new()
+	if(rotate){
+		mar[4] <- 2
+		mar[2] <- 2
+		par(mar = mar)
+    	plot.window(xlim = c(0, 1), ylim = range(levels), xaxs = "i", 
+        yaxs = "i")
+    	rect(0, levels[-length(levels)], 1, levels[-1], col = col)
+    	if (missing(key.axes)) {
+       	 if (axes) 
+    	        axis(4)
+    	}
+    	else key.axes
+    }
+    else {
+    	mar[1] <- mar[3]
+		mar[3] <- 2
+		par(mar = mar)
+    	plot.window(xlim = range(levels), ylim = c(0,1), xaxs = "i", 
+    	yaxs = "i")
+    	rect( levels[-length(levels)], 0, levels[-1], 1, col = col)
+    	if (missing(key.axes)) {
+       	 if (axes) 
+    	        axis(1)
+    	}
+    	else key.axes
+    }
+    box()
+    if (!missing(key.title)) 
+        key.title
+}
+
+sizer <- function(rotate=TRUE){
+	
+	mar <- par("mar")
+	
+	if(rotate){		
+		w <- (3 + mar[2]) * par("csi") * 2.54
+	}
+	else{
+		w <- (3+mar[3]) * par("csi") * 2.54
+	}
+	return(w)
+}
+
+
 wapply <- 
 function(x, fun, win.len = length(x), ...){
   
@@ -246,15 +414,17 @@ function(x, limit = median(x), tie = 1 ){
 }
 
 ntile.ts <- 
-function(x, n, limit.type = 'prob', tie = 1 ){
+function(x, n, limit.type = 'prob', tie = 1, altobs = NULL ){
     # returns an integer vector corresponding to n states broken by equal 
     # probability or equal distance
     #
     limit <- 
     if(limit.type == 'prob') 
       quantile(x,seq(0,1,1/n))
-    else 
+    else if(limit.type == 'equal')
       seq(min(x),max(x),by=diff(range(x))/n)
+
+    if(!is.null(altobs)) limit <- quantile(altobs,seq(0,1,1/n))
     
     b <- integer(length(x))
     
@@ -551,7 +721,7 @@ build.pools.to <- function(tr, qr){
    
 }
 
-RPSS <- function(histobs, ensemble, alt=F, altobs=0){
+RPSS <- function(histobs, ensemble, altobs=NULL, ncat=3){
     # This function calculates the Rank Probability Skill Score(RPSS)
     # for each prediction year and gives the RPSS for 'wet', 'dry' and all years
     # 'wet' is in upper 67th percentile, dry is in lower 33rd percentile
@@ -560,60 +730,59 @@ RPSS <- function(histobs, ensemble, alt=F, altobs=0){
     rpss <- 1:nyr          #Equivalent size to number of years
 
     for(j in 1:nyr) { 
-        isim <- ensemble[,j]       # Ensemble of a particular year
         obsval <- histobs[j]   #Observed value of that particular year
  
         #remove the year we are on to get calibrated data
         calibdata <- histobs[-j]
     
         # Find 33rd and 67th percentile of calibrated data
-        lq <- ifelse(alt, quantile(altobs,1/3), quantile(calibdata,1/3))
-        uq <- ifelse(alt, quantile(altobs,2/3), quantile(calibdata,2/3))
+        breaks <- seq(0,1,1/ncat)[-c(1,ncat+1)]
+        quants <- if(!is.null(altobs)) quantile(altobs,breaks) else quantile(calibdata,breaks)
+        lq <- quants[1]
+        uq <- quants[2]
              
-        ncat <- 3      #Number of categories
         probs <- pclim <- obscat <- numeric(ncat)
-
+        
         # assigns which category each of the simulations 
-        # falls in for whole ensemble       
-        nsim <- length(isim)       #Number of Simulations
-        simcat <- numeric(nsim)
-        simcat[isim >= uq] <- 3
-        simcat[isim <= lq] <- 1
-        simcat[isim > lq & isim <uq] <- 2
+        # falls in for whole ensemble   
+        if(typeof(ensemble) == 'list'){
+        
+            for(i in 1:ncat){
+                
+                fun <- approxfun(ensemble[[j]])
+                maxv <- max(ensemble[[j]]$x)
+                minv <- min(ensemble[[j]]$x)
+                lower <- ifelse(i==1, max(minv,0), max(minv,quants[i-1]))
+                upper <- ifelse(i==ncat, maxv, min(maxv,quants[i]))
+                #print(j)
+                #browser()
+                probs[i] <- 
+                if(lower > upper || upper < lower)
+                    0
+                else
+                    integrate(fun,lower,upper,subdivisions=1000)$value
+                #probs[i] <- integrate(fun,lower,upper,subdivisions=1000)$value
+            }
+            
+        }else{
 
-        # probability of simulations falling into each category        
-        for(i in 1:ncat)       
-            probs[i] <- length(simcat[simcat == i])/nsim 
-        #print(probs)
+            probs <- table(ntile.ts(ensemble[,j],ncat,altobs=altobs))/length(ensemble[,j])
+        
+        }
+        
         probs <- cumsum(probs)
-
+        
         # raw probability of falling into each category   
         # 33% chance to fall in each one of 3 categories             
         pclim <- cumsum(rep(1,ncat)/ncat)
                         
         # where the obsevation actually falls        
         obscat <- rep(0,ncat)
-        if(obsval >= uq) #in third category(quantile)
-            obscat[3]=1
-        if(obsval > lq & obsval < uq)   #obs in second quantile
-            obscat[2]=1
-        if(obsval <= lq) #obs in first quanitle
-            obscat[1]=1
-        
+        obscat[rank(c(obsval,quants))[1]] <- 1
         obscat <- cumsum(obscat)
-
         rpss[j]=1-(sum((obscat-probs)^2))/(sum((obscat-pclim)^2))
   }
   
-            
-
-    quw=quantile(histobs,2/3)  
-    zzw=rpss[histobs>quw]           
-    
-    qld=quantile(histobs,1/3)      
-    zzd=rpss[histobs<qld]  
-
-  RPSS=median(rpss)
   return(rpss)
 }
 
@@ -743,11 +912,12 @@ hmm.state.prediction <- function(x, H = 1, ...) {
     # generate forcest distributions for H steps out for a given hmm
     # model x, this function assumes a normal distributions for the 
     # components
-hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
+hmm.forecast.dist <- function(x, H = 1, len=300, ...) {
 
     #lower <- qnorm(0.001, min(x$pm$mean),x$pm$sd[which.min(x$pm$mean)])
     #upper <- qnorm(0.999, max(x$pm$mean),x$pm$sd[which.max(x$pm$mean)])
-    range <- extendrange(x$x,f=.2)
+    range <- extendrange(x$x,f=.4)
+    if(range[1] < 0) range[1] <- 0
     xrange <- seq(range[1],range[2],,len)
 
     n <- length(x$x)
@@ -763,27 +933,32 @@ hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
         fun <- paste('d',x$distn,sep='')
         for(i in 1:m){
             allprobs[,i] <- 
-                if(np == 1)
+                if(np == 1){
                     eval(call(fun, xrange, x$pm[[1]][i]))
-                else if(np == 2)
-                    eval(call(fun, xrange, x$pm[[1]][i], x$pm[[2]][i]))
-                else if(np == 3)
+                }else if(np == 2){
+                    #browser()
+                    if(x$distn == 'gamma'){
+                        eval(call(fun, xrange, x$pm[[2]][i], x$pm[[1]][i]))
+                    }else{
+                        eval(call(fun, xrange, x$pm[[1]][i], x$pm[[2]][i]))
+                    }
+                }else if(np == 3){
                     eval(call(fun, xrange, x$pm[[1]][i], x$pm[[2]][i], x$pm[[3]][i]))
+                }
         }
         allprobs
         
     }
     
     allprobs <- dfun.hmm(x)
-    
-       
-    #   browser() 
+
     #allprobs <- outer(x$x, x$pm$mean, dnorm, x$pm$sd)
     allprobs <- ifelse(!is.na(allprobs), allprobs, 1)
     foo <- x$delta * allprobs[1, ]
     sumfoo <- sum(foo)
     lscale <- log(sumfoo)
     foo <- foo/sumfoo
+    
     
     for (i in 2:n) {
         foo <- foo %*% x$Pi * allprobs[i, ]
@@ -796,7 +971,6 @@ hmm.forecast.dist <- function(x, H = 1, len=100, ...) {
         foo <- foo %*% x$Pi
         xi[, i] <- foo
     }
-    #browser()
     allprobs.out <- dfun.hmm(x,xrange)
     
         # total probability of being in 
@@ -894,14 +1068,14 @@ plot.hmm.trprob.2state <- function(hmm,sy){
     
     theme_set(theme_bw())
     myopts <- opts(
-    		panel.grid.major = theme_blank(), 
-    		panel.grid.minor = theme_blank(),
-    	  	axis.text.x = theme_text(size =  11), 
-    		axis.text.y = theme_text(size =  11,angle=90),
-    	 	axis.title.x = theme_text(size = 11), 
-    		axis.title.y = theme_text(size = 11,angle=90),
-    		panel.background = theme_rect())
-    		
+            panel.grid.major = theme_blank(), 
+            panel.grid.minor = theme_blank(),
+            axis.text.x = theme_text(size =  11), 
+            axis.text.y = theme_text(size =  11,angle=90),
+            axis.title.x = theme_text(size = 11), 
+            axis.title.y = theme_text(size = 11,angle=90),
+            panel.background = theme_rect())
+            
     tr <- matrix(NA,ncol=4,nrow=length(hmm))
     
     for(i in 1:length(hmm)){
@@ -933,10 +1107,10 @@ get.named.parlist <- function(x,m,dist,ic,...){
     
     for(j in 1:m){
         this.fit <- fitdistr(x[ntile.ts(x,m) == (j-1)],dist,...)
-        for(k in 1:np)
-            pars[[k]][j] <- this.fit$estimate[k]
         #for(k in 1:np)
-        #    pars[[k]][j] <- fit$estimate[k]
+        #    pars[[k]][j] <- this.fit$estimate[k]
+        for(k in 1:np)
+            pars[[k]][j] <- fit$estimate[k]
         if(dist == 'normal'){
             if(ic == 'same.both'){
                 pars[[k]][j] <- mean(x)
@@ -967,5 +1141,323 @@ plot.components <- function(x,m,dist,pars=NULL,...){
         dens <- eval(call(paste('d',dist,sep=''),r,pars[[2]][i],pars[[1]][i]))
         lines(r,1/m*dens)
     }
+    
+}
+
+fit.fourier <- function(u, curves = NULL, plot=F, ...){
+
+    w <- length(u)
+        # maximum number of harmonics
+    h <- if(w%%2 == 1) (w-1)/2
+         else w/2 
+
+    t <- 1:w
+
+    pgram <- A <- B <- ranked.harm <- integer(h)
+    A <- B <- MSD <- numeric(h)
+
+    ubar <- mean(u)
+
+        # Estimate fourier coefficients
+    for(j in 1:h){
+        A[j] <- 2/w * sum(u * cos(2 * pi * j * t/w ))
+        B[j] <- 2/w * sum(u * sin(2 * pi * j * t/w ))
+    }
+
+    MSDu <- 1/w * sum( (u - ubar)^2 )
+    MSD <- 1/2 * ( A^2 + B^2 )
+
+    ranked.harm <- order(MSD,decreasing=T)
+
+    pgram <- cumsum(MSD[ranked.harm]) / MSDu
+    
+    f.curves <- list()
+    if(!is.null(curves)){
+        for(i in curves){
+            f.curves[[i]] = numeric(w)    
+            
+            for(j in ranked.harm[1:i])
+                f.curves[[i]] = f.curves[[i]] + A[j]*cos(2*pi*j*t/w) + B[j]*sin(2*pi*j*t/w)
+                
+            f.curves[[i]] = f.curves[[i]] + ubar
+        }
+    }
+    if(plot) plot(0:length(pgram),c(0,pgram),
+                    xlab="Ranked Harmonic",
+                    ylab="Percent of Explained Variation",
+                    main="Cumulative Periodogram",
+                    type='l',
+                    col="steelblue",
+                    ...)
+    
+    return(list(u=u,w=w,h=h,A=A,B=B,ranked.harm=ranked.harm,MSD=MSD,MSDu=MSDu,pgram=pgram,curves=f.curves))
+}
+
+plot.harmonics <- function(ff,h=ff$h,...){
+    
+    w <- ff$w
+    A <- ff$A
+    B <- ff$B
+    u <- ff$u
+    
+    t <- seq(1,w,length.out=10*ff$w)
+    f.curve <- list(x = numeric(length(t)),y = numeric(length(t)))
+    f.curve$x <- t
+    
+    for(j in ff$ranked.harm[1:h])
+        f.curve$y = f.curve$y + A[j]*cos(2*pi*j*t/w) + B[j]*sin(2*pi*j*t/w)
+    f.curve$y = f.curve$y + mean(u)
+    
+    plot(f.curve,type='l',...)
+    invisible(f.curve)
+    
+}
+
+fit.harmonic.ar <- function(ff,h=ff$h,res=1){
+    require(forecast)
+    
+    w <- ff$w
+    A <- ff$A
+    B <- ff$B
+    u <- ff$u 
+    if(w%%2 == 1){
+        if( h > (w-1)/2 ) h <-(w-1)/2
+    }else{
+        if( h > w/2 ) h <- w/2
+    }
+    t <- seq(1,w,length.out=res*ff$w)
+    
+    harmonic <- ar.fit <- ar.fc <- vector('list',h)
+    
+    for(k in 1:length(ff$ranked.harm[1:h])){
+        j <- ff$ranked.harm[k]
+        harmonic[[k]] = A[j]*cos(2*pi*j*t/w) + B[j]*sin(2*pi*j*t/w)
+        #print(k)
+        #if(k==23)browser()
+        ar.fit[[k]] <- ar(harmonic[[k]])#,method='mle')
+        ar.fc[[k]] <- predict(ar.fit[[k]],n.ahead=res)
+    }
+    ar.pred <- sapply(ar.fc,"[[",'pred')
+    ar.se <- sapply(ar.fc,"[[",'se')
+    ar.upper <- qnorm(.95,sd=ar.se,mean=ar.pred)
+    #ar.sd <- qnorm(.683,sd=ar.se,mean=ar.pred)
+    ar.lower <- qnorm(.05,sd=ar.se,mean=ar.pred)
+    #browser()
+    return(list(mean=sum(ar.pred) + mean(u),
+        lower=sum(ar.lower) + mean(u),
+        sd=sum(ar.se),
+        upper=sum(ar.upper) + mean(u)))
+    
+    
+}
+
+#WAVELET  1D Wavelet transform with optional singificance testing
+#
+#   [WAVE,PERIOD,SCALE,COI] = wavelet(Y,DT,PAD,DJ,S0,J1,MOTHER,PARAM)
+#
+#   Computes the wavelet transform of the vector Y (length N),
+#   with sampling rate DT.
+#
+#   By default, the Morlet wavelet (k0=6) is used.
+#   The wavelet basis is normalized to have total energy=1 at all scales.
+#
+#
+# INPUTS:
+#
+#    Y = the time series of length N.
+#    DT = amount of time between each Y value, i.e. the sampling time.
+#
+# OUTPUTS:
+#
+#    WAVE is the WAVELET transform of Y. This is a complex array
+#    of dimensions (N,J1+1). FLOAT(WAVE) gives the WAVELET amplitude,
+#    ATAN(IMAGINARY(WAVE),FLOAT(WAVE) gives the WAVELET phase.
+#    The WAVELET power spectrum is ABS(WAVE)^2.
+#    Its units are sigma^2 (the time series variance).
+#
+#
+# OPTIONAL INPUTS:
+# 
+# *** Note *** setting any of the following to -1 will cause the default
+#               value to be used.
+#
+#    PAD = if set to 1 (default is 0), pad time series with enough zeroes to get
+#         N up to the next higher power of 2. This prevents wraparound
+#         from the end of the time series to the beginning, and also
+#         speeds up the FFT's used to do the wavelet transform.
+#         This will not eliminate all edge effects (see COI below).
+#
+#    DJ = the spacing between discrete scales. Default is 0.25.
+#         A smaller # will give better scale resolution, but be slower to plot.
+#
+#    S0 = the smallest scale of the wavelet.  Default is 2*DT.
+#
+#    J1 = the # of scales minus one. Scales range from S0 up to S0*2^(J1*DJ),
+#        to give a total of (J1+1) scales. Default is J1 = (LOG2(N DT/S0))/DJ.
+#
+#    MOTHER = the mother wavelet function.
+#             The choices are 'MORLET', 'PAUL', or 'DOG'
+#
+#    PARAM = the mother wavelet parameter.
+#            For 'MORLET' this is k0 (wavenumber), default is 6.
+#            For 'PAUL' this is m (order), default is 4.
+#            For 'DOG' this is m (m-th derivative), default is 2.
+#
+#
+# OPTIONAL OUTPUTS:
+#
+#    PERIOD = the vector of "Fourier" periods (in time units) that corresponds
+#           to the SCALEs.
+#
+#    SCALE = the vector of scale indices, given by S0*2^(j*DJ), j=0...J1
+#            where J1+1 is the total # of scales.
+#
+#    COI = if specified, then return the Cone-of-Influence, which is a vector
+#        of N points that contains the maximum period of useful information
+#        at that particular time.
+#        Periods greater than this are subject to edge effects.
+#        This can be used to plot COI lines on a contour plot by doing:
+#
+#              contour(time,log(period),log(power))
+#              plot(time,log(coi),'k')
+#
+#----------------------------------------------------------------------------
+#   Copyright (C) 1995-2004, Christopher Torrence and Gilbert P. Compo
+#
+#   This software may be used, copied, or redistributed as long as it is not
+#   sold and this copyright notice is reproduced on each copy made. This
+#   routine is provided as is without any express or implied warranties
+#   whatsoever.
+#
+# Notice: Please acknowledge the use of the above software in any publications:
+#    ``Wavelet software was provided by C. Torrence and G. Compo,
+#      and is available at URL: http://paos.colorado.edu/research/wavelets/''.
+#
+# Reference: Torrence, C. and G. P. Compo, 1998: A Practical Guide to
+#            Wavelet Analysis. <I>Bull. Amer. Meteor. Soc.</I>, 79, 61-78.
+#
+# Please send a copy of such publications to either C. Torrence or G. Compo:
+#  Dr. Christopher Torrence               Dr. Gilbert P. Compo
+#  Research Systems, Inc.                 Climate Diagnostics Center
+#  4990 Pearl East Circle                 325 Broadway R/CDC1
+#  Boulder, CO 80301, USA                 Boulder, CO 80305-3328, USA
+#  E-mail: chris[AT]rsinc[DOT]com         E-mail: compo[AT]colorado[DOT]edu
+#----------------------------------------------------------------------------
+wavelet=function(Y,DT=1,pad=0,dj=0.25,param=6){
+
+#Y is time series to be analyzed
+#DT is timestep for annual data, 1
+#pad data ? 0=F, 1=T
+#dj= spacing between discrete scales (.25)
+#param = wavenumber (6)
+
+s0=2*DT
+#s0=DT
+
+n1 = length(Y)
+J1=floor((log2(n1*DT/s0))/dj)
+
+
+#....construct time series to analyze, pad if necessary
+x = Y - mean(Y)
+
+
+if (pad == 1){
+	base2 = trunc(log(n1)/log(2) + 0.4999)   # power of 2 nearest to N
+	x = c(x, rep(0, 2^(base2 + 1) - n1))
+}
+n = length(x)
+
+#....construct wavenumber array used in transform [Eqn(5)]
+k = (1:trunc(n/2))
+k = k*((2*pi)/(n*DT))
+k = c(0, k, -rev(k[1:floor((n-1)/2)]))
+
+#....compute FFT of the (padded) time series
+f = fft(x)    # [Eqn(3)]
+
+#....construct SCALE array & empty PERIOD & WAVE arrays
+scale = s0*2^((0:J1)*dj)
+period = scale;
+wave = matrix(data=0, ncol=n, nrow=J1+1)  # define the wavelet array
+wave = as.complex(wave)  # make it complex
+wave=matrix(data=wave, ncol=n, nrow=J1+1)
+
+# loop through all scales and compute transform
+for(a1 in 1:(J1+1)){
+	scl=scale[a1]		
+		
+	#source("wave_bases_r.txt")	
+	
+
+nn = length(k);
+  	
+	k0 = param
+	expnt = -(scl*k - k0)^2/(2*(k > 0))
+	norm = sqrt(scl*k[2])*(pi^(-0.25))*sqrt(nn)    # total energy=N   [Eqn(7)]
+	daughter = norm*exp(expnt)
+	daughter = daughter*(k > 0)    # Heaviside step function
+	fourier_factor = (4*pi)/(k0 + sqrt(2 + k0^2)) # Scale-->Fourier [Sec.3h]
+	coi = fourier_factor/sqrt(2)                  # Cone-of-influence [Sec.3g]
+	dofmin = 2                                   # Degrees of freedom
+
+out <- list(daughter=daughter, fourier_factor=fourier_factor,coi=coi,dofmin=dofmin)
+
+
+
+
+
+
+	daughter=out$daughter
+	fourier_factor=out$fourier_factor
+	coi=out$coi
+	dofmin=out$dofmin	
+	wave[a1,] = fft((f*daughter), inverse = TRUE)/(length(f*daughter))  # wavelet transform[Eqn(4)]
+}
+
+period = fourier_factor*scale
+
+ coi = coi*c(1:(floor(n1 + 1)/2), rev(1:floor(n1/2))) * DT
+  
+
+wave = wave[,1:n1]  # get rid of padding before returning
+power=abs(wave)^2
+list(wave=wave, period=period, scale=scale, power=power, coi=coi)
+# end of code
+
+
+
+
+}
+
+
+rl.count <- function(x,ns){
+    
+    rl <- rle(ntile.ts(x,ns))$lengths
+    df <- as.data.frame(table(rl))
+    count <- df$Freq
+    lens <- as.numeric(levels(df$rl))
+    
+    return(list(rl=rl,len=lens,count=count))
+}
+
+boxplot.stats <- function(sims,x){
+    
+    layout(rbind(1:5))
+    boxplot(apply(sims,1,mean))
+    points(mean(x),col='Blue',pch=2)
+    mtext("Mean",1,1)
+    boxplot(apply(sims,1,sd))
+    points(sd(x),col='Blue',pch=2)
+    mtext('SD',1,1)
+    boxplot(apply(sims,1,min))
+    points(min(x),col='Blue',pch=2)
+    mtext('Min',1,1)
+    boxplot(apply(sims,1,max))
+    points(max(x),col='Blue',pch=2)
+    mtext('Max',1,1)
+    boxplot(apply(sims,1,mylag,1,docor=T))
+    points(mylag(x,1,docor=T),col='Blue',pch=2)
+    mtext('Lag 1 AC',1,1)
     
 }

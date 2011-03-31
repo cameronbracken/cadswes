@@ -14,3 +14,9 @@ load('data/ts.Rdata')
 # Funtions
 ######################################
 source('lib.R')
+
+######################################
+# Libraries
+######################################
+require(gtools)
+require(Hmisc)

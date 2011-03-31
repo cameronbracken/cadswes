@@ -500,21 +500,50 @@ total2intervening <- function(data,mat){
     
 }
 
-ts.annual.mean <- function(x){
+ts.annual.mean <- function(x,include.incomplete=FALSE){
 
     options(warn=-1)
     nyears <- length(unique(floor(time(x))))
     syear <- start(x)[1]
     nst = vector('numeric',nyears)
 
-    for(i in 1:nyears)  nst[i] <- mean(window(x,syear - 1 + i,
-                                        c(syear - 1 + i, frequency(x))))
+    for(i in 1:nyears){
+        
+        this.year <- window(x,syear - 1 + i,c(syear - 1 + i, frequency(x)))
+        
+        nst[i] <- ifelse(length(this.year)==frequency(x),mean(this.year),NA)
+    }
    
     nst <- ts(nst, start = c(syear,1), frequency = 1) 
     return(nst)
 
 }
 
+ts.seasonal.mean <- function(x, s=1, e=frequency(x), include.incomplete=FALSE){
+
+    options(warn=-1)
+    nyears <- length(unique(floor(time(x))))
+    ind <- 1:nyears
+    if(start(x)[2] > e) ind <- ind[-1]
+    if(end(x)[2] < s) ind <- ind[-length(ind)]
+    syear <- start(x)[1]
+    eyear <- end(x)[1]
+    years <- (syear:eyear)[ind]
+    nst <- vector('numeric',length(ind))
+    #first.year.complete <- length(which(floor(time(x)) == syear)) == frequency(x)
+    #last.year.complete <- length(which(floor(time(x)) == eyear)) == frequency(x)
+
+    for(i in ind){
+    
+        this.season <- window(x,c(syear - 1 + i, s),c(syear - 1 + i, e))
+        
+        nst[i] <- ifelse(length(this.season)==(e-s+1),mean(this.season),NA)
+    }
+
+    nst <- ts(nst, start = c(years[1],1), frequency = 1) 
+    return(nst)
+
+}
 
 ts.next.time <- function(x){
     en <- end(x)
@@ -609,6 +638,8 @@ modelSummary <- function(d,file){
 disagSimsToIntervening <- function(d,t2i){
     
     dims <- dim(d$disag)
+    d$disag.tot <- array(NA,dims)
+    d$disag.tot <- d$disag
     cat('Converting Flows to Intervening...\n')
     flush.console()
     pb <- txtProgressBar(1,dims[2]*dims[4],style=3)

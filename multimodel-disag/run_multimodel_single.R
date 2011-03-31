@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
     #Load all the model options
 source('settings.R')
 

@@ -44,7 +44,9 @@ cn <- if(vtype=="retro") years[-(1:(length(years)-nback))] else years
     # save a bunch of plots and return stats
 d <- diagnostics(d, main=main,time.names=time.names,
     site.names = site.names, cn = cn,
-    ylab='Flow Volume [MAF/month]',vtype=vtype, nback=nback ,density=F)
+    ylab='Flow Volume [MAF/month]',vtype=vtype, nback=nback ,density=T)
+
+source('cbrfc_plots.R')
     
 save(predictors, response, historical.tot, historical.intv, vtype, predmonth, 
   nback, training, fit, d, main, years, cn,

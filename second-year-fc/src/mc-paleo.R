@@ -13,7 +13,7 @@ flush.console()
 paleo   <- switch(dataset, meko = meko,   woodhouse = wood,   nino3 = cook, synth = synth)
 paleo.b <- switch(dataset, meko = meko.b, woodhouse = wood.b, nino3 = cook.b, synth = synth.b)
 
-hist <-   switch(dataset, meko = window(lees,1980),   woodhouse = window(lees,1980),   nino3 = nino3, synth = synth.h)
+hist <-   switch(dataset, meko = window(lees,1979),   woodhouse = window(lees,1979),   nino3 = nino3, synth = synth.h)
 hist.b <- switch(dataset, meko = lees.b, woodhouse = lees.b, nino3 = nino3.b, synth = synth.h.b)
 
 n <- length(paleo)
@@ -89,6 +89,7 @@ pb <- txtProgressBar(q+1,nh+1,style=3)
 for(y in (q+1):(nh+r+ifelse(q==1 & r > 1,-1,0))){
   
   #setTxtProgressBar(pb,y)
+  
     sy <- if(is.na(time(hist)[y])) time(hist)[y-1] + 1 else time(hist)[y]
     fcy <- if(is.na(time(hist)[y])) time(hist)[y-1]+1:r else time(hist)[y]+1:r
     cat('Forecasting From Year',sy,'for',fcy,'\n')

@@ -1,7 +1,15 @@
 mon <- c( "apr", "jan", "nov")
-type <- "retro"
+type <- "drop-one"
 path <- file.path('diagnostics','output_data/')
 
+paste.rpss.mc <- function(rpss,mc){
+  
+  x <- rpss
+  for(i in 1:ncol(rpss))
+    x[,i] <- paste(sprintf('%4.2f',rpss[,i]),' (',sprintf('%4.2f',mc[,i]),')',sep='') 
+  x
+  
+}
 
 for(i in 1:length(mon)){
   
@@ -25,12 +33,3 @@ for(i in 1:length(mon)){
 }
 
 print(xtable(combo.xtable))
-
-paste.rpss.mc <- function(rpss,mc){
-  
-  x <- rpss
-  for(i in 1:ncol(rpss))
-    x[,i] <- paste(sprintf('%4.2f',rpss[,i]),' (',sprintf('%4.2f',mc[,i]),')',sep='') 
-  x
-  
-}
