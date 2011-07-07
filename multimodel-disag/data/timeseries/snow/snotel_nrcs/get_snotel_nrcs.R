@@ -52,9 +52,7 @@ for(i in 1:length(fnames)){
     datalines <- substr(df[means],5,nchar(datalines[1]))
     con <- textConnection(datalines)
     datavals <- as.matrix(read.fwf(con,rep(6,12)))
-    browser()
     close(con)
-    
     
     rownames(datavals) <- seq(sy,len=nrow(datavals))
     colnames(datavals) <- c(month.abb[10:12],month.abb[1:9])
@@ -77,3 +75,4 @@ colnames(snotel) <- month.abb[1:4]
 snotel.ts <- ts(snotel,start=yrange[1])
 
 write.table(snotel,quote=F,file='snotel.txt')
+

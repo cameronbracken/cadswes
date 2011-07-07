@@ -79,6 +79,9 @@ for(j in 1:n.sites){
 	    ncol=n.months, byrow=T)/10^6
 }
 
+historical.tot.full <- historical.tot
+historical.intv.full <- historical.intv
+
 if(seasonal){
     historical.tot <- historical.tot[,4:7,]
     historical.intv <- historical.intv[,4:7,]
@@ -90,5 +93,6 @@ historical <- if(intervening) historical.intv else historical.tot
 response <- ts(rowSums(historical),start = year.s, frequency=1)
 
 save(predictors, response, historical, historical.intv, historical.tot, 
+    historical.intv.full, historical.tot.full, 
     n.sites, n.years, n.months, year.s, t2i, i2t,
     year.e, site.names, time.names, file='data/multimodel.RData')

@@ -156,6 +156,34 @@ ts.annual.mean <- function(x){
 
 }
 
+ts.seasonal.mean <- function(x, s=1, e=frequency(x), include.incomplete=FALSE){
+
+    options(warn=-1)
+    nyears <- length(unique(floor(time(x))))
+    ind <- 1:nyears
+    if(start(x)[2] > e) ind <- ind[-1]
+    if(end(x)[2] < s) ind <- ind[-length(ind)]
+    syear <- start(x)[1]
+    eyear <- end(x)[1]
+    years <- (syear:eyear)[ind]
+    nst <- vector('numeric',length(ind))
+    interyear <- ifelse(e < s, TRUE, FALSE)
+    len <- ifelse(e < s, e+frequency(x)-s+1,(e-s+1))
+    #first.year.complete <- length(which(floor(time(x)) == syear)) == frequency(x)
+    #last.year.complete <- length(which(floor(time(x)) == eyear)) == frequency(x)
+
+    for(i in ind){
+    #browser()
+        this.season <- window(x,c(syear - 1 + i, s),c(syear + ifelse(interyear,0,-1) + i, e))
+        
+        nst[i] <- ifelse(length(this.season)==len,mean(this.season),NA)
+    }
+
+    nst <- ts(nst, start = c(years[1],1), frequency = 1) 
+    return(nst)
+
+}
+
 
 ts.next.time <- function(x){
     en <- end(x)
@@ -749,7 +777,12 @@ RPSS <- function(histobs, ensemble, altobs=NULL, ncat=3){
         
             for(i in 1:ncat){
                 
-                fun <- approxfun(ensemble[[j]])
+                fun <- if(ncol(ensemble[[j]]$y) == 1 || is.null(ncol(ensemble[[j]]$y))){
+                  approxfun(x=ensemble[[j]]$x,y=ensemble[[j]]$y)
+                }else{
+                  approxfun(x=ensemble[[j]]$x,y=ensemble[[j]]$y[,1])
+                }
+                
                 maxv <- max(ensemble[[j]]$x)
                 minv <- min(ensemble[[j]]$x)
                 lower <- ifelse(i==1, max(minv,0), max(minv,quants[i-1]))
@@ -954,18 +987,22 @@ hmm.forecast.dist <- function(x, H = 1, len=300, ...) {
 
     #allprobs <- outer(x$x, x$pm$mean, dnorm, x$pm$sd)
     allprobs <- ifelse(!is.na(allprobs), allprobs, 1)
+    
+        # do first calculation, alpha_T/(alpha_T * 1')
+        # which uses the initial distribution
     foo <- x$delta * allprobs[1, ]
     sumfoo <- sum(foo)
     lscale <- log(sumfoo)
     foo <- foo/sumfoo
     
-    
+        # phi term from Zucchini (2009) equation 5.4
     for (i in 2:n) {
         foo <- foo %*% x$Pi * allprobs[i, ]
         sumfoo <- sum(foo)
         lscale <- lscale + log(sumfoo)
         foo <- foo/sumfoo
     }
+        # fc state probabilities, these are the epsilons in equation 5.5
     xi <- matrix(NA, nrow = m, ncol = H)
     for (i in 1:H) {
         foo <- foo %*% x$Pi
@@ -979,13 +1016,19 @@ hmm.forecast.dist <- function(x, H = 1, len=300, ...) {
 }
 
     #boxplot the forecast distributions bases on their summary stats
-hmm.boxplot.fc <- function(hmm.fc,sy,...){
+hmm.boxplot.fc <- function(hmm.fc,sy,H=1,...){
     
     bx <- boxplot(matrix(0,nrow=1,ncol=length(hmm.fc)), plot = FALSE)
     
     for(i in 1:length(hmm.fc)){
         
-        bx$stats[,i] <- hmm.fcdist.fivenum(hmm.fc[[i]])
+        fc <- 
+        if(ncol(hmm.fc[[i]]$y) == 1 || is.null(ncol(hmm.fc[[i]]$y))){
+          hmm.fc[[i]]
+        }else{
+          list(x=hmm.fc[[i]]$x,y=hmm.fc[[i]]$y[,H])
+        }
+        bx$stats[,i] <- hmm.fcdist.fivenum(fc)
         
     }
     
@@ -1000,15 +1043,23 @@ hmm.boxplot.fc <- function(hmm.fc,sy,...){
 hmm.ensemble.fc <- function(hmm.fc,sy,nsims=1000,...){
     
     years <- sy:(sy+length(hmm.fc)-1)
-    ens <- matrix(NA,nrow=nsims,ncol=length(hmm.fc))
+    H <- ncol(hmm.fc[[1]]$y)
+    ens <- 
+    if(H ==1) 
+      array(NA,c(nsims,length(hmm.fc)))
+    else
+      array(NA,c(nsims,length(hmm.fc),H))
     
     pb <- txtProgressBar(1,length(hmm.fc),style=3)
     
     for(i in 1:length(hmm.fc)){
-        
         setTxtProgressBar(pb,i)
-        ens[,i] <- hmm.fcdist.sim(hmm.fc[[i]],nsims)
-        
+        if( H == 1 )
+          ens[,i] <- hmm.fcdist.sim(hmm.fc[[i]],nsims)
+        else
+          for(j in 1:H)
+            ens[,i,j] <- hmm.fcdist.sim(list(x=hmm.fc[[i]]$x,y=cbind(hmm.fc[[i]]$y[,j])),nsims)
+
     }
     close(pb)
     
@@ -1041,7 +1092,7 @@ hmm.fcdist.sim <- function(fcdist,nsim=1000){
     
     pts <- runif(nsim)
     
-    cdf <- cumsum(fcdist$y)
+    cdf <- cumsum(fcdist$y[,1])
     cdf <- cdf/max(cdf)
     
     sim <- numeric(nsim)
@@ -1104,7 +1155,7 @@ get.named.parlist <- function(x,m,dist,ic,...){
     np <- length(fit$estimate)
     pars <- vector('list',np)
     names(pars) <- names(fit$estimate)
-    
+
     for(j in 1:m){
         this.fit <- fitdistr(x[ntile.ts(x,m) == (j-1)],dist,...)
         #for(k in 1:np)
@@ -1234,6 +1285,44 @@ fit.harmonic.ar <- function(ff,h=ff$h,res=1){
         harmonic[[k]] = A[j]*cos(2*pi*j*t/w) + B[j]*sin(2*pi*j*t/w)
         #print(k)
         #if(k==23)browser()
+        ar.fit[[k]] <- ar(harmonic[[k]])#,method='mle')
+        ar.fc[[k]] <- predict(ar.fit[[k]],n.ahead=res)
+    }
+    ar.pred <- sapply(ar.fc,"[[",'pred')
+    ar.se <- sapply(ar.fc,"[[",'se')
+    ar.upper <- qnorm(.95,sd=ar.se,mean=ar.pred)
+    #ar.sd <- qnorm(.683,sd=ar.se,mean=ar.pred)
+    ar.lower <- qnorm(.05,sd=ar.se,mean=ar.pred)
+    #browser()
+    return(list(mean=sum(ar.pred) + mean(u),
+        lower=sum(ar.lower) + mean(u),
+        sd=sum(ar.se),
+        upper=sum(ar.upper) + mean(u)))
+    
+    
+}
+
+fit.harmonic.mvhmm <- function(ff,h=ff$h,res=1){
+    
+    w <- ff$w
+    A <- ff$A
+    B <- ff$B
+    u <- ff$u 
+    if(w%%2 == 1){
+        if( h > (w-1)/2 ) h <-(w-1)/2
+    }else{
+        if( h > w/2 ) h <- w/2
+    }
+    t <- seq(1,w,length.out=res*ff$w)
+    
+    harmonic <- ar.fit <- ar.fc <- vector('list',h)
+    
+    for(k in 1:length(ff$ranked.harm[1:h])){
+        j <- ff$ranked.harm[k]
+        harmonic[[k]] = A[j]*cos(2*pi*j*t/w) + B[j]*sin(2*pi*j*t/w)
+        #print(k)
+        #if(k==23)browser()
+        
         ar.fit[[k]] <- ar(harmonic[[k]])#,method='mle')
         ar.fc[[k]] <- predict(ar.fit[[k]],n.ahead=res)
     }
@@ -1441,6 +1530,33 @@ rl.count <- function(x,ns){
     return(list(rl=rl,len=lens,count=count))
 }
 
+rl.count.lower <- function(x,ns){
+    
+    ql <- quantile(x,1/ns)
+    x[x > ql] <- NA
+    x[!is.na(x)] <- 1
+    rl <- rle(as.vector(x))
+    df <- as.data.frame(table(rl$lengths[!is.na(rl$values)]))
+    count <- df$Freq
+    lens <- as.numeric(levels(df[,1]))
+    
+    return(list(rl=rl$lengths,len=lens,count=count))
+}
+
+rl.count.upper <- function(x,ns){
+    
+    qu <- quantile(x,1-1/ns)
+    x[x < qu] <- NA
+    x[!is.na(x)] <- 1
+    rl <- rle(as.vector(x))
+    df <- as.data.frame(table(rl$lengths[!is.na(rl$values)]))
+    count <- df$Freq
+    lens <- as.numeric(levels(df[,1]))
+    
+    return(list(rl=rl$lengths,len=lens,count=count))
+}
+
+
 boxplot.stats <- function(sims,x){
     
     layout(rbind(1:5))
@@ -1459,5 +1575,424 @@ boxplot.stats <- function(sims,x){
     boxplot(apply(sims,1,mylag,1,docor=T))
     points(mylag(x,1,docor=T),col='Blue',pch=2)
     mtext('Lag 1 AC',1,1)
+    abline(h=)
     
+}
+
+boxplot.stats.list <- function(stats,x){
+    
+    par(mar=c(5,3,3,.5)+.1)
+    layout(rbind(1:7))
+    boxplot(stats$mean)
+    points(mean(x),col='Blue',pch=2)
+    mtext("Mean",1,1)
+    
+    boxplot(stats$sd)
+    points(sd(x),col='Blue',pch=2)
+    mtext('SD',1,1)
+    
+    boxplot(stats$skew)
+    points(skewness(x),col='Blue',pch=2)
+    mtext('Skew',1,1)
+    
+    boxplot(stats$min)
+    points(min(x),col='Blue',pch=2)
+    mtext('Min',1,1)
+    
+    boxplot(stats$max)
+    points(max(x),col='Blue',pch=2)
+    mtext('Max',1,1)
+    
+    boxplot(stats$lag1)
+    points(mylag(x,1,docor=T),col='Blue',pch=2)
+    mtext('Lag 1 AC',1,1)
+    
+    boxplot(stats$lag2)
+    points(mylag(x,2,docor=T),col='Blue',pch=2)
+    mtext('Lag 2 AC',1,1)
+    
+}
+
+boxplot.stats3 <- function(sims1,sims2,sims3,x,...){
+    
+    require(e1071)
+    layout(rbind(1:3,4:6))
+    boxplot(cbind(apply(sims1,1,mean),apply(sims2,1,mean),apply(sims3,1,mean)),...)
+    abline(h=mean(x),col='Blue')
+    mtext("Mean",3,1)
+    
+    boxplot(cbind(apply(sims1,1,sd),apply(sims2,1,sd),apply(sims3,1,sd)),...)
+    abline(h=sd(x),col='Blue')
+    mtext('SD',3,1)
+    
+    boxplot(cbind(apply(sims1,1,skewness),apply(sims2,1,skewness),apply(sims3,1,skewness)),...)
+    abline(h=skewness(x),col='Blue')
+    mtext('Skew',3,1)
+    
+    boxplot(cbind(apply(sims1,1,min),apply(sims2,1,min),apply(sims3,1,min)),...)
+    abline(h=min(x),col='Blue')
+    mtext('Min',3,1)
+    
+    boxplot(cbind(apply(sims1,1,max),apply(sims2,1,max),apply(sims3,1,max)),...)
+    abline(h=max(x),col='Blue')
+    mtext('Max',3,1)
+    
+    boxplot(cbind(apply(sims1,1,mylag,1,docor=T),apply(sims2,1,mylag,1,docor=T),apply(sims3,1,mylag,1,docor=T)),...)
+    abline(h=mylag(x,1,docor=T),col='Blue')
+    mtext('Lag 1 AC',3,1)
+    
+}
+
+
+boxplot.stats.n.list <- function(stats,x,...){
+    
+    require(e1071)
+    layout(rbind(1:3,4:6))
+    
+    boxplot(sapply(stats,'[[','mean'),...)
+    abline(h=mean(x),col='Blue')
+    mtext("Mean",3,1)
+    
+    boxplot(sapply(stats,'[[','sd'),...)
+    abline(h=sd(x),col='Blue')
+    mtext('SD',3,1)
+    
+    boxplot(sapply(stats,'[[','skew'),...)
+    abline(h=skewness(x),col='Blue')
+    mtext('Skew',3,1)
+    
+    boxplot(sapply(stats,'[[','min'),...)
+    abline(h=min(x),col='Blue')
+    mtext('Min',3,1)
+    
+    boxplot(sapply(stats,'[[','max'),...)
+    abline(h=max(x),col='Blue')
+    mtext('Max',3,1)
+    
+    boxplot(sapply(stats,'[[','lag1'),...)
+    abline(h=mylag(x,1,docor=T),col='Blue')
+    mtext('Lag 1 AC',3,1)
+    
+}
+
+
+plot.dthmm <- function(x,res=1000,cols=NULL,...){
+    
+    m <- length(x$delta)
+    dens <- matrix(NA,nrow=m,ncol=res)
+    r <- extendrange(x$x,f=.25)
+    xrange <- seq(r[1],r[2],len=res)
+    for(i in 1:m){
+        
+        if(x$distn == 'gamma')
+            dens[i,] <- dgamma(xrange,shape=x$pm$shape[i],rate=x$pm$rate[i])
+        else if(x$distn == 'norm')
+            dens[i,] <- dnorm(xrange,mean=x$pm$mean[i],sd=x$pm$sd[i])
+        else
+            stop('Distribution not supported')
+        
+    }
+    
+    hist(x$x,freq=F,ylim=c(0,max(c(hist(x$x,plot=F)$density,max(dens)))),...)
+    for(i in 1:m)
+        lines(xrange,dens[i,],col=ifelse(is.null(cols),i+1,cols[i]))
+    
+}
+
+
+plot.dthmm.stat <- function(x,res=1000,cols=NULL,...){
+    
+    m <- length(x$delta)
+    dens <- matrix(0,nrow=m+1,ncol=res)
+    r <- extendrange(x$x,f=.25)
+    xrange <- seq(r[1],r[2],len=res)
+    delta <- statdist(x$Pi)
+    for(i in 1:m){
+        
+        if(x$distn == 'gamma'){
+            dens[i,] <- delta[i]*dgamma(xrange,shape=x$pm$shape[i],rate=x$pm$rate[i])
+        }else if(x$distn == 'norm'){
+            dens[i,] <- delta[i]*dnorm(xrange,mean=x$pm$mean[i],sd=x$pm$sd[i])
+        }else{
+            stop('Distribution not supported')
+        }
+            
+        dens[m+1,] <- dens[m+1,] + dens[i,]
+    }
+    hist(x$x,freq=F,...)#ylim=c(0,max(c(hist(x$x,plot=F)$density,max(dens)))),...)
+    for(i in 1:m)
+        lines(xrange,dens[i,],col=ifelse(is.null(cols),i+1,cols[i]))
+    lines(xrange,dens[m+1,],col=1,lwd=1.5)
+    
+}
+
+
+matexp <- function(x,m){
+    mat <- x
+    for(i in 1:m)
+        mat <- mat %*% x
+    mat
+}
+
+count.run.lengths <- function(sims, count.max=25, ns=3){
+    
+    nsims <- nrow(sims)
+    sim.len <- ncol(sims)
+    runs.mat <- matrix(NA,ncol=sim.len,nrow=nsims)
+    for(i in 1:nsims){
+        runs <- rl.count(sims[i,],ns)
+        runs.mat[i,1:length(runs$rl)] <- runs$rl
+    }
+    runs.mat   
+}
+
+sim.stats <- function(sims, x, count.max=25, ns=3, wavelet.res = 115){
+    
+    wavelet.res <- length(wavelet(sims[1,], pad=1, dj=.05)$scale)
+    nsims <- nrow(sims)
+    sim.len <- ncol(sims)
+    stats <- list()
+    stats$runs <- stats$runs.upper <- stats$runs.lower <- 
+      matrix(NA,ncol=sim.len,nrow=nsims)
+    stats$pdf.x <- seq(from=0,to=max(x)*1.25,len=50)
+    stats$pdf <- matrix(NA,ncol=length(stats$pdf.x),nrow=nsims)
+    stats$spec <- stats$freq <- matrix(NA,ncol=length(spectrum(sims[1,],plot=F)$spec),nrow=nsims)
+    stats$dens <- stats$dens.lower <- stats$dens.upper <- 
+      matrix(NA,ncol=512,nrow=nsims)
+    stats$dens.x <- stats$dens.x.lower <- stats$dens.x.upper <- numeric(512)
+    stats$counts <- matrix(0,ncol=count.max,nrow=nsims)
+    stats$pow <- matrix(0,ncol=wavelet.res,nrow=nsims)
+
+    pb <- txtProgressBar(1,nsims,style=3)
+    for(i in 1:nsims){
+        setTxtProgressBar(pb,i)
+        runs <- rl.count(sims[i,],ns)
+        runs.upper <- rl.count.upper(sims[i,],ns)
+        runs.lower <- rl.count.lower(sims[i,],ns)
+        #browser()
+        stats$runs[i,1:length(runs$rl)] <- runs$rl
+        stats$runs.upper[i,1:length(runs.upper$rl)] <- runs.upper$rl
+        stats$runs.lower[i,1:length(runs.lower$rl)] <- runs.lower$rl
+        d <- density(stats$runs[i,],bw=1,from=1,to=count.max,na.rm=T)
+        stats$dens[i,] <- d$y
+        d <- density(stats$runs.lower[i,],bw=1,from=1,to=count.max,na.rm=T)
+        stats$dens.lower[i,] <- d$y
+        d <- density(stats$runs.upper[i,],bw=1,from=1,to=count.max,na.rm=T)
+        stats$dens.upper[i,] <- d$y
+        d.sm <- sm.density(sims[i,], display='none', eval.points = stats$pdf.x)
+        stats$pdf[i,] <- d.sm$estimate
+        stats$counts[i,runs$len] <- runs$count
+        stats$pow[i,] <- apply(wavelet(sims[i,], pad=1, dj=.05)$power,1,sum)
+        #browser()
+        spec <- spectrum(sims[i,],plot=F)
+        stats$spec[i,] <- spec$spec
+        stats$freq[i,] <- spec$freq
+    }
+    close(pb)
+    
+    stats$dens.x <- d$x
+    
+    stats$mean <- apply(sims,1,mean)
+    stats$sd <- apply(sims,1,sd)
+    stats$skew <- apply(sims,1,skewness)
+    stats$min <- apply(sims,1,min)
+    stats$max <- apply(sims,1,max)
+    stats$lag1 <- apply(sims,1,mylag,1,docor=T)
+    stats$lag2 <- apply(sims,1,mylag,2,docor=T)
+    
+    stats
+}
+
+knn.sim <- function(x,sim.len=length(x),nn=floor(sqrt(length(x)))){
+    
+    W <- cumsum(oneoverk(nn))
+    sim <- numeric(sim.len)
+    ll <- laglead(x,1,1)
+        # random srarting year
+    this.neighbor <- sample(1:length(x),1)
+    sim[1] <- x[this.neighbor]
+    for(i in 2:sim.len){
+            # neighbors to the current value
+            # dont use the last value because there is no following value
+        this.x <- ll$lag[!(ll$lag == sim[i-1])]
+        xsample <- c(sim[i-1],this.x)
+        neighbors <- order(as.matrix(dist(xsample))[,1])[-1][1:nn]
+        
+        r1 <- runif(1)
+        this.neighbor <- neighbors[rank(c(r1,W))[1]]
+        
+            #choose following value to neighbor selected
+        val <- xsample[this.neighbor]
+        if(is.na(val))browser()
+        sim[i] <- ll$lead[ll$lag == val]
+    }
+    sim
+}
+
+statdist <- function(tpm){
+    
+    m <- nrow(tpm)
+    ones <- rbind(rep(1,m))
+    I <- diag(rep(1,m))
+    U <- matrix(rep(1,m^2),m)
+    as.vector(ones %*% solve(I - tpm + U))
+    
+}
+
+BIC.dthmm <- function(x){
+  
+  ## Return the Baysian Information criterion value for a fitted discrete 
+  ## time hidden markov model from the HiddenMarkov package
+  
+    # Model order
+  m <- length(x$delta)
+    # Length of data 
+  T <- length(x$x)
+    # Log liklihood value
+  LL <- x$LL
+    # number of parameters
+  p <- m+m^2
+    # BIC
+  -2*LL + p*log(T)
+  
+}
+
+
+AIC.dthmm <- function(x){
+  
+  ## Return the Akaieke Information criterion value for a fitted discrete 
+  ## time hidden markov model from the HiddenMarkov package
+  
+    # Model order
+  m <- length(x$delta)
+    # Log Liklihood value
+  LL <- x$LL
+    # number of parameters
+  p <- m+m^2
+    # AIC
+  -2*LL + 2*p
+  
+}
+
+
+AICc.dthmm <- function(x){
+  
+  ## Return the Akaieke Information criterion value for a fitted discrete 
+  ## time hidden markov model from the HiddenMarkov package
+  
+  aic <- AIC(x)
+    # Model order
+  m <- length(x$delta)
+  T <- length(x$x)
+    # Log Liklihood value
+  LL <- x$LL
+    # number of parameters
+  p <- m+m^2
+    # AIC
+  aic + 2*p*(p+1)/(T-p-1)
+  
+}
+
+dthmm.gamma.mean <- function(x){
+  sum(statdist(x$Pi)*x$pm$shape/x$pm$rate)
+}
+
+dthmm.gamma.var <- function(x){
+  
+  mu <- dthmm.gamma.mean(x)
+  sum(statdist(x$Pi) * ( (x$pm$shape/x$pm$rate - mu)^2 + x$pm$shape/x$pm$rate^2))
+}
+
+
+dthmm.gamma.skew <- function(x){
+  
+  mu <- dthmm.gamma.mean(x)
+  sd <- sqrt(dthmm.gamma.var(x))
+  sd^(-3)*sum(statdist(x$Pi) * ( (x$pm$shape/x$pm$rate - mu)^3 + 
+    3*x$pm$shape/x$pm$rate^2*(x$pm$shape/x$pm$rate - mu)))
+}
+
+dthmm.gamma.acf <- function(x,lag.max=10){
+  
+  delta <- statdist(x$Pi)
+  mu <- x$pm$shape/x$pm$rate
+  acf <- numeric(lag.max)
+  for(k in 1:lag.max)
+    acf[k] <- (rbind(delta) %*% diag(mu) %*% matexp(x$Pi,k) %*% cbind(mu) -  sum(delta * mu)^2 )/dthmm.gamma.var(x)
+  acf
+}
+
+
+intpdf <- function(v, x, y=NULL){
+  
+    if(is.list(x)){
+      y <- as.vector(x$y)
+      x <- as.vector(x$x)
+    }
+    fun <- approxfun(x=x, y=y)
+    lower <- min(x)
+    upper <- v
+    if(lower > upper || upper < lower)
+        0
+    else
+        integrate(fun,lower,upper,subdivisions=1000)$value
+  
+}
+
+
+median.dist <- function(x,y=NULL){
+  
+  if(is.list(x)){
+    y <- as.vector(x$y)
+    x <- as.vector(x$x)
+  }
+  ic <- mean(x)
+  lower <- min(x)
+  upper <- ic
+  f <- function(v,x,y){
+    abs(intpdf(v,x,y)-1/2)
+  }
+  
+  optimize(f,upper=upper,lower=lower,x=x,y=y)$minimum
+}
+
+pc2in <- function(x){
+  x*12/72.27
+}
+
+hmm.forecast.traces <- function(x, H, len){
+   
+   n <- length(x$x)
+   ts <- x$x
+   traces <- matrix(NA,nrow=len,ncol=H)
+   for(i in 1:len){
+     
+     for(j in 1:H){
+       
+       mn <- eval(call(paste('hmm.mean',x$distn,sep='.'),x$pm))
+       state <- 
+        if(j == 1)
+          which.min(abs(mn - ts[length(ts)]))
+        else 
+          trans.state
+       trans.state <- rank(c(runif(1),cumsum(x$Pi[state,])))[1]
+       traces[i,j] <- do.call(paste('r',x$distn,sep=''),
+         c(n=1,lapply(x$pm,'[[',trans.state)))
+       
+     }
+     
+   }
+   traces
+}
+
+hmm.mean.gamma <- function(x){
+ 
+ x$shape/x$rate
+ 
+}
+
+hmm.mean.norm <- function(x){
+ 
+ x$mean
+ 
 }

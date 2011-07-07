@@ -60,7 +60,7 @@ for(s in 1:length(divs)){
         #this.data <- read.table(processedfile,header=T,nrows=diff(years)+1,
         #    na.strings = "-999.999")[,2]
         data <- as.matrix(read.table(processedfile,skip=2,
-                nrows=diff(years)+1,na.strings = "-999.999")[,-1])
+                nrows=diff(years)+1,na.strings = c("-999.999","-99.990","-999.9900","-999.990","-999.99"))[,-1])
         for(k in 2:(diff(years)+1)){
             pdsi.mat.nov[k-1,i] <- mean(data[k-1,10])
             pdsi.mat.jan[k-1,i] <- mean(data[k-1,12])

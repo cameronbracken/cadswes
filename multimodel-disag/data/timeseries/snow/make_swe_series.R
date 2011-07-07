@@ -24,7 +24,6 @@ for( i in 1:4 ){
     fit <- lm(y~x)
     back.snotel <- ts(predict(fit,window(snow_course.ts[,i],max(sy.snow_course,sy),sy.snotel-1)),sy.snow_course)
 
-    
     swe[,i] <- c(back.snotel,y, 
         window(snotel.ts[,i],ey.snow_course+1,ey.snotel),
         window(snotel.ts.recent[,i],ey.snotel+1,ey.snotel.recent))

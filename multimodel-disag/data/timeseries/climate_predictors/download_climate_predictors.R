@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 dl <- T
-na.strings = "-999.999"
+na.strings = c("-999.999","-99.990","-999.9900","-999.990","-999.99")
 
 library(XML)
 
@@ -84,7 +84,7 @@ for(i in 1:nrow(regions)){
         
         #read back in the data 
     this.data <- read.table(processedfile,header=T,nrows=diff(years)+1,
-        na.strings = "-999.999")[,2]
+        na.strings = na.strings)[,2]
     leadtime <- tolower(ifelse(regions$SeasonEnd[i] == 12, 
         month.abb[1],month.abb[regions$SeasonEnd[i]+1]))
         

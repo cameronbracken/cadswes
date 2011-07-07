@@ -17,24 +17,30 @@ training.intv <- verificationsetup(predictors, response, historical.intv, vtype,
 
     # Run the model a bunch of times to get 
     # an estimate of the best parameters
+selectpredictors_c <- cmpfun(selectpredictors)
 fit <- selectpredictors(training$predictors,training$response, 
-	min.alpha = min.alpha, nvmax = nvmax, verbose=1)
+	min.alpha = min.alpha, nvmax = nvmax, verbose=0, ratio=1.5)
 
 
     # using the best set of predictors, run the multimodel 
     # and generate ensembles using new data
+multimodel_c <- cmpfun(multimodel)
 fit <- multimodel(fit, training$newdata, nsims, vtype = vtype, nback = nback)
 
     # set up the proportion disag object
-pd <- pdisag(fit, training$historical, nsim=nsims, simname="pred")
+pdisag_c <- cmpfun(pdisag)
+pd <- pdisag_c(fit, training$historical, nsim=nsims, simname="pred")
 
     # do the proportion disag
-d <- disag(pd, plot=F)
+disag.pdisag_c <- cmpfun(disag.pdisag)
+d <- disag.pdisag_c(pd, plot=F)
 
     # convert back to intervening and replace the 
     # historical data with the intervening
-d <- disagSimsToIntervening(d,t2i)
-d$hist <- training.intv$historical
+disagSimsToIntervening_c <- cmpfun(disagSimsToIntervening)
+d <- disagSimsToIntervening_c(d,t2i)
+#d$hist <- training.intv$historical
+d$disag <- d$disag.tot
 
 main <- paste(CapFirst(predmonth),'1')
 years <- time(training$newdata)
@@ -44,7 +50,7 @@ cn <- if(vtype=="retro") years[-(1:(length(years)-nback))] else years
     # save a bunch of plots and return stats
 d <- diagnostics(d, main=main,time.names=time.names,
     site.names = site.names, cn = cn,
-    ylab='Flow Volume [MAF/month]',vtype=vtype, nback=nback ,density=T)
+    ylab='Flow Volume [MAF/month]',vtype=vtype, nback=nback ,density=F)
 
 source('cbrfc_plots.R')
     

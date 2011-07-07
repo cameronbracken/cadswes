@@ -117,9 +117,9 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 		nsets <- length(gcvssorted)
 		    # the min number of sets to keep
 		base <- ncol(rawpredictors)
-		if((range(gcvssorted)[2]/gcvssorted[1]) >1.5 ){
+		if((range(gcvssorted)[2]/gcvssorted[1]) >ratio ){
 			keepsets=0
-			while((gcvssorted[keepsets+1])<=(1.5*gcvssorted[1]))
+			while((gcvssorted[keepsets+1])<=(ratio*gcvssorted[1]))
 			    keepsets <- keepsets + 1
 			if(keepsets<base) keepsets <- base
 			if(nsets<base) keepsets <- nsets 
@@ -140,7 +140,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 			keptpredictors <- setswithnpredictors
 			keptpredictorset <- c(keptpredictors,gcvssorted)
 			if(verbose > 1){
-			    cat(n,'\n')
+			    #cat(n,'\n')
 			    write(t(keptpredictorset),file=stdout(),
 			        ncol=length(keptpredictorset))
 			}
@@ -148,9 +148,10 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 			keptpredictors <- setswithnpredictors[gcvsordered[1:keepsets],]
 			keptpredictorset <- cbind(keptpredictors,gcvssorted[1:keepsets])
 			if(verbose > 1){
-			    cat(n,'\n')
+			    #cat(n,'\n')
 			    write(t(keptpredictorset),file=stdout(),
 			        ncol=ncol(keptpredictorset))
+			    cat('\n\n')
 			}
 		}
 		a <- b+1
@@ -176,7 +177,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 	finalselection <- allgcvsordered[combinationskept]	
 		
 	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
-	finalselection <- finalselection[which(gcvratio < 1.5)]
+	finalselection <- finalselection[which(gcvratio < ratio)]
 	gcvratio <- gcvs[finalselection] / gcvs[finalselection][1]
 	
 		
@@ -184,7 +185,7 @@ selectpredictors <- function(rawpredictors, response, verbose=1, debug=F,
 	    print(finalselection)
 	finalpredictors <- allsubsets[finalselection,]
   
-	predset <- cbind(lps$size[finalselection],finalpredictors,
+	predset <- cbind(lps$size[finalselection],rbind(finalpredictors),
 	            gcvs[finalselection], degs[finalselection],
 	            alphas[finalselection],gcvratio)
 	info <- cbind(lps$size[finalselection], gcvs[finalselection],

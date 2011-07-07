@@ -1,0 +1,61 @@
+% !TEX root = disag-schematic.tex
+
+\tikzset{paint/.style={ draw=#1!50!black, fill=#1!50 },decorate with/.style=
+{decorate,decoration={shape backgrounds,shape=#1,shape size=1mm,anchor=west}}}
+
+\begin{tikzpicture}
+    [
+    node distance=4mm and 9mm,
+    scale=.8,
+    block/.style ={
+        rectangle, 
+        draw=gray!80, 
+        thick, 
+        top color=gray!20, 
+        bottom color=white,
+        text badly centered, 
+        text width=6.5em,
+        text height=.7em,
+        rounded corners
+    },
+    decision/.style={
+        diamond, 
+        draw=gray!80, 
+        thick, 
+        top color=gray!20, 
+        bottom color=white,
+	   % text width=5em, 
+	    text centered, 
+	    inner sep=0pt
+	},
+	a/.style={
+		-stealth',
+		draw=gray
+	}
+    ]
+
+    \node (Index)[block,text width=3em,draw=black,very thick] at (3.5,0) {Index};
+    \node (apr1) [block] at (4,5) {April 1 Site 1};
+    \node (may1) [block] at (6,4) {May 1 Site 1};
+    \node (jun1) [block] at (7,3) {June 1 Site 1};
+    \node (jul1) [block] at (8,2) {July 1 Site 1};
+    \node (apr20)[block] at (8,-2) {April 1 Site 20};
+    \node (may20)[block] at (7,-3) {May 1 Site 20};
+    \node (jun20)[block] at (6,-4) {June 1 Site 20};
+    \node (jul20)[block] at (4,-5) {July 1 Site 20};
+    \draw[decorate with=circle,paint=black] (jul1) -- (apr20);
+    %\node (jul1x) [block] at (8,2) {July 1 Site 1};
+    %\node (apr20x)[block] at (8,-2) {April 1 Site 20};
+    
+    \draw[a] (Index) edge (apr1);
+    \draw[a] (Index) edge (may1.200);
+    \draw[a] (Index) edge (jun1.200);
+    \draw[a] (Index) edge (jul1);
+    \draw[a] (Index) edge (apr20);
+    \draw[a] (Index) edge (may20.160);
+    \draw[a] (Index) edge (jun20.160);
+    \draw[a] (Index) edge (jul20);
+    \draw[decorate with=circle,paint=black] (jul1) -- (apr20);
+
+
+\end{tikzpicture}

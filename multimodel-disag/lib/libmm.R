@@ -36,8 +36,8 @@ get.predictors <- function(climatefile, swefile, pdsifile ,predmonth,
         data <- cbind(data,swep)
         colnames(data)[ncol(data)] <- 'swe_pc1'
     }
-
-      # principal component on pdsi, not really necessary. 
+    
+     # principal component on pdsi, not really necessary. 
     #pnames <- colnames(data)
     #pdsicols <- grep("pdi",pnames)
     #if(length(pdsicols) > 1){
@@ -62,8 +62,9 @@ combinationfilter=function(AllPredictors,selpredsetcombi,verbose){
     predpos=0   
     combinationkept=vector(length(selpredsetcombi),mode='numeric')  # Vector to store combinations
     #print("Correlation at 95% level:::",quote=F)
-    k <- qnorm(0.05)^2/(nrow(AllPredictors)-2)
-    sigcor <- sqrt(k/(k+1))
+    #k <- qnorm(0.01)^2/(nrow(AllPredictors)-2)
+    #sigcor <- sqrt(k/(k+1))
+    sigcor <- sigcor(nrow(AllPredictors),0.05)
     #print(sigcor,quote=F)
     #print('',quote=F)
     

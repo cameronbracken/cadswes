@@ -1,0 +1,6 @@
+export(read_rdf_2)
+export(read_rdf_times)
+export(read_rdf_meta_2)
+export(rdf_get_num_slots)
+export(get_rdf_slot)
+export(read.rdf)

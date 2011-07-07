@@ -1,10 +1,18 @@
 Package: cadswes
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2010-02-15
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Utilities developed at the Center for Advanced
+    Decision Support for Water and Environmental Systems
+    (CADSWES)
+Version: 0.1
+Date: 2010-05-09
+Author: Cameron Bracken
+Maintainer: Cameron Bracken <cameron.bracken@colorado.edu>
+Description: Functions for various purposes including water
+    resources data analysis and interacting with Riverware
+    data.
+License: GPL (>=3.0)
 LazyLoad: yes
+Collate:
+    'createRBibtexDatabase.R'
+    'read_rdf_2.R'
+    'read_rdf.R'

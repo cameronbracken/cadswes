@@ -1,3 +1,4 @@
+library('xtable')
 mon <- c( "apr", "jan", "nov")
 type <- "drop-one"
 path <- file.path('diagnostics','output_data/')
@@ -5,8 +6,17 @@ path <- file.path('diagnostics','output_data/')
 paste.rpss.mc <- function(rpss,mc){
   
   x <- rpss
-  for(i in 1:ncol(rpss))
-    x[,i] <- paste(sprintf('%4.2f',rpss[,i]),' (',sprintf('%4.2f',mc[,i]),')',sep='') 
+  for(i in 1:ncol(rpss)){
+    for(j in 1:nrow(rpss)){
+      this.rpss <- ifelse(rpss[j,i] < 0, 
+          sprintf('%4.2f',rpss[j,i]), 
+          sprintf('{\\bf %4.2f}',rpss[j,i]))
+      this.mc <- ifelse(mc[j,i] < 0.21, 
+          sprintf('%4.2f',mc[j,i]), 
+          sprintf('{\\bf %4.2f}',mc[,i]))
+      x[j,i] <- paste(this.rpss,' (',this.mc,')',sep='') 
+    }
+  }
   x
   
 }
@@ -32,4 +42,4 @@ for(i in 1:length(mon)){
   
 }
 
-print(xtable(combo.xtable))
+print(xtable(combo.xtable),sanitize.text.function = function(x) {x})

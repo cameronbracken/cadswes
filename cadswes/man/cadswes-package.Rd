@@ -2,42 +2,37 @@
 \alias{cadswes-package}
 \alias{cadswes}
 \docType{package}
+
 \title{
-What the package does (short line)
-~~ package title ~~
+Utilities developed at the Center for Advanced Decision Support for Water and Environmental Systems (CADSWES)
 }
+
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Functions for various purposes including water resources data analysis and interacting with Riverware data.
 }
+
 \details{
 \tabular{ll}{
 Package: \tab cadswes\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2010-02-15\cr
-License: \tab What license is it under?\cr
+Version: \tab 0.1\cr
+Date: \tab 2011-05-09\cr
+License: \tab GPL 3.0 or higher\cr
 LazyLoad: \tab yes\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+% ~~ An overview of how to use the package, including the most important ~~
+% ~~ functions ~~
 }
-\author{
-Who wrote it
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+\author{
+Cameron Bracken <cameron.bracken@colorado.edu>
 }
-\references{
-~~ Literature or other references for background information ~~
-}
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
+
+
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\code{\link[cadswes]{read.rdf}}\cadswes{\link[cadswes]{read_rdf_2}}
 }
 \examples{
-~~ simple examples of the most important functions ~~
+# 
 }
