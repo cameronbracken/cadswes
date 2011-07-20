@@ -30,7 +30,7 @@
 %% for a journal layout:
 %% \documentclass[final,1p,times]{elsarticle}
 %% \documentclass[final,1p,times,twocolumn]{elsarticle}
-%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle} 
 %% \documentclass[final,3p,times,twocolumn]{elsarticle}
 %% \documentclass[final,5p,times]{elsarticle}
 %% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
@@ -215,7 +215,7 @@ We obtained the most recent monthly natural flow data developed by the Bureau of
 
 
 \subsection{Climate data}
-The climate variables are the same as \citep{Bracken:2010cw} though we obtained the most recent observations for all of the predictors (through 2010 where available). The variables used were zonal (ZNW) and meridional (MDW) wind, Sea Surface Temperatures (SST), geopotential height (GPH) and Palmer Drought Severity Index (PDSI, a surrogate for soil moisture) -- all from the NOAA Earth Science Research Laboratory as predictors of large scale climate. Regions of high correlation with Lees Ferry Flow were determined using the ESRL linear correlation tool (\url{http://www.esrl.noaa.gov/psd/data/correlation/}). The variables are averaged over these regions and the resulting time series is used as a predictor. This analysis is repeated for each lead time to obtain a suite of climate predictors. This technique is described in detail in \cite{Grantz:2005ve}and \cite{Regonda2006}.
+The climate variables are the same as \citep{Bracken:2010cw} though we obtained the most recent observations for all of the predictors (through 2010 where available). The variables used were zonal (ZNW) and meridional (MDW) wind, Sea Surface Temperatures (SST), geopotential height (GPH) and Palmer Drought Severity Index (PDSI, a surrogate for soil moisture) -- all from the NOAA Earth Science Research Laboratory as predictors of large scale climate. Regions of high correlation with Lees Ferry Flow were determined using the ESRL linear correlation tool (\url{http://www.esrl.noaa.gov/psd/data/correlation/}). The variables are averaged over these regions and the resulting time series is used as a predictor. This analysis is repeated for each lead time to obtain a suite of climate predictors. This technique is described in detail in \cite{Grantz:2005ve} and \cite{Regonda2006}.
 
 \subsection{Snow Data}
 The amount of snow water equivalent (SWE) data was greatly increased over that used in \cite{Bracken:2010cw}. \cite{Bracken:2010cw} used 10 representative sites  obtained from Natural Resources Conservation Service (NRCS) (\url{http://www.wcc.nrcs.usda.gov/snow}). We use the 86 sites (Figure \ref{fig:map-snow}) that go into the UCRB snowpack report (\url{http://www.usbr.gov/uc/water/notice/snowpack.html}).  As a result of using more data we were able to generate a snowpack predictor for January 1st as well as improve the snow predictors for all other lead times. 
