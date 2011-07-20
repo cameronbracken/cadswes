@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+More Information and Advice:
+
+%  SECTION HEADS
+
+ ---------------
+ Level 1 head
+
+ Use the \section{} command to identify level 1 heads;
+ type the appropriate head wording between the curly
+ brackets, as shown below.
+
+ Capitalize the first letter of each word (expect for
+ prepositions, conjunctions, and articles that are
+ three or fewer letters).
+
+ Do not hyphenate level 1 heads. To break lines,
+ type \protect\\ where you want the break to occur.
+ AGU prefers the inverted triangle, breaking before
+ prepositions, conjunctions, and articles, if possible.
+
+An example:
+\section{Level 1 Head: Introduction}
+
+ ---------------
+ Level 2 head
+
+ Use the \subsection{} command to identify level 2 heads.
+
+ Capitalize the first letter of each word (expect for
+ prepositions, conjunctions, and articles that are
+ three or fewer letters).
+
+ Do not hyphenate level 1 heads. To break lines,
+ type \protect\\ where you want the break to occur.
+ AGU prefers the inverted triangle, breaking before
+ prepositions, conjunctions, and articles, if possible.
+
+\subsection{Level 2 Head} An example.
+
+ ---------------
+ Level 3 head
+
+ Use the \subsubsection{} command to identify level 3 heads
+
+ Capitalize only the first letter of the first word, acronyms,
+ first letter of proper nouns, and first letter of first word
+ after a colon.
+
+ Hyphenation is permitted in level 3 heads, if needed.
+
+\subsubsection{Level 3 Head} An example.
+
+\subsubsubsection{Level 4 Head} An example.
+
+%% ------------------------------------------------------------------------ %%
+%
+%  IN-TEXT LISTS
+%
+%% ------------------------------------------------------------------------ %%
+
+% Do not use bulleted lists; enumerated lists are okay.
+ \begin{enumerate}
+ \item
+ \item
+ \item
+ \end{enumerate}
+
+%% ------------------------------------------------------------------------ %%
+%
+%  EQUATIONS
+%
+%% ------------------------------------------------------------------------ %%
+
+% Single-line equations are centered.
+
+ Math coded inside display math mode \[ ...\]
+ will not be numbered e.g.:
+ \[ x^2=y^2 + z^2\]
+
+ Math coded inside \begin{equation} and \end{equation} will
+ be automatically numbered e.g.:
+ \begin{equation}
+ x^2=y^2 + z^2
+ \end{equation}
+
+% IF YOU HAVE MULTI-LINE EQUATIONS, PLEASE
+% BREAK THE EQUATIONS INTO TWO OR MORE LINES
+% OF SINGLE COLUMN WIDTH (20 pc, 8.3 cm)
+% using double backslashes (\\).
+
+% To create multiline equations, use the
+% \begin{eqnarray} and \end{eqnarray} environment
+% as demonstrated below.
+\begin{eqnarray}
+  x_{1} & = & (x - x_{0}) \cos \Theta \nonumber \\
+        && + (y - y_{0}) \sin \Theta  \nonumber \\
+  y_{1} & = & -(x - x_{0}) \sin \Theta \nonumber \\
+        && + (y - y_{0}) \cos \Theta.
+\end{eqnarray}
+
+If you don't want an equation number, use the star form:
+\begin{eqnarray*}...\end{eqnarray*}
+
+% Break each line at a sign of operation
+% (+, -, etc.) if possible, with the sign of operation
+% on the new line.
+
+% Indent second and subsequent lines to align with
+% the first character following the equal sign on the
+% first line.
+
+% Use an \hspace{} command to insert horizontal space
+% into your equation if necessary. Place an appropriate
+% unit of measure between the curly braces, e.g.
+% \hspace{1in}; you may have to experiment to achieve
+% the correct amount of space.
+
+% There is another multiline equation environment:
+% \begin{aguleftmath}...\end{aguleftmath}
+% The equation is aligned left and the second line indents to
+% the width of a paragraph indent (AGU style)
+
+
+%% ------------------------------------------------------------------------ %%
+%
+%  EQUATION NUMBERING: COUNTER
+%
+%% ------------------------------------------------------------------------ %%
+
+% You may change equation numbering by resetting
+% the equation counter or by explicitly numbering
+% an equation.
+
+% To explicitly number an equation, type \eqnum{}
+% (with the desired number between the brackets)
+% after the \begin{equation} or \begin{eqnarray}
+% command.  The \eqnum{} command will affect only
+% the equation it appears with; LaTeX will number
+% any equations appearing later in the manuscript
+% according to the equation counter.
+%
+% To reset the equation counter, place the setcounter{equation}
+% command in front of your equation(s).
+%\setcounter{equation}{0}
+
+% Set the equation counter to 0 if the next
+% number needed is 1 or set it to 7 if the
+% next number needed is 8, etc.
+%
+% The \setcounter{equation} command does affect
+% equations appearing later in the manuscript.
+
+% If you have a multiline equation that needs only
+% one equation number, use a \nonumber command in
+% front of the double backslashes (\\) as shown in
+% the multiline equation above.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Landscape figure and table examples
+%
+% ---------------
+% Landscape (broadside) figure/table
+% (These objects will not display properly in draft mode, use galley.)
+%
+% ONE-COLUMN landscape figure and table
+%
+% \begin{landscapefigure}
+% \includegraphics[height=.75\mycolumnwidth,width=42pc]{samplefigure.eps}
+% \caption{Caption text here}
+% \end{landscapefigure}
+%
+% \begin{landscapetable}
+% \caption{Caption text here}
+% \begin{tabular*}{\hsize}{@{\extracolsep{\fill}}lcccc}
+% \tableline
+% ....
+% \tableline\\
+% \multicolumn5l{(a) Algorithms from Numerical Recipes}\\
+% \end{tabular*}
+% \tablenotetext{}{}
+% \tablecomments{}
+% \end{landscapetable}
+%
+% FULL-PAGE landscape figures and tables
+%
+% \begin{figure*}[p]
+% \begin{landscapefigure*}
+% illustration here
+% \caption{caption here}
+% \end{landscapefigure*}
+% \end{figure*}
+%
+% \begin{table}[p]
+% \begin{landscapetable*}
+% \caption{}
+% \begin{tabular*}{\textheight}{@{\extracolsep{\fill}}lccrrrcrrr}
+% ....
+% \end{tabular*}
+% \begin{tablenotes}
+% ...
+% \end{tablenotes}
+% \end{landscapetable*}
+% \end{table}
+%
