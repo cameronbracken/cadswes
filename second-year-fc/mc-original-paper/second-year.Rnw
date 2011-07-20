@@ -176,6 +176,7 @@ CVEN6833 Fall, 2009
 <<setup,fig=F,echo=F,results=hide,cache=F>>=
 	
 	suppressPackageStartupMessages(require(ggplot2))
+	suppressPackageStartupMessages(require(cacheSweave))
 	
 	cashdir = "./cache"
 	setCacheDir(cashdir)
@@ -239,7 +240,7 @@ Results are shown for two sets of forecasts using 11 year running means.  \autor
 \centering
 <<11yrm-q2,fig=T,tikz=T,echo=F,width=6,height=5>>=
 	
-	load('src/data/fc-11yrm-q2.Rdata')
+	load('../src/data/fc-11yrm-q2.Rdata')
 	
 	layout(rbind(1,2))
 	par(mar=c(2.2,4,2.5,1))
@@ -258,7 +259,7 @@ Results are shown for two sets of forecasts using 11 year running means.  \autor
 \centering
 <<11yrm-q3,fig=T,tikz=T,echo=F,width=6,height=5>>=
 	
-	load('src/data/fc-11yrm-q3.Rdata')
+	load('../src/data/fc-11yrm-q3.Rdata')
 	
 	layout(rbind(1,2))
 	par(mar=c(2.2,4,2.5,1))
@@ -292,7 +293,7 @@ Results are shown for two sets of forecasts using 11 year running means.  \autor
 \centering
 <<11yrm-q4,fig=T,tikz=T,echo=F,width=6,height=5>>=
 	
-	load('src/data/fc-11yrm-q4.Rdata')
+	load('../src/data/fc-11yrm-q4.Rdata')
 	
 	layout(rbind(1,2))
 	par(mar=c(2.2,4,2.5,1))
