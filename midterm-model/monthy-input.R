@@ -25,7 +25,7 @@ season_end_month <- start_month + season_len - 1
 #
 #############################################
 
-multimodel_ouput <- 'data/jan_drop-one.RData'
+multimodel_ouput <- '../../multimodel-disag/diagnostics/output_data/jan_drop-one.RData'
 multimodel_data <- '../multimodel-disag/data/multimodel.RData'
 hmm_data <- '../second-year-fc/src/data/hmm-fc.RData'
 lp_data <- 'data/LosPinosAtLaBoca_Colorado_Natural1928-2006.txt'
@@ -207,7 +207,7 @@ for(i in 1:length(site_names_midterm)){
       x <- x[!is.na(x)][x_time %in% y_time]
       y <- y[!is.na(y)][y_time %in% x_time]
       regs_full[[i]][[j]] <- lm(y~x)
-      if(i==5)browser()
+      #if(i==5)browser()
     } else{
       regs_full[[i]][[j]] <- lm(0~0)
     }
