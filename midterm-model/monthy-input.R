@@ -25,7 +25,7 @@ season_end_month <- start_month + season_len - 1
 #
 #############################################
 
-multimodel_ouput <- '../../multimodel-disag/diagnostics/output_data/jan_drop-one.RData'
+multimodel_ouput <- '../multimodel-disag/diagnostics/output_data/jan_drop-one.RData'
 multimodel_data <- '../multimodel-disag/data/multimodel.RData'
 hmm_data <- '../second-year-fc/src/data/hmm-fc.RData'
 lp_data <- 'data/LosPinosAtLaBoca_Colorado_Natural1928-2006.txt'
