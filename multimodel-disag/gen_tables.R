@@ -13,7 +13,7 @@ paste.rpss.mc <- function(rpss,mc){
           sprintf('{\\bf %4.2f}',rpss[j,i]))
       this.mc <- ifelse(mc[j,i] < 0.21, 
           sprintf('%4.2f',mc[j,i]), 
-          sprintf('{\\bf %4.2f}',mc[,i]))
+          sprintf('{\\bf %4.2f}',mc[j,i]))
       x[j,i] <- paste(this.rpss,' (',this.mc,')',sep='') 
     }
   }
