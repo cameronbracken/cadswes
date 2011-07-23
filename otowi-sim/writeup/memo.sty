@@ -1,0 +1,19 @@
+\ProvidesPackage{memo}
+
+\RequirePackage{setspace}
+
+\newcommand{\memotopline}[2]{{%
+\noindent\sc #1}{\begin{quote}#2\end{quote}}}
+
+\newenvironment{memoheader}[1]
+{
+    \singlespacing
+        \begin{center}
+            \large\sc\noindent  #1
+        \end{center}
+        \noindent\underline{\hspace{%
+            \textwidth}}\vspace{.4cm}\\
+}
+{
+    \noindent\underline{\hspace{\textwidth}}
+}
